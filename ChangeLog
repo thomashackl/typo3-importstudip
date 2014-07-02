@@ -1,0 +1,96 @@
+130523 Version 2.4.4
+* Set correct hash for checking signature when using link generation
+* Fix error when using link generation or search form
+
+121012 Version 2.4.3
+* Check for a valid hash signature before generating content out of GET parameters
+
+121012 Version 2.4.2
+* Bugfix: Language object could not be established with further domain entries (just the first one was regarded)
+
+120920 Version 2.4.1
+* Group external configurations by type
+* Use correct debugging function
+
+120910 Version 2.4.0
+* Conversion to UTF8 back- and frontend
+* General cleanup in i18n
+* Compatibility with Typo3 4.6+
+* Remove InteLeC logo from frontend output
+* Optimize ext_conf_template.txt
+
+110405 Version 2.3.3.2
+* default value for debug is now 0
+
+110405 Version 2.3.3.1
+* removed debug string
+
+110208 Version 2.3.3
+* improved chunk handling
+* debug mode for outputting information about extension actions
+
+110204 Version 2.3.2
+* Fixed "phantom strings" in output caused by chunked transfer encoding
+
+110125 Version 2.3.1
+* Manual specification of TYPO3 website path re-introduced for proxy handling
+
+100913 Version 2.3.0
+* Show a complete subtree of subject area hierarchy and not only leaves
+* catch SOAP exceptions and show some message instead of source code
+* correct structure of search form
+
+091120 Version 2.2.1
+* Preselection of an institute for course search
+
+091002 Version 2.2.0
+* Automagically generate Typo3 website address
+
+090505 Version 2.1.2
+* Plugin configuration now in Extension Manager instead of text file
+* Generate correct links for external download pages
+
+070711 Version 2.0.0
+* Now using Stud.IP Webservice Plugin
+
+061221 Version 1.0.0
+* Initial "stable" release
+
+060626
+* The extension now automatically utilizes the cURL library if it is enabled, 
+  thus being able to access Stud.IP via SSL.
+
+060612
+* Solved a problem when a Typo3 site uses pretty URLs instead of the normal 
+  TYPO3 page naming scheme ("index.php?id=foo").
+* The Stud.IP URL may now be given with a “/” at the end.
+
+060518
+* Finished documentation and added it to the doc subdirectory (SXW and PDF).
+* Moved the Flexform configuration file to pi1 subdirectory.
+* Solved bug: Extension title not showing in content element wizard.
+* Cleaned up the language files
+
+060517
+* Included TypoScript code for disabling the cache.
+* Added an input field for the Stud.IP URL.
+* Created icons for the extension.
+
+060516
+* Added code for rewriting links in the external Stud.IP page.
+* Added input fields for configuration variables.
+* Removed the query string input field.
+
+060515
+* Added a FlexForm with an input field for the whole query string.
+
+060512
+* Stud.IP content is now retrieved via "fopen" and not via "file".
+
+060511
+* Restructuring for use as Typo3 extension
+
+060510
+* Initial release as PHP script (included via the “LumoNet PHP Include” extension)
+
+Thomas Hackl <thomas.hackl@uni-passau.de>

@@ -1,0 +1,25 @@
+# cat=basic; type=options[http,https]; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.studip_protocol
+studip_protocol = http
+# cat=basic; type=string; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.studip_url
+studip_url = 
+# cat=basic; type=string; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.studip_externphp
+studip_externphp = /studip/extern.php
+# cat=basic; type=string; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.studip_sendfilephp
+studip_sendfilephp = /studip/sendfile.php 
+# cat=basic; type=string; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.studip_typo3plugin
+studip_pluginaddress = /studip/plugins/packages/InteLeC/InteLeC_TYPO3Plugin/studip_typo3_soap.php
+
+# cat=basic; type=options[http,https]; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.typo3_protocol
+typo3_protocol = http
+# cat=basic; type=string; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.typo3_url
+typo3_url = 
+# cat=basic; type=int+; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.timeout
+typo3_timeoutwait = 5 
+
+# cat=basic; type=boolean; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.use_cache
+cache_use = 1
+# cat=basic; type=string; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.cache_url
+cache_address = 
+
+# cat=basic; type=boolean; label=LLL:EXT:importstudip/locallang.xml:tx_importstudip.conf.debug
+debug = 0
