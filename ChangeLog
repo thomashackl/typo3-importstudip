@@ -1,3 +1,6 @@
+140710 Version 3.0.0
+* Complete rework for Extbase/Fluid
+
 140527 Version 2.4.7
 * Do not handle sendfile.php addresses
 
@@ -72,7 +75,7 @@
 060612
 * Solved a problem when a Typo3 site uses pretty URLs instead of the normal 
   TYPO3 page naming scheme ("index.php?id=foo").
-* The Stud.IP URL may now be given with a �/� at the end.
+* The Stud.IP URL may now be given with a / at the end.
 
 060518
 * Finished documentation and added it to the doc subdirectory (SXW and PDF).
@@ -100,6 +103,6 @@
 * Restructuring for use as Typo3 extension
 
 060510
-* Initial release as PHP script (included via the �LumoNet PHP Include� extension)
+* Initial release as PHP script (included via the LumoNet PHP Include extension)
 
 Thomas Hackl <thomas.hackl@uni-passau.de>
