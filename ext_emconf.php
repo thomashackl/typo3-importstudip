@@ -11,11 +11,12 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Daten aus Stud.IP',
-	'description' => 'Importiert Daten aus Stud.IP',
-	'category' => 'fe',
+	'title' => 'Stud.IP data',
+	'description' => 'Imports data from the LMS Stud.IP like course or person lists',
+	'category' => 'plugin',
 	'author' => 'Thomas Hackl',
 	'author_email' => 'thomas.hackl@uni-passau.de',
+	'author_company' => 'University of Passau'
 	'shy' => '',
 	'dependencies' => '',
 	'conflicts' => '',
@@ -29,7 +30,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 0,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '2.4.7',
+	'version' => '3.0.0',
 	'constraints' => array(
 		'depends' => array(
 		),
