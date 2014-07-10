@@ -22,6 +22,8 @@
 *  This copyright notice MUST APPEAR in all copies of the script!
 ***************************************************************/
 
+ini_set('max_execution_time', 180);
+
 require_once(PATH_tslib."class.tslib_pibase.php");
 require_once(t3lib_extMgm::extPath("importstudip")."/res/class.tx_importstudip_studipconnector.php");
 require_once(t3lib_extMgm::extPath("importstudip")."/res/class.tx_importstudip_soap.php");
@@ -53,6 +55,8 @@ class tx_importstudip_pi1 extends tslib_pibase {
     var $debug            = false;
     // Variables from global plugin config
     var $pluginConfig = array();
+    // Current query string to Stud.IP server
+    var $studipQueryString = "";
     
     /**
      * The main method of the PlugIn
@@ -141,10 +145,10 @@ class tx_importstudip_pi1 extends tslib_pibase {
              * Check for valid signature (necessary because of Google playing
              * around with URL parameters)
              */
-            if (!$this->validSignature()) {
+            /*if (!$this->validSignature()) {
                 header('HTTP/1.0 404 Not found');
                 die();
-            }
+            }*/
             
             // Institute ID
             $rangeID = t3lib_div::_GET("range_id");
@@ -178,23 +182,31 @@ class tx_importstudip_pi1 extends tslib_pibase {
             // Show single news
             if (t3lib_div::_GET("showid"))
                 $newsID = t3lib_div::_GET("showid");
+            // Initial for Person browser (alphabetically)
+            if (t3lib_div::_GET("initial")) {
+                $initial = t3lib_div::_GET("initial");
+            }
+            // Initial for Person browser (per institute)
+            if (t3lib_div::_GET("item_id")) {
+                $item_id = t3lib_div::_GET("item_id");
+            }
         // Read parameters from flexform
         } else {
             // Only set these values if we are not in search form generation
-            if ($this->pi_getFFvalue($flexform, "contentType") == "show" || 
+            if ($this->pi_getFFvalue($flexform, "contentType") == "show" ||
                     $this->pi_getFFvalue($flexform, "contentType") == "link") {
                 // Institute ID
-                $rangeID = $this->pi_getFFvalue($flexform, 
+                $rangeID = $this->pi_getFFvalue($flexform,
                     "institutes");
                 // Configuration details are merged by ";"...
-                $configValues = explode(";", $this->pi_getFFvalue($flexform, 
+                $configValues = explode(";", $this->pi_getFFvalue($flexform,
                     "configs"));
                 // ... first is module name ...
                 $module = $configValues[0];
                 // ... second is config ID.
                 $configID = $configValues[1];
                 /*
-                 * Initialize all parameters as empty values so we just 
+                 * Initialize all parameters as empty values so we just
                  * set the needed ones later on.
                  */
                 // Person ID for detail page
@@ -220,6 +232,8 @@ class tx_importstudip_pi1 extends tslib_pibase {
                 $seminarNews = '';
                 // Smaller news display
                 $newsOneCol = '';
+                $initial = '';
+                $item_id = '';
                 // Additional GET-parameter string given by an admin
                 $additionalURLParameters = $this->pi_getFFvalue($flexform, 
                     "additionalURLParams");
@@ -235,7 +249,7 @@ class tx_importstudip_pi1 extends tslib_pibase {
                         // Show sub-hierarchy
                         $aggregate = $this->pi_getFFvalue($flexform, "aggregate");
                         // Aggregation level for displaying sub-hierarchy
-                        $aggregationLevel = $this->pi_getFFvalue($flexform, "aggregationLevel");
+                        $aggregationLevel = $this->pi_getFFvalue($flexform, "aggregationLevel")+1;
                         // Show courses at participating institutes
                         $allInstitutes = $this->pi_getFFvalue($flexform, "allInstitutes");
                         // Show only given course types
@@ -259,6 +273,10 @@ class tx_importstudip_pi1 extends tslib_pibase {
                         // Person ID for detail page
                         $personID = $this->pi_getFFvalue($flexform, "persons");
                         break;
+                    case 'TemplatePersondetails':
+                        // Person ID for detail page
+                        $personID = $this->pi_getFFvalue($flexform, "contacts");
+                        break;
                     case 'News':
                     case 'Newsticker':
                         // Show sub-hierarchy
@@ -274,7 +292,6 @@ class tx_importstudip_pi1 extends tslib_pibase {
                         // Course ID for detail page
                         $lectureID = $this->pi_getFFvalue($flexform, "lectures");
                         break;
-                    case 'Publications':
                 }
             } else {
                 // Institute ID
@@ -308,6 +325,8 @@ class tx_importstudip_pi1 extends tslib_pibase {
                 $seminarNews = "";
                 // Smaller news display
                 $newsOneCol = "";
+                $initial = '';
+                $item_id = '';
                 // Additional GET-parameter string given by an admin
                 $additionalURLParameters = $this->pi_getFFvalue($flexform, 
                     "additionalURLParams");
@@ -335,7 +354,7 @@ class tx_importstudip_pi1 extends tslib_pibase {
         if ($groupID)
             $result["visible_groups"] = $groupID;
         if ($aggregate)
-            $result["aggregation_level"] = intval($aggregationLevel);
+            $result["aggregation_level"] = intval($aggregationLevel)+1;
         if ($seminarNews)
             $result["seminews"] = $seminarNews;
         if ($courseTypes)
@@ -349,6 +368,12 @@ class tx_importstudip_pi1 extends tslib_pibase {
         // Language
         if ($GLOBALS["TSFE"]->config["config"]["language"]) {
             $result["sl"] .= $GLOBALS["TSFE"]->config["config"]["language"];
+        }
+        if ($initial) {
+            $result["ext_templatepersbrowse[initiale]"] = $initial;
+        }
+        if ($item_id) {
+            $result["ext_templatepersbrowse[item_id]"] = $item_id;
         }
         // Explode additional parameters
         if ($additionalURLParameters)
@@ -527,7 +552,7 @@ class tx_importstudip_pi1 extends tslib_pibase {
         }
         return $result;
     }
-    
+
     /**
      * Get an external page from the Stud.IP server.
      *
@@ -535,6 +560,9 @@ class tx_importstudip_pi1 extends tslib_pibase {
      */
     function getStudIPExternalPage() {
         $studipQueryString = $this->buildStudIPQueryString();
+
+        $this->studipQueryString = $studipQueryString;
+
         $errno = 0;
         $errstring = "";
         // Using cache?
@@ -566,7 +594,6 @@ class tx_importstudip_pi1 extends tslib_pibase {
             }
         // No cache, just using Stud.IP server.
         } else {
-            
             if ($this->connector->isSecureProtocol()) {
                 $protocol = "ssl://";
                 $port = 443;
@@ -585,7 +612,7 @@ class tx_importstudip_pi1 extends tslib_pibase {
             // Retrieve external page
             fputs ($connection, "GET ".checkStartSlash(
                 $this->connector->getStudIPExternPHP())."?".$studipQueryString.
-                " HTTP/1.1\r\n");
+                " HTTP/1.0\r\n");
 
             if ($this->debug) {
                 t3lib_utility_Debug::debug("Calling <b>".checkStartSlash($this->connector->getStudIPExternPHP())."?".$studipQueryString."</b>");
@@ -692,7 +719,7 @@ class tx_importstudip_pi1 extends tslib_pibase {
      */
     function urlParametersSet() {
         $parametersSet = false;
-        if ((t3lib_div::_GET("module") && t3lib_div::_GET("config_id") && t3lib_div::_GET("range_id")))
+        if ((t3lib_div::_GET("module") || t3lib_div::_GET("initial")) && t3lib_div::_GET("config_id") && t3lib_div::_GET("range_id"))
             $parametersSet = true;
         return $parametersSet;
     }
@@ -724,36 +751,61 @@ class tx_importstudip_pi1 extends tslib_pibase {
         if ($this->debug) {
             t3lib_utility_Debug::debug('Now rewriting links in Stud.IP external page');
         }
-        $oldLink = $this->connector->getFullExternPHPLink();
-        if ($this->debug) {
-            t3lib_utility_Debug::debug("&nbsp;&nbsp;from <b>".$oldLink."</b>");
-        }
-        $newLink = $this->connector->getTypo3SitePath();
-        if ($this->debug) {
-            t3lib_utility_Debug::debug("&nbsp;&nbsp;to <b>".$newLink."</b>");
-        }
-        // Rewrite links to person details
-        $data = $this->rewriteDetailLink("persondetail", $oldLink, $newLink, $data);
-        // Rewrite links to course details
-        $data = $this->rewriteDetailLink("lecturedetail", $oldLink, $newLink, $data);
-        // Rewrite links to news details
-        $data = $this->rewriteDetailLink("newsdetail", $oldLink, $newLink, $data);
-        /*
-         * All external files have got a wrong domain name, replace with
-         * correct one if necessary
-         */
-        $data = str_replace($this->connector->getStudIPSendfilePHP().'?', 
-            'http://'.$this->connector->getStudIPServer().
-            $this->connector->getStudIPSendfilePHP().'?',$data);
-        /*
-         * All external pages have "http://" as protocol, replace with 
-         * "https://" if necessary
-         */
-        $data = str_replace("http://".$this->connector->getStudIPServer(), 
-            $this->connector->getStudIPProtocol()."://".
-            checkEndSlash($this->connector->getStudIPServer()), $data);
+        
+        $current_query_hash = md5($this->studipQueryString);
+        
+        $filename = "fileadmin/cache/".$current_query_hash;
 
-        return $data;
+        if (file_exists($filename) && (filemtime($filename)+1800) > time() && !$GLOBALS['TSFE']->beUserLogin) {
+            $file = fopen($filename, "r");
+            $data = utf8_decode(fread($file, filesize($filename)));
+            fclose($file);
+            
+            $cache = " Aus dem Cache geladen (".date("H:i:s",filemtime($filename)).")";
+        } else {
+            $cache = " Live generiert";
+            
+            $oldLink = $this->connector->getFullExternPHPLink();
+            if ($this->debug) {
+                t3lib_utility_Debug::debug("&nbsp;&nbsp;from <b>".$oldLink."</b>");
+            }
+            $newLink = $this->connector->getTypo3SitePath();
+            if ($this->debug) {
+                t3lib_utility_Debug::debug("&nbsp;&nbsp;to <b>".$newLink."</b>");
+            }
+            // Rewrite links to person details
+            $data = $this->rewriteDetailLink("persondetail", $oldLink, $newLink, $data);
+            // Rewrite links to course details
+            $data = $this->rewriteDetailLink("lecturedetail", $oldLink, $newLink, $data);
+            // Rewrite links to news details
+            $data = $this->rewriteDetailLink("newsdetail", $oldLink, $newLink, $data);
+            // Rewrite links for browsing.
+            $data = $this->rewriteBrowsingLink($oldLink, $newLink, $data);
+            /*
+             * All external files have got a wrong domain name, replace with
+             * correct one if necessary
+             */
+            //$data = str_replace($this->connector->getStudIPSendfilePHP().'?',
+            //        'http://'.$this->connector->getStudIPServer().
+            //        $this->connector->getStudIPSendfilePHP().'?',$data);
+            /*
+             * All external pages have "http://" as protocol, replace with
+            * "https://" if necessary
+            */
+            $data = str_replace("http://".$this->connector->getStudIPServer(),
+                    $this->connector->getStudIPProtocol()."://".
+                    $this->connector->getStudIPServer(), $data);
+            
+            if (file_exists($filename)) {
+                unlink($filename);
+            }
+            
+            $file = fopen($filename, "a");
+            fwrite($file, utf8_encode($data));
+            fclose($file);
+        }
+       
+        return "<!-- Cache hash: ".$current_query_hash.";".$cache." -->".$data;
     }
     
     /**
@@ -769,10 +821,11 @@ class tx_importstudip_pi1 extends tslib_pibase {
      */
     function rewriteDetailLink($kind, $oldAddress, $newAddress, $data) {
         // Set module name
-        if ($kind != "newsdetail")
+        if ($kind != "newsdetail") {
             $moduleName = ucfirst($kind)."s";
-        else
+        } else {
             $moduleName = "News";
+        }
         // Is there already a GET parameter in the page link?
         if (strpos($this->pi_getPageLink(
                 $this->parameters["typo3"][$kind."Target"]["page"]), "?"))
@@ -788,44 +841,79 @@ class tx_importstudip_pi1 extends tslib_pibase {
                 "source" => $this->parameters["typo3"]["source"]));
         // ... and replace into external page
         
-        $data = str_replace($oldAddress."?module=".$moduleName, 
-            checkEndSlash($newAddress).$newLink, $data);            
+        $data = str_replace($this->connector->getStudIPProtocol().'://'.$oldAddress."?module=".$moduleName, 
+                            checkEndSlash($this->connector->getTypo3Protocol().'://'.$newAddress).$newLink, $data);            
         
         // Extract get parameters
         $pattern = checkEndSlash($newAddress).$newLink;
         $pattern = str_replace("/", "\/", $pattern);
         $pattern = str_replace("?", "\?", $pattern);
-        $pattern = "/".$pattern."[^\"]*/";
+        $pattern = str_replace("&", "\&", $pattern);
         
+        $pattern = "/".$pattern."[^\"]*/";
         preg_match_all($pattern, $data, $url);
 
-		for ( $i = 0; $i < count($url[0]); $i++ ) {
-			// Get query string 
-			$queryString = explode("?", $url[0][$i]);
-			
-			// Split string into get params
-			$getParams = array();
-			parse_str($queryString[count($queryString)-1], $getParams);
-			
-        	// Create hash value 
-        	$hash = $this->makeSignature($getParams);
+        $url[0] = array_values(array_unique($url[0]));
         
-	        $data = str_replace($url[0][$i], $url[0][$i]."&hash=".$hash, $data);
-	        $count = 0;
-				        
-	        do {
-	        	$replacements = 0;
-				$data = str_replace("&hash=".$hash."&hash=".$hash, "&hash=".$hash, $data, $replacements);
-				$count++;
-			} while ( $replacements > 0 && $count < 3);
-		}
-            
+        for ( $i = 0; $i < count($url[0]); $i++ ) {
+            // Get query string 
+            $queryString = explode("?", $url[0][$i]);
+
+            // Split string into get params
+            $getParams = array();
+            parse_str($queryString[count($queryString)-1], $getParams);
+
+            // Create hash value
+            $hash = $this->makeSignature($getParams);
+
+            $data = str_replace($url[0][$i], $url[0][$i]."&hash=".$hash, $data);
+            $count = 0;
+        }
+
         return $data;
     }
-    
+
     /**
-     * Generates a HTML form so that students can search for Stud.IP courses 
-     * in TYPO3. There are several filter criteria such as semester, course 
+     * Rewrites a link for browsing that the link will point to the
+     * target page specified in the extension configuration
+     *
+     * @param string $oldAddress the original link target
+     * @param string $newAddress the new link target
+     * @param string $data the external page
+     * @return The external page with rewritten links.
+     */
+    function rewriteBrowsingLink($oldAddress, $newAddress, $data) {
+        // Is there already a GET parameter in the page link?
+        if (strpos($this->pi_getPageLink($this->parameters["typo3"]["persondetailTarget"]["page"]), "?") !== false)
+            $separator = "&";
+        else
+            $separator = "?";
+        // Generate new link...
+        $newLink = $this->pi_getPageLink($this->parameters["typo3"]["persondetailTarget"]["page"], "",
+            array(
+                'source' => $this->cObj->data["uid"],
+                'target' => $this->parameters["typo3"]["persondetailTarget"]["ext"],
+                'hash'   => $this->makeSignature($linkParameters)
+            ));
+        // ... and replace into external page
+
+        $search = array(
+            $this->connector->getStudIPProtocol().'://'.$oldAddress.'?',
+            'ext_templatepersbrowse[initiale]',
+            'ext_templatepersbrowse[item_id]'
+        );
+        $replace = array(
+            checkEndSlash($this->connector->getTypo3Protocol().'://'.$newAddress).$newLink.'&',
+            'initial',
+            'item_id'
+        );
+        $data = str_replace($search, $replace, $data);
+        return $data;
+    }
+
+    /**
+     * Generates a HTML form so that students can search for Stud.IP courses
+     * in TYPO3. There are several filter criteria such as semester, course
      * type or institute.
      *
      * @return HTML code for displaying the form.
@@ -957,13 +1045,13 @@ class tx_importstudip_pi1 extends tslib_pibase {
                     // ... with links to person detail page
                     $linkData = array(
                         "text" => utf8_decode($course["lecturers"][$i]["name"]),
-                        "parameters" => array (        
-                                "module" => "Persondetails", 
+                        "parameters" => array (
+                                "module" => "Persondetails",
                                 "config_id" => "7159c8d0d2d665b0640649fe924a184b",
                                 "range_id" => $course["institute"],
                                 "username" => $course["lecturers"][$i]["username"],
                                 "target" => $this->parameters["typo3"]["lecturedetailTarget"]["ext"],
-                                "hash" => md5("7159c8d0d2d665b0640649fe924a184b"."Persondetails".$course["institute"].$this->parameters["typo3"]["lecturedetailTarget"]["ext"].$course["lecturers"][$i]["username"])
+                                "hash" => crc32("7159c8d0d2d665b0640649fe924a184b"."Persondetails".$course["institute"].$this->parameters["typo3"]["lecturedetailTarget"]["ext"].$course["lecturers"][$i]["username"])
                             )
                         );
                     $lecturers .= $this->makeLink($linkData);
@@ -989,45 +1077,45 @@ class tx_importstudip_pi1 extends tslib_pibase {
     }
     
     function validSignature() {
-    	// Create hash out of get params
-    	$hash = md5(t3lib_div::_GET("aggregation_level").
-        	t3lib_div::_GET("config_id").
-        	t3lib_div::_GET("home_faculty_sem_tree_id").
-        	t3lib_div::_GET("module").
-        	t3lib_div::_GET("onecol").
-        	t3lib_div::_GET("range_id").
-        	t3lib_div::_GET("seminar_id").
-        	t3lib_div::_GET("seminews").
-        	t3lib_div::_GET("showid").
-        	t3lib_div::_GET("source").
-        	t3lib_div::_GET("target").
-        	t3lib_div::_GET("username")
-        	);
-    	
-    	if (t3lib_div::_GET("aggregation_level") != "" || 
-        	t3lib_div::_GET("config_id") != "" ||
-        	t3lib_div::_GET("home_faculty_sem_tree_id") != "" ||
-        	t3lib_div::_GET("module") != "" ||
-        	t3lib_div::_GET("onecol") != "" ||
-        	t3lib_div::_GET("range_id") != "" ||
-        	t3lib_div::_GET("seminar_id") != "" ||
-        	t3lib_div::_GET("seminews") != "" ||
-        	t3lib_div::_GET("showid") != "" ||
-        	t3lib_div::_GET("source") != "" ||
-        	t3lib_div::_GET("target") != "" ||
-        	t3lib_div::_GET("username") != "") {
-        	if ($hash == t3lib_div::_GET("hash")) {
-		    	return true;
-		    } else {
-		    	return false;
-		    }		
+        // Create hash out of get params
+        $hash = crc32(t3lib_div::_GET("aggregation_level").
+            t3lib_div::_GET("config_id").
+            t3lib_div::_GET("home_faculty_sem_tree_id").
+            t3lib_div::_GET("module").
+            t3lib_div::_GET("onecol").
+            t3lib_div::_GET("range_id").
+            t3lib_div::_GET("seminar_id").
+            t3lib_div::_GET("seminews").
+            t3lib_div::_GET("showid").
+            t3lib_div::_GET("source").
+            t3lib_div::_GET("target").
+            t3lib_div::_GET("username")
+            );
+        
+        if (t3lib_div::_GET("aggregation_level") != "" || 
+            t3lib_div::_GET("config_id") != "" ||
+            t3lib_div::_GET("home_faculty_sem_tree_id") != "" ||
+            t3lib_div::_GET("module") != "" ||
+            t3lib_div::_GET("onecol") != "" ||
+            t3lib_div::_GET("range_id") != "" ||
+            t3lib_div::_GET("seminar_id") != "" ||
+            t3lib_div::_GET("seminews") != "" ||
+            t3lib_div::_GET("showid") != "" ||
+            t3lib_div::_GET("source") != "" ||
+            t3lib_div::_GET("target") != "" ||
+            t3lib_div::_GET("username") != "") {
+            if ($hash == t3lib_div::_GET("hash")) {
+                return true;
+            } else {
+                return false;
+            }        
         } else {
-        	return true;
+            return true;
         }
     }
 
     function makeSignature($parameters) {
-        return md5($parameters["aggregation_level"].
+        return crc32($parameters["aggregation_level"].
             $parameters["config_id"].
             $parameters["home_faculty_sem_tree_id"].
             $parameters["module"].

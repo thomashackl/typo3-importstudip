@@ -71,6 +71,21 @@
                     </config>
                 </TCEforms>
             </persons>
+            <contacts>
+                <TCEforms>
+                    <label>LLL:EXT:importstudip/locallang.xml:tx_importstudip.pi_flexform.person</label>
+                    <displayCond>FIELD:configs:-:TemplatePersondetails;-TemplatePersondetails;zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz</displayCond>
+                    <config>
+                        <type>select</type>
+                        <items type="array">
+                            <numIndex index="0" type="array">
+                                <numIndex index="0">LLL:EXT:importstudip/locallang.xml:tx_importstudip.pi_flexform.select</numIndex>
+                            </numIndex>
+                        </items>
+                        <itemsProcFunc>tx_importstudip_soap->getPersonsAtInstitute</itemsProcFunc>
+                    </config>
+                </TCEforms>
+            </contacts>
             <lectures>
                 <TCEforms>
                     <label>LLL:EXT:importstudip/locallang.xml:tx_importstudip.pi_flexform.lecture</label>

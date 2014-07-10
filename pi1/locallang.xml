@@ -33,7 +33,7 @@
 			<label index="tx_importstudip.pi_flexform.normal_text">Normaler Text</label>
 			<label index="tx_importstudip.pi_flexform.page_type">Art des Inhalts:</label>
 			<label index="tx_importstudip.pi_flexform.person">Person:</label>
-			<label index="tx_importstudip.pi_flexform.persondetail_target">Link auf Personendetails - Zielelement:</label>
+			<label index="tx_importstudip.pi_flexform.persondetail_target">Link auf Personendetails oder alphabetische/Einrichtungsliste im Personenbrowser - Zielelement:</label>
 			<label index="tx_importstudip.pi_flexform.preselected_institute">Vorausgewählte Einrichtung im Suchformular:</label>
 			<label index="tx_importstudip.pi_flexform.select">-- bitte auswählen --</label>
 			<label index="tx_importstudip.pi_flexform.seminar_news">News zugehöriger Veranstaltungen anzeigen</label>

@@ -60,7 +60,7 @@
             <label index="tx_importstudip.pi_flexform.normal_text">Normal text</label>
             <label index="tx_importstudip.pi_flexform.page_type">Content type:</label>
             <label index="tx_importstudip.pi_flexform.person">Person:</label>
-            <label index="tx_importstudip.pi_flexform.persondetail_target">Link to person details - Target element:</label>
+            <label index="tx_importstudip.pi_flexform.persondetail_target">Link to person details or alphabetical/institute list in person browser - Target element:</label>
             <label index="tx_importstudip.pi_flexform.preselected_institute">Preselected institute in search form:</label>
             <label index="tx_importstudip.pi_flexform.select">-- please choose --</label>
             <label index="tx_importstudip.pi_flexform.seminar_news">Show news from courses</label>
@@ -136,7 +136,7 @@
             <label index="tx_importstudip.pi_flexform.normal_text">Normaler Text</label>
             <label index="tx_importstudip.pi_flexform.page_type">Art des Inhalts:</label>
             <label index="tx_importstudip.pi_flexform.person">Person:</label>
-            <label index="tx_importstudip.pi_flexform.persondetail_target">Link auf Personendetails - Zielelement:</label>
+            <label index="tx_importstudip.pi_flexform.persondetail_target">Link auf Personendetails oder alphabetische/Einrichtungsliste im Personenbrowser - Zielelement:</label>
             <label index="tx_importstudip.pi_flexform.preselected_institute">Vorausgew&#228;hlte Einrichtung im Suchformular:</label>
             <label index="tx_importstudip.pi_flexform.select">-- bitte ausw&#228;hlen --</label>
             <label index="tx_importstudip.pi_flexform.seminar_news">News zugeh&#246;riger Veranstaltungen anzeigen</label>

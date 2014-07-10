@@ -305,7 +305,7 @@ class tx_importstudip_soap {
     function buildPersonsSelectList($data) {
         $result = array();
         foreach ($data as $person) {
-            $result[] = array(0 => $person["name"],
+            $result[] = array(0 => $person["name"].' ('.$person["username"].')',
                               1 => $person["username"]);
         }
         return $result;
