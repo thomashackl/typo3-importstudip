@@ -4,7 +4,7 @@
         <header/>
         <body>
             <trans-unit id="tx_importstudip.plugintitle" xml:space="preserve">
-                <source>Daten aus Stud.IP</source></source></source>
+                <source>Daten aus Stud.IP</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.plugindesc" xml:space="preserve">
                 <source>F&#252;gt Daten aus Stud.IP ein, wie z.B. Veranstaltungs- oder Personenverzeichnisse.</source>
