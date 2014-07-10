@@ -1,232 +1,230 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xliff version="1.0"></source>
-            <source>
-<file source-language="de" datatype="plaintext" original="AppController" date="2014-07-10T16:20:51Z" product-name="importstudip"></source>
-            <source>
-    <header/>
-    <body></source>
-        <trans-unit id="tx_importstudip.plugintitle" xml:space="preserve"></source>
-            <source>Daten aus Stud.IP</source></source></source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.plugindesc" xml:space="preserve"></source>
-            <source>F&#252;gt Daten aus Stud.IP ein, wie z.B. Veranstaltungs- oder Personenverzeichnisse.</source></source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.studip_protocol"></source>
-            <source>Protokoll f&#252;r Zugriff auf Stud.IP:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.studip_url"></source>
-            <source>Stud.IP Serveradresse:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.studip_externphp"></source>
-            <source>Relativer Pfad zur extern.php:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.studip_sendfilephp"></source>
-            <source>Relativer Pfad zur sendfile.php:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.studip_typo3plugin"></source>
-            <source>Relativer Pfad zum TYPO3-Plugin in Stud.IP (studip_typo3_soap.php):</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.typo3_protocol"></source>
-            <source>Protokoll f&#252;r Zugriff auf TYPO3:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.typo3_url"></source>
-            <source>Pfad zur Typo3-Site (optional):</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.timeout"></source>
-            <source>Wartezeit auf Antwort vom Stud.IP-Server:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.use_cache"></source>
-            <source>Benutze Reverse Proxy Cache-Server?</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.cache_url"></source>
-            <source>Adresse des Reverse Proxy Cache-Servers:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.conf.debug"></source>
-            <source>Debug-Ausgaben?</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.additional_url_params"></source>
-            <source>Weitere URL-Parameter:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.aggregate"></source>
-            <source>Daten untergeordneter Einrichtungen anzeigen?</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.aggregation_level"></source>
-            <source>wieviele untergeordnete Ebenen?</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.all"></source>
-            <source>-- alle --</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.all_institutes"></source>
-            <source>Veranstaltungen auch bei beteiligten Einrichtungen anzeigen?</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Download"></source>
-            <source>Download</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Newsticker"></source>
-            <source>Newsticker</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Persondetails"></source>
-            <source>Personendetails</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Persons"></source>
-            <source>Personenliste</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Lecturedetails"></source>
-            <source>Veranstaltungsdetails</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Lectures"></source>
-            <source>Veranstaltungsliste</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.Lecturestable"></source>
-            <source>Veranstaltungstabelle</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.News"></source>
-            <source>News</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateNews"></source>
-            <source>News (templatebasiert)</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateDownload"></source>
-            <source>Download (templatebasiert)</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateLecturedetails"></source>
-            <source>Veranstaltungsdetails (templatebasiert)</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateLectures"></source>
-            <source>Veranstaltungsliste (templatebasiert)</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplatePersondetails"></source>
-            <source>Personendetails (templatebasiert)</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplatePersons"></source>
-            <source>Personenliste (templatebasiert)</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.content_lecturessearch"></source>
-            <source>Suchformular f&#252;r Veranstaltungen</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.content_link"></source>
-            <source>Link generieren</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.content_show"></source>
-            <source>direkte Anzeige</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.content_type"></source>
-            <source>Anzeige des Inhalts:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.course_types"></source>
-            <source>Nur folgende Veranstaltungstypen anzeigen:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.groups"></source>
-            <source>Nur Personen in Gruppe anzeigen:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.h1"></source>
-            <source>&#220;berschrift Ebene 1</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.h2"></source>
-            <source>&#220;berschrift Ebene 2</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.h3"></source>
-            <source>&#220;berschrift Ebene 3</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.h4"></source>
-            <source>&#220;berschrift Ebene 4</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.h5"></source>
-            <source>&#220;berschrift Ebene 5</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.h6"></source>
-            <source>&#220;berschrift Ebene 6</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.institute"></source>
-            <source>Name der Einrichtung:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.lecture"></source>
-            <source>Veranstaltung:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.lecturedetail_target"></source>
-            <source>Link auf Veranstaltungsdetails - Zielelement:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.link_text"></source>
-            <source>Text zum Link:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.link_target"></source>
-            <source>Ziel des Links:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.news_one_col"></source>
-            <source>News einspaltig darstellen?</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.newsdetail_target"></source>
-            <source>Link auf Newsdetails - Zielelement:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.normal_text"></source>
-            <source>Normaler Text</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.page_type"></source>
-            <source>Art des Inhalts:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.person"></source>
-            <source>Person:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.persondetail_target"></source>
-            <source>Link auf Personendetails oder alphabetische/Einrichtungsliste im Personenbrowser - Zielelement:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.preselected_institute"></source>
-            <source>Vorausgew&#228;hlte Einrichtung im Suchformular:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.select"></source>
-            <source>-- bitte ausw&#228;hlen --</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.seminar_news"></source>
-            <source>News zugeh&#246;riger Veranstaltungen anzeigen</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.subject_areas"></source>
-            <source>Studienbereich:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.subject_areas_main"></source>
-            <source>Studiengang:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.pi_flexform.text_format"></source>
-            <source>Formatierung des Textes:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.all"></source>
-            <source>alle</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.coursetype"></source>
-            <source>Veranstaltungstyp:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.institute"></source>
-            <source>Einrichtung:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.reset"></source>
-            <source>Neue Suche</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.search_all"></source>
-            <source>alles</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.search_description"></source>
-            <source>Beschreibung</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.search_in"></source>
-            <source>Suche in:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.search_lecturer"></source>
-            <source>Dozierende</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.search_number"></source>
-            <source>Veranstaltungsnummer</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.search_title"></source>
-            <source>Titel</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.searchterm"></source>
-            <source>Suchbegriff:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.semester"></source>
-            <source>Semester:</source>
-        </trans-unit>
-        <trans-unit id="tx_importstudip.search.submit"></source>
-            <source>Abschicken</source>
-        </trans-unit>
-    </body>
-</file>
+<xliff version="1.0">
+    <file source-language="de" datatype="plaintext" original="AppController" date="2014-07-10T16:20:51Z" product-name="importstudip">
+        <header/>
+        <body>
+            <trans-unit id="tx_importstudip.plugintitle" xml:space="preserve">
+                <source>Daten aus Stud.IP</source></source></source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.plugindesc" xml:space="preserve">
+                <source>F&#252;gt Daten aus Stud.IP ein, wie z.B. Veranstaltungs- oder Personenverzeichnisse.</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_protocol">
+                <source>Protokoll f&#252;r Zugriff auf Stud.IP:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_url">
+                <source>Stud.IP Serveradresse:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_externphp">
+                <source>Relativer Pfad zur extern.php:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_sendfilephp">
+                <source>Relativer Pfad zur sendfile.php:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_typo3plugin">
+                <source>Relativer Pfad zum TYPO3-Plugin in Stud.IP (studip_typo3_soap.php):</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.typo3_protocol">
+                <source>Protokoll f&#252;r Zugriff auf TYPO3:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.typo3_url">
+                <source>Pfad zur Typo3-Site (optional):</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.timeout">
+                <source>Wartezeit auf Antwort vom Stud.IP-Server:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.use_cache">
+                <source>Benutze Reverse Proxy Cache-Server?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.cache_url">
+                <source>Adresse des Reverse Proxy Cache-Servers:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.debug">
+                <source>Debug-Ausgaben?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.additional_url_params">
+                <source>Weitere URL-Parameter:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.aggregate">
+                <source>Daten untergeordneter Einrichtungen anzeigen?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.aggregation_level">
+                <source>wieviele untergeordnete Ebenen?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.all">
+                <source>-- alle --</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.all_institutes">
+                <source>Veranstaltungen auch bei beteiligten Einrichtungen anzeigen?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Download">
+                <source>Download</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Newsticker">
+                <source>Newsticker</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Persondetails">
+                <source>Personendetails</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Persons">
+                <source>Personenliste</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Lecturedetails">
+                <source>Veranstaltungsdetails</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Lectures">
+                <source>Veranstaltungsliste</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.Lecturestable">
+                <source>Veranstaltungstabelle</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.News">
+                <source>News</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateNews">
+                <source>News (templatebasiert)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateDownload">
+                <source>Download (templatebasiert)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateLecturedetails">
+                <source>Veranstaltungsdetails (templatebasiert)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplateLectures">
+                <source>Veranstaltungsliste (templatebasiert)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplatePersondetails">
+                <source>Personendetails (templatebasiert)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.config_type.TemplatePersons">
+                <source>Personenliste (templatebasiert)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.content_lecturessearch">
+                <source>Suchformular f&#252;r Veranstaltungen</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.content_link">
+                <source>Link generieren</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.content_show">
+                <source>direkte Anzeige</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.content_type">
+                <source>Anzeige des Inhalts:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.course_types">
+                <source>Nur folgende Veranstaltungstypen anzeigen:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.groups">
+                <source>Nur Personen in Gruppe anzeigen:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.h1">
+                <source>&#220;berschrift Ebene 1</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.h2">
+                <source>&#220;berschrift Ebene 2</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.h3">
+                <source>&#220;berschrift Ebene 3</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.h4">
+                <source>&#220;berschrift Ebene 4</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.h5">
+                <source>&#220;berschrift Ebene 5</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.h6">
+                <source>&#220;berschrift Ebene 6</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.institute">
+                <source>Name der Einrichtung:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.lecture">
+                <source>Veranstaltung:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.lecturedetail_target">
+                <source>Link auf Veranstaltungsdetails - Zielelement:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.link_text">
+                <source>Text zum Link:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.link_target">
+                <source>Ziel des Links:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.news_one_col">
+                <source>News einspaltig darstellen?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.newsdetail_target">
+                <source>Link auf Newsdetails - Zielelement:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.normal_text">
+                <source>Normaler Text</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.page_type">
+                <source>Art des Inhalts:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.person">
+                <source>Person:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.persondetail_target">
+                <source>Link auf Personendetails oder alphabetische/Einrichtungsliste im Personenbrowser - Zielelement:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.preselected_institute">
+                <source>Vorausgew&#228;hlte Einrichtung im Suchformular:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.select">
+                <source>-- bitte ausw&#228;hlen --</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.seminar_news">
+                <source>News zugeh&#246;riger Veranstaltungen anzeigen</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.subject_areas">
+                <source>Studienbereich:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.subject_areas_main">
+                <source>Studiengang:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.pi_flexform.text_format">
+                <source>Formatierung des Textes:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.all">
+                <source>alle</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.coursetype">
+                <source>Veranstaltungstyp:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.institute">
+                <source>Einrichtung:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.reset">
+                <source>Neue Suche</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.search_all">
+                <source>alles</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.search_description">
+                <source>Beschreibung</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.search_in">
+                <source>Suche in:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.search_lecturer">
+                <source>Dozierende</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.search_number">
+                <source>Veranstaltungsnummer</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.search_title">
+                <source>Titel</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.searchterm">
+                <source>Suchbegriff:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.semester">
+                <source>Semester:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.search.submit">
+                <source>Abschicken</source>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>
