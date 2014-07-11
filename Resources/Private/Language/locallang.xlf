@@ -7,10 +7,10 @@
                 <source>Daten aus Stud.IP</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.plugindesc" xml:space="preserve">
-                <source>F&#252;gt Daten aus Stud.IP ein, wie z.B. Veranstaltungs- oder Personenverzeichnisse.</source>
+                <source>Fügt Daten aus Stud.IP ein, wie z.B. Veranstaltungs- oder Personenverzeichnisse.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_protocol">
-                <source>Protokoll f&#252;r Zugriff auf Stud.IP:</source>
+                <source>Protokoll für Zugriff auf Stud.IP:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <source>Stud.IP Serveradresse:</source>
@@ -25,7 +25,7 @@
                 <source>Relativer Pfad zum TYPO3-Plugin in Stud.IP (studip_typo3_soap.php):</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_protocol">
-                <source>Protokoll f&#252;r Zugriff auf TYPO3:</source>
+                <source>Protokoll für Zugriff auf TYPO3:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <source>Pfad zur Typo3-Site (optional):</source>
@@ -100,7 +100,7 @@
                 <source>Personenliste (templatebasiert)</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.content_lecturessearch">
-                <source>Suchformular f&#252;r Veranstaltungen</source>
+                <source>Suchformular für Veranstaltungen</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.content_link">
                 <source>Link generieren</source>
@@ -118,22 +118,22 @@
                 <source>Nur Personen in Gruppe anzeigen:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.h1">
-                <source>&#220;berschrift Ebene 1</source>
+                <source>Überschrift Ebene 1</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.h2">
-                <source>&#220;berschrift Ebene 2</source>
+                <source>Überschrift Ebene 2</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.h3">
-                <source>&#220;berschrift Ebene 3</source>
+                <source>Überschrift Ebene 3</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.h4">
-                <source>&#220;berschrift Ebene 4</source>
+                <source>Überschrift Ebene 4</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.h5">
-                <source>&#220;berschrift Ebene 5</source>
+                <source>Überschrift Ebene 5</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.h6">
-                <source>&#220;berschrift Ebene 6</source>
+                <source>Überschrift Ebene 6</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.institute">
                 <source>Name der Einrichtung:</source>
@@ -169,13 +169,13 @@
                 <source>Link auf Personendetails oder alphabetische/Einrichtungsliste im Personenbrowser - Zielelement:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.preselected_institute">
-                <source>Vorausgew&#228;hlte Einrichtung im Suchformular:</source>
+                <source>Vorausgewählte Einrichtung im Suchformular:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.select">
-                <source>-- bitte ausw&#228;hlen --</source>
+                <source>-- bitte auswählen --</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.seminar_news">
-                <source>News zugeh&#246;riger Veranstaltungen anzeigen</source>
+                <source>News zugehöriger Veranstaltungen anzeigen</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.pi_flexform.subject_areas">
                 <source>Studienbereich:</source>
