@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.plugintitle',
-	'description' => 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.plugindesc',
+	'title' => "LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.plugintitle",
+	'description' => "LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.plugindesc",
 	'category' => 'plugin',
 	'author' => 'Thomas Hackl',
 	'author_email' => 'thomas.hackl@uni-passau.de',
