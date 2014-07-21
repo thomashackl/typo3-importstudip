@@ -5,222 +5,66 @@
         <body>
             <trans-unit id="tx_importstudip.plugintitle">
                 <source>Stud.IP data</source>
+                <target>Daten aus Stud.IP</target>
             </trans-unit>
             <trans-unit id="tx_importstudip_plugindesc">
                 <source>Includes data from Stud.IP, like course or person lists.</source>
+                <target>F&#252;gt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_protocol">
-                <source>Stud.IP server protocol:</source>
+            <trans-unit id="tx_importstudip.backend.sheet.datasheet">
+                <source>Show Stud.IP content</source>
+                <target>Inhalte aus Stud.IP anzeigen</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_url">
-                <source>Stud.IP server address:</source>
+            <trans-unit id="tx_importstudip.backend.label.externtype">
+                <source>What type of content do you want to show?</source>
+                <target>Welche Art Inhalt m&#246;chten Sie anzeigen?</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_externphp">
-                <source>Relative path to extern.php:</source>
+            <trans-unit id="tx_importstudip.backend.externtype.courses">
+                <source>List of courses</source>
+                <target>Liste von Veranstaltungen</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_sendfilephp">
-                <source>Relative path to sendfile.php:</source>
+            <trans-unit id="tx_importstudip.backend.externtype.coursedetails">
+                <source>Single course</source>
+                <target>Einzelne Veranstaltung</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_typo3plugin">
-                <source>Relative path to Typo3 plugin (studip_typo3_soap.php):</source>
+            <trans-unit id="tx_importstudip.backend.externtype.persons">
+                <source>List of persons</source>
+                <target>Liste von Personen</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.typo3_protocol">
-                <source>TYPO3 server protocol:</source>
+            <trans-unit id="tx_importstudip.backend.externtype.persondetails">
+                <source>Single person</source>
+                <target>Einzelne Person</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.typo3_url">
-                <source>TYPO3 site path (optional):</source>
+            <trans-unit id="tx_importstudip.backend.externtype.news">
+                <source>News</source>
+                <target>Ank&#252;ndigungen</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.timeout">
-                <source>Timeout for answer from Stud.IP server:</source>
+            <trans-unit id="tx_importstudip.backend.externtype.download">
+                <source>Download area</source>
+                <target>Downloadbereich</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.use_cache">
-                <source>Use reverse proxy cache?</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.conf.cache_url">
-                <source>Reverse proxy cache address:</source>
+            <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
+                <source>Search form</source>
+                <target>Suchformular</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.debug">
                 <source>Debug output?</source>
+                <target>Debug-Ausgaben?</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.additional_url_params">
-                <source>Additional URL parameters:</source>
+            <trans-unit id="tx_importstudip.conf.studip_api_path">
+                <source>Relative path to REST API</source>
+                <target>Relativer Pfad zur REST API</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.aggregate">
-                <source>Show data from subordinate institutes?</source>
+            <trans-unit id="tx_importstudip.conf.studip_url">
+                <source>Stud.IP URL</source>
+                <target>Adresse der Stud.IP-Installation</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.aggregation_level">
-                <source>Number of levels?</source>
+            <trans-unit id="tx_importstudip.conf.typo3_url">
+                <source>Address of this web site (optional)</source>
+                <target>Adresse dieser Website (optional)
             </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.all">
-                <source>-- all --</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.all_institutes">
-                <source>Show courses at participating institutes?</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Download">
-                <source>Download</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Newsticker">
-                <source>Newsticker</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Persondetails">
-                <source>Person details</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Persons">
-                <source>Person list</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Lecturedetails">
-                <source>Course details</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Lectures">
-                <source>Course list</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.Lecturestable">
-                <source>Course table</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.News">
-                <source>News</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.TemplateNews">
-                <source>News (template based)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.TemplateDownload">
-                <source>Download (template based)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.TemplateLecturedetails">
-                <source>Course details (template based)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.TemplateLectures">
-                <source>Course list (template based)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.TemplatePersondetails">
-                <source>Person details (template based)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.config_type.TemplatePersons">
-                <source>Person list (template based)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.content_lecturessearch">
-                <source>Course search form</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.content_link">
-                <source>generate link</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.content_show">
-                <source>direct output</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.content_type">
-                <source>Display:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.course_types">
-                <source>Show only course types:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.groups">
-                <source>Show only group:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.h1">
-                <source>Heading 1</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.h2">
-                <source>Heading 2</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.h3">
-                <source>Heading 3</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.h4">
-                <source>Heading 4</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.h5">
-                <source>Heading 5</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.h6">
-                <source>Heading 6</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.institute">
-                <source>Institute name:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.course">
-                <source>Course:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.coursedetail_target">
-                <source>Link to course details - Target element:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.link_target">
-                <source>Link target:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.link_text">
-                <source>Link text:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.news_one_col">
-                <source>Display news single-column?</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.newsdetail_target">
-                <source>Link to news details - Target element:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.normal_text">
-                <source>Normal text</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.page_type">
-                <source>Content type:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.person">
-                <source>Person:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.persondetail_target">
-                <source>Link to person details or alphabetical/institute list in person browser - Target element:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.preselected_institute">
-                <source>Preselected institute in search form:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.select">
-                <source>-- please choose --</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.seminar_news">
-                <source>Show news from courses</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.subject_areas">
-                <source>Subject area:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.flexform.text_format">
-                <source>Text format:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.all">
-                <source>all</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.coursetype">
-                <source>Course type:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.institute">
-                <source>Institute:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.reset">
-                <source>New search</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.search_all">
-                <source>all</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.search_description">
-                <source>Course description</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.search_in">
-                <source>Search in:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.search_lecturer">
-                <source>Lecturer(s)</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.search_number">
-                <source>Course number</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.search_title">
-                <source>Title</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.searchterm">
-                <source>Search term:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.semester">
-                <source>Semester:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.search.submit">
-                <source>Submit</source>
+            <trans-unit id="tx_importstudip.exception.incomplete_api_path">
+                <source>Der volle Pfad zur Stud.IP-REST-API wurde nicht gesetzt!</source>
             </trans-unit>
         </body>
     </file>
