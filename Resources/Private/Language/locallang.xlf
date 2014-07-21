@@ -6,7 +6,7 @@
             <trans-unit id="tx_importstudip.plugintitle">
                 <source>Stud.IP data</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip_plugindesc">
+            <trans-unit id="tx_importstudip.plugindesc">
                 <source>Includes data from Stud.IP, like course or person lists.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.sheet.datasheet">

@@ -1,70 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xliff version="1.0">
-    <file source-language="en" target-language="de" datatype="plaintext" original="AppController" date="2014-07-10T16:20:51Z" product-name="importstudip">
+    <file target-language="de" datatype="plaintext" original="AppController" date="2014-07-10T16:20:51Z" product-name="importstudip">
         <header/>
         <body>
             <trans-unit id="tx_importstudip.plugintitle">
-                <source>Stud.IP data</source>
                 <target>Daten aus Stud.IP</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip_plugindesc">
-                <source>Includes data from Stud.IP, like course or person lists.</source>
+            <trans-unit id="tx_importstudip.plugindesc">
                 <target>F&#252;gt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.sheet.datasheet">
-                <source>Show Stud.IP content</source>
                 <target>Inhalte aus Stud.IP anzeigen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.externtype">
-                <source>What type of content do you want to show?</source>
                 <target>Welche Art Inhalt m&#246;chten Sie anzeigen?</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
-                <source>List of courses</source>
                 <target>Liste von Veranstaltungen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.coursedetails">
-                <source>Single course</source>
                 <target>Einzelne Veranstaltung</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.persons">
-                <source>List of persons</source>
                 <target>Liste von Personen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.persondetails">
-                <source>Single person</source>
                 <target>Einzelne Person</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.news">
-                <source>News</source>
                 <target>Ank&#252;ndigungen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.download">
-                <source>Download area</source>
                 <target>Downloadbereich</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
-                <source>Search form</source>
                 <target>Suchformular</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.debug">
-                <source>Debug output?</source>
                 <target>Debug-Ausgaben?</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
-                <source>Relative path to REST API</source>
                 <target>Relativer Pfad zur REST API</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
-                <source>Stud.IP URL</source>
                 <target>Adresse der Stud.IP-Installation</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_url">
-                <source>Address of this web site (optional)</source>
                 <target>Adresse dieser Website (optional)
             </trans-unit>
             <trans-unit id="tx_importstudip.exception.incomplete_api_path">
-                <source>Der volle Pfad zur Stud.IP-REST-API wurde nicht gesetzt!</source>
+                <target>Der volle Pfad zur Stud.IP-REST-API wurde nicht gesetzt!</target>
             </trans-unit>
         </body>
     </file>
