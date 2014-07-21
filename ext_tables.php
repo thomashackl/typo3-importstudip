@@ -1,5 +1,5 @@
 Tx_Extbase_Utility_Extension::registerPlugin(
     $_EXTKEY,
     'Pi1',
-    'Stud.IP data'
+    LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.plugintitle
 );
