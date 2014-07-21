@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Stud.IP data',
-	'description' => 'Imports data from the LMS Stud.IP like course or person lists',
+	'title' => LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.plugintitle,
+	'description' => LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.plugindesc,
 	'category' => 'plugin',
 	'author' => 'Thomas Hackl',
 	'author_email' => 'thomas.hackl@uni-passau.de',
