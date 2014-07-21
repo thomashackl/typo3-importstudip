@@ -11,8 +11,8 @@
  ***************************************************************/
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => "Tx_Extbase_Utility_Localization::translate('tx_importstudip.plugintitle')",
-	'description' => "Tx_Extbase_Utility_Localization::translate('tx_importstudip.plugindesc')",
+	'title' => 'Daten aus Stud.IP',
+	'description' => 'Fügt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.',
 	'category' => 'plugin',
 	'author' => 'Thomas Hackl',
 	'author_email' => 'thomas.hackl@uni-passau.de',
