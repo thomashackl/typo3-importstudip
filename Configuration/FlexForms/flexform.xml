@@ -12,7 +12,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.externtype</label>
                             <config>
                                 <type>radio</type>
-                                <itemsProcFunc>Tx_ImportStudip_Domain_Model_StudipModel->getExternConfigTypes</itemsProcFunc>
+                                <itemsProcFunc>\UniPassau\ImportStudip\StudipModel->getExternConfigTypes</itemsProcFunc>
                             </config>
                         </TCEforms>
                     </settings.pagetype>   
