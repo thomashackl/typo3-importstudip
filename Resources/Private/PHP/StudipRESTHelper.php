@@ -1,10 +1,10 @@
 <?php
 
-require_once(realpath(__DIR__.'/../../Resources/Private/PHP/php-restclient/restclient.php'));
-
-namespace \UniPassau\ImportStudip;
+namespace UniPassau\ImportStudip;
 
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+
+require_once(realpath(__DIR__.'/php-restclient/restclient.php'));
 
 class StudipRESTHelper {
 
@@ -17,13 +17,13 @@ class StudipRESTHelper {
             if (substr($url, -1, 1) != '/') {
                 $url .= '/';
             }
-            if (substr($config['studip_api_path'], 0, 1) != '/') {
+            if (substr($config['studip_api_path'], 0, 1) == '/') {
                 $url .= substr($config['studip_api_path'], 1);
             } else {
                 $url .= $config['studip_api_path'];
             }
-            $this->client = new RestClient(array(
-                'base_url' => $url, 
+            $this->client = new \RestClient(array(
+                'base_url' => $url,
                 'format' => 'json'
             ));
         } else {
@@ -32,7 +32,7 @@ class StudipRESTHelper {
     }
 
     public function call($route) {
-        $this->client->get($route);
+        return $this->client->get($route);
     }
 
 }

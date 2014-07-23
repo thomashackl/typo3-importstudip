@@ -1,15 +1,19 @@
 <?php
 
-namespace \UniPassau\ImportStudip;
+namespace UniPassau\ImportStudip;
 
-use \TYPO3\CMS\Extbase\UtilityTx_Extbase_Utility_Localization;
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use \UniPassau\ImportStudip\StudipRESTHelper;
 
-class StudipModel {
+require_once(__DIR__.'/StudipRESTHelper.php');
 
-    public function getExternConfigTypes($PA, $fobj) {
+class StudipConnector {
+
+    public function getExternConfigTypes($parameters, $config) {
         $result = array();
         $rest = new StudipRESTHelper();
         $data = $rest->call('/typo3/externalpagetypes');
+        echo 'Data:<pre>'.print_r($data, 1).'</pre>';
         /*
          * Check for available config types and enable corresponding
          * "abstract" type.
@@ -49,37 +53,37 @@ class StudipModel {
         // Now set enabled types for GUI.
         if ($courses) {
             $result[] = array(
-                Tx_Extbase_Utility_Localization::translate('tx_importstudip.backend.externtype.courses'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.courses'),
                 'courses'
             );
         }
         if ($coursedetails) {
             $result[] = array(
-                Tx_Extbase_Utility_Localization::translate('tx_importstudip.backend.externtype.coursedetails'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.coursedetails'),
                 'coursedetails'
             );
         }
         if ($persons) {
             $result[] = array(
-                Tx_Extbase_Utility_Localization::translate('tx_importstudip.backend.externtype.persons'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.persons'),
                 'persons'
             );
         }
         if ($persondetails) {
             $result[] = array(
-                Tx_Extbase_Utility_Localization::translate('tx_importstudip.backend.externtype.persondetails'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.persondetails'),
                 'persondetails'
             );
         }
         if ($news) {
             $result[] = array(
-                Tx_Extbase_Utility_Localization::translate('tx_importstudip.backend.externtype.news'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.news'),
                 'news'
             );
         }
         if ($download) {
             $result[] = array(
-                Tx_Extbase_Utility_Localization::translate('tx_importstudip.backend.externtype.download'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.download'),
                 'download'
             );
         }
