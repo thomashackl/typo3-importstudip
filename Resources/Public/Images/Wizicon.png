@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8'>
+<title>
+studip-typo3/pi1/ce_wiz.png at master - TYPO3-Extensions / Stud.IP | 
+GitLab
+</title>
+<link href="/gitlab/assets/favicon-220424ba6cb497309f8faf8545eb5408.ico" rel="shortcut icon" type="image/vnd.microsoft.icon" />
+<link href="/gitlab/assets/application-6318347ea9bdba89285d87396a4aca8e.css" media="screen" rel="stylesheet" />
+<script src="/gitlab/assets/application-cc47bae105f17ab0870fda356d2d273b.js"></script>
+<meta content="authenticity_token" name="csrf-param" />
+<meta content="JakcOIrLcSxhB+hW3mn5G86zByMuG7ntjlVKsyGSm60=" name="csrf-token" />
+<script type="text/javascript">
+//<![CDATA[
+window.gon={};gon.default_issues_tracker="gitlab";gon.api_version="v3";gon.api_token="bof2aiMaYopkz3NJyiRp";gon.gravatar_url="https://secure.gravatar.com/avatar/%{hash}?s=%{size}\u0026d=mm";gon.relative_url_root="/gitlab";
+//]]>
+</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+</head>
+
+<body class='ui_modern project' data-page='projects:blob:show' data-project-id='96'>
+
+<header class='navbar navbar-static-top navbar-gitlab'>
+<div class='navbar-inner'>
+<div class='container'>
+<div class='app_logo'>
+<span class='separator'></span>
+<a class="home has_bottom_tooltip" href="/gitlab/" title="Dashboard"><h1>GITLAB</h1>
+</a><span class='separator'></span>
+</div>
+<h1 class='project_name'><span><a href="/gitlab/groups/typo3-extensions">TYPO3-Extensions</a> / Stud.IP</span></h1>
+<button class='navbar-toggle' data-target='.navbar-collapse' data-toggle='collapse' type='button'>
+<span class='sr-only'>Toggle navigation</span>
+<i class='icon-reorder'></i>
+</button>
+<div class='navbar-collapse collapse'>
+<ul class='nav navbar-nav'>
+<li>
+<a>
+<div class='hide turbolink-spinner'>
+<i class='icon-refresh icon-spin'></i>
+Loading...
+</div>
+</a>
+</li>
+<li class='hidden-sm'>
+<div class='search'>
+<form accept-charset="UTF-8" action="/gitlab/search" class="navbar-form pull-left" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<input class="search-input" id="search" name="search" placeholder="Search in this project" type="text" />
+<input id="group_id" name="group_id" type="hidden" />
+<input id="project_id" name="project_id" type="hidden" value="96" />
+<input id="search_code" name="search_code" type="hidden" value="true" />
+<input id="repository_ref" name="repository_ref" type="hidden" value="master" />
+
+<div class='search-autocomplete-opts hide' data-autocomplete-path='/gitlab/search/autocomplete' data-autocomplete-project-id='96' data-autocomplete-project-ref='master'></div>
+</form>
+
+</div>
+
+</li>
+<li class='visible-sm'>
+<a class="has_bottom_tooltip" data-original-title="Search area" href="/gitlab/search" title="Search"><i class='icon-search'></i>
+</a></li>
+<li>
+<a class="has_bottom_tooltip" data-original-title="Public area" href="/gitlab/public" title="Public area"><i class='icon-globe'></i>
+</a></li>
+<li>
+<a class="has_bottom_tooltip" data-original-title="My snippets" href="/gitlab/s/hackl" title="My snippets"><i class='icon-paste'></i>
+</a></li>
+<li>
+<a class="has_bottom_tooltip" data-original-title="New project" href="/gitlab/projects/new" title="New project"><i class='icon-plus'></i>
+</a></li>
+<li>
+<a class="has_bottom_tooltip" data-original-title="Profile settings&quot;" href="/gitlab/profile" title="Profile settings"><i class='icon-user'></i>
+</a></li>
+<li>
+<a class="has_bottom_tooltip" data-method="delete" data-original-title="Logout" href="/gitlab/users/sign_out" rel="nofollow" title="Logout"><i class='icon-signout'></i>
+</a></li>
+<li>
+<a class="profile-pic" href="/gitlab/u/hackl" id="profile-pic"><img alt="User activity" src="https://secure.gravatar.com/avatar/d121f844074ab00b453e0d1864af7e79?s=26&amp;d=mm" />
+</a></li>
+</ul>
+</div>
+</div>
+</div>
+</header>
+
+<script>
+  GitLab.GfmAutoComplete.dataSource = "/gitlab/typo3-extensions/studip-typo3/autocomplete_sources"
+  GitLab.GfmAutoComplete.Emoji.assetBase = "/gitlab/assets/emoji"
+  GitLab.GfmAutoComplete.setup();
+</script>
+
+<div class='flash-container'>
+</div>
+
+
+<nav class='main-nav'>
+<div class='container'><ul>
+<li class="home"><a href="/gitlab/typo3-extensions/studip-typo3" title="Project"><i class='icon-home'></i>
+</a></li><li class="active"><a href="/gitlab/typo3-extensions/studip-typo3/tree/master">Files</a>
+</li><li class=""><a href="/gitlab/typo3-extensions/studip-typo3/commits/master">Commits</a>
+</li><li class=""><a href="/gitlab/typo3-extensions/studip-typo3/network/master">Network</a>
+</li><li class=""><a href="/gitlab/typo3-extensions/studip-typo3/graphs/master">Graphs</a>
+</li><li class=""><a href="/gitlab/typo3-extensions/studip-typo3/issues">Issues
+<span class='count issue_counter'>0</span>
+</a></li><li class=""><a href="/gitlab/typo3-extensions/studip-typo3/merge_requests">Merge Requests
+<span class='count merge_counter'>0</span>
+</a></li><li class=""><a href="/gitlab/typo3-extensions/studip-typo3/wikis/home">Wiki</a>
+</li><li class=""><a class="stat-tab tab " href="/gitlab/typo3-extensions/studip-typo3/edit">Settings
+</a></li></ul>
+</div>
+</nav>
+<div class='container'>
+<div class='content'><div class='tree-ref-holder'>
+<form accept-charset="UTF-8" action="/gitlab/typo3-extensions/studip-typo3/refs/switch" class="project-refs-form" method="get"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /></div>
+<select class="project-refs-select select2 select2-sm" id="ref" name="ref"><optgroup label="Branches"><option value="2.4.4">2.4.4</option>
+<option value="2.4.7">2.4.7</option>
+<option value="3.0">3.0</option>
+<option selected="selected" value="master">master</option></optgroup><optgroup label="Tags"></optgroup></select>
+<input id="destination" name="destination" type="hidden" value="blob" />
+<input id="path" name="path" type="hidden" value="pi1/ce_wiz.png" />
+</form>
+
+
+</div>
+<div class='tree-holder' id='tree-holder'>
+<ul class='breadcrumb'>
+<li>
+<i class='icon-angle-right'></i>
+<a href="/gitlab/typo3-extensions/studip-typo3/tree/master">studip-typo3
+</a></li>
+<li>
+<a href="/gitlab/typo3-extensions/studip-typo3/tree/master/pi1">pi1</a>
+</li>
+<li>
+<a href="/gitlab/typo3-extensions/studip-typo3/blob/master/pi1/ce_wiz.png"><span class='cblue'>
+ce_wiz.png
+</span>
+</a></li>
+</ul>
+<div class='tree-content-holder' id='tree-content-holder'>
+<div class='file-holder'>
+<div class='file-title'>
+<i class='icon-file'></i>
+<span class='file_name'>
+ce_wiz.png
+<small>1.92 KB</small>
+</span>
+<span class='options'><div class='btn-group tree-btn-group'>
+<a class="btn btn-small" href="/gitlab/typo3-extensions/studip-typo3/raw/master/pi1/ce_wiz.png" target="_blank">raw</a>
+<a class="btn btn-small" href="/gitlab/typo3-extensions/studip-typo3/commits/master/pi1/ce_wiz.png">history</a>
+<a class="remove-blob btn btn-small btn-remove" data-toggle="modal" href="#modal-remove-blob">remove
+</a></div>
+</span>
+</div>
+<div class='file-content image_file'>
+<img src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABYAAAAWCAMAAADzapwJAAAAGXRFWHRTb2Z0&#x000A;d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9i&#x000A;ZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2Vo&#x000A;aUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6&#x000A;bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYx&#x000A;LjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpS&#x000A;REYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJk&#x000A;Zi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIg&#x000A;eG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8i&#x000A;IHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5&#x000A;cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5j&#x000A;b20veGFwLzEuMC8iIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6ODMzRDQz&#x000A;RjRCRTQ4MTFFM0JGQ0M4OUI1QzlGOEI0NDMiIHhtcE1NOkluc3RhbmNlSUQ9&#x000A;InhtcC5paWQ6ODMzRDQzRjNCRTQ4MTFFM0JGQ0M4OUI1QzlGOEI0NDMiIHht&#x000A;cDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2gi&#x000A;PiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmRp&#x000A;ZDpGNzdGMTE3NDA3MjA2ODExOTJCMDk4NzIzRENFNjBDRCIgc3RSZWY6ZG9j&#x000A;dW1lbnRJRD0ieG1wLmRpZDpGNzdGMTE3NDA3MjA2ODExOTJCMDk4NzIzRENF&#x000A;NjBDRCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1w&#x000A;bWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqgctcAAAAHpUExURYmauegEBImZ&#x000A;uImauMHK2tDX49rf6ay4zrO+0oqbuv3f3+kCAvv7/Y2eu/n5+6SxyZSkwKWy&#x000A;yaKwyPrOzrvR4+Ls9P75+dXb5vv8/ebp8Pz9/ZWlwOkDAvj5+/ZqavFBQZGh&#x000A;vqOxya7C17rE1o+fvZGiwP76+oafv+ns8oudu+Ps85qqw+sNDPrR0evu85Wk&#x000A;wPy6uvZpabGvw6Gtx/38/Ovx9ure4+9DQucEBJCmxOXo7+To7/jc3ert8q66&#x000A;z/39/oGmx+3w9JemwbvE1pCoxa+60J21zvz7++oWFvA8PIqZuI+gvfD1+Yqd&#x000A;u6e+1YucuuLt9Py5uc3c6vzf3/Hx9Pbp65ytx/Hz956vyfvNzZupw6Cux//6&#x000A;+v709O/y9vz7/PFra5Civ46evOoNDb7M3eLs85alwbDB1s/d6fm5uf3g4JOk&#x000A;wOTo8JqqxdDc6fdPT7K90ekCAfq+vuTr8vJvcLjH2/E8PPvOzv38/e9RUfz+&#x000A;/r3P4frQ0bG/0+kODvNqar3G2JCivvdpaf26urrI2v729rnD1uPr87DB1e/w&#x000A;9LjC1b3H2PZPT+Lo7/zd3f77+8/Z5uPn7+sWFu8+Po+nxPxPT+3y9rG+0/m3&#x000A;t/z8/dne6M/W4/ATE7zR4qq3zdDb6JeyzegDA////9r+qBgAAACjdFJOU///&#x000A;////////////////////////////////////////////////////////////&#x000A;////////////////////////////////////////////////////////////&#x000A;////////////////////////////////////////////////////////////&#x000A;/////////////////////////////////wACCrcBAAABf0lEQVR42lzRVVcC&#x000A;YRAG4OHbXViQVBq7FQvBBluxsbu7u7u7u2N+qSwcPeh7MRfPxTvnzAByEUcy&#x000A;eQUCQUEeEyl2AXBDn0ErckslktJcBX319MNSPisnVER2dgRF5Oyzn5ulGhlA&#x000A;eb45MdGcXw4QpPHjOIvvLSRhwdXJVmtydXAYEXrz9QhaHUtRRqXKwlVaVEoj&#x000A;RU2miyGONlBdyjIMF8XGisKx7G2LMtA2YGQkaqASsco/JcW/CrHyMIrIXuBY&#x000A;DrcfdnXC6bWvb9FEgrpjMK0kPgTehfDZh8OmHh6PlxpjEmF0YUloJpwENe7W&#x000A;YtO8l5N5XsU+mFQBEgHk6GaOLtDn5h+7ToA1neuukm2uhDhL3Nw2tFT0NfV6&#x000A;t6O2j6cR50o3Y+vjRkDA7DTiwZoDFMwP4975wmrdIjasBIKBjvtlV5ZVvc0A&#x000A;rE7rwdr2s8uHQHCeKgs9+H6ufsQBINNI0ZNHx4CAnOVL8Q+nt3T3K+gMPf7l&#x000A;nE3BPmNzv/hbgAEAXgWkqITrC2EAAAAASUVORK5CYII='>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class='modal hide' id='modal-remove-blob'>
+<div class='modal-dialog'>
+<div class='modal-content'>
+<div class='modal-header'>
+<a class='close' data-dismiss='modal' href='#'>×</a>
+<h3 class='page-title'>Remove ce_wiz.png</h3>
+<p class='light'>
+From branch
+<strong>master</strong>
+</p>
+</div>
+<div class='modal-body'>
+<form accept-charset="UTF-8" action="/gitlab/typo3-extensions/studip-typo3/blob/master/pi1/ce_wiz.png" class="form-horizontal" method="post"><div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="&#x2713;" /><input name="_method" type="hidden" value="delete" /><input name="authenticity_token" type="hidden" value="JakcOIrLcSxhB+hW3mn5G86zByMuG7ntjlVKsyGSm60=" /></div>
+<div class='form-group commit_message-group'>
+<label class="control-label" for="commit_message">Commit message
+</label><div class='col-sm-10'>
+<textarea class="form-control" id="commit_message" name="commit_message" placeholder="Removed this file because..." required="required" rows="3">
+</textarea>
+</div>
+</div>
+<div class='form-group'>
+<div class='col-sm-2'></div>
+<div class='col-sm-10'>
+<input class="btn btn-remove" name="commit" type="submit" value="Remove file" />
+<a class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</a>
+</div>
+</div>
+</form>
+
+</div>
+</div>
+</div>
+</div>
+
+</div>
+</div>
+</body>
+</html>
