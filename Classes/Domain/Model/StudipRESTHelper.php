@@ -2,11 +2,11 @@
 
 require_once(realpath(__DIR__.'/../../Resources/Private/PHP/php-restclient/restclient.php'));
 
-namespace UniPassau\ImportStudip;
+namespace \UniPassau\ImportStudip;
 
-use Extbase\UtilityTx_Extbase_Utility_Localization;
+use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-class Tx_ImportStudip_Domain_Model_StudipRESTHelper {
+class StudipRESTHelper {
 
     private $client = null;
 
@@ -27,7 +27,7 @@ class Tx_ImportStudip_Domain_Model_StudipRESTHelper {
                 'format' => 'json'
             ));
         } else {
-            throw new Exception(Tx_Extbase_Utility_Localization::translate('tx_importstudip.exception.incomplete_api_path'));
+            throw new Exception(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_path', 'importstudip'));
         }
     }
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace UniPassau\ImportStudip;
+namespace \UniPassau\ImportStudip;
 
-use Extbase\UtilityTx_Extbase_Utility_Localization;
+use \TYPO3\CMS\Extbase\UtilityTx_Extbase_Utility_Localization;
 
-class Tx_ImportStudip_Domain_Model_StudipModel {
+class StudipModel {
 
     public function getExternConfigTypes($PA, $fobj) {
         $result = array();

@@ -1,6 +1,6 @@
 <?php
 
-namespace UniPassau\ImportStudip;
+namespace \UniPassau\ImportStudip;
 
 use \TYPO3\CMS\Extbase\MVC\Controller\ActionController;
 
