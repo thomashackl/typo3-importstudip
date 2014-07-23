@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="AppController" date="2014-07-10T16:20:51Z" product-name="importstudip">
+    <file source-language="en" datatype="plaintext" original="messages" date="2014-07-22T13:50:11Z" product-name="importstudip">
         <header/>
         <body>
             <trans-unit id="tx_importstudip.plugintitle">
@@ -42,8 +42,14 @@
             <trans-unit id="tx_importstudip.conf.studip_api_path">
                 <source>Relative path to REST API</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_api_path_desc">
+                <source>Stud.IP 3.0 and onwards have a REST API built into the core which can be reached via the api.php dispatcher. There is also a REST plugin which is typically reachable via plugins.php/restipplugin.</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <source>Stud.IP URL</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_url_desc">
+                <source>Full URL to your Stud.IP installation (something like http://studip.yourserver.com/studip/)</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <source>Address of this web site (optional)</source>

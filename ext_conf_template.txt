@@ -1,7 +1,8 @@
-# cat=basic; type=string; label:LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_url
+# cat=basic; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_url
 studip_url = https://studip.yourserver.com/studip/
-# cat=basic; type=string; label:LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_api_path
-studip_api_path = /api.php/
+
+# cat=basic; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_api_path
+studip_api_path = api.php
 
 # cat=basic; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.typo3_url
 typo3_url = 
