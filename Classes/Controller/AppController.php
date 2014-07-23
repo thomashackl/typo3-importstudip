@@ -2,7 +2,9 @@
 
 namespace UniPassau\ImportStudip;
 
-class Tx_ImportStudip_Controller_AppController extends Tx_Extbase_MVC_Controller_ActionController {
+use \TYPO3\CMS\Extbase\MVC\Controller\ActionController;
+
+class AppController extends ActionController {
 
     public function initializeAction() {
     }
