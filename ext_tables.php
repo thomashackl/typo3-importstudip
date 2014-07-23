@@ -2,7 +2,7 @@
 Tx_Extbase_Utility_Extension::registerPlugin(
     $_EXTKEY,
     'Pi1',
-    'Daten aus Stud.IP'
+    'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:tx_importstudip.plugintitle'
 );
 
 $extensionName = t3lib_div::underscoredToUpperCamelCase($_EXTKEY);
