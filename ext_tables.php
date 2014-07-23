@@ -4,6 +4,8 @@ use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use \TYPO3\CMS\Core\Utility\GeneralUtility;
 use \TYPO3\CMS\Extbase\Utility\ExtensionUtility;
 
+require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PHP/StudipConnector.php');
+
 // Register plugin for usage.
 ExtensionUtility::registerPlugin(
     $_EXTKEY,
