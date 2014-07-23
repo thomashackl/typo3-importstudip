@@ -4,7 +4,7 @@ namespace UniPassau\ImportStudip;
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-class WizIcon {
+class Wizicon {
 
     /**
      * Processing the wizard items array
@@ -18,7 +18,7 @@ class WizIcon {
             'icon'        => ExtensionManagementUtility::extRelPath('importstudip') . 'Resources/Public/Images/Wizicon.png',
             'title'       => LocalizationUtility::translate('tx_importstudip.plugintitle', 'importstudip'),
             'description' => LocalizationUtility::translate('tx_importstudip.plugindesc', 'importstudip'),
-            'params'      => '&defVals[tt_content][CType]=list'
+            'params'      => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=importstudip_pi1'
         );
 
         return $wizardItems;
