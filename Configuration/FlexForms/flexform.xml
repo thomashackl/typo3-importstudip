@@ -12,30 +12,12 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.externtype</label>
                             <config>
                                 <type>radio</type>
-                                <itemsProcFunc>Tx_ImportStudip_Domain_Model_StudipModel->getExternConfigTypes</userFunc>
+                                <itemsProcFunc>Tx_ImportStudip_Domain_Model_StudipModel->getExternConfigTypes</itemsProcFunc>
                             </config>
                         </TCEforms>
                     </settings.pagetype>   
                 </el>
             </ROOT>
         </dataSheet>
-        <searchSheet>
-            <ROOT>
-                <TCEforms>
-                    <sheetTitle>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.sheet.searchsheet</sheetTitle>
-                </TCEforms>
-                <type>array</type>
-                <el>
-                    <settings.limit>
-                        <TCEforms>
-                            <label>Limit</label>
-                            <config>
-                                <type>input</type>
-                            </config>
-                        </TCEforms>
-                    </settings.limit>   
-                </el>
-            </ROOT>
-        </searchSheet>
     </sheets>
 </T3DataStructure>
