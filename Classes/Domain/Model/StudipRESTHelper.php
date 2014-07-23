@@ -2,6 +2,10 @@
 
 require_once(realpath(__DIR__.'/../../Resources/Private/PHP/php-restclient/restclient.php'));
 
+namespace UniPassau\ImportStudip;
+
+use Extbase\UtilityTx_Extbase_Utility_Localization;
+
 class Tx_ImportStudip_Domain_Model_StudipRESTHelper {
 
     private $client = null;

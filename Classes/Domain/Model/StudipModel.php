@@ -1,5 +1,9 @@
 <?php
 
+namespace UniPassau\ImportStudip;
+
+use Extbase\UtilityTx_Extbase_Utility_Localization;
+
 class Tx_ImportStudip_Domain_Model_StudipModel {
 
     public function getExternConfigTypes($PA, $fobj) {
