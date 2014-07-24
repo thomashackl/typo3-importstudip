@@ -42,11 +42,11 @@
             <trans-unit id="tx_importstudip.conf.studip_api_path">
                 <target>Relativer Pfad zur REST API:Ab Stud.IP 3.0 ist eine REST-API in den Kern eingebaut, die &#252;ber api.php erreicht werden kann. Es gibt auch ein REST-Plugin, das normalerweise per plugins.php/restipplugin aufgerufen werden kann.</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_oauth_consumer_key">
-                <target>OAuth Consumer Key:Die Extension identifiziert sich &#252;ber OAuth gegen&#252;ber Stud.IP, daf&#252;r wird der Consumer Key ben&#246;tigt. Diesen erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
+            <trans-unit id="tx_importstudip.conf.studip_api_username">
+                <target>Benutzername f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Benutzername ben&#246;tigt. Diesen erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_oauth_consumer_secret">
-                <target>OAuth Consumer Secret:Die Extension identifiziert sich &#252;ber OAuth gegen&#252;ber Stud.IP, daf&#252;r wird das Consumer Secret ben&#246;tigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
+            <trans-unit id="tx_importstudip.conf.studip_api_password">
+                <target>Passworte f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Passwort ben&#246;tigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <target>Adresse der Stud.IP-Installation:Volle URL zu Ihrer Stud.IP-Installation, inklusive Unterverzeichnissen.</target>

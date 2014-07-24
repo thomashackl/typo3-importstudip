@@ -8,7 +8,6 @@ use \UniPassau\ImportStudip\RESTAccessException;
 
 require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Classes/RESTAccessException.php');
 require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PHP/restclient/restclient.php');
-require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PHP/oauth/OAuth.php');
 
 class StudipRESTHelper {
 
@@ -17,7 +16,7 @@ class StudipRESTHelper {
 
     public function __construct() {
         $this->config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        if ($this->config['studip_url'] && $this->config['studip_api_path'] && $this->config['studip_oauth_consumer_key'] && $this->config['studip_oauth_consumer_secret']) {
+        if ($this->config['studip_url'] && $this->config['studip_api_path'] && $this->config['studip_api_username'] && $this->config['studip_api_password']) {
             /*
              * Build correct URL (check for slashes between path parts and try
              * to remove double slashes in address)
@@ -34,7 +33,8 @@ class StudipRESTHelper {
             $this->client = new \RestClient(array(
                 'base_url' => $url,
                 'format' => 'json',
-                'headers' => array($auth_header)
+                'username' => $this->config['studip_api_username'],
+                'password' => $this->config['studip_api_password']
             ));
         } else {
             throw new RESTAccessException(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'), 1406188236);
@@ -42,11 +42,6 @@ class StudipRESTHelper {
     }
 
     public function call($route) {
-        // Build OAuth headers for request.
-        $consumer = new \OAuthConsumer($this->config['studip_oauth_consumer_key'], $this->config['studip_oauth_consumer_secret']);
-        $request = \OAuthRequest::from_consumer_and_token($consumer, NULL, 'GET', $this->client->base_url.$route, NULL);
-        $request->sign_request(new \OAuthSignatureMethod_HMAC_SHA1(), $consumer, NULL);
-        $auth_header = $request->to_header();
         return $this->client->get($route);
     }
 
