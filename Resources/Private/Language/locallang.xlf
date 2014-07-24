@@ -37,7 +37,7 @@
                 <source>Search form</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.debug">
-                <source>Debug output?</source>
+                <source>Debug output?:Setting this produces output about what data is called from Stud.IP and how it is processed in the extension.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
                 <source>Relative path to REST API:Stud.IP 3.0 and onwards have a REST API built into the core which can be reached via the api.php dispatcher. There is also a REST plugin which is typically reachable via plugins.php/restipplugin.</source>
@@ -49,13 +49,10 @@
                 <source>OAuth Consumer secret:This value  is needed for access to the Stud.IP API. You can get it from your local Stud.IP root administrator.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
-                <source>Stud.IP URL</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_url_desc">
-                <source>Full URL to your Stud.IP installation (something like http://studip.yourserver.com/studip/)</source>
+                <source>Stud.IP URL:Full URL to your Stud.IP installation, including any sub directories.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_url">
-                <source>Address of this web site (optional)</source>
+                <source>Address of this web site (optional):By specifying an address here you can override the "magic" that determines the current site address. For example, your TYPO3 installation actually lies under http://typo3.someserver.com, but your frontend is configured to be called over http://awesome.someserver.com.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.exception.incomplete_api_data">
                 <source>You need to set the path to the Stud.IP REST API and the corresponding OAuth consumer key and secret.</source>
