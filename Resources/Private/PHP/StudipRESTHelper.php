@@ -40,7 +40,7 @@ class StudipRESTHelper {
                 'headers' => array($auth_header)
             ));
         } else {
-            throw new RESTAccessException(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'));
+            throw new RESTAccessException(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'), 1406188236);
         }
     }
 
