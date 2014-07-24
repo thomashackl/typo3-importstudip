@@ -54,8 +54,8 @@
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <source>Address of this web site (optional)</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.exception.incomplete_api_path">
-                <source>The full path to the Stud.IP REST API has not been set!</source>
+            <trans-unit id="tx_importstudip.exception.incomplete_api_data">
+                <source>You need to set the path to the Stud.IP REST API and the corresponding OAuth consumer key and secret.</source>
             </trans-unit>
         </body>
     </file>

@@ -4,7 +4,8 @@ namespace UniPassau\ImportStudip;
 
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 
-require_once(realpath(__DIR__.'/php-restclient/restclient.php'));
+require_once(realpath(__DIR__.'/restclient/restclient.php'));
+require_once(realpath(__DIR__.'/oauth/OAuth.php'));
 
 class StudipRESTHelper {
 
@@ -12,7 +13,11 @@ class StudipRESTHelper {
 
     public function __construct() {
         $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        if ($config['studip_url'] && $config['studip_api_path']) {
+        if ($config['studip_url'] && $config['studip_api_path'] && $config['consumer_key'] && $config['consumer_secret']) {
+            /*
+             * Build correct URL (check for slashes between path parts and try
+             * to remove double slashes in address)
+             */
             $url = $config['studip_url'];
             if (substr($url, -1, 1) != '/') {
                 $url .= '/';
@@ -22,12 +27,19 @@ class StudipRESTHelper {
             } else {
                 $url .= $config['studip_api_path'];
             }
+            $url = str_replace('//', '/', $url);
+            // Build OAuth headers for request.
+            $consumer = new \OAuthConsumer($config['consumer_key'], $config['consumer_secret']);
+            $request = \OAuthRequest::from_consumer_and_token($consumer, NULL, 'GET', $url, NULL);
+            $request->sign_request(new \OAuthSignatureMethod_HMAC_SHA1(), $consumer, NULL);
+            $auth_header = $request->to_header();
             $this->client = new \RestClient(array(
                 'base_url' => $url,
-                'format' => 'json'
+                'format' => 'json',
+                'headers' => array($auth_header)
             ));
         } else {
-            throw new Exception(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_path', 'importstudip'));
+            throw new Exception(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'));
         }
     }
 

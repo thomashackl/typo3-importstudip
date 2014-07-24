@@ -51,8 +51,8 @@
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <target>Adresse dieser Website (optional)</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.exception.incomplete_api_path">
-                <target>Der volle Pfad zur Stud.IP-REST-API wurde nicht gesetzt!</target>
+            <trans-unit id="tx_importstudip.exception.incomplete_api_data">
+                <target>Sie m&#252;ssen den Pfad zur Stud.IP-REST API angeben und den zugeh&#246;rigen Consumer Key und Secret.</target>
             </trans-unit>
         </body>
     </file>
