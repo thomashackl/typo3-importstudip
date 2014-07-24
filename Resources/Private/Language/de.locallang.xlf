@@ -40,10 +40,13 @@
                 <target>Debug-Ausgaben?</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
-                <target>Relativer Pfad zur REST API</target>
+                <target>Relativer Pfad zur REST API:Ab Stud.IP 3.0 ist eine REST-API in den Kern eingebaut, die &#252;ber api.php erreicht werden kann. Es gibt auch ein REST-Plugin, das normalerweise per plugins.php/restipplugin aufgerufen werden kann.</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_api_path_desc">
-                <source>Ab Stud.IP 3.0 ist eine REST-API in den Kern eingebaut, die &#252;ber den Dispatcher unter api.php erreicht werden kann. Es gibt auch ein REST-Plugin, das normalerweise per plugins.php/restipplugin aufgerufen werden kann.</source>
+            <trans-unit id="tx_importstudip.conf.studip_oauth_consumer_key">
+                <target>OAuth Consumer Key</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_oauth_consumer_secret">
+                <target>OAuth Consumer Secret</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <target>Adresse der Stud.IP-Installation</target>

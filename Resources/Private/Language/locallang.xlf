@@ -40,10 +40,13 @@
                 <source>Debug output?</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
-                <source>Relative path to REST API</source>
+                <source>Relative path to REST API:Stud.IP 3.0 and onwards have a REST API built into the core which can be reached via the api.php dispatcher. There is also a REST plugin which is typically reachable via plugins.php/restipplugin.</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_api_path_desc">
-                <source>Stud.IP 3.0 and onwards have a REST API built into the core which can be reached via the api.php dispatcher. There is also a REST plugin which is typically reachable via plugins.php/restipplugin.</source>
+            <trans-unit id="tx_importstudip.conf.studip_oauth_consumer_key">
+                <source>OAuth Consumer key:This key is needed for access to the Stud.IP API. You can get it from your local Stud.IP root administrator.</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_oauth_consumer_secret">
+                <source>OAuth Consumer secret:This value  is needed for access to the Stud.IP API. You can get it from your local Stud.IP root administrator.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <source>Stud.IP URL</source>
