@@ -21,14 +21,14 @@ class StudipRESTHelper {
              * Build correct URL (check for slashes between path parts and try
              * to remove double slashes in address)
              */
-            $url = $config['studip_url'];
+            $url = $this->config['studip_url'];
             if (substr($url, -1, 1) != '/') {
                 $url .= '/';
             }
-            if (substr($config['studip_api_path'], 0, 1) == '/') {
-                $url .= substr($config['studip_api_path'], 1);
+            if (substr($this->config['studip_api_path'], 0, 1) == '/') {
+                $url .= substr($this->config['studip_api_path'], 1);
             } else {
-                $url .= $config['studip_api_path'];
+                $url .= $this->config['studip_api_path'];
             }
             $this->client = new \RestClient(array(
                 'base_url' => $url,
