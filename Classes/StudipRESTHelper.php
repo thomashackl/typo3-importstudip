@@ -5,8 +5,8 @@ namespace UniPassau\ImportStudip;
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use \UniPassau\ImportStudip\RESTAccessException;
 
-require_once(realpath(__DIR__.'/restclient/restclient.php'));
-require_once(realpath(__DIR__.'/oauth/OAuth.php'));
+require_once(realpath(__DIR__.'/../Resources/Private/PHP/restclient/restclient.php'));
+require_once(realpath(__DIR__.'/../Resources/Private/PHP/oauth/OAuth.php'));
 
 class StudipRESTHelper {
 

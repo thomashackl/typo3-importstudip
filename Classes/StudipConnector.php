@@ -5,8 +5,6 @@ namespace UniPassau\ImportStudip;
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
 use \UniPassau\ImportStudip\StudipRESTHelper;
 
-require_once(__DIR__.'/StudipRESTHelper.php');
-
 class StudipConnector {
 
     public function getExternConfigTypes($parameters, $config) {
