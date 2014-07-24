@@ -13,13 +13,13 @@ class StudipConnector {
     public function getExternConfigTypes($parameters, $config) {
         $result = array();
         $rest = new StudipRESTHelper();
-        $data = $rest->call('/typo3/externalpagetypes');
+        $data = $rest->call('typo3/externalpagetypes');
         /*
          * Check for available config types and enable corresponding
          * "abstract" type.
          */
         foreach ($data as $entry) {
-            switch ($entry['type']) {
+            switch ($entry) {
                 case 3:
                 case 8:
                 case 12:
@@ -53,41 +53,42 @@ class StudipConnector {
         // Now set enabled types for GUI.
         if ($courses) {
             $result[] = array(
-                LocalizationUtility::translate('tx_importstudip.backend.externtype.courses'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.courses', 'importstudip'),
                 'courses'
             );
         }
         if ($coursedetails) {
             $result[] = array(
-                LocalizationUtility::translate('tx_importstudip.backend.externtype.coursedetails'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.coursedetails', 'importstudip'),
                 'coursedetails'
             );
         }
         if ($persons) {
             $result[] = array(
-                LocalizationUtility::translate('tx_importstudip.backend.externtype.persons'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.persons', 'importstudip'),
                 'persons'
             );
         }
         if ($persondetails) {
             $result[] = array(
-                LocalizationUtility::translate('tx_importstudip.backend.externtype.persondetails'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.persondetails', 'importstudip'),
                 'persondetails'
             );
         }
         if ($news) {
             $result[] = array(
-                LocalizationUtility::translate('tx_importstudip.backend.externtype.news'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.news', 'importstudip'),
                 'news'
             );
         }
         if ($download) {
             $result[] = array(
-                LocalizationUtility::translate('tx_importstudip.backend.externtype.download'),
+                LocalizationUtility::translate('tx_importstudip.backend.externtype.download', 'importstudip'),
                 'download'
             );
         }
-        return $result;
+        $parameters['items'] = array_merge($parameters['items'], $result);
+        return $config;
     }
 
 }

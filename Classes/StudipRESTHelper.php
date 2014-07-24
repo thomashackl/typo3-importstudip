@@ -32,7 +32,6 @@ class StudipRESTHelper {
             }
             $this->client = new \RestClient(array(
                 'base_url' => $url,
-                'format' => 'json',
                 'username' => $this->config['studip_api_username'],
                 'password' => $this->config['studip_api_password']
             ));
@@ -42,7 +41,8 @@ class StudipRESTHelper {
     }
 
     public function call($route) {
-        return $this->client->get($route);
+        $response = $this->client->get($route);
+        return json_decode($response->response);
     }
 
 }
