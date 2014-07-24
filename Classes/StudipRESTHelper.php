@@ -13,10 +13,11 @@ require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PH
 class StudipRESTHelper {
 
     private $client = null;
+    private $config = null;
 
     public function __construct() {
-        $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        if ($config['studip_url'] && $config['studip_api_path'] && $config['studip_oauth_consumer_key'] && $config['studip_oauth_consumer_secret']) {
+        $this->config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        if ($this->config['studip_url'] && $this->config['studip_api_path'] && $this->config['studip_oauth_consumer_key'] && $this->config['studip_oauth_consumer_secret']) {
             /*
              * Build correct URL (check for slashes between path parts and try
              * to remove double slashes in address)
@@ -30,16 +31,8 @@ class StudipRESTHelper {
             } else {
                 $url .= $config['studip_api_path'];
             }
-            $url = str_replace('//', '/', $url);
-            // Build OAuth headers for request.
-            $consumer = new \OAuthConsumer($config['studip_oauth_consumer_key'], $config['studip_oauth_consumer_secret']);
-            $request = \OAuthRequest::from_consumer_and_token($consumer, NULL, 'GET', $url, NULL);
-            $request->sign_request(new \OAuthSignatureMethod_HMAC_SHA1(), $consumer, NULL);
-            $auth_header = $request->to_header();
-            echo 'Request:<pre>'.print_r($request, 1).'</pre>';
             $this->client = new \RestClient(array(
                 'base_url' => $url,
-
                 'format' => 'json',
                 'headers' => array($auth_header)
             ));
@@ -49,6 +42,11 @@ class StudipRESTHelper {
     }
 
     public function call($route) {
+        // Build OAuth headers for request.
+        $consumer = new \OAuthConsumer($this->config['studip_oauth_consumer_key'], $this->config['studip_oauth_consumer_secret']);
+        $request = \OAuthRequest::from_consumer_and_token($consumer, NULL, 'GET', $this->client->base_url.$route, NULL);
+        $request->sign_request(new \OAuthSignatureMethod_HMAC_SHA1(), $consumer, NULL);
+        $auth_header = $request->to_header();
         return $this->client->get($route);
     }
 

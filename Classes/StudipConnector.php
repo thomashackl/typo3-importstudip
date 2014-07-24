@@ -14,7 +14,6 @@ class StudipConnector {
         $result = array();
         $rest = new StudipRESTHelper();
         $data = $rest->call('/typo3/externalpagetypes');
-        echo 'Data:<pre>'.print_r($data, 1).'</pre>';
         /*
          * Check for available config types and enable corresponding
          * "abstract" type.
