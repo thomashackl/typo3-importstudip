@@ -3,6 +3,7 @@
 namespace UniPassau\ImportStudip;
 
 use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
+use \UniPassau\ImportStudip\RESTAccessException;
 
 require_once(realpath(__DIR__.'/restclient/restclient.php'));
 require_once(realpath(__DIR__.'/oauth/OAuth.php'));
@@ -39,7 +40,7 @@ class StudipRESTHelper {
                 'headers' => array($auth_header)
             ));
         } else {
-            throw new Exception(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'));
+            throw new RESTAccessException(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'));
         }
     }
 
