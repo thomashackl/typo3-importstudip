@@ -11,11 +11,20 @@
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.externtype</label>
                             <config>
-                                <type>radio</type>
-                                <itemsProcFunc>\UniPassau\ImportStudip\StudipConnector->getExternConfigTypes</itemsProcFunc>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getExternConfigTypes</userFunc>
                             </config>
                         </TCEforms>
                     </settings.pagetype>   
+                    <settings.institute>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.institute</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getInstitutes</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.institute>   
                 </el>
             </ROOT>
         </dataSheet>

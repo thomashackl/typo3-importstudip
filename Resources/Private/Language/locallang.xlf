@@ -15,6 +15,9 @@
             <trans-unit id="tx_importstudip.backend.label.externtype">
                 <source>What type of content do you want to show?</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.institute">
+                <source>Select an institute to show data from.</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
                 <source>List of courses</source>
             </trans-unit>
@@ -54,7 +57,10 @@
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <source>Address of this web site (optional):By specifying an address here you can override the "magic" that determines the current site address. For example, your TYPO3 installation actually lies under http://typo3.someserver.com, but your frontend is configured to be called over http://awesome.someserver.com.</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.message.error">
+            <trans-unit id="tx_importstudip.message.ajax_error">
+                <source>An error has occurred on trying to fetch data.</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.message.ajax_error">
                 <source>An error has occurred.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.message.incomplete_api_config">

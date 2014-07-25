@@ -15,6 +15,9 @@
             <trans-unit id="tx_importstudip.backend.label.externtype">
                 <target>Welche Art Inhalt m&#246;chten Sie anzeigen?</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.institute">
+                <target>W&#228;hlen Sie hier eine Einrichtung, deren Daten angezeigt werden sollen.</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
                 <target>Liste von Veranstaltungen</target>
             </trans-unit>
@@ -53,6 +56,9 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <target>Adresse dieser Website (optional):Diese Angabe &#252;berschreibt die automatische Ermittlung der aktuellen Seitenadresse. Das kann sinnvoll sein, wenn Ihre TYPO3-Installation nach au&#223;en &#252;ber eine andere Adresse aufgerufen wird, als sie eigentlich physikalisch hat.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.message.ajax_error">
+                <target>Ein Fehler ist beim Abruf von Daten aufgetreten.</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.message.error">
                 <target>Ein Fehler ist aufgetreten.</target>
