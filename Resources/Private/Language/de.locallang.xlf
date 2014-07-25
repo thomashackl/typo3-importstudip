@@ -54,8 +54,14 @@
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <target>Adresse dieser Website (optional):Diese Angabe &#252;berschreibt die automatische Ermittlung der aktuellen Seitenadresse. Das kann sinnvoll sein, wenn Ihre TYPO3-Installation nach au&#223;en &#252;ber eine andere Adresse aufgerufen wird, als sie eigentlich physikalisch hat.</target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.exception.incomplete_api_data">
-                <target>Sie m&#252;ssen den Pfad zur Stud.IP-REST API angeben und den zugeh&#246;rigen Consumer Key und Secret.</target>
+            <trans-unit id="tx_importstudip.message.error">
+                <target>Ein Fehler ist aufgetreten.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.message.incomplete_api_config">
+                <target>Bitte setzen Sie den korrekten Pfad zur Stud.IP-Schnittstelle und die zugeh$#246;rige Kombination aus Benutzername und Passwort.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.message.rest_access_error">
+                <target>Auf die Stud.IP-Schnittstelle konnte nicht zugegriffen werden. Die Fehlermeldung lautete:</target>
             </trans-unit>
         </body>
     </file>

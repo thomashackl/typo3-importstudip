@@ -2,12 +2,7 @@
 
 namespace UniPassau\ImportStudip;
 
-use \TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
-use \TYPO3\CMS\Extbase\Utility\LocalizationUtility;
-use \UniPassau\ImportStudip\RESTAccessException;
-
-require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Classes/RESTAccessException.php');
-require_once(ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PHP/restclient/restclient.php');
+require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PHP/restclient/restclient.php');
 
 class StudipRESTHelper {
 
@@ -36,13 +31,28 @@ class StudipRESTHelper {
                 'password' => $this->config['studip_api_password']
             ));
         } else {
-            throw new RESTAccessException(LocalizationUtility::translate('tx_importstudip.exception.incomplete_api_data', 'importstudip'), 1406188236);
+            $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.incomplete_api_config', 'importstudip'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.error', 'importstudip'),
+                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+            );
+            \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);
         }
     }
 
     public function call($route) {
         $response = $this->client->get($route);
-        return json_decode($response->response);
+        //echo 'Response:<pre>'.print_r($response, 1).'</pre>';
+        if ($response->info->http_code == '200') {
+            return json_decode($response->response);
+        } else {
+            $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.rest_access_error', 'importstudip').' '.$response->response,
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.error', 'importstudip'),
+                \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
+            );
+            \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);
+        }
     }
 
 }
