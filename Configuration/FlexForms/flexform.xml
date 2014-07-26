@@ -25,6 +25,15 @@
                             </config>
                         </TCEforms>
                     </settings.institute>   
+                    <settings.externconfigs>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.externconfigurations</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getExternConfigurations</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.externconfigs>   
                 </el>
             </ROOT>
         </dataSheet>

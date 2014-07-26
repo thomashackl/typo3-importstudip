@@ -18,6 +18,9 @@
             <trans-unit id="tx_importstudip.backend.label.institute">
                 <target>W&#228;hlen Sie hier eine Einrichtung, deren Daten angezeigt werden sollen.</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.externconfigurations">
+                <target>W&#228;hlen Sie hier aus, welche Daten angezeigt werden sollen:</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
                 <target>Liste von Veranstaltungen</target>
             </trans-unit>

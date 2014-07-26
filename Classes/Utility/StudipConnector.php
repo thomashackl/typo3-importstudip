@@ -92,4 +92,10 @@ class StudipConnector {
         return $rest->call('typo3/institutes');
     }
 
+    public function getExternConfigurations($institute) {
+        $result = array();
+        $rest = new StudipRESTHelper();
+        return $rest->call('typo3/externconfig/'.$institute);
+    }
+
 }

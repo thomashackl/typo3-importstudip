@@ -7,7 +7,8 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 class ConfigForm {
 
     public function getExternConfigTypes($parameters, $config) {
-        $result = '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').'Resources/Public/JavaScript/tx_importstudip.js"></script>';
+        $result = '<div id="externtypes">';
+        $result .= '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').'Resources/Public/JavaScript/tx_importstudip.js"></script>';
         $result .= '<style type="text/css">
             @import url("'.
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').
@@ -20,6 +21,7 @@ class ConfigForm {
                 $parameters['itemFormElName'].'" value="'.$type[1].'"/>'.
                 '<label for="'.$type[1].'">'.$type[0].'</label><br/>';
         }
+        $result .= '</div>';
         return $result;
     }
 
@@ -28,6 +30,16 @@ class ConfigForm {
         $result .= '<script type="text/javascript">
         //<!--
         TYPO3.jQuery("#institutes").closest(".t3-form-field-container").hide();
+        //-->
+        </script>';
+        return $result;
+    }
+
+    public function getExternConfigurations($parameters, $config) {
+        $result = '<div id="externconfigs" data-input-name="'.$parameters['itemFormElName'].'"></div>';
+        $result .= '<script type="text/javascript">
+        //<!--
+        TYPO3.jQuery("#externconfigs").closest(".t3-form-field-container").hide();
         //-->
         </script>';
         return $result;

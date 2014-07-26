@@ -14,4 +14,11 @@ class AjaxHandler {
         return StudipConnector::getInstitutes();
     }
 
+    public function externconfigurations() {
+        $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
+        $configtype = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
+        
+        return StudipConnector::getExternConfigurations($institute, $types);
+    }
+
 }
