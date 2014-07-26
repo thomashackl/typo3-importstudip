@@ -7,16 +7,30 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 class ConfigForm {
 
     public function getExternConfigTypes($parameters, $config) {
-        $result = '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').'Resources/Public/JavaScript/importstudip.js"></script>';
+        $result = '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').'Resources/Public/JavaScript/tx_importstudip.js"></script>';
+        $result .= '<style type="text/css">
+            @import url("'.
+            \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').
+            'Resources/Public/Css/tx_importstudip.css")
+            </style>';
         $types = StudipConnector::getExternConfigTypes();
         foreach ($types as $type) {
-            $result .= '<input type="radio" onclick="Tx_ImportStudip.getInstitutes()" name="'.$parameters['itemFormElName'].'" value="'.$type[1].'"/>'.$type[0].'<br/>';
+            $result .= '<input type="radio" id="' .$type[1].
+                '" onclick="Tx_ImportStudip.getInstitutes()" name="'.
+                $parameters['itemFormElName'].'" value="'.$type[1].'"/>'.
+                '<label for="'.$type[1].'">'.$type[0].'</label><br/>';
         }
         return $result;
     }
 
     public function getInstitutes($parameters, $config) {
-        return '<div id="institutes"></div>';
+        $result = '<div id="institutes" data-input-name="'.$parameters['itemFormElName'].'"></div>';
+        $result .= '<script type="text/javascript">
+        //<!--
+        TYPO3.jQuery("#institutes").closest(".t3-form-field-container").hide();
+        //-->
+        </script>';
+        return $result;
     }
 
 }

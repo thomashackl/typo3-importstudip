@@ -1,0 +1,50 @@
+li.tx_importstudip_treebranch {
+    list-style-type: none;
+    background-image: url("../../../../../../typo3/gfx/ol/plus.gif");
+    background-repeat: no-repeat;
+    /*background-position: 0px 5px;*/
+    padding-left: 20px;
+    margin-left: -20px;
+    margin-top: -19px;
+}
+
+li.tx_importstudip_treebranch:first-child {
+    background-image: url("../../../../../../typo3/gfx/ol/plustop.gif");
+    margin-top: -5px;
+}
+
+li.tx_importstudip_treebranch input.tx_importstudip_treeinput {
+    opacity: 0;
+}
+
+li.tx_importstudip_treebranch input.tx_importstudip_treeinput + ul {
+    margin-top: -19px;
+    padding-top: 16px;
+}
+
+li.tx_importstudip_treebranch input.tx_importstudip_treeinput + ul > li {
+    display: none;
+    cursor: pointer;
+    padding-left: 20px;
+    margin-left: -42px;
+    margin-top: -9px;
+}
+
+li.tx_importstudip_treebranch input.tx_importstudip_treeinput + ul > li:first-child {
+    margin-top: -4px;
+}
+
+li.tx_importstudip_treebranch input.tx_importstudip_treeinput:checked + ul > li {
+    display: block;
+}
+
+li.tx_importstudip_treeleaf {
+    list-style-type: none;
+    background-image: url("../../../../../../typo3/gfx/ol/join.gif");
+    background-repeat: no-repeat;
+    background-position: 0px 5px;
+}
+
+li.tx_importstudip_treeleaf:last-child {
+    background-image: url("../../../../../../typo3/gfx/ol/joinbottom.gif");
+}

@@ -1,6 +1,6 @@
 <?php
 
-namespace UniPassau\ImportStudip;
+namespace UniPassau\ImportStudip\Utility;
 
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Resources/Private/PHP/restclient/restclient.php');
 
@@ -42,9 +42,8 @@ class StudipRESTHelper {
 
     public function call($route) {
         $response = $this->client->get($route);
-        //echo 'Response:<pre>'.print_r($response, 1).'</pre>';
         if ($response->info->http_code == '200') {
-            return json_decode($response->response);
+            return $response->response;
         } else {
             $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.rest_access_error', 'importstudip').' '.$response->response,
