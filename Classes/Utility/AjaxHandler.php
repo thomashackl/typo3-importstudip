@@ -16,7 +16,7 @@ class AjaxHandler {
 
     public function externconfigurations() {
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
-        $configtype = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
+        $types = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype');
         
         return StudipConnector::getExternConfigurations($institute, $types);
     }

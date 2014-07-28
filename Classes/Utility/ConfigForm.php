@@ -7,7 +7,7 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 class ConfigForm {
 
     public function getExternConfigTypes($parameters, $config) {
-        $result = '<div id="externtypes">';
+        $result = '<div id="pagetypes">';
         $result .= '<script type="text/javascript" src="'.\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').'Resources/Public/JavaScript/tx_importstudip.js"></script>';
         $result .= '<style type="text/css">
             @import url("'.
