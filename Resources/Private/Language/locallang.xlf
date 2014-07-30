@@ -16,10 +16,10 @@
                 <source>What type of content do you want to show?</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.institute">
-                <source>Select an institute to show data from.</source>
+                <source>Which institute provides the data to show?</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.externconfigurations">
-                <source>Select the content to show:</source>
+                <source>Select the data to show:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
                 <source>List of courses</source>

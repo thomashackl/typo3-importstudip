@@ -16,7 +16,7 @@
                 <target>Welche Art Inhalt m&#246;chten Sie anzeigen?</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.institute">
-                <target>W&#228;hlen Sie hier eine Einrichtung, deren Daten angezeigt werden sollen.</target>
+                <target>Welche Einrichtung stellt die anzuzeigenden Daten zur Verf&#252;gung?</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.externconfigurations">
                 <target>W&#228;hlen Sie hier aus, welche Daten angezeigt werden sollen:</target>
