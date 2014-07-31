@@ -89,7 +89,17 @@ class StudipConnector {
     public function getInstitutes() {
         $result = array();
         $rest = new StudipRESTHelper();
-        return $rest->call('typo3/institutes');
+        /*
+         * Get extension config: We need to decide whether to use institutes or
+         * range_tree.
+         */
+        $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        if ($config['studip_use_hierarchy'] == 'rangetree') {
+            $route = 'typo3/rangetree';
+        } else {
+            $route = 'typo3/institutes';
+        }
+        return $rest->call($route);
     }
 
     public function getExternConfigurations($institute, $type) {
@@ -104,6 +114,16 @@ class StudipConnector {
         );
         $rest = new StudipRESTHelper();
         return $rest->call('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
+    }
+
+    public function getCourseTypes($institute) {
+        $rest = new StudipRESTHelper();
+        return $rest->call('typo3/coursetypes/'.$institute);
+    }
+
+    public function getSubjects() {
+        $rest = new StudipRESTHelper();
+        return $rest->call('typo3/semtree');
     }
 
 }

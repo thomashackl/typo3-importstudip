@@ -1,50 +1,73 @@
-li.tx_importstudip_treebranch {
+ul.tx-importstudip-tree li:first-child {
+    margin-top: 0px;
+}
+
+ul.tx-import-studip input[type=radio] {
+    width: 10px;
+    height: 10px;
+}
+
+ul.tx-importstudip-tree li:last-child {
+    margin-bottom: 0px;
+}
+
+li.tx-importstudip-treebranch {
     list-style-type: none;
-    background-image: url("../../../../../../typo3/gfx/ol/plus.gif");
-    background-repeat: no-repeat;
-    /*background-position: 0px 5px;*/
-    padding-left: 20px;
-    margin-left: -20px;
-    margin-top: -19px;
+    margin-top: -22px;
+    margin-bottom: -22px;
 }
 
-li.tx_importstudip_treebranch:first-child {
-    background-image: url("../../../../../../typo3/gfx/ol/plustop.gif");
-    margin-top: -5px;
-}
-
-li.tx_importstudip_treebranch input.tx_importstudip_treeinput {
+li.tx-importstudip-treebranch input.tx-importstudip-treeinput {
     opacity: 0;
 }
 
-li.tx_importstudip_treebranch input.tx_importstudip_treeinput + ul {
-    margin-top: -19px;
-    padding-top: 16px;
+li.tx-importstudip-treebranch input.tx-importstudip-treeinput + ul {
+    margin-top: -5px;
+    margin-bottom; -8px;
 }
 
-li.tx_importstudip_treebranch input.tx_importstudip_treeinput + ul > li {
+li.tx-importstudip-treebranch input.tx-importstudip-treeinput + ul > li {
     display: none;
     cursor: pointer;
-    padding-left: 20px;
-    margin-left: -42px;
-    margin-top: -9px;
 }
 
-li.tx_importstudip_treebranch input.tx_importstudip_treeinput + ul > li:first-child {
-    margin-top: -4px;
-}
-
-li.tx_importstudip_treebranch input.tx_importstudip_treeinput:checked + ul > li {
+li.tx-importstudip-treebranch input.tx-importstudip-treeinput:checked + ul > li {
     display: block;
-}
-
-li.tx_importstudip_treeleaf {
-    list-style-type: none;
-    background-image: url("../../../../../../typo3/gfx/ol/join.gif");
+    background-image: url('../../../../../../typo3/gfx/ol/join.gif');
     background-repeat: no-repeat;
-    background-position: 0px 5px;
+    margin-left: -20px;
+    padding-left: 20px;
 }
 
-li.tx_importstudip_treeleaf:last-child {
-    background-image: url("../../../../../../typo3/gfx/ol/joinbottom.gif");
+li.tx-importstudip-treebranch input.tx-importstudip-treeinput:checked + ul > li:last-child {
+    background-image: url('../../../../../../typo3/gfx/ol/joinbottom.gif');
+    background-repeat: no-repeat;
+}
+
+li.tx-importstudip-treeleaf {
+    list-style-type: none;
+    margin-top: -9px;
+    margin-bottom: -9px;
+}
+
+li.tx-importstudip-treeleaf + li.tx-importstudip-treebranch {
+    margin-top: -8px;
+}
+
+li.tx-importstudip-treebranch input[type=radio], li.tx-importstudip-treeleaf input[type=radio] {
+    margin-top: 5px;
+}
+
+img.tx-importstudip-openclose {
+    vertical-align: middle;
+}
+
+div#tx-importstudip-options {
+    background-color: rgba(0,0,0,0.10);
+    margin: 15px;
+    padding: 10px;
+}
+
+div#tx-importstudip-options img {
+    vertical-align: middle;
 }

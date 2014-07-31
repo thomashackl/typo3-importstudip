@@ -35,4 +35,8 @@ class AjaxHandler {
         return ConfigForm::getExternConfigurationsForm(json_decode($externconfigs), $inputname, $selected);
     }
 
+    public function additionaloptions() {
+        return ConfigForm::getadditionalOptions();
+    }
+
 }

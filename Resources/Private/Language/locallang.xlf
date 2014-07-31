@@ -21,6 +21,24 @@
             <trans-unit id="tx_importstudip.backend.label.externconfigurations">
                 <source>Select the data to show:</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.options">
+                <source>Additional settings</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.aggregate">
+                <source>Aggregate data over sub-institutes</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.coursetype">
+                <source>Show only courses of the following type:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.subject">
+                <source>Show only courses assigned to the following subject (and its children)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.statusgroup">
+                <source>Show only users belonging to the following status group</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.select">
+                <source>-- please choose --</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
                 <source>List of courses</source>
             </trans-unit>
@@ -42,6 +60,12 @@
             <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
                 <source>Search form</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.conf.category_studip">
+                <source>Stud.IP-related settings</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.category_typo3">
+                <source>Settings for output in TYPO3</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.conf.debug">
                 <source>Debug output?:Setting this produces output about what data is called from Stud.IP and how it is processed in the extension.</source>
             </trans-unit>
@@ -53,6 +77,15 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_password">
                 <source>Password for API access:To access the Stud.IP REST API, a password is needed. You can get it from your local Stud.IP root administrator.</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">
+                <source>Which Stud.IP institute hierarchy shall be used?</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_hierarchy_institute">
+                <source>Two-level institute hierarchy (institute)</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_hierarchy_rangetree">
+                <source>Multi-level range hierarchy (range_tree)</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <source>Stud.IP URL:Full URL to your Stud.IP installation, including any sub directories.</source>

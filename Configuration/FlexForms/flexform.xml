@@ -34,6 +34,51 @@
                             </config>
                         </TCEforms>
                     </settings.externconfigs>   
+                    <settings.options>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.options</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAdditionalOptions</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.options>   
+                    <settings.aggregate>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.aggregate</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAggregationForm</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.aggregate>   
+                    <settings.coursetype>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.coursetype</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getCourseTypes</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.coursetype>   
+                    <settings.subject>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.subject</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getSubjects</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.subject>
+                    <settings.statusgroup>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.statusgroup</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getStatusgroups</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.statusgroup>   
                 </el>
             </ROOT>
         </dataSheet>

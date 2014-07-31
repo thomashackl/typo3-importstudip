@@ -21,6 +21,24 @@
             <trans-unit id="tx_importstudip.backend.label.externconfigurations">
                 <target>W&#228;hlen Sie hier aus, welche Daten angezeigt werden sollen:</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.options">
+                <target>Zus&#228;tzliche Einstellungen</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.aggregate">
+                <target>Daten von Untereinrichtungen der gew&#228;hlten Einrichtung anzeigen?</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.coursetype">
+                <target>Zeige nur folgenden Veranstaltungstyp:</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.subject">
+                <target>Zeige nur Veranstaltungen des folgenden Studienbereichs (und Unterbereichen):</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.statusgroup">
+                <target>Zeige nur Personen in folgender Statusgruppe:</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.select">
+                <target>-- bitte ausw&#228;hlen --</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.externtype.courses">
                 <target>Liste von Veranstaltungen</target>
             </trans-unit>
@@ -42,6 +60,12 @@
             <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
                 <target>Suchformular</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.conf.category_studip">
+                <target>Stud.IP-bezogene Einstellungen</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.category_typo3">
+                <target>Einstellungen f&#252;r die Ausgabe in TYPO3</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.conf.debug">
                 <target>Debug-Ausgaben?:Falls gesetzt, werden Information dar&#252;ber ausgegeben, welche Daten von Stud.IP abgerufen werden und wie sie in der Extension weiterverarbeitet werden.</target>
             </trans-unit>
@@ -52,7 +76,16 @@
                 <target>Benutzername f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Benutzername ben&#246;tigt. Diesen erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_password">
-                <target>Passworte f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Passwort ben&#246;tigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
+                <target>Passwort f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Passwort ben&#246;tigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">
+                <target>Welche Stud.IP-Einrichtungshierarchie soll verwendet werden?:In Stud.IP gibt es zwei Arten, um die Beziehungen von Einrichtungen untereinander darzustellen. Die Institute-Hierarchie kann maximal zweistufig sein, beinhaltet aber nur echte Einrichtungen. Daneben gibt es noch die RangeTree-Einrichtungshierarchie, die beliebig viele Ebenen und Mehrfachzuordnungen darstellen kann, auch mit Ebenen, die keiner existierenden Einrichtung entsprechen.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_hierarchy_institute">
+                <target>Zweistufige Einrichtungshierarchie (institute)</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_hierarchy_rangetree">
+                <target>Mehrstufige, erweiterte Einrichtungshierarchie (range_tree)</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <target>Adresse der Stud.IP-Installation:Volle URL zu Ihrer Stud.IP-Installation, inklusive Unterverzeichnissen.</target>
