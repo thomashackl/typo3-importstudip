@@ -11,7 +11,8 @@ class AjaxHandler {
     }
 
     public function institutes() {
-        return StudipConnector::getInstitutes();
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        return StudipConnector::getInstitutes($extConf['studip_use_hierarchy']);
     }
 
     public function instituteform() {
@@ -33,6 +34,14 @@ class AjaxHandler {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         return ConfigForm::getExternConfigurationsForm(json_decode($externconfigs), $inputname, $selected);
+    }
+
+    public function subjectsform() {
+        $parent_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('parent');
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        //return StudipConnector::getSubjects($parent_id, 2);
+        return ConfigForm::getSubjectForm(json_decode(StudipConnector::getSubjects($parent_id, 2)), $inputname, $selected);
     }
 
     public function additionaloptions() {

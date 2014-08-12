@@ -86,32 +86,21 @@ class StudipConnector {
         return $types;
     }
 
-    public function getInstitutes() {
+    public function getInstitutes($treetype, $externtype) {
         $result = array();
+        $mapping = self::getTypeMapping();
         $rest = new StudipRESTHelper();
-        /*
-         * Get extension config: We need to decide whether to use institutes or
-         * range_tree.
-         */
-        $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        if ($config['studip_use_hierarchy'] == 'rangetree') {
-            $route = 'typo3/rangetree';
+        if ($treetype == 'rangetree') {
+            $route = 'typo3/rangetree/'.$mapping[$externtype];
         } else {
-            $route = 'typo3/institutes';
+            $route = 'typo3/institutes/'.$mapping[$externtype];
         }
         return $rest->call($route);
     }
 
     public function getExternConfigurations($institute, $type) {
         $result = array();
-        $mapping = array(
-            'courses' => array(3, 8, 12, 15),
-            'coursedetails' => array(4, 13),
-            'persons' => array(1, 9, 16),
-            'persondetails' => array(2, 14),
-            'news' => array(5, 7, 11),
-            'download' => array(6, 10)
-        );
+        $mapping = self::getTypeMapping();
         $rest = new StudipRESTHelper();
         return $rest->call('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
     }
@@ -121,9 +110,25 @@ class StudipConnector {
         return $rest->call('typo3/coursetypes/'.$institute);
     }
 
-    public function getSubjects() {
+    public function getSubjects($parent_id, $depth) {
         $rest = new StudipRESTHelper();
-        return $rest->call('typo3/semtree');
+        return $rest->call('typo3/semtree/'.$parent_id.'/'.$depth);
+    }
+
+    public function getStatusgroupNames($institute) {
+        $rest = new StudipRESTHelper();
+        return $rest->call('typo3/statusgroupnames/'.$institute);
+    }
+
+    private function getTypeMapping() {
+        return array(
+            'courses' => array(3, 8, 12, 15),
+            'coursedetails' => array(4, 13),
+            'persons' => array(1, 9, 16),
+            'persondetails' => array(2, 14),
+            'news' => array(5, 7, 11),
+            'download' => array(6, 10)
+        );
     }
 
 }

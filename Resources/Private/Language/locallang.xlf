@@ -3,14 +3,35 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2014-07-22T13:50:11Z" product-name="importstudip">
         <header/>
         <body>
-            <trans-unit id="tx_importstudip.plugintitle">
-                <source>Stud.IP data</source>
+            <trans-unit id="tx_importstudip.backend.externtype.coursedetails">
+                <source>Single course</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.plugindesc">
-                <source>Includes data from Stud.IP, like course or person lists.</source>
+            <trans-unit id="tx_importstudip.backend.externtype.courses">
+                <source>List of courses</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.sheet.datasheet">
-                <source>Show Stud.IP content</source>
+            <trans-unit id="tx_importstudip.backend.externtype.download">
+                <source>Download area</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.externtype.news">
+                <source>News</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.externtype.persondetails">
+                <source>Single person</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.externtype.persons">
+                <source>List of persons</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.aggregate">
+                <source>Aggregate data over sub-institutes</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.all">
+                <source>all</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.coursetype">
+                <source>Show only courses of the following type:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.externconfigurations">
+                <source>Select the data to show:</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.externtype">
                 <source>What type of content do you want to show?</source>
@@ -18,44 +39,23 @@
             <trans-unit id="tx_importstudip.backend.label.institute">
                 <source>Which institute provides the data to show?</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.externconfigurations">
-                <source>Select the data to show:</source>
+            <trans-unit id="tx_importstudip.backend.label.loading">
+                <source>Loading data...</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.options">
                 <source>Additional settings</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.aggregate">
-                <source>Aggregate data over sub-institutes</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.coursetype">
-                <source>Show only courses of the following type:</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.subject">
-                <source>Show only courses assigned to the following subject (and its children)</source>
+            <trans-unit id="tx_importstudip.backend.label.select">
+                <source>-- please choose --</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.statusgroup">
                 <source>Show only users belonging to the following status group</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.select">
-                <source>-- please choose --</source>
+            <trans-unit id="tx_importstudip.backend.label.subject">
+                <source>Show only courses assigned to the following subject (and its children)</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.courses">
-                <source>List of courses</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.coursedetails">
-                <source>Single course</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.persons">
-                <source>List of persons</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.persondetails">
-                <source>Single person</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.news">
-                <source>News</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.download">
-                <source>Download area</source>
+            <trans-unit id="tx_importstudip.backend.sheet.datasheet">
+                <source>Show Stud.IP content</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
                 <source>Search form</source>
@@ -69,17 +69,14 @@
             <trans-unit id="tx_importstudip.conf.debug">
                 <source>Debug output?:Setting this produces output about what data is called from Stud.IP and how it is processed in the extension.</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_api_password">
+                <source>Password for API access:To access the Stud.IP REST API, a password is needed. You can get it from your local Stud.IP root administrator.</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
                 <source>Relative path to REST API:Stud.IP 3.0 and onwards have a REST API built into the core which can be reached via the api.php dispatcher. There is also a REST plugin which is typically reachable via plugins.php/restipplugin.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_username">
                 <source>Username for API access:To access the Stud.IP REST API, a username is needed. You can get it from your local Stud.IP root administrator.</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_api_password">
-                <source>Password for API access:To access the Stud.IP REST API, a password is needed. You can get it from your local Stud.IP root administrator.</source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">
-                <source>Which Stud.IP institute hierarchy shall be used?</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_hierarchy_institute">
                 <source>Two-level institute hierarchy (institute)</source>
@@ -90,13 +87,16 @@
             <trans-unit id="tx_importstudip.conf.studip_url">
                 <source>Stud.IP URL:Full URL to your Stud.IP installation, including any sub directories.</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">
+                <source>Which Stud.IP institute hierarchy shall be used?</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.conf.typo3_url">
                 <source>Address of this web site (optional):By specifying an address here you can override the "magic" that determines the current site address. For example, your TYPO3 installation actually lies under http://typo3.someserver.com, but your frontend is configured to be called over http://awesome.someserver.com.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.message.ajax_error">
                 <source>An error has occurred on trying to fetch data.</source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.message.ajax_error">
+            <trans-unit id="tx_importstudip.message.error">
                 <source>An error has occurred.</source>
             </trans-unit>
             <trans-unit id="tx_importstudip.message.incomplete_api_config">
@@ -104,6 +104,12 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.message.rest_access_error">
                 <source>The Stud.IP interface could not be accessed. The returned error was:</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.plugindesc">
+                <source>Includes data from Stud.IP, like course or person lists.</source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.plugintitle">
+                <source>Stud.IP data</source>
             </trans-unit>
         </body>
     </file>

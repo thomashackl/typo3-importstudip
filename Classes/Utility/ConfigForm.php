@@ -19,7 +19,7 @@ class ConfigForm {
         $types = StudipConnector::getExternConfigTypes();
         foreach ($types as $type) {
             $result .= '<input type="radio" id="' .$type[1].
-                '" onclick="Tx_ImportStudip.getInstitutes()" name="'.
+                '" onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
                 $parameters['itemFormElName'].'" value="'.$type[1].'"'.
                 ($type[1] == $parameters['itemFormElValue'] ? ' checked="checked"' : '').
                 '/><label for="'.$type[1].'">'.$type[0].'</label><br/>';
@@ -29,13 +29,17 @@ class ConfigForm {
     }
 
     public function getInstitutes($parameters, $config) {
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $hierarchy = $extConf['studip_use_hierarchy'];
         $result = '<div id="tx-importstudip-institutes" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
-            $parameters['itemFormElValue'].'">';
+            $parameters['itemFormElValue'].'" data-inst-treetype="'.$hierarchy.'" '.
+            'data-loading-text="'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip').'">';
         if ($parameters['itemFormElValue']) {
             $result .= self::getInstituteForm(json_decode(
-                StudipConnector::getInstitutes()), $parameters['itemFormElName'],
-                $parameters['itemFormElValue']);
+                StudipConnector::getInstitutes($hierarchy)), $parameters['itemFormElName'],
+                $parameters['itemFormElValue'], $hierarchy);
         }
         $result .= '</div>';
         if (!$parameters['itemFormElValue']) {
@@ -60,10 +64,10 @@ class ConfigForm {
                     'gfx/ol/plusonly.gif" data-swap-img="'.$path.
                     'gfx/ol/minusonly.gif"/>';
             }
-            if ($entry->id) {
+            if ($entry->selectable) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" '.
                     'name="'.$inputname.'" value="'.$entry->id.
-                    '" onclick="Tx_ImportStudip.getExternConfigurations()"'.
+                    '" onclick="Tx_ImportStudip.changeSelection(\'institute\')"'.
                     ($entry->id == $selected ? ' checked="checked"' : '').
                     '/>';
             }
@@ -80,7 +84,10 @@ class ConfigForm {
     }
 
     public function getExternConfigurations($parameters, $config) {
-        $result = '<div id="tx-importstudip-externconfigs" data-input-name="'.$parameters['itemFormElName'].'">';
+        $result = '<div id="tx-importstudip-externconfigs" data-input-name="'.
+            $parameters['itemFormElName'].'" data-loading-text="'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip').
+            '">';
         if ($parameters['itemFormElValue']) {
             $config = self::getConfig($parameters);
             $result .= self::getExternConfigurationsForm(
@@ -101,7 +108,8 @@ class ConfigForm {
     }
 
     public function getExternConfigurationsForm($data, $inputname, $selected, $parameters=array()) {
-        $html = '<select name="'.$inputname.'" size="1">';
+        $html = '<select name="'.$inputname.'" size="1" '.
+            'onchange="Tx_ImportStudip(\'content\')">';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry->id.'"'.
                 ($entry->id==$selected ? ' selected="selected"' : '').'>'.
@@ -118,12 +126,13 @@ class ConfigForm {
     }
 
     public function getAggregationForm($parameters, $config) {
-        $html = '';
+        $html = '<div id="tx-importstudip-aggregate">';
         $config = self::getConfig($parameters);
         if ($config['settings.pagetype'] == 'courses' || $config['settings.pagetype'] == 'persons') {
             $html .= '<input type="checkbox" name="'.$parameters['itemFormElName'].'"'.($parameters['itemFormElValue'] ? ' checked="checked"' : '').'/>';
             $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.aggregate', 'importstudip');
         }
+        $html .= '</div>';
         return $html;
     }
 
@@ -153,11 +162,13 @@ class ConfigForm {
     }
 
     public function getSubjects($parameters, $config) {
-        $html = '<div id="tx-importstudip-subjects">';
+        $html = '<div id="tx-importstudip-subjects" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
         $config = self::getConfig($parameters);
         if ($config['settings.pagetype'] == 'courses') {
             $html .= self::getSubjectForm(
-                json_decode(StudipConnector::getSubjects()), 
+                json_decode(StudipConnector::getSubjects('root', 1, $parameters['itemFormElValue'])), 
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
                 $parameters);
         }
@@ -170,23 +181,32 @@ class ConfigForm {
         foreach ($data as $entry) {
             $id = 'tx-importstudip-subject-'.$entry->tree_id;
             $html .= '<li class="'.
-                ($entry->children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
-            if ($entry->children) {
+                ($entry->num_children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
+            if ($entry->num_children > 0) {
                 $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
                 $html .= '<img class="tx-importstudip-openclose" src="'.$path.
                     'gfx/ol/plusonly.gif" data-swap-img="'.$path.
                     'gfx/ol/minusonly.gif"/>';
             }
-            $html .= '<input type="radio" class="tx-importstudip-selector" '.
-                'name="'.$inputname.'" value="'.$entry->id.
-                '" onclick="Tx_ImportStudip.getExternConfigurations()"'.
-                ($entry->id == $selected ? ' checked="checked"' : '').
-                '/>';
+            if ($entry->id) {
+                $html .= '<input type="radio" class="tx-importstudip-selector" '.
+                    'name="'.$inputname.'" value="'.$entry->id.'"'.
+                    ($entry->id == $selected ? ' checked="checked"' : '').
+                    '/>';
+            }
             $html .= '<label for="'.$id.'">'.$entry->name.'</label>'.
                 '<input type="checkbox" class="tx-importstudip-treeinput" id="'.
-                $id.'"/>';
-            if ($entry->children != null) {
-                $html .= self::getInstituteForm($entry->children, $inputname, $selected, $parameters);
+                $id.'"';
+            if ($entry->num_children && !$entry->children) {
+                $html .= 'onclick="return Tx_ImportStudip.getSubjects(\''.$entry->id.'\')"';
+            }
+            $html .= '/>';
+            if ($entry->children) {
+                $html .= self::getSubjectForm($entry->children, $inputname, $selected, $parameters);
+            } else if ($entry->num_children) {
+                $html .= '<ul class="tx-importstudip-tree"><li data-loading-text="'.
+                    \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip').
+                    '">&nbsp;</li></ul>';
             }
             $html .= '</li>';
         }
@@ -194,9 +214,28 @@ class ConfigForm {
         return $html;
     }
 
-    public function getStatusgroups() {
+    public function getStatusgroups($parameters, $config) {
         $html = '<div id="tx-importstudip-statusgroups">';
+        $config = self::getConfig($parameters);
+        $html .= self::getStatusgroupForm(
+            json_decode(StudipConnector::getStatusgroupNames($config['settings.institute'])), 
+            $parameters['itemFormElName'], $parameters['itemFormElValue'],
+            $parameters);
         $html .= '</div>';
+        return $html;
+    }
+
+    public function getStatusgroupForm($data, $inputname, $selected, $parameters=array()) {
+        $html = '<select name="'.$inputname.'" size="1">';
+        $html .= '<option value="">'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.all', 'importstudip').
+            '</option>';
+        foreach ($data as $entry) {
+            $html .= '<option value="'.$entry.'"'.
+                ($entry==$selected ? ' selected="selected"' : '').'>'.
+                $entry.'</option>';
+        }
+        $html .= '</select>';
         return $html;
     }
 
