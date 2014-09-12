@@ -45,6 +45,9 @@
             <trans-unit id="tx_importstudip.backend.label.options">
                 <source>Additional settings</source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.personsearch">
+                <source>Which person's data shall be shown?</source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.select">
                 <source>-- please choose --</source>
             </trans-unit>

@@ -34,6 +34,15 @@
                             </config>
                         </TCEforms>
                     </settings.externconfigs>   
+                    <settings.personsearch>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.personsearch</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getPersonSearch</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.personsearch>   
                     <settings.options>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.options</label>
@@ -48,7 +57,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.aggregate</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAggregationForm</userFunc>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAggregation</userFunc>
                             </config>
                         </TCEforms>
                     </settings.aggregate>   

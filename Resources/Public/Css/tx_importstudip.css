@@ -62,12 +62,11 @@ img.tx-importstudip-openclose {
     vertical-align: middle;
 }
 
-div#tx-importstudip-options {
+.tx-importstudip-options-container {
     background-color: rgba(0,0,0,0.10);
-    margin: 15px;
-    padding: 10px;
 }
 
-div#tx-importstudip-options img {
-    vertical-align: middle;
+.tx-importstudip-options-container > .t3-form-field-label {
+    cursor: pointer;
+    padding-left: 15px;
 }

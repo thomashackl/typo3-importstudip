@@ -36,6 +36,30 @@ class AjaxHandler {
         return ConfigForm::getExternConfigurationsForm(json_decode($externconfigs), $inputname, $selected);
     }
 
+    public function personsearch() {
+        $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        return ConfigForm::getPersonSearchForm();
+    }
+
+    public function additionaloptions() {
+        return ConfigForm::getadditionalOptions();
+    }
+
+    public function aggregationform() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
+        return ConfigForm::getAggregationForm($inputname, $value);
+    }
+
+    public function coursetypeform() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
+        $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
+        return ConfigForm::getCourseTypeForm(json_decode(StudipConnector::getCourseTypes($institute)), $inputname, $value);
+    }
+
     public function subjectsform() {
         $parent_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('parent');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
@@ -44,8 +68,11 @@ class AjaxHandler {
         return ConfigForm::getSubjectForm(json_decode(StudipConnector::getSubjects($parent_id, 2)), $inputname, $selected);
     }
 
-    public function additionaloptions() {
-        return ConfigForm::getadditionalOptions();
+    public function statusgroupform() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
+        $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
+        return ConfigForm::getStatusgroupForm(json_decode(StudipConnector::getStatusgroupNames($institute)), $inputname, $value);
     }
 
 }

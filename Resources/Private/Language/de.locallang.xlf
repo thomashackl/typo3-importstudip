@@ -45,6 +45,9 @@
             <trans-unit id="tx_importstudip.backend.label.options">
                 <target>Zus&#228;tzliche Einstellungen</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.personsearch">
+                <target>Die Daten welcher Person sollen angezeigt werden?</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.select">
                 <target>-- bitte ausw&#228;hlen --</target>
             </trans-unit>

@@ -105,6 +105,32 @@ class StudipConnector {
         return $rest->call('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
     }
 
+    public function getUser($user_id) {
+        $result = array();
+        $rest = new StudipRESTHelper();
+        $data = $rest->call('user/'.$user_id);
+        if ($data) {
+            $result = array(
+                array(
+                    'user_id' => $data['user_id'],
+                    'firstname' => $data['name']['given'],
+                    'lastname' => $data['name']['family'],
+                    'username' => $data['username'],
+                    'title_front' => $data['name']['prefix'],
+                    'title_rear' => $data['name']['suffix']
+                )
+            );
+        }
+        return $result;
+    }
+
+    public function searchUser($searchterm) {
+        $result = array();
+        $rest = new StudipRESTHelper();
+        $result = $rest->call('typo3/usersearch/'.$searchterm);
+        return $result;
+    }
+
     public function getCourseTypes($institute) {
         $rest = new StudipRESTHelper();
         return $rest->call('typo3/coursetypes/'.$institute);
