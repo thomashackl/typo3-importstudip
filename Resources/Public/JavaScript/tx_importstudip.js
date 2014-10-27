@@ -13,12 +13,17 @@ Tx_ImportStudip = {
     },
 
     adjustToPageType: function() {
-        Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+        if (TYPO3.jQuery('#tx-importstudip-institutes').find('input.tx-importstudip-selector:checked').length == 0) {
+            Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+        }
         var pagetype = TYPO3.jQuery('#tx-importstudip-pagetypes').find('input[type="radio"]:checked').val();
         if (pagetype != '' && pagetype != null) {
             switch (pagetype) {
                 case 'courses':
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.enableInput('tx-importstudip-aggregate',
                         {
@@ -42,13 +47,28 @@ Tx_ImportStudip = {
                             value: TYPO3.jQuery('#tx-importstudip-subjects').data('input-value')
                         }
                     );
+                    Tx_ImportStudip.getInstitutes();
                     break;
                 case 'coursedetails':
+                    Tx_ImportStudip.disableInput('tx-importstudip-institutes');
+                    Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.enableInput('tx-importstudip-coursesearch',
+                        {
+                            action: 'coursesearch',
+                            inputname: TYPO3.jQuery('#tx-importstudip-coursesearch').data('input-name'),
+                            value: TYPO3.jQuery('#tx-importstudip-coursesearch').data('input-value')
+                        }
+                    );
                     break;
                 case 'persons':
+                    Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
@@ -60,26 +80,42 @@ Tx_ImportStudip = {
                             institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
                         }
                     );
+                    Tx_ImportStudip.getInstitutes();
                     break;
                 case 'persondetails':
+                    Tx_ImportStudip.disableInput('tx-importstudip-institutes');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.enableInput('tx-importstudip-personsearch',
                         {
-                            action: 'personsearchform',
+                            action: 'personsearch',
                             inputname: TYPO3.jQuery('#tx-importstudip-personsearch').data('input-name'),
                             value: TYPO3.jQuery('#tx-importstudip-personsearch').data('input-value')
                         }
                     );
+                    Tx_ImportStudip.enableInput('tx-importstudip-choose-user-institute',
+                        {
+                            action: 'chooseuserinstitute',
+                            inputname: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-name'),
+                            value: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-value'),
+                            userid: TYPO3.jQuery('#tx-importstudip-personsearch').find('select option:select').val()
+                        }
+                    );
                     break;
                 case 'news':
+                    Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.getInstitutes();
                     break;
             }
-            Tx_ImportStudip.getInstitutes();
             TYPO3.jQuery.ajax({
                 url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
                 method: 'post',
@@ -93,6 +129,10 @@ Tx_ImportStudip = {
             });
             TYPO3.jQuery('#tx-importstudip-options').closest('.t3-form-field-container').show();
         } else {
+            Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+            Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+            Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+            Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
             Tx_ImportStudip.disableInput('tx-importstudip-options');
         }
     },
@@ -183,7 +223,45 @@ Tx_ImportStudip = {
     },
 
     performPersonSearch: function() {
-        var searchterm = TYPO3.jQuery('#tx-importstudip-searchterm').val();
+        TYPO3.jQuery('#tx-importstudip-personsearch-result').html(Tx_ImportStudip.getSpinner(''));
+        TYPO3.jQuery.ajax({
+            url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
+            method: 'post',
+            data: {
+                action: 'personsearchform',
+                searchterm: TYPO3.jQuery('#tx-importstudip-searchterm').val(),
+                inputname: TYPO3.jQuery('#tx-importstudip-personsearch').data('input-name'),
+                selected: TYPO3.jQuery('#tx-importstudip-personsearch').data('input-value')
+            },
+            success: function(response, textStatus, jqXHR) {
+                TYPO3.jQuery('#tx-importstudip-personsearch-result').html(response.tx_importstudip);
+            },
+            error: function(data, textStatus, errorThrown) {
+                alert('Error: '+errorThrown);
+            },
+        });
+        return false;
+    },
+
+    performCourseSearch: function() {
+        TYPO3.jQuery('#tx-importstudip-coursesearch-result').html(Tx_ImportStudip.getSpinner(''));
+        TYPO3.jQuery.ajax({
+            url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
+            method: 'post',
+            data: {
+                action: 'coursesearchform',
+                searchterm: TYPO3.jQuery('#tx-importstudip-searchterm').val(),
+                inputname: TYPO3.jQuery('#tx-importstudip-coursesearch').data('input-name'),
+                selected: TYPO3.jQuery('#tx-importstudip-coursesearch').data('input-value')
+            },
+            success: function(response, textStatus, jqXHR) {
+                TYPO3.jQuery('#tx-importstudip-coursesearch-result').html(response.tx_importstudip);
+            },
+            error: function(data, textStatus, errorThrown) {
+                alert('Error: '+errorThrown);
+            },
+        });
+        return false;
     },
 
     getSubjects: function(id) {

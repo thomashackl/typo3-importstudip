@@ -15,7 +15,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getExternConfigTypes</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.pagetype>   
+                    </settings.pagetype>
                     <settings.institute>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.institute</label>
@@ -24,7 +24,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getInstitutes</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.institute>   
+                    </settings.institute>
                     <settings.externconfigs>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.externconfigurations</label>
@@ -33,7 +33,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getExternConfigurations</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.externconfigs>   
+                    </settings.externconfigs>
                     <settings.personsearch>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.personsearch</label>
@@ -42,7 +42,34 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getPersonSearch</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.personsearch>   
+                    </settings.personsearch>
+                    <settings.choose_user_institute>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.choose_user_institute</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->chooseUserInstitute</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.choose_user_institute>
+                    <settings.coursesearch>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.coursesearch</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getCourseSearch</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.coursesearch>
+                    <settings.choose_course_institute>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.choose_course_institute</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->chooseCourseInstitute</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.choose_course_institute>
                     <settings.options>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.options</label>
@@ -51,7 +78,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAdditionalOptions</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.options>   
+                    </settings.options>
                     <settings.aggregate>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.aggregate</label>
@@ -60,7 +87,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAggregation</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.aggregate>   
+                    </settings.aggregate>
                     <settings.coursetype>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.coursetype</label>
@@ -87,7 +114,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getStatusgroups</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.statusgroup>   
+                    </settings.statusgroup>
                 </el>
             </ROOT>
         </dataSheet>

@@ -37,10 +37,52 @@ class AjaxHandler {
     }
 
     public function personsearch() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        return ConfigForm::getPersonSearch();
+    }
+
+    public function personsearchform() {
         $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
-        return ConfigForm::getPersonSearchForm();
+        $data = json_decode(StudipConnector::searchUser($searchterm));
+        return ConfigForm::getPersonSearchForm($data, $inputname, $selected);
+    }
+
+    public function personsearchresults() {
+        $number = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('number');
+        $html = '<div class="tx-importstudip-searchresult-found">';
+        if ($number == 1) {
+            $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_one', 'importstudip');
+        } else {
+            $html .= $number.' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_more', 'importstudip');
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function chooseuserinstitute() {
+        $user_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('userid');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $institutes = (array) StudipConnector::getUserInstitutes($user_id);
+        return ConfigForm::chooseUserInstituteForm($institutes, $inputname, $selected);
+    }
+
+    public function coursesearch() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        return ConfigForm::getCourseSearch();
+    }
+
+    public function coursesearchform() {
+        $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
+        $semester = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('semester');
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $data = json_decode(StudipConnector::searchUser($searchterm));
+        return ConfigForm::getPersonSearchForm($data, $inputname, $selected);
     }
 
     public function additionaloptions() {

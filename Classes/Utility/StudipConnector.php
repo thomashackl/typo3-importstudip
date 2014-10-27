@@ -127,7 +127,32 @@ class StudipConnector {
     public function searchUser($searchterm) {
         $result = array();
         $rest = new StudipRESTHelper();
-        $result = $rest->call('typo3/usersearch/'.$searchterm);
+        $result = $rest->call('typo3/usersearch/'.rawurlencode($searchterm));
+        return $result;
+    }
+
+    public function getUserInstitutes($user_id) {
+        $result = array();
+        $rest = new StudipRESTHelper();
+        $result = $rest->call('user/'.$user_id.'/institutes');
+        return $result['work'];
+    }
+
+    public function searchCourse($searchterm, $semester_id='') {
+        $result = array();
+        $rest = new StudipRESTHelper();
+        $call = 'typo3/coursesearch/'.rawurlencode($searchterm);
+        if ($semster_id) {
+            $call .= '/'.$semster_id;
+        }
+        $result = $rest->call($call);
+        return $result;
+    }
+
+    public function getAllSemesters() {
+        $result = array();
+        $rest = new StudipRESTHelper();
+        $result = $rest->call('typo3/allsemesters');
         return $result;
     }
 

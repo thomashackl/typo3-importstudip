@@ -122,26 +122,138 @@ class ConfigForm {
         $html = '<div id="tx-importstudip-personsearch" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
-        $html .= self::getPersonSearchForm($selected, $parameters['itemFormElName'],
-            $parameters['itemFormElValue'], $parameters);
+        $html .= '<input type="text" id="tx-importstudip-searchterm" size="40" maxlength="255" placeholder="'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.personsearch', 'importstudip').
+            '">';
+        $html .= '<button type="button" id="tx-importstudip-execute-personsearch" onclick="Tx_ImportStudip.performPersonSearch()">'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.execute_search', 'importstudip').
+            '</button>';
+        $html .= '<div>'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.personsearch', 'importstudip').'</div>';
+        $html .= '<div id="tx-importstudip-personsearch-result">';
+        if ($parameters['itemFormElValue']) {
+            $html .= self::getPersonSearchForm($selected, $parameters['itemFormElName'],
+                $parameters['itemFormElValue'], $parameters);
+        }
+        $html .= '</div>';
         $html .= '</div>';
         return $html;
     }
 
-    public function getPersonSearchForm($data, $inputname, $value, $parameters) {
-        $config = self::getConfig($parameters);
-        $html = '<input type="text" id="tx-importstudip-searchterm" size="40" maxlength="255">';
-        if ($config['settings.pagetype'] == 'persondetails' && $config['settings.personsearch']) {
+    public function getPersonSearchForm($data, $inputname, $value, $parameters=array()) {
+        if ($value) {
             $selected = StudipConnector::getUser($value);
-            $html .= '<select name="'.$inputname.'" size="1">';
-            foreach ($data as $id => $name) {
-                $html .= '<option value="'.$id.'"'.
-                    ($id == $selected ? ' selected="selected"' : '').'>'.
-                    $name.'</option>';
+        }
+        $html = '<select name="'.$inputname.'" size="1">';
+        foreach ($data as $entry) {
+            $html .= '<option value="'.$entry->user_id.'"'.
+                ($id == $selected ? ' selected="selected"' : '').'>'.
+                $entry->lastname.', '.$entry->firstname.' ('.$entry->username.')</option>';
+        }
+        $html .= '</select>';
+        return $html;
+    }
+
+    public function chooseUserInstitute($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-choose-user-institute" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        if ($parameters['itemFormElValue']) {
+            $html .= self::chooseUserInstituteForm(
+                (array) StudipConnector::getUserInstitutes($config['settings.personsearch']),
+                $parameters['itemFormElName'], $parameters['itemFormElValue']);
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function chooseUserInstituteForm($data, $inputname, $value, $parameters=array()) {
+        if (sizeof($institutes) == 1) {
+            $html .= '<input type="hidden" name="'.$parameters['itemFormElName'].
+                '" value="'.$institutes[0]['institute_id'].'"/>';
+            $html .= '<div class="tx-importstudip-choose-institute">'.
+                $institutes[0]['name'].'</div>';
+        } else {
+            $html = '<select name="'.$parameters['itemFormElName'].'">';
+            foreach ($institutes as $i) {
+                $html .= '<option value="'.$i['institute_id'].'"'.
+                    ($i['institute_id']==$parameters['itemFormElValue'] ? ' selected="selected"' : '').
+                    '>'.$i['name'].'</option>';
             }
             $html .= '</select>';
         }
+    }
+
+    public function getCourseSearch($parameters, $config) {
+        $html = '<div id="tx-importstudip-coursesearch" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        $html .= '<input type="text" id="tx-importstudip-searchterm" size="40" maxlength="255" placeholder="'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.coursesearch', 'importstudip').
+            '">';
+        $html .= '<select id="tx-importstudip-semester" size="1">';
+        $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.allsemesters', 'importstudip').'</option>';
+        foreach ((array) json_decode(StudipConnector::getAllSemesters()) as $semester) {
+            $html .= '<option value="'.$semester->semester_id.'">'.$semester->description.'</option>';
+        }
+        $html .= '</select>';
+        $html .= '<button type="button" id="tx-importstudip-execute-coursesearch" onclick="Tx_ImportStudip.performCourseSearch()">'.
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.execute_search', 'importstudip').
+            '</button>';
+        $html .= '<div>'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.coursesearch', 'importstudip').'</div>';
+        $html .= '<div id="tx-importstudip-coursesearch-result">';
+        if ($parameters['itemFormElValue']) {
+            $html .= self::getPersonSearchForm($selected, $parameters['itemFormElName'],
+                $parameters['itemFormElValue'], $parameters);
+        }
+        $html .= '</div>';
+        $html .= '</div>';
         return $html;
+    }
+
+    public function getCourseSearchForm($data, $inputname, $value, $parameters) {
+        if ($value) {
+            $selected = StudipConnector::getCourse($value);
+        }
+        $html = '<select name="'.$inputname.'" size="1">';
+        foreach ($data as $entry) {
+            $html .= '<option value="'.$entry->seminar_id.'"'.
+                ($id == $selected ? ' selected="selected"' : '').'>'.
+                $entry->name.' ('.$entry->type.', '.$entry->semester.')</option>';
+        }
+        $html .= '</select>';
+        return $html;
+    }
+
+    public function chooseCourseInstitute($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-choose-course-institute" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        if ($parameters['itemFormElValue']) {
+            $html .= self::chooseCourseInstituteForm(
+                (array) StudipConnector::getCourseInstitutes($config['settings.coursesearch']),
+                $parameters['itemFormElName'], $parameters['itemFormElValue']);
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function chooseCourseInstituteForm($data, $inputname, $value, $parameters) {
+        if (sizeof($institutes) == 1) {
+            $html .= '<input type="hidden" name="'.$parameters['itemFormElName'].
+                '" value="'.$institutes[0]['institute_id'].'"/>';
+            $html .= '<div class="tx-importstudip-choose-institute">'.
+                $institutes[0]['name'].'</div>';
+        } else {
+            $html = '<select name="'.$parameters['itemFormElName'].'">';
+            foreach ($institutes as $i) {
+                $html .= '<option value="'.$i['institute_id'].'"'.
+                    ($i['institute_id']==$parameters['itemFormElValue'] ? ' selected="selected"' : '').
+                    '>'.$i['name'].'</option>';
+            }
+            $html .= '</select>';
+        }
     }
 
     public function getAdditionalOptions() {

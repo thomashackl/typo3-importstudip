@@ -27,8 +27,23 @@
             <trans-unit id="tx_importstudip.backend.label.all">
                 <target>alle</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.allsemesters">
+                <target>-- alle Semester --</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.choose_course_institute">
+                <target>Diese Veranstaltung hat mehrere Einrichtungszuordnungen. Welche soll zur Anzeige benutzt werden?</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.choose_user_institute">
+                <target>Die gew&#228;hlte Person ist folgenden Einrichtungen zugeordnet:</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.coursesearch">
+                <target>Welche Veranstaltung soll angezeigt werden?</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.coursetype">
                 <target>Zeige nur folgenden Veranstaltungstyp:</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.execute_search">
+                <target>Suchen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.externconfigurations">
                 <target>W&#228;hlen Sie hier aus, welche Daten angezeigt werden sollen:</target>
@@ -46,7 +61,13 @@
                 <target>Zus&#228;tzliche Einstellungen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.personsearch">
-                <target>Die Daten welcher Person sollen angezeigt werden?</target>
+                <target>Welche Person soll angezeigt werden?</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.searchresult_more">
+                <target>Ergebnisse gefunden.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.searchresult_one">
+                <target>Ein Ergebnis gefunden.</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.select">
                 <target>-- bitte ausw&#228;hlen --</target>
@@ -57,11 +78,20 @@
             <trans-unit id="tx_importstudip.backend.label.subject">
                 <target>Zeige nur Veranstaltungen des folgenden Studienbereichs (und Unterbereichen):</target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.placeholder.personsearch">
+                <target>Geben Sie einen Suchbegriff ein.</target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.sheet.datasheet">
                 <target>Inhalte aus Stud.IP anzeigen</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
                 <target>Suchformular</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.text.coursesearch">
+                <target>Sie k&#246;nnen nach Veranstaltungen durch Angabe von Teilen des Titels oder der Veranstaltungsnummer suchen.</target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.text.personsearch">
+                <target>Sie k&#246;nnen nach Personen durch Angabe des Vornamens oder Nachnamens oder Benutzernamens oder in der Form "Vorname Nachname" suchen.</target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.category_studip">
                 <target>Stud.IP-bezogene Einstellungen</target>
