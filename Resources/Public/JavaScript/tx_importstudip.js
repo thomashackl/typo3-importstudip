@@ -244,7 +244,7 @@ Tx_ImportStudip = {
             method: 'post',
             data: {
                 action: 'personsearchform',
-                searchterm: TYPO3.jQuery('#tx-importstudip-searchterm').val(),
+                searchterm: TYPO3.jQuery('#tx-importstudip-personsearchterm').val(),
                 inputname: TYPO3.jQuery('#tx-importstudip-personsearch').data('input-name'),
                 selected: TYPO3.jQuery('#tx-importstudip-personsearch').data('input-value')
             },
@@ -286,7 +286,8 @@ Tx_ImportStudip = {
             method: 'post',
             data: {
                 action: 'coursesearchform',
-                searchterm: TYPO3.jQuery('#tx-importstudip-searchterm').val(),
+                searchterm: TYPO3.jQuery('#tx-importstudip-coursesearchterm').val(),
+                semester: TYPO3.jQuery('#tx-importstudip-semester option:selected').val(),
                 inputname: TYPO3.jQuery('#tx-importstudip-coursesearch').data('input-name'),
                 selected: TYPO3.jQuery('#tx-importstudip-coursesearch').data('input-value')
             },

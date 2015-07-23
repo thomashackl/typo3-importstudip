@@ -122,7 +122,7 @@ class ConfigForm {
         $html = '<div id="tx-importstudip-personsearch" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
-        $html .= '<input type="text" id="tx-importstudip-searchterm" size="40" maxlength="255" placeholder="'.
+        $html .= '<input type="text" id="tx-importstudip-personsearchterm" size="40" maxlength="255" placeholder="'.
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.personsearch', 'importstudip').
             '">';
         $html .= '<button type="button" id="tx-importstudip-execute-personsearch" onclick="Tx_ImportStudip.performPersonSearch()">'.
@@ -203,7 +203,7 @@ class ConfigForm {
         $html = '<div id="tx-importstudip-coursesearch" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
-        $html .= '<input type="text" id="tx-importstudip-searchterm" size="40" maxlength="255" placeholder="'.
+        $html .= '<input type="text" id="tx-importstudip-coursesearchterm" size="40" maxlength="255" placeholder="'.
             \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.coursesearch', 'importstudip').
             '">';
         $html .= '<select id="tx-importstudip-semester" size="1">';
@@ -218,7 +218,7 @@ class ConfigForm {
         $html .= '<div>'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.coursesearch', 'importstudip').'</div>';
         $html .= '<div id="tx-importstudip-coursesearch-result">';
         if ($parameters['itemFormElValue']) {
-            $html .= self::getPersonSearchForm($selected, $parameters['itemFormElName'],
+            $html .= self::getCourseSearchForm($selected, $parameters['itemFormElName'],
                 $parameters['itemFormElValue'], $parameters);
         }
         $html .= '</div>';
@@ -232,9 +232,14 @@ class ConfigForm {
         }
         $html = '<select name="'.$inputname.'" size="1">';
         foreach ($data as $entry) {
-            $html .= '<option value="'.$entry->seminar_id.'"'.
-                ($id == $selected ? ' selected="selected"' : '').'>'.
-                $entry->name.' ('.$entry->type.', '.$entry->semester.')</option>';
+            $fullname = $entry['name'];
+            if ($entry['number']) {
+                $fullname = $entry['number'].' '.$fullname;
+            }
+            $fullname .= ' ('.$entry['type'].', '.$entry['semester'].')';
+            $html .= '<option value="'.$entry['seminar_id'].'"'.
+                ($entry['seminar_id'] == $value ? ' selected="selected"' : '').'>'.
+                $fullname.'</option>';
         }
         $html .= '</select>';
         return $html;

@@ -142,8 +142,8 @@ class StudipConnector {
         $result = array();
         $rest = new StudipRESTHelper();
         $call = 'typo3/coursesearch/'.rawurlencode($searchterm);
-        if ($semster_id) {
-            $call .= '/'.$semster_id;
+        if ($semester_id) {
+            $call .= '/'.$semester_id;
         }
         $result = $rest->call($call);
         return $result;

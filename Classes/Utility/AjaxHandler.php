@@ -85,8 +85,8 @@ class AjaxHandler {
         $semester = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('semester');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
-        $data = json_decode(StudipConnector::searchUser($searchterm));
-        return ConfigForm::getPersonSearchForm($data, $inputname, $selected);
+        $data = json_decode(StudipConnector::searchCourse($searchterm, $semester), true);
+        return ConfigForm::getCourseSearchForm($data, $inputname, $selected);
     }
 
     public function additionaloptions() {
