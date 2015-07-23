@@ -46,7 +46,7 @@ class AjaxHandler {
         $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
-        $data = json_decode(StudipConnector::searchUser($searchterm));
+        $data = json_decode(StudipConnector::searchUser($searchterm), true);
         return ConfigForm::getPersonSearchForm($data, $inputname, $selected);
     }
 
@@ -66,7 +66,11 @@ class AjaxHandler {
         $user_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('userid');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $institutes = (array) StudipConnector::getUserInstitutes($user_id);
+        $institutes = json_decode(StudipConnector::getUserInstitutes($user_id), true);
+        $institutes = $institutes['collection']['work'];
+        usort($institutes, function($a, $b) {
+            return strnatcasecmp($a['name'], $b['name']);
+        });
         return ConfigForm::chooseUserInstituteForm($institutes, $inputname, $selected);
     }
 
@@ -99,7 +103,8 @@ class AjaxHandler {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
-        return ConfigForm::getCourseTypeForm(json_decode(StudipConnector::getCourseTypes($institute)), $inputname, $value);
+        return ConfigForm::getCourseTypeForm(json_decode(StudipConnector::getCourseTypes($institute)),
+            $inputname, $value);
     }
 
     public function subjectsform() {
@@ -107,14 +112,16 @@ class AjaxHandler {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         //return StudipConnector::getSubjects($parent_id, 2);
-        return ConfigForm::getSubjectForm(json_decode(StudipConnector::getSubjects($parent_id, 2)), $inputname, $selected);
+        return ConfigForm::getSubjectForm(json_decode(StudipConnector::getSubjects($parent_id, 2)),
+            $inputname, $selected);
     }
 
     public function statusgroupform() {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
-        return ConfigForm::getStatusgroupForm(json_decode(StudipConnector::getStatusgroupNames($institute)), $inputname, $value);
+        return ConfigForm::getStatusgroupForm(json_decode(StudipConnector::getStatusgroupNames($institute)),
+            $inputname, $value);
     }
 
 }

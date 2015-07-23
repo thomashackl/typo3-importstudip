@@ -108,7 +108,7 @@ class StudipConnector {
     public function getUser($user_id) {
         $result = array();
         $rest = new StudipRESTHelper();
-        $data = $rest->call('user/'.$user_id);
+        $data = json_decode($rest->call('user/'.$user_id), true);
         if ($data) {
             $result = array(
                 array(
@@ -135,7 +135,7 @@ class StudipConnector {
         $result = array();
         $rest = new StudipRESTHelper();
         $result = $rest->call('user/'.$user_id.'/institutes');
-        return $result['work'];
+        return $result;
     }
 
     public function searchCourse($searchterm, $semester_id='') {
