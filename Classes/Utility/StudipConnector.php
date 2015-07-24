@@ -6,9 +6,8 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 
 class StudipConnector {
 
-    public function getExternConfigTypes() {
-        $rest = new StudipRESTHelper();
-        $data = json_decode($rest->call('typo3/externalpagetypes'));
+    public static function getExternConfigTypes() {
+        $data = json_decode(self::getData('typo3/externalpagetypes'));
         /*
          * Check for available config types and enable corresponding
          * "abstract" type.
@@ -86,29 +85,26 @@ class StudipConnector {
         return $types;
     }
 
-    public function getInstitutes($treetype, $externtype) {
+    public static function getInstitutes($treetype, $externtype) {
         $result = array();
         $mapping = self::getTypeMapping();
-        $rest = new StudipRESTHelper();
         if ($treetype == 'rangetree') {
             $route = 'typo3/rangetree/'.$mapping[$externtype];
         } else {
             $route = 'typo3/institutes/'.$mapping[$externtype];
         }
-        return $rest->call($route);
+        return self::getData($route);
     }
 
-    public function getExternConfigurations($institute, $type) {
+    public static function getExternConfigurations($institute, $type) {
         $result = array();
         $mapping = self::getTypeMapping();
-        $rest = new StudipRESTHelper();
-        return $rest->call('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
+        return self::getData('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
     }
 
-    public function getUser($user_id) {
+    public static function getUser($user_id) {
         $result = array();
-        $rest = new StudipRESTHelper();
-        $data = json_decode($rest->call('user/'.$user_id), true);
+        $data = json_decode(self::getData('user/'.$user_id), true);
         if ($data) {
             $result = array(
                 array(
@@ -124,54 +120,47 @@ class StudipConnector {
         return $result;
     }
 
-    public function searchUser($searchterm) {
+    public static function searchUser($searchterm) {
         $result = array();
-        $rest = new StudipRESTHelper();
-        $result = $rest->call('typo3/usersearch/'.rawurlencode($searchterm));
+        $result = self::getData('typo3/usersearch/'.rawurlencode($searchterm));
         return $result;
     }
 
-    public function getUserInstitutes($user_id) {
+    public static function getUserInstitutes($user_id) {
         $result = array();
-        $rest = new StudipRESTHelper();
-        $result = $rest->call('user/'.$user_id.'/institutes');
+        $result = self::getData('user/'.$user_id.'/institutes');
         return $result;
     }
 
-    public function searchCourse($searchterm, $semester_id='') {
+    public static function searchCourse($searchterm, $semester_id='') {
         $result = array();
-        $rest = new StudipRESTHelper();
         $call = 'typo3/coursesearch/'.rawurlencode($searchterm);
         if ($semester_id) {
             $call .= '/'.$semester_id;
         }
-        $result = $rest->call($call);
+        $result = self::getData($call);
         return $result;
     }
 
-    public function getAllSemesters() {
+    public static function getAllSemesters() {
         $result = array();
-        $rest = new StudipRESTHelper();
-        $result = $rest->call('typo3/allsemesters');
+        $result = self::getData('typo3/allsemesters');
         return $result;
     }
 
-    public function getCourseTypes($institute) {
-        $rest = new StudipRESTHelper();
-        return $rest->call('typo3/coursetypes/'.$institute);
+    public static function getCourseTypes($institute) {
+        return self::getData('typo3/coursetypes/'.$institute);
     }
 
-    public function getSubjects($parent_id, $depth) {
-        $rest = new StudipRESTHelper();
-        return $rest->call('typo3/semtree/'.$parent_id.'/'.$depth);
+    public static function getSubjects($parent_id, $depth) {
+        return self::getData('typo3/semtree/'.$parent_id.'/'.$depth);
     }
 
-    public function getStatusgroupNames($institute) {
-        $rest = new StudipRESTHelper();
-        return $rest->call('typo3/statusgroupnames/'.$institute);
+    public static function getStatusgroupNames($institute) {
+        return self::getData('typo3/statusgroupnames/'.$institute);
     }
 
-    private function getTypeMapping() {
+    private static function getTypeMapping() {
         return array(
             'courses' => array(3, 8, 12, 15),
             'coursedetails' => array(4, 13),
@@ -180,6 +169,48 @@ class StudipConnector {
             'news' => array(5, 7, 11),
             'download' => array(6, 10)
         );
+    }
+
+    /**
+     * Fetches data specified by the given route. If an entry for the given
+     * route is found in the database and the entry is still valid according
+     * to the given timestamp, it is returned. Otherwise, a REST call to
+     * the Stud.IP server is created, result is written to database for
+     * caching.
+     *
+     * @param String $route the route to get data for.
+     * @param int $validfor how long is database entry valid (in minutes)?
+     * @return mixed
+     */
+    private static function getData($route, $validfor) {
+        $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate',
+            'tx_importstudip_config', 'route='.$route, '', '', 1);
+        $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
+        if ($row && $row['chdate'] >= time() - $validfor) {
+            $data = $row['data'];
+            $GLOBALS['TYPO3_DB']->sql_free_result($cached);
+        } else {
+            $rest = new StudipRESTHelper();
+            $data = $rest->call($route);
+            if ($row) {
+                $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+                    'tx_importstudip_config',
+                    'route='.$route,
+                    array('data' => $data, 'chdate' => time())
+                );
+            } else {
+                $GLOBALS['TYPO3_DB']->exec_INSERTquery(
+                    'tx_importstudip_config',
+                    array(
+                        'route' => $route,
+                        'data' => $data,
+                        'mkdate' => time(),
+                        'chdate' => time()
+                    )
+                );
+            }
+        }
+        return $data;
     }
 
 }

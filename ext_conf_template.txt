@@ -19,5 +19,8 @@ studip_use_hierarchy = institute
 # cat=TYPO3/typo3/20; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.typo3_url
 typo3_url = 
 
-# cat=TYPO3/typo3/21; type=boolean; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.debug
+# cat=TYPO3/typo3/21; type=int; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.config_cache_lifetime
+config_cache_lifetime = 720
+
+# cat=TYPO3/typo3/22; type=boolean; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.debug
 debug = 0

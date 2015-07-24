@@ -204,7 +204,7 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         $html .= '<input type="text" id="tx-importstudip-coursesearchterm" size="40" maxlength="255" placeholder="'.
-            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.coursesearch', 'importstudip').
+            \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.personsearch', 'importstudip').
             '">';
         $html .= '<select id="tx-importstudip-semester" size="1">';
         $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.allsemesters', 'importstudip').'</option>';
