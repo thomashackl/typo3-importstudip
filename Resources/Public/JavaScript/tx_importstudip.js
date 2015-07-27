@@ -8,17 +8,24 @@ Tx_ImportStudip = {
             case 'institute':
                 Tx_ImportStudip.getExternConfigurations();
                 Tx_ImportStudip.changeInstitute();
-            case 'content':
+                break;
         }
     },
 
+    /**
+     * According to the selected page type, not all of the defined input fields
+     * are needed. So this function hides or shows all necessary options for
+     * the current page type.
+     */
     adjustToPageType: function() {
         if (TYPO3.jQuery('#tx-importstudip-institutes').find('input.tx-importstudip-selector:checked').length == 0) {
             Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
         }
         var pagetype = TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val();
+        // There is a page type selected.
         if (pagetype != '' && pagetype != null) {
             switch (pagetype) {
+                // Course list.
                 case 'courses':
                     Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
@@ -51,6 +58,7 @@ Tx_ImportStudip = {
                     );
                     Tx_ImportStudip.getInstitutes();
                     break;
+                // Single course.
                 case 'coursedetails':
                     Tx_ImportStudip.disableInput('tx-importstudip-institutes');
                     Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
@@ -69,6 +77,7 @@ Tx_ImportStudip = {
                         }
                     );
                     break;
+                // Person list.
                 case 'persons':
                     Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
@@ -89,9 +98,9 @@ Tx_ImportStudip = {
                     );
                     Tx_ImportStudip.getInstitutes();
                     break;
+                // Single person.
                 case 'persondetails':
                     Tx_ImportStudip.disableInput('tx-importstudip-institutes');
-                    Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
@@ -106,13 +115,20 @@ Tx_ImportStudip = {
                                 action: 'chooseuserinstitute',
                                 inputname: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-name'),
                                 value: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-value'),
-                                userid: TYPO3.jQuery('#tx-importstudip-personsearch').find('select option:select').val()
+                                userid: TYPO3.jQuery('#tx-importstudip-personsearch').find('select option:selected').val()
                             }
                         );
                     } else {
                         Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                        Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
                     }
+                    TYPO3.jQuery('#tx-importstudip-externconfigs').
+                        closest('.t3-form-field-container').insertAfter(
+                        TYPO3.jQuery('#tx-importstudip-choose-user-institute').
+                            closest('.t3-form-field-container')
+                    );
                     break;
+                // News list.
                 case 'news':
                     Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
@@ -139,6 +155,7 @@ Tx_ImportStudip = {
                 }
             });
             //TYPO3.jQuery('#tx-importstudip-options').closest('.t3-form-field-container').show();
+        // No page type set, show default view.
         } else {
             Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
             Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
@@ -175,6 +192,9 @@ Tx_ImportStudip = {
                     success: function(response, textStatus, jqXHR) {
                         TYPO3.jQuery('#tx-importstudip-institutes').html(response.tx_importstudip);
                         Tx_ImportStudip.openSelectedParents('tx-importstudip-institutes');
+                        if (TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').length > 0) {
+                            Tx_ImportStudip.getExternConfigurations('radio');
+                        }
                     }
                 });
             },
@@ -203,16 +223,54 @@ Tx_ImportStudip = {
         }
     },
 
-    getExternConfigurations: function() {
+    /**
+     * Fetches available external page configurations.
+     *
+     * @param sourcetype 'radio', 'user-select' or 'course-select':
+     *                   Use the full list of all institutes or a
+     *                   given selection of institutes.
+     */
+    getExternConfigurations: function(sourcetype) {
         var div = TYPO3.jQuery('#tx-importstudip-externconfigs');
         div.parents('.t3-form-field-container').show();
         div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
+        var source = null;
+        /*
+         * Is there a full institute hierarchy with radio buttons or a select
+         * with only some chosen institutes?
+         */
+        switch (sourcetype) {
+            // We come from single user selection.
+            case 'user-select':
+                var source  = TYPO3.jQuery('#tx-importstudip-choose-user-institute').find('select');
+                if (source.children('option:selected').length > 0) {
+                    source = source.children('option:selected').val();
+                } else {
+                    source = source.children('option').first().val();
+                }
+                break;
+            // We come from single course selection.
+            case 'course-select':
+                var source  = TYPO3.jQuery('#tx-importstudip-choose-course-institute').find('select');
+                if (source.children('option:selected').length > 0) {
+                    source = source.children('option:selected').val();
+                } else {
+                    source = source.children('option').first().val();
+                }
+                break;
+            // Full institute hierarchy with radio buttons.
+            case 'radio':
+            default:
+                source = TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val();
+                console.log(source);
+                break;
+        }
         TYPO3.jQuery.ajax({
             url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
             method: 'post',
             data: {
                 action: 'externconfigurations',
-                institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
+                institute: source,
                 configtype: TYPO3.jQuery('#tx-importstudip-pagetypes').find('input[type="radio"]:checked').val()
             },
             success: function(data, textStatus, jqXHR) {
@@ -250,6 +308,7 @@ Tx_ImportStudip = {
             },
             success: function(response, textStatus, jqXHR) {
                 TYPO3.jQuery('#tx-importstudip-personsearch-result').html(response.tx_importstudip);
+                Tx_ImportStudip.getPersonInstitutes();
             },
             error: function(data, textStatus, errorThrown) {
                 alert('Error: '+errorThrown);
@@ -260,17 +319,24 @@ Tx_ImportStudip = {
 
     getPersonInstitutes: function() {
         TYPO3.jQuery('#tx-importstudip-choose-user-institute').html(Tx_ImportStudip.getSpinner(''));
+        var userselect = TYPO3.jQuery('#tx-importstudip-choose-user');
+        if (userselect.children('option:selected').length > 0) {
+            var user = TYPO3.jQuery('#tx-importstudip-choose-user option:selected').val();
+        } else {
+            var user = TYPO3.jQuery('#tx-importstudip-choose-user option').first().val();
+        }
         TYPO3.jQuery.ajax({
             url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
             method: 'post',
             data: {
                 action: 'chooseuserinstitute',
-                userid: TYPO3.jQuery('#tx-importstudip-choose-user option:selected').val(),
+                userid: user,
                 inputname: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-name'),
                 selected: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-value')
             },
             success: function(response, textStatus, jqXHR) {
                 TYPO3.jQuery('#tx-importstudip-choose-user-institute').html(response.tx_importstudip);
+                Tx_ImportStudip.getExternConfigurations('user-select');
             },
             error: function(data, textStatus, errorThrown) {
                 alert('Error: '+errorThrown);
