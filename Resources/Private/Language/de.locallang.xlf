@@ -51,8 +51,7 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.choose_course_institute">
                 <target>
-                    Diese Veranstaltung hat mehrere Einrichtungszuordnungen.
-                    Welche soll zur Anzeige benutzt werden?
+                    Einrichtungszuordnung der Veranstaltung:
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.choose_user_institute">

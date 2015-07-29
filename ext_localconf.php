@@ -1,9 +1,8 @@
 <?php
 Tx_Extbase_Utility_Extension::configurePlugin(
-        $_EXTKEY,
+        'UniPassau.'.$_EXTKEY,
         'Pi1',
         array(
-            'App' => 'index',
-            'Ajax' => 'institutes'
+            'ImportStudip' => 'index'
         )
 );

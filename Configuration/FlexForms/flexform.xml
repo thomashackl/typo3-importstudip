@@ -96,7 +96,7 @@
                                 <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getCourseTypes</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.coursetype>   
+                    </settings.coursetype>
                     <settings.subject>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.subject</label>

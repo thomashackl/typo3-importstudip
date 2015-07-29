@@ -50,8 +50,7 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.choose_course_institute">
                 <source>
-                    This course has several assignments to institutes. Which
-                    one shall be used for display?
+                    Institute assignment of selected course:
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.choose_user_institute">

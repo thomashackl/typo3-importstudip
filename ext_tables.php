@@ -5,7 +5,7 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 
 // Register plugin for usage.
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    $_EXTKEY,
+    'UniPassau.'.$_EXTKEY,
     'Pi1',
     'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:tx_importstudip.plugintitle'
 );
@@ -13,7 +13,7 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 // Register AJAX handler.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerAjaxHandler (
     'ImportStudip::AjaxHandler',
-    '\UniPassau\ImportStudip\Utility\AjaxHandler->handleAjax'
+    'UniPassau\ImportStudip\Utility\AjaxHandler->handleAjax'
 );
 
 // Include Flexform

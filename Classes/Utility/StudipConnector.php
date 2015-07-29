@@ -142,6 +142,18 @@ class StudipConnector {
         return $result;
     }
 
+    public static function getCourse($course_id) {
+        $result = array();
+        $result = self::getData('typo3/course/'.$course_id);
+        return $result;
+    }
+
+    public static function getInstitute($institute_id) {
+        $result = array();
+        $result = self::getData('typo3/institute/'.$institute_id);
+        return $result;
+    }
+
     public static function getAllSemesters() {
         $result = array();
         $result = self::getData('typo3/allsemesters');

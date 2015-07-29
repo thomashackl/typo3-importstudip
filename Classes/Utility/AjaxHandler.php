@@ -25,7 +25,7 @@ class AjaxHandler {
     public function externconfigurations() {
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
         $types = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype');
-        
+
         return StudipConnector::getExternConfigurations($institute, $types);
     }
 
@@ -87,6 +87,27 @@ class AjaxHandler {
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $data = json_decode(StudipConnector::searchCourse($searchterm, $semester), true);
         return ConfigForm::getCourseSearchForm($data, $inputname, $selected);
+    }
+
+    public function coursesearchresults() {
+        $number = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('number');
+        $html = '<div class="tx-importstudip-searchresult-found">';
+        if ($number == 1) {
+            $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_one', 'importstudip');
+        } else {
+            $html .= $number.' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_more', 'importstudip');
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function choosecourseinstitute() {
+        $course_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('courseid');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $institutes = json_decode(StudipConnector::getCourse($course_id), true);
+        $institutes = array($institutes['home_institute']);
+        return ConfigForm::chooseCourseInstituteForm($institutes, $inputname, $selected);
     }
 
     public function additionaloptions() {
