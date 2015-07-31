@@ -70,15 +70,15 @@
                             </config>
                         </TCEforms>
                     </settings.choose_course_institute>
-                    <settings.options>
+                    <settings.filters>
                         <TCEforms>
-                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.options</label>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.filters</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAdditionalOptions</userFunc>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getAdditionalFilters</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.options>
+                    </settings.filters>
                     <settings.aggregate>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.aggregate</label>
@@ -115,6 +115,81 @@
                             </config>
                         </TCEforms>
                     </settings.statusgroup>
+                    <settings.linkingoptions>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.linkingoptions</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getLinkingOptions</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.linkingoptions>
+                    <settings.makelink>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.makelink</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getMakeLink</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.makelink>
+                    <settings.linktext>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.linktext</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getLinkText</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.linktext>
+                    <settings.linkformat>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.linkformat</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getLinkFormat</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.linkformat>
+                    <settings.persondetailtarget>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.persondetailtarget</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tt_content</allowed>
+                                <size>2</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                            </config>
+                        </TCEforms>
+                    </settings.persondetailtarget>
+                    <settings.coursedetailtarget>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.coursedetailtarget</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tt_content</allowed>
+                                <size>2</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                            </config>
+                        </TCEforms>
+                    </settings.coursedetailtarget>
+                    <settings.newsdetailtarget>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.newsdetailtarget</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tt_content</allowed>
+                                <size>2</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                            </config>
+                        </TCEforms>
+                    </settings.newsdetailtarget>
                 </el>
             </ROOT>
         </dataSheet>

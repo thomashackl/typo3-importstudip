@@ -268,8 +268,8 @@ class ConfigForm {
         return $html;
     }
 
-    public function getAdditionalOptions() {
-        $html = '<div id="tx-importstudip-options">';
+    public function getAdditionalFilters() {
+        $html = '<div id="tx-importstudip-filters">';
         $html .= '</div>';
         return $html;
     }
@@ -289,7 +289,6 @@ class ConfigForm {
     public function getAggregationForm($inputname, $value) {
         $html = '<input type="checkbox" name="'.$inputname.'"'.
             ($value ? ' checked="checked"' : '').'/>';
-        //$html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.aggregate', 'importstudip');
         return $html;
     }
 
@@ -298,7 +297,8 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         $config = self::getConfig($parameters);
-        if ($config['settings.pagetype'] == 'courses' || \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
+        if ($config['settings.pagetype'] == 'courses' ||
+                \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
             $html .= self::getCourseTypeForm(
                 json_decode($config['settings.institute']),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
@@ -310,7 +310,8 @@ class ConfigForm {
 
     public function getCourseTypeForm($data, $inputname, $selected) {
         $html = '<select name="'.$inputname.'" size="1">';
-        $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.select', 'importstudip').'</option>';
+        $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'tx_importstudip.backend.label.select', 'importstudip').'</option>';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry->id.'"'.
                 ($entry->id==$selected ? ' selected="selected"' : '').'>'.
@@ -325,7 +326,8 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         $config = self::getConfig($parameters);
-        if ($config['settings.pagetype'] == 'courses' || \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
+        if ($config['settings.pagetype'] == 'courses' ||
+                \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
             $html .= self::getSubjectForm(
                 json_decode(StudipConnector::getSubjects('root', 1, $parameters['itemFormElValue'])),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
@@ -364,7 +366,8 @@ class ConfigForm {
                 $html .= self::getSubjectForm($entry->children, $inputname, $selected, $parameters);
             } else if ($entry->num_children) {
                 $html .= '<ul class="tx-importstudip-tree"><li data-loading-text="'.
-                    trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip')).
+                    trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'tx_importstudip.backend.label.loading', 'importstudip')).
                     '">&nbsp;</li></ul>';
             }
             $html .= '</li>';
@@ -378,7 +381,8 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         $config = self::getConfig($parameters);
-        if ($config['settings.pagetype'] == 'persons' || \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'persons') {
+        if ($config['settings.pagetype'] == 'persons' ||
+                \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'persons') {
             $html .= self::getStatusgroupForm(
                 json_decode(StudipConnector::getStatusgroupNames($config['settings.institute'])),
                 $parameters['itemFormElName'], $parameters['itemFormElValue']);
@@ -390,12 +394,74 @@ class ConfigForm {
     public function getStatusgroupForm($data, $inputname, $selected) {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.all', 'importstudip')).
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'tx_importstudip.backend.label.all', 'importstudip')).
             '</option>';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry.'"'.
                 ($entry==$selected ? ' selected="selected"' : '').'>'.
                 $entry.'</option>';
+        }
+        $html .= '</select>';
+        return $html;
+    }
+
+    public function getLinkingOptions() {
+        $html = '<div id="tx-importstudip-linkingoptions">';
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function getMakeLink($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-makelink" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        $html .= self::getMakeLinkForm($parameters['itemFormElName'], $parameters['itemFormElValue']);
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function getMakeLinkForm($inputname, $value) {
+        $html = '<input type="checkbox" name="'.$inputname.'"'.
+            ($value ? ' checked="checked"' : '').'/>';
+        return $html;
+    }
+
+    public function getLinkText($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-linktext" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        $html .= self::getLinkTextForm($parameters['itemFormElName'], $parameters['itemFormElValue']);
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function getLinkTextForm($inputname, $value) {
+        $html = '<input type="text" name="'.$inputname.'" size="60" maxlength="255" value="'.$value.'"/>';
+        return $html;
+    }
+
+    public function getLinkFormat($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-linkformat" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        $html .= self::getLinkFormatForm($parameters['itemFormElName'], $parameters['itemFormElValue']);
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function getLinkFormatForm($inputname, $value) {
+        $html = '<select name="'.$inputname.'" value="'.$value.'"/>';
+        $html .= '<option value=""'.($value == '' ? ' selected="selected"' : '').'>'.
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'tx_importstudip.backend.label.normaltext', 'importstudip')).'</option>';
+        for ($i = 1 ; $i <= 4 ; $i++) {
+            $html .= '<option value="h'.$i.'"'.($value == 'h'.$i ? ' selected="selected"' : '').'>'.
+                trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'tx_importstudip.backend.label.h'.$i, 'importstudip')).'</option>';
         }
         $html .= '</select>';
         return $html;

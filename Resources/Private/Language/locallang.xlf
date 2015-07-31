@@ -58,6 +58,11 @@
                     The selected user is assigned to this institute:
                 </source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.coursedetailtarget">
+                <source>
+                    Target page and element for linked course details:
+                </source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.coursesearch">
                 <source>
                     Which course shall be shown?
@@ -83,9 +88,49 @@
                     What type of content do you want to show?
                 </source>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.filters">
+                <source>
+                    Additional data filters
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h1">
+                <source>
+                    Header level 1
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h2">
+                <source>
+                    Header level 2
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h3">
+                <source>
+                    Header level 3
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h4">
+                <source>
+                    Header level 4
+                </source>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.institute">
                 <source>
                     Which institute provides the data to show?
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.linkformat">
+                <source>
+                    Link text format:
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.linktext">
+                <source>
+                    Link text:
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.linkingoptions">
+                <source>
+                    Options for data linking
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.loading">
@@ -93,9 +138,24 @@
                     Loading data...
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.options">
+            <trans-unit id="tx_importstudip.backend.label.makelink">
                 <source>
-                    Additional settings
+                    Create a link instead of showing the data directly?
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.normaltext">
+                <source>
+                    Normal text
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.newsdetailtarget">
+                <source>
+                    Target page and element for linked news:
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.persondetailtarget">
+                <source>
+                    Target page and element for linked person details:
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.personsearch">

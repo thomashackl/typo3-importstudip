@@ -110,8 +110,8 @@ class AjaxHandler {
         return ConfigForm::chooseCourseInstituteForm($institutes, $inputname, $selected);
     }
 
-    public function additionaloptions() {
-        return ConfigForm::getadditionalOptions();
+    public function additionalfilters() {
+        return ConfigForm::getadditionalFilters();
     }
 
     public function aggregationform() {

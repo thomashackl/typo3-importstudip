@@ -60,6 +60,11 @@
                     zugeordnet:
                 </target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.coursedetailtarget">
+                <target>
+                    Zielseite und -element f&#252;r Links zu Veranstaltungsdetails:
+                </target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.coursesearch">
                 <target>
                     Welche Veranstaltung soll angezeigt werden?
@@ -85,10 +90,50 @@
                     Welche Art Inhalt m&#246;chten Sie anzeigen?
                 </target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.filters">
+                <target>
+                    Zus&#228;tzliche Filter f&#252;r die angezeigten Daten
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h1">
+                <target>
+                    &#220;berschrift 1
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h2">
+                <target>
+                    &#220;berschrift 2
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h3">
+                <target>
+                    &#220;berschrift 3
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.h4">
+                <target>
+                    &#220;berschrift 4
+                </target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.institute">
                 <target>
                     Welche Einrichtung stellt die anzuzeigenden Daten zur
                     Verf&#252;gung?
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.linkformat">
+                <target>
+                    Format des Linktextes:
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.linktext">
+                <target>
+                    Text zum Link:
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.linkingoptions">
+                <target>
+                    Verlinkung der Daten
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.loading">
@@ -96,9 +141,24 @@
                     Daten werden geladen...
                 </target>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.options">
+            <trans-unit id="tx_importstudip.backend.label.makelink">
                 <target>
-                    Zus&#228;tzliche Einstellungen
+                    Link erzeugen, statt die Daten direkt anzuzeigen?
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.normaltext">
+                <target>
+                    Normaler Text
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.newsdetailtarget">
+                <target>
+                    Zielseite und -element f&#252;r Links zu Ank&#252;ndigungen:
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.persondetailtarget">
+                <target>
+                    Zielseite und -element f&#252;r Links zu Personendetails:
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.personsearch">
