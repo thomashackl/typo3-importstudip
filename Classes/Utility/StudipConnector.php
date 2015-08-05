@@ -6,7 +6,8 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 
 class StudipConnector {
 
-    public static function getExternConfigTypes() {
+    public static function getExternConfigTypes()
+    {
         $data = json_decode(self::getData('typo3/externalpagetypes'));
         /*
          * Check for available config types and enable corresponding
@@ -85,7 +86,8 @@ class StudipConnector {
         return $types;
     }
 
-    public static function getInstitutes($treetype, $externtype) {
+    public static function getInstitutes($treetype, $externtype)
+    {
         $result = array();
         $mapping = self::getTypeMapping();
         if ($treetype == 'rangetree') {
@@ -96,10 +98,16 @@ class StudipConnector {
         return self::getData($route);
     }
 
-    public static function getExternConfigurations($institute, $type) {
+    public static function getExternConfigurations($institute, $type)
+    {
         $result = array();
         $mapping = self::getTypeMapping();
         return self::getData('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
+    }
+
+    public static function getExternConfigData($configid)
+    {
+        return self::getData('typo3/externconfig/'.$configid);
     }
 
     public static function getUser($user_id) {
@@ -120,19 +128,22 @@ class StudipConnector {
         return $result;
     }
 
-    public static function searchUser($searchterm) {
+    public static function searchUser($searchterm)
+    {
         $result = array();
         $result = self::getData('typo3/usersearch/'.rawurlencode($searchterm));
         return $result;
     }
 
-    public static function getUserInstitutes($user_id) {
+    public static function getUserInstitutes($user_id)
+    {
         $result = array();
         $result = self::getData('user/'.$user_id.'/institutes');
         return $result;
     }
 
-    public static function searchCourse($searchterm, $semester_id='') {
+    public static function searchCourse($searchterm, $semester_id='')
+    {
         $result = array();
         $call = 'typo3/coursesearch/'.rawurlencode($searchterm);
         if ($semester_id) {
@@ -142,13 +153,15 @@ class StudipConnector {
         return $result;
     }
 
-    public static function getCourse($course_id) {
+    public static function getCourse($course_id)
+    {
         $result = array();
         $result = self::getData('typo3/course/'.$course_id);
         return $result;
     }
 
-    public static function getInstitute($institute_id) {
+    public static function getInstitute($institute_id)
+    {
         $result = array();
         $result = self::getData('typo3/institute/'.$institute_id);
         return $result;
@@ -160,19 +173,23 @@ class StudipConnector {
         return $result;
     }
 
-    public static function getCourseTypes($institute) {
+    public static function getCourseTypes($institute)
+    {
         return self::getData('typo3/coursetypes/'.$institute);
     }
 
-    public static function getSubjects($parent_id, $depth) {
+    public static function getSubjects($parent_id, $depth)
+    {
         return self::getData('typo3/semtree/'.$parent_id.'/'.$depth);
     }
 
-    public static function getStatusgroupNames($institute) {
+    public static function getStatusgroupNames($institute)
+    {
         return self::getData('typo3/statusgroupnames/'.$institute);
     }
 
-    private static function getTypeMapping() {
+    private static function getTypeMapping()
+    {
         return array(
             'courses' => array(3, 8, 12, 15),
             'coursedetails' => array(4, 13),
@@ -180,6 +197,28 @@ class StudipConnector {
             'persondetails' => array(2, 14),
             'news' => array(5, 7, 11),
             'download' => array(6, 10)
+        );
+    }
+
+    private static function getModuleMapping()
+    {
+        return array(
+            1 => 'Persons',
+            2 => 'Persondetails',
+            3 => 'Lectures',
+            4 => 'Lecturedetails',
+            5 => 'News',
+            6 => 'Download',
+            7 => 'Newsticker',
+            8 => 'Lecturestable',
+            9 => 'TemplatePersons',
+            10 => 'TemplateDownload',
+            11 => 'TemplateNews',
+            12 => 'TemplateLectures',
+            13 => 'TemplateLecturedetails',
+            14 => 'TemplatePersondetails',
+            15 => 'TemplateSemBrowse',
+            16 => 'TemplatePersBrowse'
         );
     }
 
@@ -191,12 +230,14 @@ class StudipConnector {
      * caching.
      *
      * @param String $route the route to get data for.
-     * @param int $validfor how long is database entry valid (in minutes)?
      * @return mixed
      */
-    private static function getData($route, $validfor) {
+    private static function getData($route)
+    {
+        $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $validfor = intval($config['config_cache_lifetime']) * 60 * 1000;
         $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate',
-            'tx_importstudip_config', 'route='.$route, '', '', 1);
+            'tx_importstudip_config', "route='".$route."'");
         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
         if ($row && $row['chdate'] >= time() - $validfor) {
             $data = $row['data'];

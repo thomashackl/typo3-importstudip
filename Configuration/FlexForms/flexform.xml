@@ -34,6 +34,14 @@
                             </config>
                         </TCEforms>
                     </settings.externconfigs>
+                    <settings.module>
+                        <TCEforms>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getModule</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.module>
                     <settings.personsearch>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.personsearch</label>

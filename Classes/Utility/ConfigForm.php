@@ -108,13 +108,28 @@ class ConfigForm {
     }
 
     public function getExternConfigurationsForm($data, $inputname, $selected, $parameters=array()) {
-        $html = '<select name="'.$inputname.'" size="1">';
+        $html = '<select name="'.$inputname.'" size="1" onchange="Tx_ImportStudip.setModuleName()">';
         foreach ($data as $entry) {
-            $html .= '<option value="'.$entry->id.'"'.
+            $html .= '<option value="'.$entry->id.'" data-module="'.
+                $entry->type.'"'.
                 ($entry->id==$selected ? ' selected="selected"' : '').'>'.
                 $entry->name.'</option>';
         }
         $html .= '</select>';
+        return $html;
+    }
+
+    public function getModule($parameters, $config) {
+        $result = '<div id="tx-importstudip-module" data-input-name="'.
+            $parameters['itemFormElName'].'">';
+        $result .= '<input type="hidden" name="'.
+            $parameters['itemFormElName'].'" value="'.
+            $parameters['itemFormElValue'].'"/>';
+        $result .= '</div>';
+        return $result;
+    }
+
+    public function getModuleForm($value, $inputname) {
         return $html;
     }
 
@@ -245,10 +260,6 @@ class ConfigForm {
             $parameters['itemFormElValue'].'">';
         if ($parameters['itemFormElValue']) {
             $institute = json_decode(StudipConnector::getInstitute($parameters['itemFormElValue']), true);
-            $log = fopen('/Applications/MAMP/tmp/php/tx.log', 'a');
-            fwrite($log, date('d-m-Y')." - Institute:\n");
-            fwrite($log, date('d-m-Y')." - ".print_r($institute, 1)."\n");
-            fclose($log);
             $institutes = array($institute);
             $html .= self::chooseUserInstituteForm($institutes, $parameters['itemFormElName'],
                 $parameters['itemFormElValue']);
@@ -467,7 +478,7 @@ class ConfigForm {
         return $html;
     }
 
-    private function getConfig($data) {
+    public static function getConfig($data) {
         $result = array();
         // Extract already configured flexform values.
         $xml = simplexml_load_string($data['row']['pi_flexform']);
