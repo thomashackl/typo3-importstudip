@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * Input specification for flexform values.
+ *
+ * This software is published under the GNU General Public License version 2.
+ * The license text can be found at
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * @category   Extension
+ * @package    ImportStudip
+ * @subpackage Utility
+ * @author     Thomas Hackl <thomas.hackl@uni-passau.de>
+ */
+
 namespace UniPassau\ImportStudip\Utility;
 
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Utility/StudipConnector.php');
@@ -84,7 +102,7 @@ class ConfigForm {
     }
 
     public function getExternConfigurations($parameters, $config) {
-        $result = '<div id="tx-importstudip-externconfigs" data-input-name="'.
+        $result = '<div id="tx-importstudip-externconfig" data-input-name="'.
             $parameters['itemFormElName'].'" data-loading-text="'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip')).
             '">';
@@ -100,7 +118,7 @@ class ConfigForm {
         if (!$parameters['itemFormElValue']) {
             $result .= '<script type="text/javascript">
             //<!--
-            TYPO3.jQuery("#tx-importstudip-externconfigs").closest(".t3-form-field-container").hide();
+            TYPO3.jQuery("#tx-importstudip-externconfig").closest(".t3-form-field-container").hide();
             //-->
             </script>';
         }

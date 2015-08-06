@@ -1,5 +1,23 @@
 <?php
 
+/**
+ * ImportStudip Utility AjaxHandler
+ *
+ * This software is published under the GNU General Public License version 2.
+ * The license text can be found at
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * @category   Extension
+ * @package    ImportStudip
+ * @subpackage Utility
+ * @author     Thomas Hackl <thomas.hackl@uni-passau.de>
+ */
+
 namespace UniPassau\ImportStudip\Utility;
 
 class AjaxHandler {

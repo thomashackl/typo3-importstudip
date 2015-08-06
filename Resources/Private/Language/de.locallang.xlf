@@ -258,10 +258,9 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
                 <target>
-                    Relativer Pfad zur REST API:Ab Stud.IP 3.0 ist eine REST-API
-                    in den Kern eingebaut, die &#252;ber api.php erreicht werden
-                    kann. Es gibt auch ein REST-Plugin, das normalerweise per
-                    plugins.php/restipplugin aufgerufen werden kann.
+                    Vollst&#228;ndige URL der Stud.IP REST API:Ab Stud.IP 3.0
+                    ist eine REST-API in den Kern eingebaut, die &#252;ber
+                    api.php erreicht werden kann.
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_username">
@@ -272,6 +271,13 @@
                     Stud.IP-Rootadministrator.
                 </target>
             </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_externphp_path">
+                <target>
+                    Vollst&#228;ndige URL zu extern.php:Die so genannten
+                    Externen Seiten werden in Stud.IP &#252;ber die extern.php
+                    bereitgestellt.
+                </target>
+            </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_hierarchy_institute">
                 <target>
                     Zweistufige Einrichtungshierarchie (institute)
@@ -280,12 +286,6 @@
             <trans-unit id="tx_importstudip.conf.studip_hierarchy_rangetree">
                 <target>
                     Mehrstufige, erweiterte Einrichtungshierarchie (range_tree)
-                </target>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_url">
-                <target>
-                    Adresse der Stud.IP-Installation:Volle URL zu Ihrer
-                    Stud.IP-Installation, inklusive Unterverzeichnissen.
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">

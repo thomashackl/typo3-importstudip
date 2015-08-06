@@ -19,7 +19,7 @@ Tx_ImportStudip = {
      */
     adjustToPageType: function() {
         if (TYPO3.jQuery('#tx-importstudip-institutes').find('input.tx-importstudip-selector:checked').length == 0) {
-            Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+            Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
         }
         var pagetype = TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val();
         var persondetailtarget = TYPO3.jQuery('select[name*="persondetailtarget"]').
@@ -39,7 +39,7 @@ Tx_ImportStudip = {
             switch (pagetype) {
                 // Course list.
                 case 'courses':
-                    Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+                    Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
@@ -95,9 +95,9 @@ Tx_ImportStudip = {
                         Tx_ImportStudip.getExternConfigurations('course-select');
                     } else {
                         Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
-                        Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+                        Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     }
-                    TYPO3.jQuery('#tx-importstudip-externconfigs').
+                    TYPO3.jQuery('#tx-importstudip-externconfig').
                         closest('.t3-form-field-container').insertAfter(
                         TYPO3.jQuery('#tx-importstudip-choose-course-institute').
                             closest('.t3-form-field-container')
@@ -106,7 +106,7 @@ Tx_ImportStudip = {
                     break;
                 // Person list.
                 case 'persons':
-                    Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+                    Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
@@ -150,9 +150,9 @@ Tx_ImportStudip = {
                         Tx_ImportStudip.getExternConfigurations('user-select');
                     } else {
                         Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
-                        Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+                        Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     }
-                    TYPO3.jQuery('#tx-importstudip-externconfigs').
+                    TYPO3.jQuery('#tx-importstudip-externconfig').
                         closest('.t3-form-field-container').insertAfter(
                         TYPO3.jQuery('#tx-importstudip-choose-user-institute').
                             closest('.t3-form-field-container')
@@ -161,7 +161,7 @@ Tx_ImportStudip = {
                     break;
                 // News list.
                 case 'news':
-                    Tx_ImportStudip.disableInput('tx-importstudip-externconfigs');
+                    Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
@@ -271,7 +271,7 @@ Tx_ImportStudip = {
      *                   given selection of institutes.
      */
     getExternConfigurations: function(sourcetype) {
-        var div = TYPO3.jQuery('#tx-importstudip-externconfigs');
+        var div = TYPO3.jQuery('#tx-importstudip-externconfig');
         div.parents('.t3-form-field-container').show();
         div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
         var source = null;
@@ -319,27 +319,27 @@ Tx_ImportStudip = {
                     data: {
                         action: 'externconfigurationsform',
                         configurations: data.tx_importstudip,
-                        inputname: TYPO3.jQuery('#tx-importstudip-externconfigs').data('input-name'),
-                        selected: TYPO3.jQuery('#tx-importstudip-externconfigs').data('input-value')
+                        inputname: TYPO3.jQuery('#tx-importstudip-externconfig').data('input-name'),
+                        selected: TYPO3.jQuery('#tx-importstudip-externconfig').data('input-value')
                     },
                     success: function(response, textStatus, jqXHR) {
-                        TYPO3.jQuery('#tx-importstudip-externconfigs').html(response.tx_importstudip);
+                        TYPO3.jQuery('#tx-importstudip-externconfig').html(response.tx_importstudip);
                         Tx_ImportStudip.setModuleName();
                     },
                     error: function(data, textStatus, errorThrown) {
-                        TYPO3.jQuery('#tx-importstudip-externconfigs').html('Error: '+errorThrown);
+                        TYPO3.jQuery('#tx-importstudip-externconfig').html('Error: '+errorThrown);
                     }
                 });
-                TYPO3.jQuery('#tx-importstudip-externconfigs').html(html);
+                TYPO3.jQuery('#tx-importstudip-externconfig').html(html);
             },
             error: function(data, textStatus, errorThrown) {
-                TYPO3.jQuery('#tx-importstudip-externconfigs').html('Error: '+errorThrown);
+                TYPO3.jQuery('#tx-importstudip-externconfig').html('Error: '+errorThrown);
             }
         });
     },
 
     setModuleName: function() {
-        var config = TYPO3.jQuery('#tx-importstudip-externconfigs').children('select');
+        var config = TYPO3.jQuery('#tx-importstudip-externconfig').children('select');
         if (config.children('option:selected').length > 0) {
             var module = config.children('option:selected').data('module');
         } else {

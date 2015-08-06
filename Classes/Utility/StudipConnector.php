@@ -1,44 +1,80 @@
 <?php
 
+/**
+ * Handles the connection and data fetching from Stud.IP
+ *
+ * This software is published under the GNU General Public License version 2.
+ * The license text can be found at
+ * http://www.gnu.org/licenses/old-licenses/gpl-2.0.
+ *
+ * This script is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * @category   Extension
+ * @package    ImportStudip
+ * @subpackage Utility
+ * @author     Thomas Hackl <thomas.hackl@uni-passau.de>
+ */
+
 namespace UniPassau\ImportStudip\Utility;
 
 require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Utility/StudipRESTHelper.php');
 
 class StudipConnector {
 
+    /**
+     * Fetches all available tyoes for external page configurations
+     * (like person or course lists) and categorizes them.
+     *
+     * @return Array External page types available in this Stud.IP.
+     */
     public static function getExternConfigTypes()
     {
         $data = json_decode(self::getData('typo3/externalpagetypes'));
+
         /*
          * Check for available config types and enable corresponding
          * "abstract" type.
          */
         foreach ($data as $entry) {
             switch ($entry) {
+                // Course lists.
                 case 3:
                 case 8:
                 case 12:
                 case 15:
                     $courses = true;
                     break;
+
+                // Course details
                 case 4:
                 case 13:
                     $coursedetails = true;
                     break;
+
+                // Person lists
                 case 1:
                 case 9:
                 case 16:
                     $persons = true;
                     break;
+
+                // Person details
                 case 2:
                 case 14:
                     $persondetails = true;
                     break;
+
+                News
                 case 5:
                 case 7:
                 case 11:
                     $news = true;
                     break;
+
+                // Download
                 case 6:
                 case 10:
                     $download = true;
@@ -46,6 +82,7 @@ class StudipConnector {
             }
         }
         $types = array();
+
         // Now set enabled types for GUI.
         if ($courses) {
             $types[] = array(
@@ -86,6 +123,16 @@ class StudipConnector {
         return $types;
     }
 
+    /**
+     * Gets the Stud.IP institute hierarchy (according to given hierarchy type)
+     * filtered by external page type.
+     *
+     * @param String $treetype Which hierarchy to use? extended range tree or
+     *                         just real institutes?
+     * @param $externtype Get only institutes which provide the given external
+     *                    page type.
+     * @return Array Stud.IP institutes sorted by their hierarchy.
+     */
     public static function getInstitutes($treetype, $externtype)
     {
         $result = array();

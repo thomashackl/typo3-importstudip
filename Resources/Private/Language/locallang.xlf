@@ -249,10 +249,9 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_path">
                 <source>
-                    Relative path to REST API:Stud.IP 3.0 and onwards have
+                    Full URL to Stud.IP REST API:Stud.IP 3.0 and onwards have
                     a REST API built into the core which can be reached via
-                    the api.php dispatcher. There is also a REST plugin which
-                    is typically reachable via plugins.php/restipplugin.
+                    the api.php dispatcher.
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_api_username">
@@ -260,6 +259,12 @@
                     Username for API access:To access the Stud.IP REST API,
                     a username is needed. You can get it from your local
                     Stud.IP root administrator.
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.conf.studip_externphp_path">
+                <source>
+                    Full URL to Stud.IP extern.php:The so called external pages
+                    in Stud.IP are provided via the extern.php script.
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_hierarchy_institute">
@@ -270,12 +275,6 @@
             <trans-unit id="tx_importstudip.conf.studip_hierarchy_rangetree">
                 <source>
                     Multi-level range hierarchy (range_tree)
-                </source>
-            </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_url">
-                <source>
-                    Stud.IP URL:Full URL to your Stud.IP installation,
-                    including any sub directories.
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">
