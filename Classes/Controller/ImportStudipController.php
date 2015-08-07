@@ -39,7 +39,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     public function indexAction() {
         // Fetch Stud.IP external page.
         $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
-            $this->settings);
+            $this->settings, $this->controllerContext->getUriBuilder());
 
         // UTF8-encode the content if necessary.
         if ($this->utf) {

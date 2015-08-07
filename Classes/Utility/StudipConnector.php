@@ -67,7 +67,7 @@ class StudipConnector {
                     $persondetails = true;
                     break;
 
-                News
+                // News
                 case 5:
                 case 7:
                 case 11:
