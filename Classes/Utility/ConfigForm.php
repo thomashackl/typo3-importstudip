@@ -185,8 +185,8 @@ class ConfigForm {
                 $fullname = $fullname.', '.$entry['suffix'];
             }
             $fullname .= ' ('.$entry['username'].')';
-            $html .= '<option value="'.$entry['user_id'].'"'.
-                ($id == $value ? ' selected="selected"' : '').'>'.$fullname.'</option>';
+            $html .= '<option value="'.$entry['username'].'" data-user-id="'.$entry['user_id'].'"'.
+                ($entry['username'] == $value ? ' selected="selected"' : '').'>'.$fullname.'</option>';
         }
         $html .= '</select>';
         return $html;
@@ -207,18 +207,18 @@ class ConfigForm {
                     return strnatcasecmp($a['name'], $b['name']);
                 }
             );
-            $html .= self::chooseUserInstituteForm($institutes, $parameters['itemFormElName'],
-                $parameters['itemFormElValue']);
+            $html .= self::chooseUserInstituteForm($institutes, $parameters['itemFormElName'], $parameters['itemFormElValue']);
         }
         $html .= '</div>';
         return $html;
     }
 
-    public function chooseUserInstituteForm($data, $inputname, $value, $parameters=array()) {
+    public function chooseUserInstituteForm($data, $inputname, $value, $parameters=array())
+    {
         $html = '<select name="'.$inputname.'" onchange="Tx_ImportStudip.getExternConfigurations(\'user-select\')">';
         foreach ($data as $i) {
             $html .= '<option value="'.$i['institute_id'].'"'.
-                ($i['institute_id']==$value ? ' selected="selected"' : '').
+                ($i['institute_id'] == $value ? ' selected="selected"' : '').
                 '>'.$i['name'].'</option>';
         }
         $html .= '</select>';

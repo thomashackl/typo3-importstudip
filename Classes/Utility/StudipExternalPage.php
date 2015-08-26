@@ -114,7 +114,7 @@ class StudipExternalPage
                     break;
                 // Show a single person.
                 case 'persondetails':
-                    $params['user_id'] = $settings['personsearch'];
+                    $params['username'] = $settings['personsearch'];
                     break;
 
             }

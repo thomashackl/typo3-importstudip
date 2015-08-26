@@ -81,10 +81,10 @@ class AjaxHandler {
     }
 
     public function chooseuserinstitute() {
-        $user_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('userid');
+        $username = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('username');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $institutes = json_decode(StudipConnector::getUserInstitutes($user_id), true);
+        $institutes = json_decode(StudipConnector::getUserInstitutes($username), true);
         $institutes = $institutes['collection']['work'];
         usort($institutes, function($a, $b) {
             return strnatcasecmp($a['name'], $b['name']);

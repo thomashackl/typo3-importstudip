@@ -143,8 +143,8 @@ Tx_ImportStudip = {
                             {
                                 action: 'chooseuserinstitute',
                                 inputname: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-name'),
-                                value: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-value'),
-                                userid: TYPO3.jQuery('#tx-importstudip-personsearch').find('select option:selected').val()
+                                selected: TYPO3.jQuery('#tx-importstudip-choose-user-institute').data('input-value'),
+                                username: TYPO3.jQuery('#tx-importstudip-personsearch').find('select option:selected').val()
                             }
                         );
                         Tx_ImportStudip.getExternConfigurations('user-select');
@@ -374,9 +374,9 @@ Tx_ImportStudip = {
         TYPO3.jQuery('#tx-importstudip-choose-user-institute').html(Tx_ImportStudip.getSpinner(''));
         var userselect = TYPO3.jQuery('#tx-importstudip-choose-user');
         if (userselect.children('option:selected').length > 0) {
-            var user = TYPO3.jQuery('#tx-importstudip-choose-user option:selected').val();
+            var user = TYPO3.jQuery('#tx-importstudip-choose-user option:selected').data('user-id');
         } else {
-            var user = TYPO3.jQuery('#tx-importstudip-choose-user option').first().val();
+            var user = TYPO3.jQuery('#tx-importstudip-choose-user option').first().data('user-id');
         }
         TYPO3.jQuery.ajax({
             url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
