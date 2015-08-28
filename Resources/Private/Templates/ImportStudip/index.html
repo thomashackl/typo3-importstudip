@@ -1,1 +1,12 @@
-<f:format.raw value="{studipcontent}" />
+<f:if condition="{studipcontent}!=''">
+    <f:then>
+        <f:format.raw value="{studipcontent}" />
+    </f:then>
+    <f:else>
+        <f:form action="searchcourse">
+            <f:form.textfield name="tx-importstudip-searchterm" size="75" maxlength="255" placeholder="Name oder Veranstaltungsnummer..."/>
+            <br/><br/>
+            <f:form.submit value="Finden" name="tx-importstudip-coursesearch"/>
+        </f:form>
+    </f:else>
+</f:if>

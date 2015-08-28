@@ -40,8 +40,16 @@ class ConfigForm {
                 '" onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
                 $parameters['itemFormElName'].'" value="'.$type[1].'"'.
                 ($type[1] == $parameters['itemFormElValue'] ? ' checked="checked"' : '').
-                '/><label for="'.$type[1].'">'.$type[0].'</label><br/>';
+                '/><label for="'.$type[1].'">'.trim($type[0]).'</label><br/>';
         }
+        $result .= '<input type="radio" id="searchpage" '.
+            'onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
+            $parameters['itemFormElName'].'" value="searchpage"'.
+            ($parameters['itemFormElValue'] == 'searchpage' ? ' checked="checked"' : '').
+            '/><label for="searchpage">'.
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                'tx_importstudip.backend.label.searchpage',
+                'importstudip')).'</label><br/>';
         $result .= '</div>';
         return $result;
     }
@@ -433,6 +441,29 @@ class ConfigForm {
         }
         $html .= '</select>';
         return $html;
+    }
+
+    public function getPreselectedInstitute($parameters, $config) {
+        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $result = '<div id="tx-importstudip-preselectinst" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'" data-inst-treetype="institute" '.
+            'data-loading-text="'.
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip')).'">';
+        if ($parameters['itemFormElValue']) {
+            $result .= self::getInstituteForm(json_decode(
+                StudipConnector::getInstitutes('institute')),
+                $parameters['itemFormElName'], $parameters['itemFormElValue']);
+        }
+        $result .= '</div>';
+        if (!$parameters['itemFormElValue']) {
+            $result .= '<script type="text/javascript">
+            //<!--
+            TYPO3.jQuery("#tx-importstudip-institutes").closest(".t3-form-field-container").hide();
+            //-->
+            </script>';
+        }
+        return $result;
     }
 
     public function getLinkingOptions() {

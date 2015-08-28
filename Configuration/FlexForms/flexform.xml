@@ -123,6 +123,15 @@
                             </config>
                         </TCEforms>
                     </settings.statusgroup>
+                    <settings.preselectinst>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.preselectinst</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\ImportStudip\Utility\ConfigForm->getPreselectedInstitute</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.preselectinst>
                     <settings.linkingoptions>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.backend.label.linkingoptions</label>

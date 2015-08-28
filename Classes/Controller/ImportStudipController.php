@@ -37,17 +37,22 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
      * Standard action for showing content when the extension is called.
      */
     public function indexAction() {
-        // Fetch Stud.IP external page.
-        $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
-            $this->settings, $this->controllerContext->getUriBuilder());
+        if ($this->settings['pagetype'] != 'searchpage') {
+            // Fetch Stud.IP external page.
+            $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
+                intval($this->configurationManager->getContentObject()->data['uid']),
+                $this->settings, $this->controllerContext->getUriBuilder());
 
-        // UTF8-encode the content if necessary.
-        if ($this->utf) {
-            $content = utf8_encode($content);
+            // UTF8-encode the content if necessary.
+            if ($this->utf) {
+                $content = utf8_encode($content);
+            }
+
+            // Assign Stud.IP output to view.
+            $this->view->assign('studipcontent', $content);
+        } else {
+            $this->view->assign('institute', $this->settings['preselectinst']);
         }
-
-        // Assign Stud.IP output to view.
-        $this->view->assign('studipcontent', $content);
     }
 
     /**

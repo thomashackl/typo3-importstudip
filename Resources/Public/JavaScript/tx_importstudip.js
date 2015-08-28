@@ -45,6 +45,7 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
+                    Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     TYPO3.jQuery('.tx-importstudip-filters-container').show();
                     Tx_ImportStudip.enableInput('tx-importstudip-aggregate',
                         {
@@ -68,7 +69,7 @@ Tx_ImportStudip = {
                             value: TYPO3.jQuery('#tx-importstudip-subjects').data('input-value')
                         }
                     );
-                    Tx_ImportStudip.getInstitutes();
+                    Tx_ImportStudip.getInstitutes('tx-importstudip-institutes');
                     persondetailtarget.show();
                     coursedetailtarget.show();
                     break;
@@ -81,6 +82,7 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     TYPO3.jQuery('.tx-importstudip-filters-container').hide();
                     if (TYPO3.jQuery('#tx-importstudip-choose-course option').length > 0) {
                         Tx_ImportStudip.enableInput('tx-importstudip-coursesearch');
@@ -114,6 +116,7 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     TYPO3.jQuery('.tx-importstudip-filters-container').show();
                     Tx_ImportStudip.enableInput('tx-importstudip-statusgroups',
                         {
@@ -123,7 +126,7 @@ Tx_ImportStudip = {
                             institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
                         }
                     );
-                    Tx_ImportStudip.getInstitutes();
+                    Tx_ImportStudip.getInstitutes('tx-importstudip-institutes');
                     persondetailtarget.show();
                     coursedetailtarget.show();
                     break;
@@ -136,6 +139,7 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     TYPO3.jQuery('.tx-importstudip-filters-container').hide();
                     if (TYPO3.jQuery('#tx-importstudip-choose-user option').length > 0) {
                         Tx_ImportStudip.enableInput('tx-importstudip-personsearch');
@@ -171,9 +175,25 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
-                    Tx_ImportStudip.getInstitutes();
+                    Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
+                    Tx_ImportStudip.getInstitutes('tx-importstudip-institutes');
                     newsdetailtarget.show();
                     break;
+                // Course search
+                case 'searchpage':
+                    Tx_ImportStudip.disableInput('tx-importstudip-institutes');
+                    Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
+                    Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
+                    TYPO3.jQuery('.tx-importstudip-filters-container').hide();
+                    TYPO3.jQuery('.tx-importstudip-linkingoptions-container').hide();
+                    Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
+                    Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
+                    Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.getInstitutes('tx-importstudip-preselectinst');
             }
             TYPO3.jQuery.ajax({
                 url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
@@ -209,8 +229,8 @@ Tx_ImportStudip = {
         }
     },
 
-    getInstitutes: function() {
-        var div = TYPO3.jQuery('#tx-importstudip-institutes');
+    getInstitutes: function(elementId) {
+        var div = TYPO3.jQuery('#' + elementId);
         div.parents('.t3-form-field-container').show();
         div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
         TYPO3.jQuery.ajax({
@@ -226,20 +246,20 @@ Tx_ImportStudip = {
                     data: {
                         action: 'instituteform',
                         institutes: data.tx_importstudip,
-                        inputname: TYPO3.jQuery('#tx-importstudip-institutes').data('input-name'),
-                        selected: TYPO3.jQuery('#tx-importstudip-institutes').data('input-value')
+                        inputname: div.data('input-name'),
+                        selected: div.data('input-value')
                     },
                     success: function(response, textStatus, jqXHR) {
-                        TYPO3.jQuery('#tx-importstudip-institutes').html(response.tx_importstudip);
-                        Tx_ImportStudip.openSelectedParents('tx-importstudip-institutes');
-                        if (TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').length > 0) {
+                        div.html(response.tx_importstudip);
+                        Tx_ImportStudip.openSelectedParents(elementId);
+                        if (div.find('input[type="radio"]:checked').length > 0) {
                             Tx_ImportStudip.getExternConfigurations('radio');
                         }
                     }
                 });
             },
             error: function(data, textStatus, errorThrown) {
-                TYPO3.jQuery('#tx-importstudip-institutes').html('Error: '+errorThrown);
+                div.html('Error: '+errorThrown);
             }
         });
     },
@@ -527,6 +547,7 @@ Tx_ImportStudip = {
         element.hide();
         var container = element.closest('.t3-form-field-container');
         container.addClass('tx-importstudip-entrygroup');
+        container.addClass(elementId + '-container');
         container.children('.t3-form-field-label').prepend(
             '<img src="gfx/ol/plusbullet.gif" data-toggle-image="gfx/ol/minusbullet.gif"/>');
         container.children('.t3-form-field-label').on('click', function() {
@@ -547,7 +568,7 @@ TYPO3.jQuery(function () {
     // build group for additional filter options.
     Tx_ImportStudip.buildEntryGroup('tx-importstudip-filters',
         ['tx-importstudip-aggregate', 'tx-importstudip-coursetypes',
-        'tx-importstudip-subjects', 'tx-importstudip-statusgroups']);
+        'tx-importstudip-subjects', 'tx-importstudip-statusgroups', 'tx-importstudip-preselectinst']);
     // Build group for linking options.
     Tx_ImportStudip.buildEntryGroup('tx-importstudip-linkingoptions',
         ['tx-importstudip-makelink', 'tx-importstudip-linktext', 'tx-importstudip-linkformat']);

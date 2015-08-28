@@ -92,7 +92,7 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.filters">
                 <target>
-                    Zus&#228;tzliche Filter f&#252;r die angezeigten Daten
+                    Zus&#228;tzliche Einstellungen f&#252;r die angezeigten Daten
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.h1">
@@ -164,6 +164,16 @@
             <trans-unit id="tx_importstudip.backend.label.personsearch">
                 <target>
                     Welche Person soll angezeigt werden?
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.preselectinst">
+                <target>
+                    Vorausgew&#228;hlte Einrichtung
+                </target>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.searchpage">
+                <target>
+                    Veranstaltungssuche
                 </target>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.searchresult_more">

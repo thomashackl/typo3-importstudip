@@ -90,7 +90,7 @@
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.filters">
                 <source>
-                    Additional data filters
+                    Additional data settings
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.h1">
@@ -161,6 +161,16 @@
             <trans-unit id="tx_importstudip.backend.label.personsearch">
                 <source>
                     Which person shall be shown?
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.preselectinst">
+                <source>
+                    Pre-selected institute
+                </source>
+            </trans-unit>
+            <trans-unit id="tx_importstudip.backend.label.searchpage">
+                <source>
+                    Course search
                 </source>
             </trans-unit>
             <trans-unit id="tx_importstudip.backend.label.searchresult_more">
