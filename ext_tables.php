@@ -7,7 +7,7 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'UniPassau.'.$_EXTKEY,
     'Pi1',
-    'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:tx_importstudip.plugintitle'
+    'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:plugintitle'
 );
 
 // Register AJAX handler.

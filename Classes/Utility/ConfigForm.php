@@ -48,7 +48,7 @@ class ConfigForm {
             ($parameters['itemFormElValue'] == 'searchpage' ? ' checked="checked"' : '').
             '/><label for="searchpage">'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                'tx_importstudip.backend.label.searchpage',
+                'backend.label.searchpage',
                 'importstudip')).'</label><br/>';
         $result .= '</div>';
         return $result;
@@ -61,7 +61,7 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'" data-inst-treetype="'.$hierarchy.'" '.
             'data-loading-text="'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip')).'">';
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).'">';
         if ($parameters['itemFormElValue']) {
             $result .= self::getInstituteForm(json_decode(
                 StudipConnector::getInstitutes($hierarchy)),
@@ -112,7 +112,7 @@ class ConfigForm {
     public function getExternConfigurations($parameters, $config) {
         $result = '<div id="tx-importstudip-externconfig" data-input-name="'.
             $parameters['itemFormElName'].'" data-loading-text="'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip')).
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).
             '">';
         if ($parameters['itemFormElValue']) {
             $config = self::getConfig($parameters);
@@ -164,12 +164,12 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         $html .= '<input type="text" id="tx-importstudip-personsearchterm" size="40" maxlength="255" placeholder="'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.personsearch', 'importstudip')).
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.placeholder.personsearch', 'importstudip')).
             '">';
         $html .= '<button type="button" id="tx-importstudip-execute-personsearch" onclick="Tx_ImportStudip.performPersonSearch()">'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.execute_search', 'importstudip')).
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.execute_search', 'importstudip')).
             '</button>';
-        $html .= '<div>'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.personsearch', 'importstudip').'</div>';
+        $html .= '<div>'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.text.personsearch', 'importstudip').'</div>';
         $html .= '<div id="tx-importstudip-personsearch-result">';
         if ($parameters['itemFormElValue']) {
             $selected = StudipConnector::getUser($parameters['itemFormElValue']);
@@ -238,18 +238,18 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         $html .= '<input type="text" id="tx-importstudip-coursesearchterm" size="40" maxlength="255" placeholder="'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.placeholder.personsearch', 'importstudip')).
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.placeholder.personsearch', 'importstudip')).
             '">';
         $html .= '<select id="tx-importstudip-semester" size="1">';
-        $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.allsemesters', 'importstudip').'</option>';
+        $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.allsemesters', 'importstudip').'</option>';
         foreach (json_decode(StudipConnector::getAllSemesters()) as $semester) {
             $html .= '<option value="'.$semester->semester_id.'">'.$semester->description.'</option>';
         }
         $html .= '</select>';
         $html .= '<button type="button" id="tx-importstudip-execute-coursesearch" onclick="Tx_ImportStudip.performCourseSearch()">'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.execute_search', 'importstudip')).
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.execute_search', 'importstudip')).
             '</button>';
-        $html .= '<div>'.trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.coursesearch', 'importstudip')).'</div>';
+        $html .= '<div>'.trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.text.coursesearch', 'importstudip')).'</div>';
         $html .= '<div id="tx-importstudip-coursesearch-result">';
         if ($parameters['itemFormElValue']) {
             $html .= self::getCourseSearchForm(
@@ -449,7 +449,7 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'" data-inst-treetype="institute" '.
             'data-loading-text="'.
-            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.label.loading', 'importstudip')).'">';
+            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).'">';
         if ($parameters['itemFormElValue']) {
             $result .= self::getInstituteForm(json_decode(
                 StudipConnector::getInstitutes('institute')),

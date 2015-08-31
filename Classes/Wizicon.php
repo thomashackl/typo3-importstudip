@@ -16,8 +16,8 @@ class Wizicon {
     function proc($wizardItems) {
         $wizardItems['plugins_tx_importstudip_pi1'] = array(
             'icon'        => ExtensionManagementUtility::extRelPath('importstudip') . 'Resources/Public/Images/Wizicon.png',
-            'title'       => LocalizationUtility::translate('tx_importstudip.plugintitle', 'importstudip'),
-            'description' => LocalizationUtility::translate('tx_importstudip.plugindesc', 'importstudip'),
+            'title'       => LocalizationUtility::translate('plugintitle', 'importstudip'),
+            'description' => LocalizationUtility::translate('plugindesc', 'importstudip'),
             'params'      => '&defVals[tt_content][CType]=list&defVals[tt_content][list_type]=importstudip_pi1'
         );
 

@@ -3,296 +3,296 @@
     <file source-language="en" datatype="plaintext" original="messages" date="2014-07-22T13:50:11Z" product-name="importstudip">
         <header/>
         <body>
-            <trans-unit id="tx_importstudip.backend.externtype.coursedetails">
+            <trans-unit id="backend.externtype.coursedetails">
                 <source>
                     Single course
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.courses">
+            <trans-unit id="backend.externtype.courses">
                 <source>
                     List of courses
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.download">
+            <trans-unit id="backend.externtype.download">
                 <source>
                     Download area
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.news">
+            <trans-unit id="backend.externtype.news">
                 <source>
                     News
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.persondetails">
+            <trans-unit id="backend.externtype.persondetails">
                 <source>
                     Single person
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.externtype.persons">
+            <trans-unit id="backend.externtype.persons">
                 <source>
                     List of persons
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.aggregate">
+            <trans-unit id="backend.label.aggregate">
                 <source>
                     Aggregate data over sub-institutes
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.all">
+            <trans-unit id="backend.label.all">
                 <source>
                     all
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.allsemesters">
+            <trans-unit id="backend.label.allsemesters">
                 <source>
                     -- all semesters --
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.choose_course_institute">
+            <trans-unit id="backend.label.choose_course_institute">
                 <source>
                     Institute assignment of selected course:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.choose_user_institute">
+            <trans-unit id="backend.label.choose_user_institute">
                 <source>
                     The selected user is assigned to this institute:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.coursedetailtarget">
+            <trans-unit id="backend.label.coursedetailtarget">
                 <source>
                     Target page and element for linked course details:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.coursesearch">
+            <trans-unit id="backend.label.coursesearch">
                 <source>
                     Which course shall be shown?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.coursetype">
+            <trans-unit id="backend.label.coursetype">
                 <source>
                     Show only courses of the following type:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.execute_search">
+            <trans-unit id="backend.label.execute_search">
                 <source>
                     Search
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.externconfigurations">
+            <trans-unit id="backend.label.externconfigurations">
                 <source>
                     Select the data to show:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.externtype">
+            <trans-unit id="backend.label.externtype">
                 <source>
                     What type of content do you want to show?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.filters">
+            <trans-unit id="backend.label.filters">
                 <source>
                     Additional data settings
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.h1">
+            <trans-unit id="backend.label.h1">
                 <source>
                     Header level 1
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.h2">
+            <trans-unit id="backend.label.h2">
                 <source>
                     Header level 2
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.h3">
+            <trans-unit id="backend.label.h3">
                 <source>
                     Header level 3
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.h4">
+            <trans-unit id="backend.label.h4">
                 <source>
                     Header level 4
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.institute">
+            <trans-unit id="backend.label.institute">
                 <source>
                     Which institute provides the data to show?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.linkformat">
+            <trans-unit id="backend.label.linkformat">
                 <source>
                     Link text format:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.linktext">
+            <trans-unit id="backend.label.linktext">
                 <source>
                     Link text:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.linkingoptions">
+            <trans-unit id="backend.label.linkingoptions">
                 <source>
                     Options for data linking
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.loading">
+            <trans-unit id="backend.label.loading">
                 <source>
                     Loading data...
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.makelink">
+            <trans-unit id="backend.label.makelink">
                 <source>
                     Create a link instead of showing the data directly?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.normaltext">
+            <trans-unit id="backend.label.normaltext">
                 <source>
                     Normal text
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.newsdetailtarget">
+            <trans-unit id="backend.label.newsdetailtarget">
                 <source>
                     Target page and element for linked news:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.persondetailtarget">
+            <trans-unit id="backend.label.persondetailtarget">
                 <source>
                     Target page and element for linked person details:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.personsearch">
+            <trans-unit id="backend.label.personsearch">
                 <source>
                     Which person shall be shown?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.preselectinst">
+            <trans-unit id="backend.label.preselectinst">
                 <source>
                     Pre-selected institute
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.searchpage">
+            <trans-unit id="backend.label.searchpage">
                 <source>
                     Course search
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.searchresult_more">
+            <trans-unit id="backend.label.searchresult_more">
                 <source>
                     results found.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.searchresult_one">
+            <trans-unit id="backend.label.searchresult_one">
                 <source>
                     One result found.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.select">
+            <trans-unit id="backend.label.select">
                 <source>
                     -- please choose --
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.statusgroup">
+            <trans-unit id="backend.label.statusgroup">
                 <source>
                     Show only users belonging to the following status group
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.label.subject">
+            <trans-unit id="backend.label.subject">
                 <source>
                     Show only courses assigned to the following subject
                     (and its children)
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.placeholder.personsearch">
+            <trans-unit id="backend.placeholder.personsearch">
                 <source>
                     Enter your search term.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.sheet.datasheet">
+            <trans-unit id="backend.sheet.datasheet">
                 <source>
                     Show Stud.IP content
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.sheet.searchsheet">
+            <trans-unit id="backend.sheet.searchsheet">
                 <source>
                     Search form
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.text.coursesearch">
+            <trans-unit id="backend.text.coursesearch">
                 <source>
                     You can search for a course by specifying either parts of
                     its title or the course number.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.backend.text.personsearch">
+            <trans-unit id="backend.text.personsearch">
                 <source>
                     You can search for a person by specifying either
                     "given name" or "last name" or "given name last name"
                     or "username".
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.category_studip">
+            <trans-unit id="conf.category_studip">
                 <source>
                     Stud.IP-related settings
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.category_typo3">
+            <trans-unit id="conf.category_typo3">
                 <source>
                     Settings for output in TYPO3
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.config_cache_lifetime">
+            <trans-unit id="conf.config_cache_lifetime">
                 <source>
                     How long (in minutes) shall configuration data from
                     Stud.IP be cached?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.debug">
+            <trans-unit id="conf.debug">
                 <source>
                     Debug output?:Setting this produces output about what
                     data is called from Stud.IP and how it is processed in
                     the extension.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_api_password">
+            <trans-unit id="conf.studip_api_password">
                 <source>
                     Password for API access:To access the Stud.IP REST API,
                     a password is needed. You can get it from your local
                     Stud.IP root administrator.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_api_path">
+            <trans-unit id="conf.studip_api_path">
                 <source>
                     Full URL to Stud.IP REST API:Stud.IP 3.0 and onwards have
                     a REST API built into the core which can be reached via
                     the api.php dispatcher.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_api_username">
+            <trans-unit id="conf.studip_api_username">
                 <source>
                     Username for API access:To access the Stud.IP REST API,
                     a username is needed. You can get it from your local
                     Stud.IP root administrator.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_externphp_path">
+            <trans-unit id="conf.studip_externphp_path">
                 <source>
                     Full URL to Stud.IP extern.php:The so called external pages
                     in Stud.IP are provided via the extern.php script.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_hierarchy_institute">
+            <trans-unit id="conf.studip_hierarchy_institute">
                 <source>
                     Two-level institute hierarchy (institute)
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_hierarchy_rangetree">
+            <trans-unit id="conf.studip_hierarchy_rangetree">
                 <source>
                     Multi-level range hierarchy (range_tree)
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.studip_use_hierarchy">
+            <trans-unit id="conf.studip_use_hierarchy">
                 <source>
                     Which Stud.IP institute hierarchy shall be used?
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.conf.typo3_url">
+            <trans-unit id="conf.typo3_url">
                 <source>
                     Address of this web site (optional):By specifying an
                     address here you can override the "magic" that determines
@@ -302,34 +302,55 @@
                     http://awesome.someserver.com.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.message.ajax_error">
+            <trans-unit id="frontend.label.all">
+                <source>all</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.coursetype">
+                <source>Course type:</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.institute">
+                <source>Institute:</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.perform_search">
+                <source>Find</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.searchterm">
+                <source>Search for:</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.semester">
+                <source>Semester:</source>
+            </trans-unit>
+            <trans-unit id="frontend.searchterm_placeholder">
+                <source>Course name or number...</source>
+            </trans-unit>
+            <trans-unit id="message.ajax_error">
                 <source>
                     An error has occurred on trying to fetch data.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.message.error">
+            <trans-unit id="message.error">
                 <source>
                     An error has occurred.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.message.incomplete_api_config">
+            <trans-unit id="message.incomplete_api_config">
                 <source>
                     You need to set the path to the Stud.IP interface and the
                     corresponding username and password.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.message.rest_access_error">
+            <trans-unit id="message.rest_access_error">
                 <source>
                     The Stud.IP interface could not be accessed. The returned
                     error was:
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.plugindesc">
+            <trans-unit id="plugindesc">
                 <source>
                     Includes data from Stud.IP, like course or person lists.
                 </source>
             </trans-unit>
-            <trans-unit id="tx_importstudip.plugintitle">
+            <trans-unit id="plugintitle">
                 <source>
                     Stud.IP data
                 </source>

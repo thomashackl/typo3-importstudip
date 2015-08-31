@@ -60,8 +60,8 @@ class StudipRESTHelper {
         } else {
 
             $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.incomplete_api_config', 'importstudip'),
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.error', 'importstudip'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.incomplete_api_config', 'importstudip'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
             \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);
@@ -88,8 +88,8 @@ class StudipRESTHelper {
         } else {
 
             $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.rest_access_error', 'importstudip').' '.$response->response.'<br/>'.$route,
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.error', 'importstudip'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.rest_access_error', 'importstudip').' '.$response->response.'<br/>'.$route,
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
             \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);

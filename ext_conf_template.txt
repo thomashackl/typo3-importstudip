@@ -1,26 +1,26 @@
-# customSubcategory=studip=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.category_studip
-# customSubcategory=typo3=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.category_typo3
+# customSubcategory=studip=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.category_studip
+# customSubcategory=typo3=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.category_typo3
 
-# cat=Stud.IP/studip/11; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_api_path
+# cat=Stud.IP/studip/11; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_api_path
 studip_api_path = https://studip.yourserver.com/studip/api.php
 
-# cat=Stud.IP/studip/12; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_api_username
+# cat=Stud.IP/studip/12; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_api_username
 studip_api_username =
 
-# cat=Stud.IP/studip/13; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_api_password
+# cat=Stud.IP/studip/13; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_api_password
 studip_api_password =
 
-# cat=Stud.IP/studip/11; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_externphp_path
+# cat=Stud.IP/studip/11; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_externphp_path
 studip_externphp_path = http://studip.yourserver.com/studip/extern.php
 
-# cat=Stud.IP/studip/14; type=options[LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_hierarchy_institute=institute,LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_hierarchy_rangetree=rangetree]; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.studip_use_hierarchy
+# cat=Stud.IP/studip/14; type=options[LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_hierarchy_institute=institute,LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_hierarchy_rangetree=rangetree]; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_use_hierarchy
 studip_use_hierarchy = institute
 
-# cat=TYPO3/typo3/20; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.typo3_url
+# cat=TYPO3/typo3/20; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.typo3_url
 typo3_url =
 
-# cat=TYPO3/typo3/21; type=int; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.config_cache_lifetime
+# cat=TYPO3/typo3/21; type=int; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.config_cache_lifetime
 config_cache_lifetime = 360
 
-# cat=TYPO3/typo3/22; type=boolean; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:tx_importstudip.conf.debug
+# cat=TYPO3/typo3/22; type=boolean; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.debug
 debug = 0

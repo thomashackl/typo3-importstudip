@@ -72,9 +72,9 @@ class AjaxHandler {
         $number = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('number');
         $html = '<div class="tx-importstudip-searchresult-found">';
         if ($number == 1) {
-            $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_one', 'importstudip');
+            $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.text.searchresult_one', 'importstudip');
         } else {
-            $html .= $number.' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_more', 'importstudip');
+            $html .= $number.' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.text.searchresult_more', 'importstudip');
         }
         $html .= '</div>';
         return $html;
@@ -111,9 +111,9 @@ class AjaxHandler {
         $number = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('number');
         $html = '<div class="tx-importstudip-searchresult-found">';
         if ($number == 1) {
-            $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_one', 'importstudip');
+            $html .= \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.text.searchresult_one', 'importstudip');
         } else {
-            $html .= $number.' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.backend.text.searchresult_more', 'importstudip');
+            $html .= $number.' '.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.text.searchresult_more', 'importstudip');
         }
         $html .= '</div>';
         return $html;

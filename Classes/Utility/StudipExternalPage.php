@@ -20,8 +20,6 @@
 
 namespace UniPassau\ImportStudip\Utility;
 
-//require_once('COnfigForm.php');
-
 class StudipExternalPage
 {
 

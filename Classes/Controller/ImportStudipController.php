@@ -20,9 +20,11 @@
 
 namespace UniPassau\ImportStudip\Controller;
 
-require_once(realpath(__DIR__.'/../Utility/StudipExternalPage.php'));
+require_once(realpath(__DIR__.'/../ViewHelpers/InstituteSelectViewHelper.php'));
+require_once(realpath(__DIR__.'/../ViewHelpers/CourseTypeSelectViewHelper.php'));
 
-use \UniPassau\ImportStudip\Utility\StudipExternalPage;
+use UniPassau\ImportStudip\Utility\StudipConnector;
+use UniPassau\ImportStudip\Utility\StudipExternalPage;
 
 class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionController {
 
@@ -36,7 +38,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     /**
      * Standard action for showing content when the extension is called.
      */
-    public function indexAction() {
+    public function indexAction()
+    {
         if ($this->settings['pagetype'] != 'searchpage') {
             // Fetch Stud.IP external page.
             $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
@@ -51,8 +54,34 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             // Assign Stud.IP output to view.
             $this->view->assign('studipcontent', $content);
         } else {
+
+            $semesters = array();
+            $current = '';
+            // Get all semesters and build a value => name array.
+            foreach (json_decode(StudipConnector::getAllSemesters(), true) as $semester) {
+                $semesters[$semester['semester_id']] = $semester['description'];
+                if (!$current && !$semester['past']) {
+                    $current = $semester['semester_id'];
+                }
+            }
+            $this->view->assign('semesters', array_reverse($semesters));
+            // Current semester is pre-selected
+            $this->view->assign('selected_semester', $current);
+
+            // Get all institutes and build a value => name array.
+            $this->view->assign('institutes', json_decode(StudipConnector::getInstitutes('institute'), true));
+            // If a pre-selected institute is set in backend, set it.
             $this->view->assign('institute', $this->settings['preselectinst']);
+
+            // Get all coursetypes and build a value => name array.
+            $coursetypes = json_decode(StudipConnector::getCourseTypes(), true);
+            $this->view->assign('coursetypes', $coursetypes);
         }
+    }
+
+    public function searchcourseAction($searchterm, $semester='', $institute='')
+    {
+
     }
 
     /**
@@ -68,8 +97,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             UniPassau\ImportStudip\AjaxController::$action();
         } else {
             $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.rest_access_error', 'importstudip').' '.$response->response,
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('tx_importstudip.message.error', 'importstudip'),
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.rest_access_error', 'importstudip').' '.$response->response,
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
             return $message->render;

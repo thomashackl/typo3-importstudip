@@ -1,12 +1,33 @@
+{namespace importstudip=Tx_ImportStudip_ViewHelpers}
 <f:if condition="{studipcontent}!=''">
     <f:then>
         <f:format.raw value="{studipcontent}" />
     </f:then>
     <f:else>
         <f:form action="searchcourse">
-            <f:form.textfield name="tx-importstudip-searchterm" size="75" maxlength="255" placeholder="Name oder Veranstaltungsnummer..."/>
+            <label>
+                <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.searchterm"/>
+                <br/>
+                <f:form.textfield name="importstudip[searchterm]" size="75" maxlength="255" placeholder="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.searchterm_placeholder')}"/>
+            </label>
+            <label>
+                <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.semester"/>
+                <br/>
+                <f:form.select name="importstudip[semester]" value="{selected_semester}" options="{semesters}" prependOptionLabel="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.all')}"/>
+            </label>
+            <label>
+                <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.institute"/>
+                <br/>
+                <importstudip:InstituteSelect name="importstudip[institute]" options="{institutes}" value="{institute}" prependOptionLabel="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.all')}"/>
+            </label>
+            <br/>
+            <label>
+                <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.coursetype"/>
+                <br/>
+                <importstudip:CourseTypeSelect name="importstudip[coursetype]" options="{coursetypes}" prependOptionLabel="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.all')}"/>
+            </label>
             <br/><br/>
-            <f:form.submit value="Finden" name="tx-importstudip-coursesearch"/>
+            <f:form.submit value="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.perform_search')}" name="importstudip[coursesearch]"/>
         </f:form>
     </f:else>
 </f:if>
