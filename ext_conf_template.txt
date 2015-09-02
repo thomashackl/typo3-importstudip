@@ -1,8 +1,8 @@
 # customSubcategory=studip=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.category_studip
 # customSubcategory=typo3=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.category_typo3
 
-# cat=Stud.IP/studip/11; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_api_path
-studip_api_path = https://studip.yourserver.com/studip/api.php
+# cat=Stud.IP/studip/11; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_url
+studip_url = https://studip.yourserver.com/studip/
 
 # cat=Stud.IP/studip/12; type=string; label=LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:conf.studip_api_username
 studip_api_username =

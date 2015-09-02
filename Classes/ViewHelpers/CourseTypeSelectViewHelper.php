@@ -35,7 +35,7 @@ class Tx_ImportStudip_ViewHelpers_CourseTypeSelectViewHelper extends \TYPO3\CMS\
     protected function renderOptionGroupTag($label, $options) {
         $output = '<optgroup label="' . htmlspecialchars($label) . '">';
         foreach ($options as $o) {
-            $output .= $this->renderOptionTag($o['id'], $o['type'], $this->isSelected[$o['id']]);
+            $output .= $this->renderOptionTag($o['id'], $o['type'], $this->isSelected($o['id']));
         }
         $output .= '</optgroup>';
         return $output;

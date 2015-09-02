@@ -257,13 +257,6 @@
                     Stud.IP root administrator.
                 </source>
             </trans-unit>
-            <trans-unit id="conf.studip_api_path">
-                <source>
-                    Full URL to Stud.IP REST API:Stud.IP 3.0 and onwards have
-                    a REST API built into the core which can be reached via
-                    the api.php dispatcher.
-                </source>
-            </trans-unit>
             <trans-unit id="conf.studip_api_username">
                 <source>
                     Username for API access:To access the Stud.IP REST API,
@@ -286,6 +279,11 @@
                 <source>
                     Multi-level range hierarchy (range_tree)
                 </source>
+            </trans-unit>
+            <trans-unit id="conf.studip_url">
+                <target>
+                    Full URL to your Stud.IP installation.
+                </target>
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
                 <source>
@@ -320,7 +318,19 @@
             <trans-unit id="frontend.label.semester">
                 <source>Semester:</source>
             </trans-unit>
-            <trans-unit id="frontend.searchterm_placeholder">
+            <trans-unit id="frontend.text.no_search_results">
+                <source>No results have been found for your search.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.no_search_term">
+                <source>Please specify a search term.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.one_search_result">
+                <source>One result found.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.num_search_results">
+                <source>%s results found.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.searchterm_placeholder">
                 <source>Course name or number...</source>
             </trans-unit>
             <trans-unit id="message.ajax_error">

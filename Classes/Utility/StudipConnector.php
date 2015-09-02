@@ -138,9 +138,9 @@ class StudipConnector {
         $result = array();
         $mapping = self::getTypeMapping();
         if ($treetype == 'rangetree') {
-            $route = 'typo3/rangetree/'.$mapping[$externtype];
+            $route = 'typo3/rangetree'.($externtype ? '/'.$mapping[$externtype] : '');
         } else {
-            $route = 'typo3/institutes/'.$mapping[$externtype];
+            $route = 'typo3/institutes'.($externtype ? '/'.$mapping[$externtype] : '');
         }
         return self::getData($route);
     }
@@ -200,6 +200,17 @@ class StudipConnector {
         return $result;
     }
 
+    public static function frontendSearchCourse($searchterm, $semester_id='', $institute_id='', $coursetype='')
+    {
+        $result = array();
+        $call = 'typo3/extendedcoursesearch/'.rawurlencode($searchterm);
+        if ($semester_id || $institute_id || $coursetype) {
+            $call .= '/'.($semester_id ?: 0).'/'.($institute_id ?: 0).'/'.($coursetype ?: 0);
+        }
+        $result = self::getData($call, false);
+        return $result;
+    }
+
     public static function getCourse($course_id)
     {
         $result = array();
@@ -220,9 +231,9 @@ class StudipConnector {
         return $result;
     }
 
-    public static function getCourseTypes($institute)
+    public static function getCourseTypes($institute='')
     {
-        return self::getData('typo3/coursetypes/'.$institute);
+        return self::getData('typo3/coursetypes'.($institute ? '/'.$institute : ''));
     }
 
     public static function getSubjects($parent_id, $depth)
@@ -277,37 +288,42 @@ class StudipConnector {
      * caching.
      *
      * @param String $route the route to get data for.
+     * @param bool $caching cache the result to database?
      * @return mixed
      */
-    private static function getData($route)
+    private static function getData($route, $caching=true)
     {
         $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
         $validfor = intval($config['config_cache_lifetime']) * 60 * 1000;
-        $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate',
-            'tx_importstudip_config', "route='".$route."'");
-        $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
+        if ($caching) {
+            $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate',
+                'tx_importstudip_config', "route='" . $route . "'");
+            $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
+        }
         if ($row && $row['chdate'] >= time() - $validfor) {
             $data = $row['data'];
             $GLOBALS['TYPO3_DB']->sql_free_result($cached);
         } else {
             $rest = new StudipRESTHelper();
             $data = $rest->call($route);
-            if ($row) {
-                $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
-                    'tx_importstudip_config',
-                    'route='.$route,
-                    array('data' => $data, 'chdate' => time())
-                );
-            } else {
-                $GLOBALS['TYPO3_DB']->exec_INSERTquery(
-                    'tx_importstudip_config',
-                    array(
-                        'route' => $route,
-                        'data' => $data,
-                        'mkdate' => time(),
-                        'chdate' => time()
-                    )
-                );
+            if ($caching) {
+                if ($row) {
+                    $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+                        'tx_importstudip_config',
+                        'route=' . $route,
+                        array('data' => $data, 'chdate' => time())
+                    );
+                } else {
+                    $GLOBALS['TYPO3_DB']->exec_INSERTquery(
+                        'tx_importstudip_config',
+                        array(
+                            'route' => $route,
+                            'data' => $data,
+                            'mkdate' => time(),
+                            'chdate' => time()
+                        )
+                    );
+                }
             }
         }
         return $data;

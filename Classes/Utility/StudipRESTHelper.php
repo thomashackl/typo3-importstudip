@@ -37,17 +37,18 @@ class StudipRESTHelper {
         $this->config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
 
         // All necessary values set?
-        if ($this->config['studip_api_path'] && $this->config['studip_api_username'] && $this->config['studip_api_password']) {
+        if ($this->config['studip_url'] && $this->config['studip_api_username'] && $this->config['studip_api_password']) {
 
             /*
              * Build correct URL (check for slashes between path parts and try
              * to remove double slashes in address)
              */
-            if (substr($this->config['studip_api_path'], 0, 1) == '/') {
-                $url = substr($this->config['studip_api_path'], 1);
+            if (substr($this->config['studip_url'], 0, 1) == '/') {
+                $url = substr($this->config['studip_url'], 1);
             } else {
-                $url = $this->config['studip_api_path'];
+                $url = $this->config['studip_url'];
             }
+            $url .= 'api.php';
 
             // Initialize REST client.
             $this->client = new \RestClient(array(

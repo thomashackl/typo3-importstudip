@@ -266,13 +266,6 @@
                     erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.
                 </target>
             </trans-unit>
-            <trans-unit id="conf.studip_api_path">
-                <target>
-                    Vollst&#228;ndige URL der Stud.IP REST API:Ab Stud.IP 3.0
-                    ist eine REST-API in den Kern eingebaut, die &#252;ber
-                    api.php erreicht werden kann.
-                </target>
-            </trans-unit>
             <trans-unit id="conf.studip_api_username">
                 <target>
                     Benutzername f&#252;r API-Zugriff:Um auf die
@@ -296,6 +289,11 @@
             <trans-unit id="conf.studip_hierarchy_rangetree">
                 <target>
                     Mehrstufige, erweiterte Einrichtungshierarchie (range_tree)
+                </target>
+            </trans-unit>
+            <trans-unit id="conf.studip_url">
+                <target>
+                    Vollst&#228;ndige URL Ihrer Stud.IP-Installation.
                 </target>
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
@@ -337,7 +335,19 @@
             <trans-unit id="frontend.label.semester">
                 <target>Semester:</target>
             </trans-unit>
-            <trans-unit id="frontend.searchterm_placeholder">
+            <trans-unit id="frontend.text.no_search_results">
+                <source>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.no_search_term">
+                <target>Bitte geben Sie einen Suchbegriff an.</target>
+            </trans-unit>
+            <trans-unit id="frontend.text.one_search_result">
+                <source>Ein Ergebnis gefunden.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.num_search_results">
+                <source>%s Ergebnisse gefunden.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.searchterm_placeholder">
                 <target>Veranstaltungsname oder -nummer...</target>
             </trans-unit>
             <trans-unit id="message.ajax_error">

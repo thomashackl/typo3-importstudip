@@ -4,6 +4,13 @@ class Tx_ImportStudip_ViewHelpers_InstituteSelectViewHelper extends \TYPO3\CMS\F
 
     protected function renderOptionTags($options) {
         $output = '';
+
+        if ($this->hasArgument('prependOptionLabel')) {
+            $value = $this->hasArgument('prependOptionValue') ? $this->arguments['prependOptionValue'] : '';
+            $label = $this->arguments['prependOptionLabel'];
+            $output .= $this->renderOptionTag($value, $label, FALSE) . chr(10);
+        }
+
         foreach ($options as $faculty) {
             $output .= $this->renderOptionTag($faculty['id'], $faculty['name'], $this->isSelected($faculty['id']));
             foreach ($faculty['children'] as $c) {
