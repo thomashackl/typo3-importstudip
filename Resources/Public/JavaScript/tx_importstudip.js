@@ -84,8 +84,8 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     TYPO3.jQuery('.tx-importstudip-filters-container').hide();
+                    Tx_ImportStudip.enableInput('tx-importstudip-coursesearch');
                     if (TYPO3.jQuery('#tx-importstudip-choose-course option').length > 0) {
-                        Tx_ImportStudip.enableInput('tx-importstudip-coursesearch');
                         Tx_ImportStudip.enableInput('tx-importstudip-choose-course-institute',
                             {
                                 action: 'choosecourseinstitute',
@@ -141,8 +141,8 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     TYPO3.jQuery('.tx-importstudip-filters-container').hide();
+                    Tx_ImportStudip.enableInput('tx-importstudip-personsearch');
                     if (TYPO3.jQuery('#tx-importstudip-choose-user option').length > 0) {
-                        Tx_ImportStudip.enableInput('tx-importstudip-personsearch');
                         Tx_ImportStudip.enableInput('tx-importstudip-choose-user-institute',
                             {
                                 action: 'chooseuserinstitute',
@@ -229,6 +229,10 @@ Tx_ImportStudip = {
         }
     },
 
+    /**
+     * Fetches the list of institutes.
+     * @param elementId parent the list should be appended to
+     */
     getInstitutes: function(elementId) {
         var div = TYPO3.jQuery('#' + elementId);
         div.parents('.t3-form-field-container').show();
@@ -264,6 +268,9 @@ Tx_ImportStudip = {
         });
     },
 
+    /**
+     * Actions to execute if the selected institute is changed.
+     */
     changeInstitute: function() {
         // Set course types for chosen institute.
         if (TYPO3.jQuery('#tx-importstudip-pagetypes').find('input[type="radio"]:checked').val() == 'courses') {
@@ -358,6 +365,10 @@ Tx_ImportStudip = {
         });
     },
 
+    /**
+     * Which Stud.IP external page module name must be set
+     * according to the selected configuration?
+     */
     setModuleName: function() {
         var config = TYPO3.jQuery('#tx-importstudip-externconfig').children('select');
         if (config.children('option:selected').length > 0) {
@@ -368,6 +379,10 @@ Tx_ImportStudip = {
         TYPO3.jQuery('#tx-importstudip-module').children('input').val(module);
     },
 
+    /**
+     * Search for persons in Stud.IP.
+     * @returns {boolean}
+     */
     performPersonSearch: function() {
         TYPO3.jQuery('#tx-importstudip-personsearch-result').html(Tx_ImportStudip.getSpinner(''));
         TYPO3.jQuery.ajax({
@@ -390,6 +405,10 @@ Tx_ImportStudip = {
         return false;
     },
 
+    /**
+     * Get the institutes the selected person is assigned to.
+     * @returns {boolean}
+     */
     getPersonInstitutes: function() {
         TYPO3.jQuery('#tx-importstudip-choose-user-institute').html(Tx_ImportStudip.getSpinner(''));
         var userselect = TYPO3.jQuery('#tx-importstudip-choose-user');
@@ -418,6 +437,10 @@ Tx_ImportStudip = {
         return false;
     },
 
+    /**
+     * Search for courses in Stud.IP.
+     * @returns {boolean}
+     */
     performCourseSearch: function() {
         TYPO3.jQuery('#tx-importstudip-coursesearch-result').html(Tx_ImportStudip.getSpinner(''));
         TYPO3.jQuery.ajax({
@@ -441,6 +464,10 @@ Tx_ImportStudip = {
         return false;
     },
 
+    /**
+     * Get the institutes the selected course is assigned to.
+     * @returns {boolean}
+     */
     getCourseInstitutes: function() {
         TYPO3.jQuery('#tx-importstudip-choose-course-institute').html(Tx_ImportStudip.getSpinner(''));
         var courseselect = TYPO3.jQuery('#tx-importstudip-choose-course');
@@ -469,6 +496,9 @@ Tx_ImportStudip = {
         return false;
     },
 
+    /**
+     * Get the fields of study list.
+     */
     getSubjects: function(id) {
         var li = TYPO3.jQuery('#tx-importstudip-subject-'+id).siblings('ul.tx-importstudip-tree').children('li');
         li.show();
@@ -493,12 +523,21 @@ Tx_ImportStudip = {
         });
     },
 
+    /**
+     * Open all tree ancestors of the selected element.
+     * @param id
+     */
     openSelectedParents: function(id) {
         TYPO3.jQuery('#'+id).find('.tx-importstudip-selector:checked').
             parents('.tx-importstudip-treebranch').
             children('input.tx-importstudip-treeinput').attr('checked', true);
     },
 
+    /**
+     * Enables the given input field, e.g. showing it and loading data via AJAX.
+     * @param id ID of the input field to show
+     * @param parameters needed parameters for AJAX call which fills in data
+     */
     enableInput: function(id, parameters) {
         TYPO3.jQuery('#'+id).closest('.t3-form-field-container').show();
         if (parameters != '' && parameters != null) {
@@ -516,11 +555,20 @@ Tx_ImportStudip = {
         }
     },
 
+    /**
+     * Hide the given input field.
+     * @param id ID of the input field to hide.
+     */
     disableInput: function(id) {
         TYPO3.jQuery('#'+id).html();
         TYPO3.jQuery('#'+id).closest('.t3-form-field-container').hide();
     },
 
+    /**
+     * Shows a "loading..." icon indicating that some AJAX stuff is happening.
+     * @param text Text to show along with the animated icon.
+     * @returns {string|*}
+     */
     getSpinner: function(text) {
         html = '<img src="gfx/spinner.gif"/>';
         if (text != '') {

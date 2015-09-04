@@ -40,9 +40,135 @@ class StudipExternalPage
         // Create the correct URL from given settings.
         $url = self::buildStudipURL($settings, $extconfig['studip_externphp_path']);
 
-        // Retrieve the external page content from Stud.IP. Just a HTTP(S) call.
-        $html = file_get_contents($url);
+        $error = false;
 
+        // Caching settings.
+        $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $validfor = intval($config['config_cache_lifetime']) * 60;
+
+        // Fetch cached content if available.
+        $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('content, chdate',
+            'tx_importstudip_externalpages', "url='" . $url . "'");
+        $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
+
+        // Cached content exists and is not expired, use it.
+        if ($row && $row['chdate'] >= time() - $validfor) {
+
+            $html = utf8_decode($row['content']);
+            $GLOBALS['TYPO3_DB']->sql_free_result($cached);
+
+        // No cached content or expired -> fetch page from Stud.IP.
+        } else {
+
+            // Set timeout for HTTP call.
+            $timeout = 10;
+
+            /* Retrieve the external page content from Stud.IP. Just a HTTP(S) call. */
+
+            // Use CURL if available as it is faster than file_get_contents.
+            if (in_array('curly', get_loaded_extensions())) {
+
+                $curl = curl_init();
+                curl_setopt($curl, CURLOPT_URL, $url);
+                curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+                curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+                $html = trim(curl_exec($curl));
+
+                // No result because of code 404 "Not found".
+                if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 404) {
+                    throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
+                        trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                            'frontend.text.error_studip_404',
+                            'importstudip')));
+                }
+                curl_close($curl);
+
+            // No CURL, try file_get_contents instead.
+            } else {
+
+                // We need allow_url_fopen for this functionality to work.
+                if (ini_get('allow_url_fopen')) {
+
+                    // Create a HTTP context (for easy timeout setting)
+                    $ctx = stream_context_create(array(
+                        'http' => array(
+                            'ignore_errors' => true,
+                            'timeout' => $timeout,
+                            'http_protocol' => '1.1'
+                        )
+                    ));
+
+                    $html = trim(@file_get_contents($url, false, $ctx));
+
+                    // No result because of code 404 "Not found".
+                    if (!$html && strpos($http_response_header[0], '404') !== false) {
+                        $error = true;
+                        throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
+                            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                                'frontend.text.error_studip_404',
+                                'importstudip')));
+                    }
+
+                // No allow_url_fopen, show error message and write to syslog.
+                } else {
+
+                    $error = true;
+
+                    $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'frontend.text.error_no_url_fopen',
+                        'importstudip'));
+
+                    $logger = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+                        'TYPO3\CMS\Core\Log\LogManager')->getLogger(__CLASS__);
+                    $logger->error('Cannot transfer Stud.IP data for '.
+                        'frontend. Please enable either the CURL extension '.
+                        'for PHP or allow_url_fopen in php.ini.');
+
+                }
+
+            }
+
+            // No or too slow response from Stud.IP :(
+            if ($html === false) {
+                // Try to load cached content.
+                if ($row) {
+                    $html = $row['content'];
+                } else {
+                    $error = true;
+
+                    $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'frontend.text.error_studip_unavailable',
+                        'importstudip'));
+                }
+            }
+
+            if (!$error) {
+                // Expired content available, replace it.
+                if ($row) {
+                    // Update existing row.
+                    $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
+                        'tx_importstudip_externalpages',
+                        "url='" . $url . "'",
+                        array('content' => utf8_encode(trim($html)), 'chdate' => time())
+                    );
+                // Nothing cached yet, create new entry.
+                } else {
+                    // Insert new row.
+                    $GLOBALS['TYPO3_DB']->exec_INSERTquery(
+                        'tx_importstudip_externalpages',
+                        array(
+                            'url' => $url,
+                            'content' => utf8_encode(trim($html)),
+                            'mkdate' => time(),
+                            'chdate' => time()
+                        )
+                    );
+                }
+
+            }
+        }
+
+        // Rewrite links to Stud.IP in content.
         $html = self::rewriteStudipLinks($html, $pageid, $elementid, $extconfig, $settings, $uribuilder);
 
         return $html;

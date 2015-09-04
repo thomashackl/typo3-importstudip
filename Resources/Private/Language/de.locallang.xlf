@@ -335,6 +335,22 @@
             <trans-unit id="frontend.label.semester">
                 <target>Semester:</target>
             </trans-unit>
+            <trans-unit id="frontend.text.error_studip_404">
+                <target>Zu den angegebenen Einstellungen wurden keine Daten gefunden.</target>
+            </trans-unit>
+            <trans-unit id="frontend.text.error_no_curl">
+                <target>
+                    Es ist ein TYPO3-Fehler aufgetreten, daher k&#246;nnen
+                    keine Daten aus Stud.IP abgerufen werden.
+                </target>
+            </trans-unit>
+            <trans-unit id="frontend.text.error_studip_unavailable">
+                <target>
+                    Es k&#246;nnen keine Daten angezeigt werden, da Stud.IP
+                    nicht verf&#252;gbar ist oder zu lange braucht, um zu
+                    antworten.
+                </target>
+            </trans-unit>
             <trans-unit id="frontend.text.no_search_results">
                 <source>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</source>
             </trans-unit>

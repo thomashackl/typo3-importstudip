@@ -21,11 +21,12 @@
 namespace UniPassau\ImportStudip\Controller;
 
 require_once(realpath(__DIR__.'/../Utility/StudipConnector.php'));
+require_once(realpath(__DIR__.'/../Utility/StudipExternalPage.php'));
 require_once(realpath(__DIR__.'/../ViewHelpers/InstituteSelectViewHelper.php'));
 require_once(realpath(__DIR__.'/../ViewHelpers/CourseTypeSelectViewHelper.php'));
 
-use \UniPassau\ImportStudip\Utility\StudipConnector;
-use \UniPassau\ImportStudip\Utility\StudipExternalPage;
+use UniPassau\ImportStudip\Utility\StudipConnector;
+use UniPassau\ImportStudip\Utility\StudipExternalPage;
 
 class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionController {
 
@@ -42,7 +43,10 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
      */
     public function indexAction()
     {
+
         if ($this->settings['pagetype'] != 'searchpage') {
+
+            $this->view->assign('showsearch', false);
 
             // Fetch Stud.IP external page.
             $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
@@ -59,6 +63,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
         // Generate form for course search.
         } else {
+
+            $this->view->assign('showsearch', true);
 
             $semesters = $this->getSemesters();
             $this->view->assign('semesters', array_reverse($semesters['semesters']));
@@ -152,6 +158,24 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
             return $message->render;
+        }
+    }
+
+    /**
+     * @param \TYPO3\CMS\Extbase\Mvc\RequestInterface $request
+     * @param \TYPO3\CMS\Extbase\Mvc\ResponseInterface $response
+     * @throws \Exception|\TYPO3\CMS\Extbase\Property\Exception
+     */
+    public function processRequest(\TYPO3\CMS\Extbase\Mvc\RequestInterface $request, \TYPO3\CMS\Extbase\Mvc\ResponseInterface $response) {
+        try {
+            parent::processRequest($request, $response);
+        }
+        catch(\TYPO3\CMS\Extbase\Property\Exception $e) {
+            if ($e->getPrevious() instanceof \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException) {
+                $GLOBALS['TSFE']->pageNotFoundAndExit($e->getMessage());
+            } else {
+                throw $e;
+            }
         }
     }
 
