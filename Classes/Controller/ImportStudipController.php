@@ -39,9 +39,6 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     public function indexAction()
     {
 
-        $log = fopen('/Applications/MAMP/tmp/php/tx.log', 'w');
-        fwrite($log, "HERE!\n");
-        fclose($log);
         if ($this->settings['pagetype'] != 'searchpage') {
 
             $this->view->assign('showsearch', false);
@@ -155,7 +152,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
-            return $message->render;
+            return $message->render();
         }
     }
 

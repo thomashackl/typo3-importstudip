@@ -180,21 +180,29 @@ class ConfigForm {
     }
 
     public function getPersonSearchForm($data, $inputname, $value, $parameters=array()) {
-        $html = '<select name="'.$inputname.'" id="tx-importstudip-choose-user" data-input-name="'.$inputname.
-            '" data-input-value="'.$value.'" size="1" onchange="Tx_ImportStudip.getPersonInstitutes()">';
-        foreach ($data as $entry) {
-            $fullname = $entry['lastname'].', '.$entry['firstname'];
-            if ($entry['prefix']) {
-                $fullname = $entry['prefix'].' '.$fullname;
+        if ($data) {
+            $html = '<select name="' . $inputname . '" id="tx-importstudip-choose-user" data-input-name="' . $inputname .
+                '" data-input-value="' . $value . '" size="1" onchange="Tx_ImportStudip.getPersonInstitutes()">';
+            foreach ($data as $entry) {
+                $fullname = $entry['lastname'] . ', ' . $entry['firstname'];
+                if ($entry['prefix']) {
+                    $fullname = $entry['prefix'] . ' ' . $fullname;
+                }
+                if ($entry['suffix']) {
+                    $fullname = $fullname . ', ' . $entry['suffix'];
+                }
+                $fullname .= ' (' . $entry['username'] . ')';
+                $html .= '<option value="' . $entry['username'] . '" data-user-id="' . $entry['user_id'] . '"' .
+                    ($entry['username'] == $value ? ' selected="selected"' : '') . '>' . $fullname . '</option>';
             }
-            if ($entry['suffix']) {
-                $fullname = $fullname.', '.$entry['suffix'];
-            }
-            $fullname .= ' ('.$entry['username'].')';
-            $html .= '<option value="'.$entry['username'].'" data-user-id="'.$entry['user_id'].'"'.
-                ($entry['username'] == $value ? ' selected="selected"' : '').'>'.$fullname.'</option>';
+            $html .= '</select>';
+        } else {
+            $html = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.no_persons_found', 'importstudip'),
+                '',
+                \TYPO3\CMS\Core\Messaging\FlashMessage::INFO
+            )->render();
         }
-        $html .= '</select>';
         return $html;
     }
 
@@ -261,19 +269,27 @@ class ConfigForm {
     }
 
     public function getCourseSearchForm($data, $inputname, $value, $parameters) {
-        $html = '<select name="'.$inputname.'" size="1" id="tx-importstudip-choose-course" '.
-            'onchange="Tx_ImportStudip.getCourseInstitutes()">';
-        foreach ($data as $entry) {
-            $fullname = $entry['name'];
-            if ($entry['number']) {
-                $fullname = $entry['number'].' '.$fullname;
+        if ($data) {
+            $html = '<select name="' . $inputname . '" size="1" id="tx-importstudip-choose-course" ' .
+                'onchange="Tx_ImportStudip.getCourseInstitutes()">';
+            foreach ($data as $entry) {
+                $fullname = $entry['name'];
+                if ($entry['number']) {
+                    $fullname = $entry['number'] . ' ' . $fullname;
+                }
+                $fullname .= ' (' . $entry['type'] . ', ' . $entry['semester'] . ')';
+                $html .= '<option value="' . $entry['course_id'] . '"' .
+                    ($entry['course_id'] == $value ? ' selected="selected"' : '') . '>' .
+                    $fullname . '</option>';
             }
-            $fullname .= ' ('.$entry['type'].', '.$entry['semester'].')';
-            $html .= '<option value="'.$entry['course_id'].'"'.
-                ($entry['course_id'] == $value ? ' selected="selected"' : '').'>'.
-                $fullname.'</option>';
+            $html .= '</select>';
+        } else {
+            $html = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.no_courses_found', 'importstudip'),
+                '',
+                \TYPO3\CMS\Core\Messaging\FlashMessage::INFO
+                )->render();
         }
-        $html .= '</select>';
         return $html;
     }
 

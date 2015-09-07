@@ -383,6 +383,16 @@
                     aus Benutzername und Passwort.
                 </target>
             </trans-unit>
+            <trans-unit id="message.no_courses_found">
+                <target>
+                    Es wurden keine Veranstaltungen zu Ihrem Suchbegriff gefunden.
+                </target>
+            </trans-unit>
+            <trans-unit id="message.no_persons_found">
+                <target>
+                    Es wurden keine Personen zu Ihrem Suchbegriff gefunden.
+                </target>
+            </trans-unit>
             <trans-unit id="message.rest_access_error">
                 <target>
                     Auf die Stud.IP-Schnittstelle konnte nicht zugegriffen

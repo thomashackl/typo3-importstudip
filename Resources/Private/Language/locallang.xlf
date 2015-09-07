@@ -364,6 +364,16 @@
                     corresponding username and password.
                 </source>
             </trans-unit>
+            <trans-unit id="message.no_courses_found">
+                <source>
+                    No courses matching your search term have been found.
+                </source>
+            </trans-unit>
+            <trans-unit id="message.no_persons_found">
+                <source>
+                    No persons matching your search term have been found.
+                </source>
+            </trans-unit>
             <trans-unit id="message.rest_access_error">
                 <source>
                     The Stud.IP interface could not be accessed. The returned
