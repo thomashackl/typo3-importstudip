@@ -1,8 +1,5 @@
 <?php
 
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Utility/ConfigForm.php');
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Utility/AjaxHandler.php');
-
 // Register plugin for usage.
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
     'UniPassau.'.$_EXTKEY,
@@ -13,7 +10,7 @@ require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKE
 // Register AJAX handler.
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::registerAjaxHandler (
     'ImportStudip::AjaxHandler',
-    'UniPassau\ImportStudip\Utility\AjaxHandler->handleAjax'
+    'UniPassau\Importstudip\Utility\AjaxHandler->handleAjax'
 );
 
 // Include Flexform
@@ -25,5 +22,5 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
 
 // Wizicon
 if (TYPO3_MODE == 'BE') {
-    $GLOBALS['TBE_MODULES_EXT']['xMOD_db_new_content_el']['addElClasses']['UniPassau\\ImportStudip\\Wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Wizicon.php';
+    $GLOBALS['TBE_MODULES_EXT']['xMOD_db_new_content_el']['addElClasses']['UniPassau\\Importstudip\\Wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Wizicon.php';
 }

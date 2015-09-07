@@ -18,7 +18,7 @@
  * @author     Thomas Hackl <thomas.hackl@uni-passau.de>
  */
 
-namespace UniPassau\ImportStudip\Utility;
+namespace UniPassau\Importstudip\Utility;
 
 class StudipExternalPage
 {

@@ -18,15 +18,10 @@
  * @author     Thomas Hackl <thomas.hackl@uni-passau.de>
  */
 
-namespace UniPassau\ImportStudip\Controller;
+namespace UniPassau\Importstudip\Controller;
 
-require_once(realpath(__DIR__.'/../Utility/StudipConnector.php'));
-require_once(realpath(__DIR__.'/../Utility/StudipExternalPage.php'));
-require_once(realpath(__DIR__.'/../ViewHelpers/InstituteSelectViewHelper.php'));
-require_once(realpath(__DIR__.'/../ViewHelpers/CourseTypeSelectViewHelper.php'));
-
-use UniPassau\ImportStudip\Utility\StudipConnector;
-use UniPassau\ImportStudip\Utility\StudipExternalPage;
+use UniPassau\Importstudip\Utility\StudipConnector;
+use UniPassau\Importstudip\Utility\StudipExternalPage;
 
 class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionController {
 
@@ -44,6 +39,9 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     public function indexAction()
     {
 
+        $log = fopen('/Applications/MAMP/tmp/php/tx.log', 'w');
+        fwrite($log, "HERE!\n");
+        fclose($log);
         if ($this->settings['pagetype'] != 'searchpage') {
 
             $this->view->assign('showsearch', false);
@@ -149,8 +147,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     public function handleAjax($params = array(), \TYPO3\CMS\Core\Http\AjaxRequestHandler &$ajaxObj = NULL)
     {
         $action = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('action');
-        if (method_exists('UniPassau\\ImportStudip\\AjaxAction', $action)) {
-            UniPassau\ImportStudip\AjaxController::$action();
+        if (method_exists('UniPassau\\Importstudip\\AjaxAction', $action)) {
+            UniPassau\Importstudip\AjaxController::$action();
         } else {
             $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.rest_access_error', 'importstudip').' '.$response->response,

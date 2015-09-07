@@ -18,9 +18,7 @@
  * @author     Thomas Hackl <thomas.hackl@uni-passau.de>
  */
 
-namespace UniPassau\ImportStudip\Utility;
-
-require_once(\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Utility/StudipConnector.php');
+namespace UniPassau\Importstudip\Utility;
 
 class ConfigForm {
 

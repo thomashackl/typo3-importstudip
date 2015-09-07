@@ -1,5 +1,5 @@
 <?php
-namespace UniPassau\ImportStudip;
+namespace UniPassau\Importstudip;
 
 use TYPO3\CMS\Core\Utility\ExtensionManagementUtility;
 use TYPO3\CMS\Extbase\Utility\LocalizationUtility;
