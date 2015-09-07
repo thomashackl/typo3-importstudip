@@ -156,7 +156,6 @@ class StudipConnector {
     }
 
     public static function getUser($user_id) {
-        $result = array();
         $data = json_decode(self::getData('typo3/user/'.$user_id), true);
         if ($data) {
             $result = array(
@@ -175,15 +174,13 @@ class StudipConnector {
 
     public static function searchUser($searchterm)
     {
-        $result = array();
         $result = self::getData('typo3/usersearch/'.rawurlencode($searchterm));
         return $result;
     }
 
     public static function getUserInstitutes($user_id)
     {
-        $result = array();
-        $result = self::getData('typo3/user/'.$user_id.'/institutes');
+        $result = self::getData('typo3/user_institutes/'.$user_id);
         return $result;
     }
 
