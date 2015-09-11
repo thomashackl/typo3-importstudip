@@ -1,6 +1,8 @@
 <?php
 
-class Tx_ImportStudip_ViewHelpers_CourseTypeSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper {
+namespace UniPassau\Importstudip\ViewHelpers;
+
+class CourseTypeSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper {
 
     protected function renderOptionTags($options) {
         $output = '';
