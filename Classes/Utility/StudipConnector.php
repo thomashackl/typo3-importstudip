@@ -147,7 +147,11 @@ class StudipConnector {
     {
         $result = array();
         $mapping = self::getTypeMapping();
-        return self::getData('typo3/externconfigs/'.$institute.'/'.implode(',',$mapping[$type]));
+        $route = 'typo3/externconfigs/'.$institute;
+        if ($mapping[$type]) {
+            $route .= '/'.implode(',',$mapping[$type]);
+        }
+        return self::getData($route);
     }
 
     public static function getExternConfigData($configid)

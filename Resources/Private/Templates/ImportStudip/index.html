@@ -1,8 +1,8 @@
-<f:if condition="{showsearch} == false">
+<f:if condition="{showsearch}">
     <f:then>
-        <f:format.raw value="{studipcontent}"/>
+        <f:render partial="SearchForm" arguments="{_all}"/>
     </f:then>
     <f:else>
-        <f:render partial="SearchForm" arguments="{_all}"/>
+        <f:format.raw value="{studipcontent}"/>
     </f:else>
 </f:if>
