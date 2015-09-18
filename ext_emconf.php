@@ -14,23 +14,6 @@ $EM_CONF[$_EXTKEY] = array(
     'title' => 'Daten aus Stud.IP',
     'description' => 'Fügt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.',
     'category' => 'plugin',
-    'author' => 'Thomas Hackl',
-    'author_email' => 'thomas.hackl@uni-passau.de',
-    'author_company' => 'University of Passau',
-    'shy' => '',
-    'dependencies' => '',
-    'conflicts' => '',
-    'priority' => '',
-    'module' => '',
-    'state' => 'beta',
-    'internal' => '',
-    'uploadfolder' => 0,
-    'createDirs' => '',
-    'modify_tables' => '',
-    'clearCacheOnLoad' => 1,
-    'lockType' => '',
-    'author_company' => 'University of Passau',
-    'version' => '3.0.0-beta1',
     'constraints' => array(
         'depends' => array(
             'typo3' => '6.0'
@@ -39,7 +22,13 @@ $EM_CONF[$_EXTKEY] = array(
         ),
         'suggests' => array(
         ),
-    )
+    ),
+    'state' => 'beta',
+    'clearCacheOnLoad' => 1,
+    'author' => 'Thomas Hackl',
+    'author_email' => 'thomas.hackl@uni-passau.de',
+    'author_company' => 'University of Passau',
+    'version' => '3.0.0-beta1'
 );
 
 ?>
