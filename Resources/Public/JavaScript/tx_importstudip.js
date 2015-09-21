@@ -238,7 +238,8 @@ Tx_ImportStudip = {
             url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
             method: 'post',
             data: {
-                action: 'institutes'
+                action: 'institutes',
+                configtype: TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val()
             },
             success: function(data, textStatus, jqXHR) {
                 TYPO3.jQuery.ajax({
@@ -539,9 +540,15 @@ Tx_ImportStudip = {
      * @param id
      */
     openSelectedParents: function(id) {
-        TYPO3.jQuery('#'+id).find('.tx-importstudip-selector:checked').
-            parents('.tx-importstudip-treebranch').
-            children('input.tx-importstudip-treeinput').attr('checked', true);
+        var checked = TYPO3.jQuery('#'+id).find('.tx-importstudip-selector:checked');
+        // Open parents of checked element.
+        if (checked.length > 0) {
+            checked.parents('.tx-importstudip-treebranch').
+                children('input.tx-importstudip-treeinput').attr('checked', true);
+        // No checked element, open only root node.
+        } else {
+            TYPO3.jQuery('#'+id).find('input.tx-importstudip-treeinput').first().attr('checked', true);
+        }
     },
 
     /**
