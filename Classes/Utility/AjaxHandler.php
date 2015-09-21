@@ -30,7 +30,8 @@ class AjaxHandler {
 
     public function institutes() {
         $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        return StudipConnector::getInstitutes($extConf['studip_use_hierarchy']);
+        $configtype = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype');
+        return StudipConnector::getInstitutes($extConf['studip_use_hierarchy'], $configtype);
     }
 
     public function instituteform() {

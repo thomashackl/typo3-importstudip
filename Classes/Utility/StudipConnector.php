@@ -136,9 +136,9 @@ class StudipConnector {
         $result = array();
         $mapping = self::getTypeMapping();
         if ($treetype == 'rangetree') {
-            $route = 'typo3/rangetree'.($externtype ? '/'.$mapping[$externtype] : '');
+            $route = 'typo3/rangetree'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
         } else {
-            $route = 'typo3/institutes'.($externtype ? '/'.$mapping[$externtype] : '');
+            $route = 'typo3/institutes'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
         }
         return self::getData($route);
     }
