@@ -531,11 +531,11 @@ class ConfigForm {
         $html = '<select name="'.$inputname.'" value="'.$value.'"/>';
         $html .= '<option value=""'.($value == '' ? ' selected="selected"' : '').'>'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                'tx_importstudip.backend.label.normaltext', 'importstudip')).'</option>';
+                'backend.label.normaltext', 'importstudip')).'</option>';
         for ($i = 1 ; $i <= 4 ; $i++) {
             $html .= '<option value="h'.$i.'"'.($value == 'h'.$i ? ' selected="selected"' : '').'>'.
                 trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                    'tx_importstudip.backend.label.h'.$i, 'importstudip')).'</option>';
+                    'backend.label.h'.$i, 'importstudip')).'</option>';
         }
         $html .= '</select>';
         return $html;

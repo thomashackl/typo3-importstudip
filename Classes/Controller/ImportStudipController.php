@@ -39,25 +39,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     public function indexAction()
     {
 
-        if ($this->settings['pagetype'] != 'searchpage') {
-
-            $this->view->assign('showsearch', false);
-
-            // Fetch Stud.IP external page.
-            $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
-                intval($this->configurationManager->getContentObject()->data['uid']),
-                $this->settings, $this->controllerContext->getUriBuilder());
-
-            // UTF8-encode the content if necessary.
-            if ($this->utf) {
-                $content = utf8_encode($content);
-            }
-
-            // Assign Stud.IP output to view.
-            $this->view->assign('studipcontent', $content);
-
         // Generate form for course search.
-        } else {
+        if ($this->settings['pagetype'] == 'searchpage') {
 
             $this->view->assign('showsearch', true);
 
@@ -74,6 +57,31 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             // Get all coursetypes and build a value => name array.
             $coursetypes = $this->getCourseTypes();
             $this->view->assign('coursetypes', $coursetypes);
+
+        } else {
+
+            $this->view->assign('showsearch', false);
+
+            if ($this->settings['makelink'] && !StudipExternalPage::urlParameters()) {
+                $this->view->assign('makelink', true);
+                // Create a link that will fetch the configured Stud.IP external page.
+                $this->view->assign('link', $this->makeLink());
+                $this->view->assign('linktext', $this->settings['linktext']);
+                $this->view->assign('linkformat', $this->settings['linkformat']);
+            } else {
+                // Fetch Stud.IP external page.
+                $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
+                    intval($this->configurationManager->getContentObject()->data['uid']),
+                    $this->settings, $this->controllerContext->getUriBuilder());
+            }
+
+            // UTF8-encode the content if necessary.
+            if ($this->utf) {
+                $content = utf8_encode($content);
+            }
+
+            // Assign Stud.IP output to view.
+            $this->view->assign('studipcontent', $content);
 
         }
     }
@@ -195,6 +203,46 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     private function getCourseTypes()
     {
         return json_decode(StudipConnector::getCourseTypes(), true);
+    }
+
+    private function makeLink()
+    {
+        // Build base path to current page.
+        $link = $this->controllerContext->getUriBuilder()
+            ->reset()
+            ->setTargetPageUid($GLOBALS['TSFE']->id)
+            ->setCreateAbsoluteUri(true)
+            ->buildFrontendUri();
+        if (strpos($link, '?') !== false) {
+            $link .= '&';
+        } else {
+            $link .= '?';
+        }
+        // Add current content element as target parameter.
+        $link .= 'target='.intval($this->configurationManager->getContentObject()->data['uid']);
+
+        // Add necessary parameters for Stud.IP call.
+        // The basic parameters...
+        $link .= '&module=' . $this->settings['module'];
+        $link .= '&config_id=' . $this->settings['externconfig'];
+        $link .= '&range_id=' . $this->settings['institute'];
+
+        // ... everything else depends on set page type.
+        switch ($this->settings['pagetype']) {
+
+            // Show a single course.
+            case 'coursedetails':
+                $link .= '&seminar_id=' . $this->settings['coursesearch'];
+                break;
+            // Show a single person.
+            case 'persondetails':
+                $link .= '&username=' . $this->settings['personsearch'];
+                break;
+
+        }
+
+        return $link;
+
     }
 
 }

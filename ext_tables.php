@@ -24,3 +24,4 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
 if (TYPO3_MODE == 'BE') {
     $GLOBALS['TBE_MODULES_EXT']['xMOD_db_new_content_el']['addElClasses']['UniPassau\\Importstudip\\Wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Classes/Wizicon.php';
 }
+

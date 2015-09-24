@@ -269,7 +269,7 @@ class StudipExternalPage
      *
      * @return Array The parameters set by GET values.
      */
-    private static function urlParameters()
+    public static function urlParameters()
     {
 
         $set = array();

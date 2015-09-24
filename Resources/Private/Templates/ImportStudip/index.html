@@ -3,6 +3,25 @@
         <f:render partial="SearchForm" arguments="{_all}"/>
     </f:then>
     <f:else>
-        <f:format.raw value="{studipcontent}"/>
+        <f:if condition="{makelink}">
+            <f:then>
+                <a href="{link}">
+                    <f:if condition="{0: '{linkformat}'} != {0: ''}">
+                        <f:then>
+                            <{linkformat}>
+                        </f:then>
+                    </f:if>
+                    {linktext}
+                    <f:if condition="{0: '{linkformat}'} != {0: ''}">
+                        <f:then>
+                            </{linkformat}>
+                        </f:then>
+                    </f:if>
+                </a>
+            </f:then>
+            <f:else>
+                <f:format.raw value="{studipcontent}"/>
+            </f:else>
+        </f:if>
     </f:else>
 </f:if>
