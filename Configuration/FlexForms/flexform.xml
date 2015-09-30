@@ -150,6 +150,14 @@
                             </config>
                         </TCEforms>
                     </settings.makelink>
+                    <!--<settings.makelink>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.makelink</label>
+                            <config>
+                                <type>check</type>
+                            </config>
+                        </TCEforms>
+                    </settings.makelink>-->
                     <settings.linktext>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linktext</label>
@@ -207,6 +215,19 @@
                             </config>
                         </TCEforms>
                     </settings.newsdetailtarget>
+                    <settings.linktarget>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linktarget</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tt_content</allowed>
+                                <size>2</size>
+                                <maxitems>1</maxitems>
+                                <minitems>0</minitems>
+                            </config>
+                        </TCEforms>
+                    </settings.linktarget>
                 </el>
             </ROOT>
         </dataSheet>

@@ -31,6 +31,9 @@ Tx_ImportStudip = {
         var newsdetailtarget = TYPO3.jQuery('select[name*="newsdetailtarget"]').
             closest('.t3-form-field-container');
         newsdetailtarget.hide();
+        var linktarget = TYPO3.jQuery('select[name*="linktarget"]').
+            closest('.t3-form-field-container');
+        linktarget.hide();
         var module = TYPO3.jQuery('#tx-importstudip-module').
             closest('.t3-form-field-container');
         module.hide();
@@ -203,7 +206,7 @@ Tx_ImportStudip = {
                     TYPO3.jQuery('#tx-importstudip-institutes').html(data.tx_importstudip);
                 }
             });
-            if (TYPO3.jQuery('#tx-importstudip-makelink').children('input[type="checkbox"]:checked').length > 0) {
+            if (TYPO3.jQuery('#tx-importstudip-makelink-checkbox').prop('checked')) {
                 Tx_ImportStudip.enableInput('tx-importstudip-linktext');
                 Tx_ImportStudip.enableInput('tx-importstudip-linkformat');
             } else {
@@ -223,6 +226,32 @@ Tx_ImportStudip = {
             Tx_ImportStudip.disableInput('tx-importstudip-subjects');
             Tx_ImportStudip.disableInput('tx-importstudip-linktext');
             Tx_ImportStudip.disableInput('tx-importstudip-linkformat');
+        }
+    },
+
+    adjustLinkOptions: function() {
+        if (TYPO3.jQuery('#tx-importstudip-makelink-checkbox').prop('checked')) {
+            TYPO3.jQuery('input[name*="settings.persondetailtarget"]').closest('div.t3-form-field-container').hide();
+            TYPO3.jQuery('input[name*="settings.coursedetailtarget"]').closest('div.t3-form-field-container').hide();
+            TYPO3.jQuery('input[name*="settings.newsdetailtarget"]').closest('div.t3-form-field-container').hide();
+            Tx_ImportStudip.enableInput('tx-importstudip-linktext');
+            Tx_ImportStudip.enableInput('tx-importstudip-linkformat');
+            TYPO3.jQuery('input[name*="settings.linktarget"]').closest('div.t3-form-field-container').show();
+            TYPO3.jQuery('#tx-importstudip-makelink-hidden').val(1);
+        } else {
+            if (TYPO3.jQuery('#courses:checked').length > 0 || TYPO3.jQuery('#coursedetails:checked').length > 0) {
+                TYPO3.jQuery('input[name*="settings.persondetailtarget"]').closest('div.t3-form-field-container').show();
+            }
+            if (TYPO3.jQuery('#courses:checked').length > 0 || TYPO3.jQuery('#persondetails:checked').length > 0) {
+                TYPO3.jQuery('input[name*="settings.coursedetailtarget"]').closest('div.t3-form-field-container').show();
+            }
+            if (TYPO3.jQuery('#news:checked').length > 0) {
+                TYPO3.jQuery('input[name*="settings.newsdetailtarget"]').closest('div.t3-form-field-container').show();
+            }
+            Tx_ImportStudip.disableInput('tx-importstudip-linktext');
+            Tx_ImportStudip.disableInput('tx-importstudip-linkformat');
+            TYPO3.jQuery('input[name*="settings.linktarget"]').closest('div.t3-form-field-container').hide();
+            TYPO3.jQuery('#tx-importstudip-makelink-hidden').val(0);
         }
     },
 
@@ -642,5 +671,7 @@ TYPO3.jQuery(function () {
     container.append(TYPO3.jQuery('select[name*=persondetailtarget').closest('.t3-form-field-container'));
     container.append(TYPO3.jQuery('select[name*=coursedetailtarget').closest('.t3-form-field-container'));
     container.append(TYPO3.jQuery('select[name*=newsdetailtarget').closest('.t3-form-field-container'));
+    container.append(TYPO3.jQuery('select[name*=linktarget').closest('.t3-form-field-container'));
     Tx_ImportStudip.adjustToPageType();
+    Tx_ImportStudip.adjustLinkOptions();
 });

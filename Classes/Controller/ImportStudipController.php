@@ -84,6 +84,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             $this->view->assign('studipcontent', $content);
 
         }
+
     }
 
     public function searchcourseAction()
@@ -185,6 +186,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     private function getSemesters()
     {
         $semesters = array();
+        $current = '';
         // Get all semesters and build a value => name array.
         foreach (json_decode(StudipConnector::getAllSemesters(), true) as $semester) {
             $semesters[$semester['semester_id']] = $semester['description'];
@@ -207,10 +209,17 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
     private function makeLink()
     {
+        if ($this->settings['linktarget']) {
+            $targetPage = StudipExternalPage::getTargetPage($this->settings['linktarget']);
+            $targetElement = $this->settings['linktarget'];
+        } else {
+            $targetPage = $GLOBALS['TSFE']->id;
+            $targetElement = intval($this->configurationManager->getContentObject()->data['uid']);
+        }
         // Build base path to current page.
         $link = $this->controllerContext->getUriBuilder()
             ->reset()
-            ->setTargetPageUid($GLOBALS['TSFE']->id)
+            ->setTargetPageUid($targetPage)
             ->setCreateAbsoluteUri(true)
             ->buildFrontendUri();
         if (strpos($link, '?') !== false) {
@@ -219,7 +228,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             $link .= '?';
         }
         // Add current content element as target parameter.
-        $link .= 'target='.intval($this->configurationManager->getContentObject()->data['uid']);
+        $link .= 'target='.$targetElement;
 
         // Add necessary parameters for Stud.IP call.
         // The basic parameters...

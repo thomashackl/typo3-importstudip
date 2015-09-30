@@ -66,7 +66,7 @@ class StudipExternalPage
             /* Retrieve the external page content from Stud.IP. Just a HTTP(S) call. */
 
             // Use CURL if available as it is faster than file_get_contents.
-            if (in_array('curly', get_loaded_extensions())) {
+            if (in_array('curl', get_loaded_extensions())) {
 
                 $curl = curl_init();
                 curl_setopt($curl, CURLOPT_URL, $url);
@@ -76,6 +76,7 @@ class StudipExternalPage
 
                 // No result because of code 404 "Not found".
                 if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 404) {
+                    $error = true;
                     throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
                         trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                             'frontend.text.error_studip_404',
@@ -198,7 +199,7 @@ class StudipExternalPage
             $params['module'] = $urlparams['module'];
 
             // Initial for person browser.
-            if ($urlparams['initial']) {
+            if ($initial = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('initial')) {
                 $params['initial'] = $urlparams['initial'];
             }
 
@@ -305,37 +306,49 @@ class StudipExternalPage
     {
         $oldpath = $extconfig['studip_externphp_path'].'?';
 
+        $find = array();
+        $replace = array();
+
         // Rewrite links to person details.
         if (in_array($params['pagetype'], array('', 'courses', 'coursedetails', 'persons'))) {
+            $find[] = $oldpath.'module=Persondetails';
+            $find[] = $oldpath.'module=TemplatePersondetails';
             $target = $params['persondetailtarget'] ?
                 self::getTargetPage($params['persondetailtarget']) :
                 $pageid;
             $element = $params['persondetailtarget'] ?: $elementid;
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $html = str_replace($oldpath, $newpath, $html);
+            $replace[] = $newpath.'module=Persondetails';
+            $replace[] = $newpath.'module=TemplatePersondetails';
         }
 
         // Rewrite links to course details.
         if (in_array($params['pagetype'], array('', 'courses', 'persondetails'))) {
+            $find[] = $oldpath.'module=Lecturedetails';
+            $find[] = $oldpath.'module=TemplateLecturedetails';
             $target = $params['coursedetailtarget'] ?
                 self::getTargetPage($params['coursedetailtarget']) :
                 $pageid;
             $element = $params['coursedetailtarget'] ?: $elementid;
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $html = str_replace($oldpath, $newpath, $html);
+            $replace[] = $newpath.'module=Lecturedetails';
+            $replace[] = $newpath.'module=TemplateLecturedetails';
         }
 
         // Rewrite links to news details.
         if (in_array($params['pagetype'], array('', 'news'))) {
+            $find[] = $oldpath.'module=News';
+            $find[] = $oldpath.'module=TemplateNews';
             $target = $params['newsdetailtarget'] ?
                 self::getTargetPage($params['newsdetailtarget']) :
                 $pageid;
             $element = $params['newsdetailtarget'] ?: $elementid;
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $html = str_replace($oldpath, $newpath, $html);
+            $replace[] = $newpath.'module=News';
+            $replace[] = $newpath.'module=TemplateNews';
         }
 
-        // Rewrite browsing links.
+        $html = str_replace($find, $replace, $html);
 
         return $html;
     }
@@ -370,7 +383,7 @@ class StudipExternalPage
      * @param int $uid content element to get page for
      * @return int ID of the TYPO3 page containing the given content element.
      */
-    private static function getTargetPage($uid)
+    public static function getTargetPage($uid)
     {
         $dbData = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid='.$uid);
         return $dbData['pid'];

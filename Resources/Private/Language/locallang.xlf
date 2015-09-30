@@ -123,6 +123,11 @@
                     Link text format:
                 </source>
             </trans-unit>
+            <trans-unit id="backend.label.linktarget">
+                <source>
+                    Link to another page?
+                </source>
+            </trans-unit>
             <trans-unit id="backend.label.linktext">
                 <source>
                     Link text:

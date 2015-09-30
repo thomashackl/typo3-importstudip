@@ -126,6 +126,11 @@
                     Format des Linktextes:
                 </target>
             </trans-unit>
+            <trans-unit id="backend.label.linktarget">
+                <target>
+                    Soll der Link auf eine andere Seite führen?
+                </target>
+            </trans-unit>
             <trans-unit id="backend.label.linktext">
                 <target>
                     Text zum Link:

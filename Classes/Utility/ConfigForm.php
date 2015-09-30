@@ -490,15 +490,17 @@ class ConfigForm {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-makelink" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
-            $parameters['itemFormElValue'].'">';
+            $parameters['itemFormElValue'].'"">';
         $html .= self::getMakeLinkForm($parameters['itemFormElName'], $parameters['itemFormElValue']);
         $html .= '</div>';
         return $html;
     }
 
     public function getMakeLinkForm($inputname, $value) {
-        $html = '<input type="checkbox" name="'.$inputname.'"'.
-            ($value ? ' checked="checked"' : '').'/>';
+        $html = '<input id="tx-importstudip-makelink-checkbox" type="checkbox" name="'.$inputname.'_0"'.
+            ($value ? ' checked="checked"' : '').' onclick="Tx_ImportStudip.adjustLinkOptions()"/>';
+        $html .= '<input id="tx-importstudip-makelink-hidden" type="hidden" name="'.$inputname.'" value="'.
+            ($value ? 1 : 0).'"/>';
         return $html;
     }
 
