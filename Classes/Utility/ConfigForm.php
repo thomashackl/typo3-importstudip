@@ -343,6 +343,27 @@ class ConfigForm {
         return $html;
     }
 
+    public function getParticipating($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-participating" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        if ($config['settings.pagetype'] == 'courses') {
+            $html .= self::getParticipatingForm($parameters['itemFormElName'], $parameters['itemFormElValue']);
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function getParticipatingForm($inputname, $value) {
+        $html = '<input id="tx-importstudip-participating-checkbox" type="checkbox" name="'.$inputname.'_0"'.
+            ($value ? ' checked="checked"' : '').
+            ' onclick="TYPO3.jQuery(\'#tx-importstudip-participating-hidden\').val(TYPO3.jQuery(this).prop(\'checked\') ? 1 : 0)"/>';
+        $html .= '<input id="tx-importstudip-participating-hidden" type="hidden" name="'.$inputname.'" value="'.
+            ($value ? 1 : 0).'"/>';
+        return $html;
+    }
+
     public function getCourseTypes($parameters, $config) {
         $html = '<div id="tx-importstudip-coursetypes" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -454,6 +475,27 @@ class ConfigForm {
                 $entry.'</option>';
         }
         $html .= '</select>';
+        return $html;
+    }
+
+    public function getSmallNews($parameters, $config) {
+        $config = self::getConfig($parameters);
+        $html = '<div id="tx-importstudip-smallnews" data-input-name="'.
+            $parameters['itemFormElName'].'" data-input-value="'.
+            $parameters['itemFormElValue'].'">';
+        if ($config['settings.pagetype'] == 'news') {
+            $html .= self::getSmallNewsForm($parameters['itemFormElName'], $parameters['itemFormElValue']);
+        }
+        $html .= '</div>';
+        return $html;
+    }
+
+    public function getSmallNewsForm($inputname, $value) {
+        $html = '<input id="tx-importstudip-smallnews-checkbox" type="checkbox" name="'.$inputname.'_0"'.
+            ($value ? ' checked="checked"' : '').
+            ' onclick="TYPO3.jQuery(\'#tx-importstudip-smallnews\').val(TYPO3.jQuery(this).prop(\'checked\') ? 1 : 0)"/>';
+        $html .= '<input id="tx-importstudip-smallnews-hidden" type="hidden" name="'.$inputname.'" value="'.
+            ($value ? 1 : 0).'"/>';
         return $html;
     }
 

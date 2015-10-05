@@ -139,6 +139,12 @@ class AjaxHandler {
         return ConfigForm::getAggregationForm($inputname, $value);
     }
 
+    public function participatingform() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
+        return ConfigForm::getParticipatingForm($inputname, $value);
+    }
+
     public function coursetypeform() {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
@@ -162,6 +168,12 @@ class AjaxHandler {
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
         return ConfigForm::getStatusgroupForm(json_decode(StudipConnector::getStatusgroupNames($institute)),
             $inputname, $value);
+    }
+
+    public function smallnewsform() {
+        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
+        return ConfigForm::getSmallNewsForm($inputname, $value);
     }
 
 }

@@ -49,12 +49,20 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
+                    Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     TYPO3.jQuery('.tx-importstudip-filters-container').show();
                     Tx_ImportStudip.enableInput('tx-importstudip-aggregate',
                         {
                             action: 'aggregationform',
                             inputname: TYPO3.jQuery('#tx-importstudip-aggregate').data('input-name'),
                             value: TYPO3.jQuery('#tx-importstudip-aggregate').data('input-value')
+                        }
+                    );
+                    Tx_ImportStudip.enableInput('tx-importstudip-participating',
+                        {
+                            action: 'participatingform',
+                            inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
+                            value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value')
                         }
                     );
                     Tx_ImportStudip.enableInput('tx-importstudip-coursetypes',
@@ -83,9 +91,11 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
+                    Tx_ImportStudip.disableInput('tx-importstudip-participating');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
+                    Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     TYPO3.jQuery('.tx-importstudip-filters-container').hide();
                     Tx_ImportStudip.enableInput('tx-importstudip-coursesearch');
                     if (TYPO3.jQuery('#tx-importstudip-choose-course option').length > 0) {
@@ -117,9 +127,11 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
+                    Tx_ImportStudip.disableInput('tx-importstudip-participating');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
+                    Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     TYPO3.jQuery('.tx-importstudip-filters-container').show();
                     Tx_ImportStudip.enableInput('tx-importstudip-statusgroups',
                         {
@@ -140,9 +152,11 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
+                    Tx_ImportStudip.disableInput('tx-importstudip-participating');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
+                    Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     TYPO3.jQuery('.tx-importstudip-filters-container').hide();
                     Tx_ImportStudip.enableInput('tx-importstudip-personsearch');
                     if (TYPO3.jQuery('#tx-importstudip-choose-user option').length > 0) {
@@ -170,13 +184,20 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
-                    TYPO3.jQuery('.tx-importstudip-filters-container').hide();
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
+                    Tx_ImportStudip.disableInput('tx-importstudip-participating');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     Tx_ImportStudip.getInstitutes('tx-importstudip-institutes');
+                    Tx_ImportStudip.enableInput('tx-importstudip-smallnews',
+                        {
+                            action: 'smallnewsform',
+                            inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
+                            value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value')
+                        }
+                    );
                     newsdetailtarget.show();
                     break;
                 // Course search
@@ -191,8 +212,10 @@ Tx_ImportStudip = {
                     TYPO3.jQuery('.tx-importstudip-linkingoptions-container').hide();
                     Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
                     Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
+                    Tx_ImportStudip.disableInput('tx-importstudip-participating');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     Tx_ImportStudip.getInstitutes('tx-importstudip-preselectinst');
             }
             TYPO3.jQuery.ajax({
@@ -222,8 +245,10 @@ Tx_ImportStudip = {
             Tx_ImportStudip.disableInput('tx-importstudip-filters');
             Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
             Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
+            Tx_ImportStudip.disableInput('tx-importstudip-participating');
             Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
             Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+            Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
             Tx_ImportStudip.disableInput('tx-importstudip-linktext');
             Tx_ImportStudip.disableInput('tx-importstudip-linkformat');
         }
@@ -662,8 +687,9 @@ TYPO3.jQuery(function () {
     Tx_ImportStudip.openSelectedParents('tx-importstudip-institutes');
     // build group for additional filter options.
     Tx_ImportStudip.buildEntryGroup('tx-importstudip-filters',
-        ['tx-importstudip-aggregate', 'tx-importstudip-coursetypes',
-        'tx-importstudip-subjects', 'tx-importstudip-statusgroups', 'tx-importstudip-preselectinst']);
+        ['tx-importstudip-aggregate', 'tx-importstudip-participating', 'tx-importstudip-coursetypes',
+        'tx-importstudip-subjects', 'tx-importstudip-statusgroups', 'tx-importstudip-smallnews',
+        'tx-importstudip-preselectinst']);
     // Build group for linking options.
     Tx_ImportStudip.buildEntryGroup('tx-importstudip-linkingoptions',
         ['tx-importstudip-makelink', 'tx-importstudip-linktext', 'tx-importstudip-linkformat']);

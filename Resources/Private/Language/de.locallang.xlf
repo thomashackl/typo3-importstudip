@@ -161,6 +161,11 @@
                     Zielseite und -element f&#252;r Links zu Ank&#252;ndigungen:
                 </target>
             </trans-unit>
+            <trans-unit id="backend.label.participating">
+                <target>
+                    Zeige auch Veranstaltungen, bei denen die aktuell gew&#228;hlte Einrichtung nur teilnehmend ist?
+                </target>
+            </trans-unit>
             <trans-unit id="backend.label.persondetailtarget">
                 <target>
                     Zielseite und -element f&#252;r Links zu Personendetails:
@@ -194,6 +199,11 @@
             <trans-unit id="backend.label.select">
                 <target>
                     -- bitte ausw&#228;hlen --
+                </target>
+            </trans-unit>
+            <trans-unit id="backend.label.smallnews">
+                <target>
+                    Kurze Ank&#252;ndigungsansicht (nur Titel und Datum)?
                 </target>
             </trans-unit>
             <trans-unit id="backend.label.statusgroup">

@@ -223,7 +223,17 @@ class StudipExternalPage
                 $params['item_id'] = $item;
             }
 
-        // Nothing given per GET, use extension settings.
+            // Short news display.
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('shortnews')) {
+                $params['short'] = 1;
+            }
+
+            // Show courses not only at home, but also at participating institutes.
+            if (\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('allseminars')) {
+                $params['allseminars'] = 1;
+            }
+
+            // Nothing given per GET, use extension settings.
         } else {
 
             // The basic, necessary parameters...
@@ -234,6 +244,13 @@ class StudipExternalPage
             // ... everything else depends on set page type.
             switch ($settings['pagetype']) {
 
+                // Show a list of courses.
+                case 'courses':
+                    // Show courses not only at home, but also at participating institutes.
+                    if ($settings['participating']) {
+                        $params['allseminars'] = 1;
+                    }
+                    break;
                 // Show a single course.
                 case 'coursedetails':
                     $params['seminar_id'] = $settings['coursesearch'];
@@ -241,6 +258,12 @@ class StudipExternalPage
                 // Show a single person.
                 case 'persondetails':
                     $params['username'] = $settings['personsearch'];
+                    break;
+                // Show news
+                case 'news':
+                    if ($settings['smallnews']) {
+                        $params['short'] = 1;
+                    }
                     break;
 
             }

@@ -158,6 +158,11 @@
                     Target page and element for linked news:
                 </source>
             </trans-unit>
+            <trans-unit id="backend.label.participating">
+                <source>
+                    Show also courses where the currently selected institute is only participating?
+                </source>
+            </trans-unit>
             <trans-unit id="backend.label.persondetailtarget">
                 <source>
                     Target page and element for linked person details:
@@ -191,6 +196,11 @@
             <trans-unit id="backend.label.select">
                 <source>
                     -- please choose --
+                </source>
+            </trans-unit>
+            <trans-unit id="backend.label.smallnews">
+                <source>
+                    Small news display (show only header and date)?
                 </source>
             </trans-unit>
             <trans-unit id="backend.label.statusgroup">

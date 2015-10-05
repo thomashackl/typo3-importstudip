@@ -96,6 +96,15 @@
                             </config>
                         </TCEforms>
                     </settings.aggregate>
+                    <settings.aggregate>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.participating</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getParticipating</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.aggregate>
                     <settings.coursetype>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.coursetype</label>
@@ -150,14 +159,6 @@
                             </config>
                         </TCEforms>
                     </settings.makelink>
-                    <!--<settings.makelink>
-                        <TCEforms>
-                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.makelink</label>
-                            <config>
-                                <type>check</type>
-                            </config>
-                        </TCEforms>
-                    </settings.makelink>-->
                     <settings.linktext>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linktext</label>
@@ -215,6 +216,15 @@
                             </config>
                         </TCEforms>
                     </settings.newsdetailtarget>
+                    <settings.smallnews>
+                        <TCEforms>
+                            <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.smallnews</label>
+                            <config>
+                                <type>user</type>
+                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getSmallNews</userFunc>
+                            </config>
+                        </TCEforms>
+                    </settings.smallnews>
                     <settings.linktarget>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linktarget</label>
