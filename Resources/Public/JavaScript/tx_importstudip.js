@@ -61,8 +61,8 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.enableInput('tx-importstudip-participating',
                         {
                             action: 'participatingform',
-                            inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
-                            value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value')
+                            inputname: TYPO3.jQuery('#tx-importstudip-participating').data('input-name'),
+                            value: TYPO3.jQuery('#tx-importstudip-participating').data('input-value')
                         }
                     );
                     Tx_ImportStudip.enableInput('tx-importstudip-coursetypes',
@@ -194,8 +194,8 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.enableInput('tx-importstudip-smallnews',
                         {
                             action: 'smallnewsform',
-                            inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
-                            value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value')
+                            inputname: TYPO3.jQuery('#tx-importstudip-smallnews').data('input-name'),
+                            value: TYPO3.jQuery('#tx-importstudip-smallnews').data('input-value')
                         }
                     );
                     newsdetailtarget.show();

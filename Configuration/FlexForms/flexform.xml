@@ -96,7 +96,7 @@
                             </config>
                         </TCEforms>
                     </settings.aggregate>
-                    <settings.aggregate>
+                    <settings.participating>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.participating</label>
                             <config>
@@ -104,7 +104,7 @@
                                 <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getParticipating</userFunc>
                             </config>
                         </TCEforms>
-                    </settings.aggregate>
+                    </settings.participating>
                     <settings.coursetype>
                         <TCEforms>
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.coursetype</label>

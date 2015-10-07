@@ -109,7 +109,8 @@ class ConfigForm {
 
     public function getExternConfigurations($parameters, $config) {
         $result = '<div id="tx-importstudip-externconfig" data-input-name="'.
-            $parameters['itemFormElName'].'" data-loading-text="'.
+            $parameters['itemFormElName'].'" data-input-value="'.$parameters['itemFormElValue'].
+            '" data-loading-text="'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).
             '">';
         if ($parameters['itemFormElValue']) {
@@ -338,8 +339,11 @@ class ConfigForm {
     }
 
     public function getAggregationForm($inputname, $value) {
-        $html = '<input type="checkbox" name="'.$inputname.'"'.
-            ($value ? ' checked="checked"' : '').'/>';
+        $html = '<input id="tx-importstudip-aggregate-checkbox" type="checkbox" name="'.$inputname.'_0"'.
+            ($value ? ' checked="checked"' : '').
+            ' onclick="TYPO3.jQuery(\'#tx-importstudip-aggregate-hidden\').val(TYPO3.jQuery(this).prop(\'checked\') ? 1 : 0)"/>';
+        $html .= '<input id="tx-importstudip-aggregate-hidden" type="hidden" name="'.$inputname.'" value="'.
+            ($value ? 1 : 0).'"/>';
         return $html;
     }
 
