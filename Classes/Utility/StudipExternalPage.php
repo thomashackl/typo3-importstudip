@@ -193,14 +193,18 @@ class StudipExternalPage
         // Parameters provided by GET, use these.
         if ($urlparams) {
 
-            // These are absolutely necessary.
             $params['range_id'] = $urlparams['range_id'];
             $params['config_id'] = $urlparams['config_id'];
             $params['module'] = $urlparams['module'];
 
             // Initial for person browser.
             if ($initial = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('initial')) {
-                $params['initial'] = $urlparams['initial'];
+                $params['ext_templatepersbrowse[initiale]'] = $initial;
+            }
+
+            // Item_id for course browser.
+            if ($item = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('item_id')) {
+                $params['ext_templatepersbrowse[item_id]'] = $item;
             }
 
             // Single username.
@@ -211,6 +215,11 @@ class StudipExternalPage
             // Single course ID.
             if ($course = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('seminar_id')) {
                 $params['seminar_id'] = $course;
+            }
+
+            // Single news ID.
+            if ($news = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('news_id')) {
+                $params['news_id'] = $news;
             }
 
             // Aggregate over sub institutes?
@@ -233,28 +242,60 @@ class StudipExternalPage
                 $params['allseminars'] = 1;
             }
 
-            // Nothing given per GET, use extension settings.
+        // Nothing given per GET, use extension settings.
         } else {
 
             // The basic, necessary parameters...
             $params['module'] = $settings['module'];
             $params['config_id'] = $settings['externconfig'];
-            $params['range_id'] = $settings['institute'];
+            // These are absolutely necessary.
+            switch ($settings['pagetype']) {
+                case 'coursedetails':
+                    $params['range_id'] = $settings['choose_course_institute'];
+                    break;
+                case 'persondetails':
+                    $params['range_id'] = $settings['choose_user_institute'];
+                    break;
+                default:
+                    $params['range_id'] = $settings['institute'];
+            }
 
             // ... everything else depends on set page type.
             switch ($settings['pagetype']) {
 
                 // Show a list of courses.
                 case 'courses':
+                    // Show courses from subinstitutes, too.
+                    if ($settings['aggregate']) {
+                        $params['aggregation_level'] = 1;
+                    }
                     // Show courses not only at home, but also at participating institutes.
                     if ($settings['participating']) {
                         $params['allseminars'] = 1;
+                    }
+                    // Show only a selected course type.
+                    if ($settings['coursetype']) {
+                        $params['semstatuses'] = $settings['coursetype'];
+                    }
+                    // Show only courses assigned to selected SemTree node (and its children).
+                    if ($settings['subject']) {
+                        $params['sem_tree_id'] = $settings['subject'];
                     }
                     break;
                 // Show a single course.
                 case 'coursedetails':
                     $params['seminar_id'] = $settings['coursesearch'];
                     break;
+                // Show a list of persons.
+                case 'persons':
+                    // Show persons from subinstitutes, too.
+                    if ($settings['aggregate']) {
+                        $params['aggregation_level'] = 1;
+                    }
+                    // Show only persons in selected statusgroup.
+                    if ($settings['statusgroup']) {
+                        $params['visible_groups'] = $settings['statusgroup'];
+                    }
                 // Show a single person.
                 case 'persondetails':
                     $params['username'] = $settings['personsearch'];
@@ -333,7 +374,7 @@ class StudipExternalPage
         $replace = array();
 
         // Rewrite links to person details.
-        if (in_array($params['pagetype'], array('', 'courses', 'coursedetails', 'persons'))) {
+        if (in_array($params['pagetype'], array('', 'courses', 'coursedetails', 'persons', 'news'))) {
             $find[] = $oldpath.'module=Persondetails';
             $find[] = $oldpath.'module=TemplatePersondetails';
             $target = $params['persondetailtarget'] ?
@@ -369,6 +410,30 @@ class StudipExternalPage
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
             $replace[] = $newpath.'module=News';
             $replace[] = $newpath.'module=TemplateNews';
+        }
+
+        // Rewrite browsing links.
+        if (in_array($params['pagetype'], array('', 'persons'))) {
+            $find[] = $oldpath.'module=TemplatePersBrowse';
+            $target = $params['browsingtarget'] ?
+                self::getTargetPage($params['browsingtarget']) :
+                $pageid;
+            $element = $params['browsingtarget'] ?: $elementid;
+            $newpath = self::buildTargetLink($target, $element, $uribuilder);
+            $replace[] = $newpath.'module=TemplatePersBrowse';
+            $find[] = 'ext_templatepersbrowse[initiale]=';
+            $replace[] = 'initial=';
+        }
+        if (in_array($params['pagetype'], array('', 'courses'))) {
+            $find[] = $oldpath.'module=TemplateSemBrowse';
+            $target = $params['browsingtarget'] ?
+                self::getTargetPage($params['browsingtarget']) :
+                $pageid;
+            $element = $params['browsingtarget'] ?: $elementid;
+            $newpath = self::buildTargetLink($target, $element, $uribuilder);
+            $replace[] = $newpath.'module=TemplateSemBrowse';
+            $find[] = 'ext_templatepersbrowse[item_id]=';
+            $replace[] = 'item_id=';
         }
 
         $html = str_replace($find, $replace, $html);
