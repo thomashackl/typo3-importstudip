@@ -4,7 +4,7 @@
                 xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
                 xmlns="http://www.w3.org/TR/REC-html40">
 
-    <xsl:output method="xml" version="1.0" encoding="utf-8" standalone="yes"/>
+    <xsl:output method="xml" version="1.0" encoding="utf-8" standalone="yes" indent="yes"/>
 
     <!-- Root template, generates FlexForm structure. -->
     <xsl:template match="/">
@@ -19,7 +19,7 @@
     <xsl:template match="sheet">
         <xsl:if test="@index = 'sDEF'">
             <sheet index="dataSheet">
-                <xsl:apply-templates/>
+                <xsl:apply-templates select="language"/>
             </sheet>
         </xsl:if>
     </xsl:template>
@@ -38,7 +38,12 @@
         <xsl:choose>
 
             <!-- Generate a course search form -->
-            <xsl:when test="current() = 'lecturessearch'">
+            <xsl:when test="normalize-space(string(current())) = 'lecturessearch'">
+
+                <!-- Set search as target page type. -->
+                <field index="settings.pagetype">
+                    <value index="vDEF">searchpage</value>
+                </field>
 
                 <!-- Check if a pre-selected institute is set -->
                 <xsl:variable name="preselect" select="../field[@index = 'preselectedInstitute']"/>
@@ -49,10 +54,12 @@
                     </field>
                 </xsl:if>
 
+                <xsl:apply-templates select="../field[@index = 'configs']"/>
+
             </xsl:when>
 
             <!-- Generate a link instead of directly showing content? -->
-            <xsl:when test="current() = 'link'">
+            <xsl:when test="normalize-space(string(current())) = 'link'">
                 <field index="settings.makelink">
                     <value index="vDEF">1</value>
                 </field>
@@ -66,6 +73,15 @@
                     </field>
                 </xsl:if>
 
+                <!-- Check if target text for link is set -->
+                <xsl:variable name="linktext" select="../field[@index = 'linkText']"/>
+                <!-- Set link text -->
+                <xsl:if test="normalize-space(string($linktext/value/text())) != ''">
+                    <field index="settings.linktext">
+                        <value index="vDEF"><xsl:value-of select="normalize-space(string($linktext/value/text()))"/></value>
+                    </field>
+                </xsl:if>
+
                 <!-- Check if link should point to another page -->
                 <xsl:variable name="linktarget" select="../field[@index = 'linkTarget']"/>
                 <!-- Value "linkTarget" set, so use it -->
@@ -75,15 +91,16 @@
                     </field>
                 </xsl:if>
 
-                <xsl:apply-templates select="field[@index = 'configs']"/>
+                <xsl:apply-templates select="../field[@index = 'configs']"/>
 
             </xsl:when>
 
             <xsl:otherwise>
-                <xsl:apply-templates select="field[@index = 'configs']"/>
+                <xsl:apply-templates select="../field[@index = 'configs']"/>
             </xsl:otherwise>
 
         </xsl:choose>
+
     </xsl:template>
 
     <!--
@@ -92,9 +109,9 @@
     -->
     <xsl:template match="field[@index = 'configs']">
         <!-- Extract selected module name -->
-        <xsl:variable name="module" select="normalize-space(substring-before(current(), ';'))"/>
+        <xsl:variable name="module" select="substring-before(normalize-space(string(current())), ';')"/>
         <!-- Extract selected config_id -->
-        <xsl:variable name="externconfig" select="normalize-space(substring-after(current(), ';'))"/>
+        <xsl:variable name="externconfig" select="substring-after(normalize-space(string(current())), ';')"/>
 
         <!--
             Switch between different module names and generate
@@ -103,32 +120,22 @@
         <xsl:variable name="pagetype">
             <xsl:choose>
                 <!-- Course lists in different flavors -->
-                <xsl:when test="$module='Lectures'">courses</xsl:when>
-                <xsl:when test="$module='LecturesTable'">courses</xsl:when>
-                <xsl:when test="$module='TemplateLectures'">courses</xsl:when>
-                <xsl:when test="$module='TemplateSemBrowse'">courses</xsl:when>
+                <xsl:when test="$module='Lectures' or $module='LecturesTable' or $module='TemplateLectures' or $module='TemplateSemBrowse'">courses</xsl:when>
 
                 <!-- Person lists in different flavors -->
-                <xsl:when test="$module='Lecturedetails'">coursedetails</xsl:when>
-                <xsl:when test="$module='TemplateLecturedetails'">coursedetails</xsl:when>
+                <xsl:when test="$module='Lecturedetails' or $module='TemplateLecturedetails'">coursedetails</xsl:when>
 
                 <!-- Person lists in different flavors -->
-                <xsl:when test="$module='Persons'">persons</xsl:when>
-                <xsl:when test="$module='TemplatePersons'">persons</xsl:when>
-                <xsl:when test="$module='TemplatePersBrowse'">persons</xsl:when>
+                <xsl:when test="$module='Persons' or $module='TemplatePersons' or $module='TemplatePersBrowse'">persons</xsl:when>
 
                 <!-- Persondetails -->
-                <xsl:when test="$module='Persondetails'">persondetails</xsl:when>
-                <xsl:when test="$module='TemplatePersondetails'">persondetails</xsl:when>
+                <xsl:when test="$module='Persondetails' or $module='TemplatePersondetails'">persondetails</xsl:when>
 
                 <!-- News -->
-                <xsl:when test="$module='News'">news</xsl:when>
-                <xsl:when test="$module='Newsticker'">news</xsl:when>
-                <xsl:when test="$module='TemplateNews'">news</xsl:when>
+                <xsl:when test="$module='News' or $module='Newsticker' or $module='TemplateNews'">news</xsl:when>
 
                 <!-- Download -->
-                <xsl:when test="$module='Download'">download</xsl:when>
-                <xsl:when test="$module='TemplateDownload'">download</xsl:when>
+                <xsl:when test="$module='Download' or $module='TemplateDownload'">download</xsl:when>
 
                 <!-- No known module name, do nothing -->
                 <xsl:otherwise></xsl:otherwise>
@@ -149,17 +156,21 @@
         </xsl:if>
 
         <!-- Now parse other fields. -->
-        <xsl:apply-templates select="../field[@index!='configs']">
-            <xsl:with-param name="pagetype" select="$pagetype"/>
+        <xsl:apply-templates select="../field[@index != 'contentType' and @index != 'configs']">
+            <xsl:with-param name="ptype" select="$pagetype"/>
+            <xsl:with-param name="modulename" select="$module"/>
         </xsl:apply-templates>
     </xsl:template>
 
     <!-- Process all "field" elements and create corresponding structure. -->
-    <xsl:template match="field[@index != 'configs']">
+    <xsl:template match="field[@index != 'contentType' and @index != 'configs']">
+
+        <xsl:param name="ptype"/>
+        <xsl:param name="modulename"/>
 
         <xsl:choose>
             <!-- Course lists -->
-            <xsl:when test="$pagetype = 'courses'">
+            <xsl:when test="$ptype = 'courses'">
                 <xsl:choose>
 
                     <!-- Selected institute -->
@@ -187,22 +198,23 @@
                         subsequent subjectArea is selected.
                     -->
                     <xsl:when test="current()/@index = 'mainSubjectAreas'">
-                        <xsl:if test="normalize-space(string(current())) != ''">
-                            <field index="settings.subject">
-                            <xsl:choose>
-                                <!-- Get value from "subjectAreas" field -->
-                                <xsl:variable name="subjectareas" select="../field[@index = 'subjectAreas']"/>
-                                <!-- Value "subjectAreas" set, so use it -->
-                                <xsl:if test="normalize-space(string($subjectareas/value/text())) != ''">
-                                    <value index="vDEF"><xsl:value-of select="normalize-space(string($subjectareas/value/text()))"/></value>
+                        <xsl:choose>
+                            <xsl:when test="../field[@index = 'subjectAreas']">
+                                <xsl:if test="normalize-space(../field[@index = 'subjectAreas']/value/text()) != ''">
+                                    <!-- Value "subjectAreas" set, so use it -->
+                                    <field index="settings.subject">
+                                        <value index="vDEF"><xsl:value-of select="normalize-space(../field[@index = 'subjectAreas']/value/text())"/></value>
+                                    </field>
                                 </xsl:if>
-                                <!-- No value "subjectAreas" set, use "mainSubjectAreas" -->
-                                <xsl:otherwise>
-                                    <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
-                                </xsl:otherwise>
-                            </xsl:choose>
-                            </field>
-                        </xsl:if>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <xsl:if test="normalize-space(current()) != ''">
+                                    <field index="settings.subject">
+                                        <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
+                                    </field>
+                                </xsl:if>
+                            </xsl:otherwise>
+                        </xsl:choose>
                     </xsl:when>
 
                     <!-- Show courses only at home or at participating institutes, too? -->
@@ -227,9 +239,31 @@
                         </xsl:if>
                     </xsl:when>
 
+                    <!-- Should links to course details point to another page? -->
+                    <xsl:when test="current()/@index = 'lectureDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.coursedetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
+                    <!-- Should links to person details point to another page? -->
+                    <xsl:when test="current()/@index = 'personDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.persondetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="$pagetype = 'coursedetails'">
+            <xsl:when test="$ptype = 'coursedetails'">
                 <xsl:choose>
 
                     <!-- Selected course -->
@@ -246,9 +280,20 @@
                         </field>
                     </xsl:when>
 
+                    <!-- Should links to person details point to another page? -->
+                    <xsl:when test="current()/@index = 'personDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.persondetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="$pagetype = 'persons'">
+            <xsl:when test="$ptype = 'persons'">
                 <xsl:choose>
 
                     <!-- Selected institute -->
@@ -267,40 +312,113 @@
                         </xsl:if>
                     </xsl:when>
 
+                    <!-- Should links to person details point to another page? -->
+                    <xsl:when test="current()/@index = 'personDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.persondetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
                 </xsl:choose>
             </xsl:when>
-            <xsl:when test="$pagetype = 'persondetails'">
+            <xsl:when test="$ptype = 'persondetails'">
 
-                <!-- Selected course -->
-                <xsl:when test="current()/@index = 'contacts'">
-                    <field index="settings.personsearch">
-                        <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
-                    </field>
-                </xsl:when>
+                <xsl:choose>
+                    <!-- Selected person -->
+                    <xsl:when test="current()/@index = 'persons' and $modulename = 'Persondetails'">
+                        <field index="settings.personsearch">
+                            <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
+                        </field>
+                    </xsl:when>
 
-                <!-- Selected institute -->
-                <xsl:when test="current()/@index = 'institutes'">
-                    <field index="settings.choose_user_institute">
-                        <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
-                    </field>
-                </xsl:when>
+                    <!-- Selected person part 2 -->
+                    <xsl:when test="current()/@index = 'contacts' and $modulename = 'TemplatePersondetails'">
+                        <field index="settings.personsearch">
+                            <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
+                        </field>
+                    </xsl:when>
+
+                    <!-- Selected institute -->
+                    <xsl:when test="current()/@index = 'institutes'">
+                        <field index="settings.choose_user_institute">
+                            <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
+                        </field>
+                    </xsl:when>
+
+                    <!-- Should links to course details point to another page? -->
+                    <xsl:when test="current()/@index = 'lectureDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.coursedetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
+                </xsl:choose>
 
             </xsl:when>
-            <xsl:when test="$pagetype = 'news'">
+            <xsl:when test="$ptype = 'news'">
 
-                <!-- Small news display -->
-                <xsl:if test="current()/@index = 'newsOneCol'">
-                    <xsl:if test="normalize-space(string(current())) != ''">
-                        <xsl:if test="normalize-space(string(current())) != '0'">
+                <xsl:choose>
+                    <!-- Selected institute -->
+                    <xsl:when test="current()/@index = 'institutes'">
+                        <field index="settings.institute">
+                            <value index="vDEF"><xsl:value-of select="normalize-space(current())"/></value>
+                        </field>
+                    </xsl:when>
+
+                    <!-- Small news display -->
+                    <xsl:when test="current()/@index = 'newsOneCol'">
+                        <xsl:if test="normalize-space(string(current())) != '' and normalize-space(string(current())) != '0'">
                             <field index="settings.smallnews">
                                 <value index="vDEF">1</value>
                             </field>
                         </xsl:if>
-                    </xsl:if>
-                </xsl:if>
+                    </xsl:when>
+
+                    <!-- Should links to news details point to another page? -->
+                    <xsl:when test="current()/@index = 'newsDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.newsdetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
+                    <!-- Should links to person details point to another page? -->
+                    <xsl:when test="current()/@index = 'personDetailTarget'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.persondetailtarget">
+                                    <value index="vDEF"><xsl:value-of select="normalize-space(string(current()))"/></value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
+                    <!-- Aggregation (collect data from sub institutes)? -->
+                    <xsl:when test="current()/@index = 'aggregate'">
+                        <xsl:if test="normalize-space(string(current())) != ''">
+                            <xsl:if test="normalize-space(string(current())) != '0'">
+                                <field index="settings.aggregate">
+                                    <value index="vDEF">1</value>
+                                </field>
+                            </xsl:if>
+                        </xsl:if>
+                    </xsl:when>
+
+                </xsl:choose>
 
             </xsl:when>
-            <xsl:when test="$pagetype = 'download'">
+            <xsl:when test="$ptype = 'download'">
 
             </xsl:when>
         </xsl:choose>
