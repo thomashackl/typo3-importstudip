@@ -30,7 +30,7 @@ class StudipConnector {
      */
     public static function getExternConfigTypes()
     {
-        $data = json_decode(self::getData('typo3/externalpagetypes'));
+        $data = json_decode(self::getData('extern/externalpagetypes'));
 
         /*
          * Check for available config types and enable corresponding
@@ -136,9 +136,9 @@ class StudipConnector {
         $result = array();
         $mapping = self::getTypeMapping();
         if ($treetype == 'rangetree') {
-            $route = 'typo3/rangetree'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
+            $route = 'extern/rangetree'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
         } else {
-            $route = 'typo3/institutes'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
+            $route = 'extern/institutes'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
         }
         return self::getData($route);
     }
@@ -147,7 +147,7 @@ class StudipConnector {
     {
         $result = array();
         $mapping = self::getTypeMapping();
-        $route = 'typo3/externconfigs/'.$institute;
+        $route = 'extern/externconfigs/'.$institute;
         if ($mapping[$type]) {
             $route .= '/'.implode(',',$mapping[$type]);
         }
@@ -156,11 +156,11 @@ class StudipConnector {
 
     public static function getExternConfigData($configid)
     {
-        return self::getData('typo3/externconfig/'.$configid);
+        return self::getData('extern/externconfig/'.$configid);
     }
 
     public static function getUser($user_id) {
-        $data = json_decode(self::getData('typo3/user/'.$user_id), true);
+        $data = json_decode(self::getData('extern/user/'.$user_id), true);
         if ($data) {
             $result = array(
                 array(
@@ -178,20 +178,20 @@ class StudipConnector {
 
     public static function searchUser($searchterm)
     {
-        $result = self::getData('typo3/usersearch/'.rawurlencode($searchterm));
+        $result = self::getData('extern/usersearch/'.rawurlencode($searchterm));
         return $result;
     }
 
     public static function getUserInstitutes($user_id)
     {
-        $result = self::getData('typo3/user_institutes/'.$user_id);
+        $result = self::getData('extern/user_institutes/'.$user_id);
         return $result;
     }
 
     public static function searchCourse($searchterm, $semester_id='')
     {
         $result = array();
-        $call = 'typo3/coursesearch/'.rawurlencode($searchterm);
+        $call = 'extern/coursesearch/'.rawurlencode($searchterm);
         if ($semester_id) {
             $call .= '/'.$semester_id;
         }
@@ -202,7 +202,7 @@ class StudipConnector {
     public static function frontendSearchCourse($searchterm, $semester_id='', $institute_id='', $coursetype='')
     {
         $result = array();
-        $call = 'typo3/extendedcoursesearch/'.rawurlencode($searchterm);
+        $call = 'extern/extendedcoursesearch/'.rawurlencode($searchterm);
         if ($semester_id || $institute_id || $coursetype) {
             $call .= '/'.($semester_id ?: 0).'/'.($institute_id ?: 0).'/'.($coursetype ?: 0);
         }
@@ -213,36 +213,36 @@ class StudipConnector {
     public static function getCourse($course_id)
     {
         $result = array();
-        $result = self::getData('typo3/course/'.$course_id);
+        $result = self::getData('extern/course/'.$course_id);
         return $result;
     }
 
     public static function getInstitute($institute_id)
     {
         $result = array();
-        $result = self::getData('typo3/institute/'.$institute_id);
+        $result = self::getData('extern/institute/'.$institute_id);
         return $result;
     }
 
     public static function getAllSemesters() {
         $result = array();
-        $result = self::getData('typo3/allsemesters');
+        $result = self::getData('extern/allsemesters');
         return $result;
     }
 
     public static function getCourseTypes($institute='')
     {
-        return self::getData('typo3/coursetypes'.($institute ? '/'.$institute : ''));
+        return self::getData('extern/coursetypes'.($institute ? '/'.$institute : ''));
     }
 
     public static function getSubjects($parent_id, $depth)
     {
-        return self::getData('typo3/semtree/'.$parent_id.'/'.$depth);
+        return self::getData('extern/semtree/'.$parent_id.'/'.$depth);
     }
 
     public static function getStatusgroupNames($institute)
     {
-        return self::getData('typo3/statusgroupnames/'.$institute);
+        return self::getData('extern/statusgroupnames/'.$institute);
     }
 
     private static function getTypeMapping()
