@@ -84,20 +84,21 @@ class ConfigForm {
                 ($entry->children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
             if ($entry->children) {
                 $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-                $html .= '<img class="tx-importstudip-openclose" src="'.$path.
+                $html .= '<img class="tx-importstudip-openclose" id="tx-importstudip-openclose-inst-'.$entry->id.'" src="'.$path.
                     'gfx/ol/plusonly.gif" data-swap-img="'.$path.
                     'gfx/ol/minusonly.gif"/>';
             }
             if ($entry->selectable) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" '.
                     'name="'.$inputname.'" value="'.$entry->id.
-                    '" onclick="Tx_ImportStudip.changeSelection(\'institute\')"'.
+                    '" onclick="Tx_ImportStudip.changeSelection(\'institute\', \''.
+                    $entry->id.'\')"'.
                     ($entry->id == $selected ? ' checked="checked"' : '').
                     '/>';
             }
             $html .= '<label for="'.$id.'">'.$entry->name.'</label>'.
                 '<input type="checkbox" class="tx-importstudip-treeinput" id="'.
-                $id.'"/>';
+                $id.'" onclick="Tx_ImportStudip.swapImages(\'tx-importstudip-openclose-inst-'.$entry->id.'\')"/>';
             if ($entry->children != null) {
                 $html .= self::getInstituteForm($entry->children, $inputname, $selected, $parameters);
             }

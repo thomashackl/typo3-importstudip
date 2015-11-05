@@ -615,6 +615,9 @@ Tx_ImportStudip = {
         if (checked.length > 0) {
             checked.parents('.tx-importstudip-treebranch').
                 children('input.tx-importstudip-treeinput').attr('checked', true);
+            checked.parents('.tx-importstudip-treebranch').children('img.tx-importstudip-openclose').each(function() {
+                Tx_ImportStudip.swapImages(TYPO3.jQuery(this).attr('id'));
+            });
         // No checked element, open only root node.
         } else {
             TYPO3.jQuery('#'+id).find('input.tx-importstudip-treeinput').first().attr('checked', true);
@@ -694,6 +697,17 @@ Tx_ImportStudip = {
             img.attr('src', other);
             img.data('toggle-image', src);
         });
+    },
+
+    swapImages: function(elementId) {
+        var element = TYPO3.jQuery('#' + elementId);
+        if (element.length > 0) {
+            var img1 = element.attr('src');
+            var img2 = element.data('swap-img');
+            element.data('swap-img', img1);
+            element.attr('src', img2);
+        }
+        return false;
     }
 
 };
