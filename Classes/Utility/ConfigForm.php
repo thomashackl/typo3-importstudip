@@ -387,7 +387,7 @@ class ConfigForm {
     public function getCourseTypeForm($data, $inputname, $selected) {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                'tx_importstudip.backend.label.select', 'importstudip').'</option>';
+                'backend.label.select', 'importstudip').'</option>';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry->id.'"'.
                 ($entry->id==$selected ? ' selected="selected"' : '').'>'.
@@ -443,7 +443,7 @@ class ConfigForm {
             } else if ($entry->num_children) {
                 $html .= '<ul class="tx-importstudip-tree"><li data-loading-text="'.
                     trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                        'tx_importstudip.backend.label.loading', 'importstudip')).
+                        'backend.label.loading', 'importstudip')).
                     '">&nbsp;</li></ul>';
             }
             $html .= '</li>';
@@ -471,7 +471,7 @@ class ConfigForm {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                'tx_importstudip.backend.label.all', 'importstudip')).
+                'backend.label.all', 'importstudip')).
             '</option>';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry.'"'.
