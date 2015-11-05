@@ -1,8 +1,7 @@
 140710 Version 3.0.0
 * Complete rework for Extbase/Fluid
-* Access Stud.IP via REST API and OAuth
+* Access Stud.IP via REST API
 ** REST API Client (Copyright by Travis Dent, https://github.com/tcdent/php-restclient)
-** OAuth library (Copyright by Andy Smith, http://oauth.googlecode.com/svn/code/php/) 
 
 140527 Version 2.4.7
 * Do not handle sendfile.php addresses
