@@ -48,12 +48,20 @@ class StudipRESTHelper {
             }
             $url .= 'api.php';
 
+            // Config for REST API access.
+            $restconfig = array(
+                'base_url' = $url;
+            );
+            // Add access credentials if set in extension config.
+            if ($this->config['studip_api_username']) {
+                $restconfig['username'] = $this->config['studip_api_username'];
+            }
+            if ($this->config['studip_api_password']) {
+                $restconfig['password'] = $this->config['studip_api_password'];
+            }
+
             // Initialize REST client.
-            $this->client = new \RestClient(array(
-                'base_url' => $url,
-                'username' => $this->config['studip_api_username'],
-                'password' => $this->config['studip_api_password']
-            ));
+            $this->client = new \RestClient($restconfig);
 
         // Some required values are missing -> show an error message.
         } else {
