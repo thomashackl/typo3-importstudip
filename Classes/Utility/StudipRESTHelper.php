@@ -50,7 +50,7 @@ class StudipRESTHelper {
 
             // Config for REST API access.
             $restconfig = array(
-                'base_url' = $url;
+                'base_url' => $url
             );
             // Add access credentials if set in extension config.
             if ($this->config['studip_api_username']) {
