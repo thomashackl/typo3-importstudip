@@ -1,15 +1,15 @@
-CREATE TABLE IF NOT EXISTS `tx_importstudip_config` (
-    `route` VARCHAR(255) NOT NULL,
+CREATE TABLE `tx_importstudip_config` (
+    `route` VARCHAR(255) DEFAULT '' NOT NULL,
     `data` MEDIUMTEXT NOT NULL,
-    `mkdate` INT NOT NULL,
-    `chdate` INT NOT NULL,
+    `mkdate` INT DEFAULT 0 NOT NULL,
+    `chdate` INT DEFAULT 0 NOT NULL,
     PRIMARY KEY (`route`)
 );
 
-CREATE TABLE IF NOT EXISTS `tx_importstudip_externalpages` (
-    `url` VARCHAR(255) NOT NULL,
+CREATE TABLE `tx_importstudip_externalpages` (
+    `url` VARCHAR(255) DEFAULT '' NOT NULL,
     `content` MEDIUMTEXT NOT NULL,
-    `mkdate` INT NOT NULL,
-    `chdate` INT NOT NULL,
+    `mkdate` INT DEFAULT 0 NOT NULL,
+    `chdate` INT DEFAULT 0 NOT NULL,
     PRIMARY KEY (`url`)
 );
