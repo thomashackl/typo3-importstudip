@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
     'category' => 'plugin',
     'constraints' => array(
         'depends' => array(
-            'typo3' => '6.0'
+            'typo3' => '6.0.0-6.9.99'
         ),
         'conflicts' => array(
         ),
