@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file target-language="de" datatype="plaintext" original="messages" date="2014-07-22T14:37:11Z" product-name="importstudip">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-11-25T14:37:11Z" product-name="importstudip">
         <header/>
         <body>
             <trans-unit id="backend.externtype.coursedetails">
@@ -308,7 +308,7 @@
             </trans-unit>
             <trans-unit id="conf.studip_url">
                 <target>
-                    Vollst&#228;ndige URL Ihrer Stud.IP-Installation.
+                    Vollst&#228;ndige URL Ihrer Stud.IP-Installation
                 </target>
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
@@ -367,7 +367,7 @@
                 </target>
             </trans-unit>
             <trans-unit id="frontend.text.no_search_results">
-                <te>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</target>
+                <target>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.no_search_term">
                 <target>Bitte geben Sie einen Suchbegriff an.</target>

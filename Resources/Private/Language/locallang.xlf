@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-    <file source-language="en" datatype="plaintext" original="messages" date="2014-07-22T13:50:11Z" product-name="importstudip">
+    <file source-language="en" datatype="plaintext" original="messages" date="2015-11-25T14:37:11Z" product-name="importstudip">
         <header/>
         <body>
             <trans-unit id="backend.externtype.coursedetails">
@@ -297,7 +297,7 @@
             </trans-unit>
             <trans-unit id="conf.studip_url">
                 <source>
-                    Full URL to your Stud.IP installation.
+                    Full URL to your Stud.IP installation
                 </source>
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
