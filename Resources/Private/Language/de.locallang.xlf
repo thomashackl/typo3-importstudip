@@ -367,16 +367,16 @@
                 </target>
             </trans-unit>
             <trans-unit id="frontend.text.no_search_results">
-                <source>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</source>
+                <te>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.no_search_term">
                 <target>Bitte geben Sie einen Suchbegriff an.</target>
             </trans-unit>
             <trans-unit id="frontend.text.one_search_result">
-                <source>Ein Ergebnis gefunden.</source>
+                <target>Ein Ergebnis gefunden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.num_search_results">
-                <source>%s Ergebnisse gefunden.</source>
+                <target>%s Ergebnisse gefunden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.searchterm_placeholder">
                 <target>Veranstaltungsname oder -nummer...</target>

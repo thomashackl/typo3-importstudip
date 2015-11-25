@@ -296,9 +296,9 @@
                 </source>
             </trans-unit>
             <trans-unit id="conf.studip_url">
-                <target>
+                <source>
                     Full URL to your Stud.IP installation.
-                </target>
+                </source>
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
                 <source>

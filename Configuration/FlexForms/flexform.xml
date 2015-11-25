@@ -12,7 +12,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.externtype</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getExternConfigTypes</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getExternConfigTypes</userFunc>
                             </config>
                         </TCEforms>
                     </settings.pagetype>
@@ -21,7 +21,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.institute</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getInstitutes</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getInstitutes</userFunc>
                             </config>
                         </TCEforms>
                     </settings.institute>
@@ -30,7 +30,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.externconfigurations</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getExternConfigurations</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getExternConfigurations</userFunc>
                             </config>
                         </TCEforms>
                     </settings.externconfig>
@@ -38,7 +38,7 @@
                         <TCEforms>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getModule</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getModule</userFunc>
                             </config>
                         </TCEforms>
                     </settings.module>
@@ -47,7 +47,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.personsearch</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getPersonSearch</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getPersonSearch</userFunc>
                             </config>
                         </TCEforms>
                     </settings.personsearch>
@@ -56,7 +56,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.choose_user_institute</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->chooseUserInstitute</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->chooseUserInstitute</userFunc>
                             </config>
                         </TCEforms>
                     </settings.choose_user_institute>
@@ -65,7 +65,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.coursesearch</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getCourseSearch</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getCourseSearch</userFunc>
                             </config>
                         </TCEforms>
                     </settings.coursesearch>
@@ -74,7 +74,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.choose_course_institute</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->chooseCourseInstitute</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->chooseCourseInstitute</userFunc>
                             </config>
                         </TCEforms>
                     </settings.choose_course_institute>
@@ -83,7 +83,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.filters</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getAdditionalFilters</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getAdditionalFilters</userFunc>
                             </config>
                         </TCEforms>
                     </settings.filters>
@@ -92,7 +92,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.aggregate</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getAggregation</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getAggregation</userFunc>
                             </config>
                         </TCEforms>
                     </settings.aggregate>
@@ -101,7 +101,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.participating</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getParticipating</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getParticipating</userFunc>
                             </config>
                         </TCEforms>
                     </settings.participating>
@@ -110,7 +110,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.coursetype</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getCourseTypes</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getCourseTypes</userFunc>
                             </config>
                         </TCEforms>
                     </settings.coursetype>
@@ -119,7 +119,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.subject</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getSubjects</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getSubjects</userFunc>
                             </config>
                         </TCEforms>
                     </settings.subject>
@@ -128,7 +128,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.statusgroup</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getStatusgroups</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getStatusgroups</userFunc>
                             </config>
                         </TCEforms>
                     </settings.statusgroup>
@@ -137,7 +137,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.preselectinst</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getPreselectedInstitute</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getPreselectedInstitute</userFunc>
                             </config>
                         </TCEforms>
                     </settings.preselectinst>
@@ -146,7 +146,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linkingoptions</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getLinkingOptions</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getLinkingOptions</userFunc>
                             </config>
                         </TCEforms>
                     </settings.linkingoptions>
@@ -155,7 +155,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.makelink</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getMakeLink</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getMakeLink</userFunc>
                             </config>
                         </TCEforms>
                     </settings.makelink>
@@ -164,7 +164,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linktext</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getLinkText</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getLinkText</userFunc>
                             </config>
                         </TCEforms>
                     </settings.linktext>
@@ -173,7 +173,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.linkformat</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getLinkFormat</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getLinkFormat</userFunc>
                             </config>
                         </TCEforms>
                     </settings.linkformat>
@@ -221,7 +221,7 @@
                             <label>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.label.smallnews</label>
                             <config>
                                 <type>user</type>
-                                <userFunc>\UniPassau\Importstudip\Utility\ConfigForm->getSmallNews</userFunc>
+                                <userFunc>UniPassau\Importstudip\Utility\ConfigForm->getSmallNews</userFunc>
                             </config>
                         </TCEforms>
                     </settings.smallnews>
