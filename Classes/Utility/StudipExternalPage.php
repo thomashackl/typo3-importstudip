@@ -223,8 +223,8 @@ class StudipExternalPage
             }
 
             // Aggregate over sub institutes?
-            if ($aggregation = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('aggregate')) {
-                $params['aggregate'] = true;
+            if ($aggregation = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('aggregation')) {
+                $params['aggregation'] = true;
             }
 
             // Item_id for course browser.
@@ -267,7 +267,7 @@ class StudipExternalPage
                 case 'courses':
                     // Show courses from subinstitutes, too.
                     if ($settings['aggregate']) {
-                        $params['aggregation_level'] = 1;
+                        $params['aggregation'] = 1;
                     }
                     // Show courses not only at home, but also at participating institutes.
                     if ($settings['participating']) {
@@ -290,7 +290,7 @@ class StudipExternalPage
                 case 'persons':
                     // Show persons from subinstitutes, too.
                     if ($settings['aggregate']) {
-                        $params['aggregation_level'] = 1;
+                        $params['aggregation'] = 1;
                     }
                     // Show only persons in selected statusgroup.
                     if ($settings['statusgroup']) {
