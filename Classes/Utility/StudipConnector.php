@@ -142,9 +142,8 @@ class StudipConnector {
                 $route = 'extern/institutes' . ($externtype ? '/' . implode(',', $mapping[$externtype]) : '');
             }
             $result = self::getData($route);
-        } else {
-            return $result;
         }
+        return $result;
     }
 
     public static function getExternConfigurations($institute, $type)
