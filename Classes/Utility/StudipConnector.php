@@ -145,13 +145,16 @@ class StudipConnector {
 
     public static function getExternConfigurations($institute, $type)
     {
-        $result = array();
-        $mapping = self::getTypeMapping();
-        $route = 'extern/externconfigs/'.$institute;
-        if ($mapping[$type]) {
-            $route .= '/'.implode(',',$mapping[$type]);
+        if ($institute) {
+            $mapping = self::getTypeMapping();
+            $route = 'extern/externconfigs/' . $institute;
+            if ($mapping[$type]) {
+                $route .= '/' . implode(',', $mapping[$type]);
+            }
+            return self::getData($route);
+        } else {
+            return array();
         }
-        return self::getData($route);
     }
 
     public static function getExternConfigData($configid)
