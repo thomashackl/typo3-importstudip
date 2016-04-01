@@ -134,103 +134,126 @@ class StudipConnector {
     public static function getInstitutes($treetype, $externtype='')
     {
         $result = array();
-        $mapping = self::getTypeMapping();
-        if ($treetype == 'rangetree') {
-            $route = 'extern/rangetree'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
+        if ($treetype) {
+            $mapping = self::getTypeMapping();
+            if ($treetype == 'rangetree') {
+                $route = 'extern/rangetree' . ($externtype ? '/' . implode(',', $mapping[$externtype]) : '');
+            } else {
+                $route = 'extern/institutes' . ($externtype ? '/' . implode(',', $mapping[$externtype]) : '');
+            }
+            $result = self::getData($route);
         } else {
-            $route = 'extern/institutes'.($externtype ? '/'.implode(',', $mapping[$externtype]) : '');
+            return $result;
         }
-        return self::getData($route);
     }
 
     public static function getExternConfigurations($institute, $type)
     {
+        $result = array();
         if ($institute) {
             $mapping = self::getTypeMapping();
             $route = 'extern/externconfigs/' . $institute;
             if ($mapping[$type]) {
                 $route .= '/' . implode(',', $mapping[$type]);
             }
-            return self::getData($route);
-        } else {
-            return array();
+            $result = self::getData($route);
         }
+        return $result;
     }
 
     public static function getExternConfigData($configid)
     {
-        return self::getData('extern/externconfig/'.$configid);
+        $result = array();
+        if ($configid) {
+            $result = self::getData('extern/externconfig/' . $configid);
+        }
+        return $result;
     }
 
     public static function getUser($user_id) {
-        $data = json_decode(self::getData('extern/user/'.$user_id), true);
-        if ($data) {
-            $result = array(
-                array(
-                    'user_id' => $data['user_id'],
-                    'firstname' => $data['name']['given'],
-                    'lastname' => $data['name']['family'],
-                    'username' => $data['username'],
-                    'title_front' => $data['name']['prefix'],
-                    'title_rear' => $data['name']['suffix']
-                )
-            );
+        $result = array();
+        if ($user_id) {
+            $data = json_decode(self::getData('extern/user/' . $user_id), true);
+            if ($data) {
+                $result = array(
+                    array(
+                        'user_id' => $data['user_id'],
+                        'firstname' => $data['name']['given'],
+                        'lastname' => $data['name']['family'],
+                        'username' => $data['username'],
+                        'title_front' => $data['name']['prefix'],
+                        'title_rear' => $data['name']['suffix']
+                    )
+                );
+            }
         }
         return $result;
     }
 
     public static function searchUser($searchterm)
     {
-        $result = self::getData('extern/usersearch/'.rawurlencode($searchterm));
+        $result = array();
+        if ($searchterm) {
+            $result = self::getData('extern/usersearch/' . rawurlencode($searchterm));
+        }
         return $result;
     }
 
     public static function getUserInstitutes($user_id)
     {
-        $result = self::getData('extern/user_institutes/'.$user_id);
+        $result = array();
+        if ($user_id) {
+            $result = self::getData('extern/user_institutes/' . $user_id);
+        }
         return $result;
     }
 
     public static function searchCourse($searchterm, $semester_id='')
     {
         $result = array();
-        $call = 'extern/coursesearch/'.rawurlencode($searchterm);
-        if ($semester_id) {
-            $call .= '/'.$semester_id;
+        if ($searchterm) {
+            $call = 'extern/coursesearch/' . rawurlencode($searchterm);
+            if ($semester_id) {
+                $call .= '/' . $semester_id;
+            }
+            $result = self::getData($call);
         }
-        $result = self::getData($call);
         return $result;
     }
 
     public static function frontendSearchCourse($searchterm, $semester_id='', $institute_id='', $coursetype='')
     {
         $result = array();
-        $call = 'extern/extendedcoursesearch/'.rawurlencode($searchterm);
-        if ($semester_id || $institute_id || $coursetype) {
-            $call .= '/'.($semester_id ?: 0).'/'.($institute_id ?: 0).'/'.($coursetype ?: 0);
+        if ($searchterm) {
+            $call = 'extern/extendedcoursesearch/' . rawurlencode($searchterm);
+            if ($semester_id || $institute_id || $coursetype) {
+                $call .= '/' . ($semester_id ?: 0) . '/' . ($institute_id ?: 0) . '/' . ($coursetype ?: 0);
+            }
+            $result = self::getData($call, false);
         }
-        $result = self::getData($call, false);
         return $result;
     }
 
     public static function getCourse($course_id)
     {
         $result = array();
-        $result = self::getData('extern/course/'.$course_id);
+        if ($course_id) {
+            $result = self::getData('extern/course/' . $course_id);
+        }
         return $result;
     }
 
     public static function getInstitute($institute_id)
     {
         $result = array();
-        $result = self::getData('extern/institute/'.$institute_id);
+        if ($institute_id) {
+            $result = self::getData('extern/institute/' . $institute_id);
+        }
         return $result;
     }
 
     public static function getAllSemesters() {
-        $result = array();
-        $result = self::getData('extern/allsemesters');
-        return $result;
+        return self::getData('extern/allsemesters');
     }
 
     public static function getCourseTypes($institute='')
