@@ -389,7 +389,6 @@ class ConfigForm {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'backend.label.select', 'importstudip').'</option>';
-        if (!$data)
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry->id.'"'.
                 ($entry->id==$selected ? ' selected="selected"' : '').'>'.
