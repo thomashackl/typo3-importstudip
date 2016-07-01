@@ -155,10 +155,6 @@ class ConfigForm {
         return $result;
     }
 
-    public function getModuleForm($value, $inputname) {
-        return $html;
-    }
-
     public function getPersonSearch($parameters, $config) {
         $html = '<div id="tx-importstudip-personsearch" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -270,7 +266,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getCourseSearchForm($data, $inputname, $value, $parameters) {
+    public function getCourseSearchForm($data, $inputname, $value, $parameters=array()) {
         if ($data) {
             $html = '<select name="' . $inputname . '" size="1" id="tx-importstudip-choose-course" ' .
                 'onchange="Tx_ImportStudip.getCourseInstitutes()">';
@@ -377,7 +373,7 @@ class ConfigForm {
         if ($config['settings.pagetype'] == 'courses' ||
                 \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
             $html .= self::getCourseTypeForm(
-                $config['settings.institute'],
+                json_decode(StudipConnector::getCourseTypes($config['settings.institute'])),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
                 $parameters);
         }
@@ -385,7 +381,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getCourseTypeForm($data, $inputname, $selected) {
+    public function getCourseTypeForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'backend.label.select', 'importstudip').'</option>';
@@ -594,11 +590,13 @@ class ConfigForm {
         $result = array();
         // Extract already configured flexform values.
         $xml = simplexml_load_string($data['row']['pi_flexform']);
-        $json = json_encode($xml);
-        $fullConfig = json_decode($json, true);
-        $fullConfig = $fullConfig['data']['sheet']['language']['field'];
-        foreach ($fullConfig as $c) {
-            $result[$c['@attributes']['index']] = $c['value'];
+        if ($xml) {
+            $json = json_encode($xml);
+            $fullConfig = json_decode($json, true);
+            $fullConfig = $fullConfig['data']['sheet']['language']['field'];
+            foreach ($fullConfig as $c) {
+                $result[$c['@attributes']['index']] = $c['value'];
+            }
         }
         return $result;
     }
