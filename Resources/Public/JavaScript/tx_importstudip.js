@@ -226,7 +226,7 @@ Tx_ImportStudip = {
                     configtype: TYPO3.jQuery('#tx-importstudip-pagetypes').find('input[type="radio"]:checked').val()
                 },
                 success: function(data, textStatus, jqXHR) {
-                    TYPO3.jQuery('#tx-importstudip-institutes').html(data.tx_importstudip);
+                    //TYPO3.jQuery('#tx-importstudip-institutes').html(data.tx_importstudip);
                 }
             });
             if (TYPO3.jQuery('#tx-importstudip-makelink-checkbox').prop('checked')) {
@@ -287,37 +287,39 @@ Tx_ImportStudip = {
     getInstitutes: function(elementId) {
         var div = TYPO3.jQuery('#' + elementId);
         div.parents('.t3-form-field-container').show();
-        div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
-        TYPO3.jQuery.ajax({
-            url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
-            method: 'post',
-            data: {
-                action: 'institutes',
-                configtype: TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val()
-            },
-            success: function(data, textStatus, jqXHR) {
-                TYPO3.jQuery.ajax({
-                    url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
-                    method: 'post',
-                    data: {
-                        action: 'instituteform',
-                        institutes: data.tx_importstudip,
-                        inputname: div.data('input-name'),
-                        selected: div.data('input-value')
-                    },
-                    success: function(response, textStatus, jqXHR) {
-                        div.html(response.tx_importstudip);
-                        Tx_ImportStudip.openSelectedParents(elementId);
-                        if (div.find('input[type="radio"]:checked').length > 0) {
-                            Tx_ImportStudip.getExternConfigurations('radio');
+        if (TYPO3.jQuery('#' + elementId).find('input[type="radio"]').length == 0) {
+            div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
+            TYPO3.jQuery.ajax({
+                url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
+                method: 'post',
+                data: {
+                    action: 'institutes',
+                    configtype: TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val()
+                },
+                success: function(data, textStatus, jqXHR) {
+                    TYPO3.jQuery.ajax({
+                        url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
+                        method: 'post',
+                        data: {
+                            action: 'instituteform',
+                            institutes: data.tx_importstudip,
+                            inputname: div.data('input-name'),
+                            selected: div.data('input-value')
+                        },
+                        success: function(response, textStatus, jqXHR) {
+                            div.html(response.tx_importstudip);
+                            Tx_ImportStudip.openSelectedParents(elementId);
+                            if (div.find('input[type="radio"]:checked').length > 0) {
+                                Tx_ImportStudip.getExternConfigurations('radio');
+                            }
                         }
-                    }
-                });
-            },
-            error: function(data, textStatus, errorThrown) {
-                div.html('Error: '+errorThrown);
-            }
-        });
+                    });
+                },
+                error: function(data, textStatus, errorThrown) {
+                    div.html('Error: '+errorThrown);
+                }
+            });
+        }
     },
 
     /**
