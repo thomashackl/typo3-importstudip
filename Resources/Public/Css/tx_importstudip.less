@@ -1,0 +1,83 @@
+ul.tx-importstudip-tree {
+
+  li {
+
+    &:first-child {
+      margin-top: 0;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.tx-importstudip-treebranch {
+      list-style-type: none;
+      margin-top: -22px;
+      margin-bottom: -22px;
+
+      input.tx-importstudip-treeinput {
+        opacity: 0;
+
+        + ul {
+          margin-top: -5px;
+          margin-bottom: -8px;
+
+          > li {
+            display: none;
+            cursor: pointer;
+          }
+        }
+
+        &:checked {
+          + ul {
+            > li {
+              display: block;
+              background-image: url('../../../../../../typo3/gfx/ol/join.gif');
+              background-repeat: no-repeat;
+              margin-left: -20px;
+              padding-left: 20px;
+
+              &:last-child {
+                background-image: url('../../../../../../typo3/gfx/ol/joinbottom.gif');
+                background-repeat: no-repeat;
+              }
+            }
+          }
+        }
+
+      }
+    }
+
+    &.tx-importstudip-treeleaf {
+      list-style-type: none;
+      margin-top: -9px;
+      margin-bottom: -9px;
+
+      + li.tx-importstudip-treebranch {
+        margin-top: -8px;
+      }
+    }
+
+  }
+
+  input[type=radio] {
+    height: 10px;
+    height: 10px;
+    margin-top: 5px;
+  }
+
+}
+
+
+img.tx-importstudip-openclose {
+  vertical-align: middle;
+}
+
+.tx-importstudip-entrygroup {
+  background-color: rgba(0, 0, 0, 0.10);
+
+  > .t3-form-field-label {
+    cursor: pointer;
+    padding-left: 15px;
+  }
+}
