@@ -1,3 +1,6 @@
+170130 Version 3.1.0
+* Compatibility with Typo3 7.x
+
 140710 Version 3.0.0
 * Complete rework for Extbase/Fluid
 * Access Stud.IP via REST API

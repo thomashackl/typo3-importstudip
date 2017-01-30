@@ -117,8 +117,8 @@ class ConfigForm {
         if ($parameters['itemFormElValue']) {
             $config = self::getConfig($parameters);
             $result .= self::getExternConfigurationsForm(
-                json_decode(StudipConnector::getExternConfigurations(
-                $config['settings.institute'], $config['settings.pagetype'])),
+                StudipConnector::getExternConfigurations(
+                $config['settings.institute'], $config['settings.pagetype']),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
                 $parameters);
         }

@@ -193,7 +193,7 @@ class StudipConnector {
     {
         $result = array();
         if ($searchterm) {
-            $result = self::getData('extern/usersearch/' . rawurlencode($searchterm));
+            $result = self::getData('extern/usersearch/' . rawurlencode($searchterm), false);
         }
         return $result;
     }
@@ -215,7 +215,7 @@ class StudipConnector {
             if ($semester_id) {
                 $call .= '/' . $semester_id;
             }
-            $result = self::getData($call);
+            $result = self::getData($call, false);
         }
         return $result;
     }
