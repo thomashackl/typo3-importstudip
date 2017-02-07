@@ -37,6 +37,9 @@ ul.tx-importstudip-tree li.tx-importstudip-treeleaf {
 ul.tx-importstudip-tree li.tx-importstudip-treeleaf + li.tx-importstudip-treebranch {
   margin-top: -5px;
 }
+ul.tx-importstudip-tree li label {
+  font-weight: normal;
+}
 ul.tx-importstudip-tree input[type=radio] {
   height: 10px;
   margin-top: 5px;
