@@ -25,7 +25,7 @@ class InstituteSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\Select
     protected function renderOptionTag($value, $label, $isSelected, $isChild = false) {
         $output = '<option value="' . htmlspecialchars($value) . '"';
         if ($isSelected) {
-            $output .= ' selected="selected"';
+            $output .= ' selected';
         }
         $output .= '>' . ($isChild ? '&nbsp;&nbsp;' : '') . htmlspecialchars($label) . '</option>';
         return $output;

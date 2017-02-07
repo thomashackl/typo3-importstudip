@@ -71,7 +71,9 @@ class StudipRESTHelper {
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
-            \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);
+            $flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
+            $messageQueue = $flashMessageService->getMessageQueueByIdentifier();
+            $messageQueue->addMessage($message);
         }
     }
 
@@ -99,7 +101,9 @@ class StudipRESTHelper {
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
-            \TYPO3\CMS\Core\Messaging\FlashMessageQueue::addMessage($message);
+            $flashMessageService = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Messaging\FlashMessageService::class);
+            $messageQueue = $flashMessageService->getMessageQueueByIdentifier();
+            $messageQueue->addMessage($message);
 
             return null;
 

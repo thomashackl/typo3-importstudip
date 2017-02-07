@@ -1,0 +1,33 @@
+{
+  "name": "unipassau/importstudip",
+  "type": "typo3-cms-extension",
+  "description": "Imports data from Stud.IP, like course or person lists",
+  "homepage": "https://develop.intelec.uni-passau.de/gitlab/typo3-extensions/studip-typo3/tree/master",
+  "license": ["GPL-2.0+"],
+  "keywords": ["TYPO3 CMS", "Stud.IP"],
+  "support": {
+    "issues": "https://develop.intelec.uni-passau.de/gitlab/typo3-extensions/studip-typo3/issues"
+  },
+  "require": {
+    "typo3/cms": "^7.0.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "UniPassau\\Importstudip\\": "Classes",
+      "UniPassau\\Importstudip\\Controller": "Classes/Controller",
+      "UniPassau\\Importstudip\\Utility": "Classes/Utility",
+      "UniPassau\\Importstudip\\ViewHelpers": "Classes/ViewHelpers"
+    },
+    "classmap": [
+      "Classes",
+      "Classes/Controller",
+      "Classes/Utility",
+      "Classes/ViewHelpers",
+      "Resources/Private/PHP/restclient"
+    ]
+  },
+  "replace": {
+    "importstudip": "self.version",
+    "typo3-ter/importstudip": "self.version"
+  }
+}

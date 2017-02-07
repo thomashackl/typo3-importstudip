@@ -28,7 +28,7 @@ class CourseTypeSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\Selec
     protected function renderOptionTag($value, $label, $isSelected) {
         $output = '<option value="' . htmlspecialchars($value) . '"';
         if ($isSelected) {
-            $output .= ' selected="selected"';
+            $output .= ' selected';
         }
         $output .= '>' . htmlspecialchars($label) . '</option>';
         return $output;

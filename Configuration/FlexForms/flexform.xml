@@ -3,7 +3,7 @@
         <langDisable>1</langDisable>
     </meta>
     <sheets>
-        <dataSheet>
+        <sDEF>
             <ROOT>
                 <TCEforms>
                     <sheetTitle>LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:backend.sheet.datasheet</sheetTitle>
@@ -243,6 +243,6 @@
                     </settings.linktarget>
                 </el>
             </ROOT>
-        </dataSheet>
+        </sDEF>
     </sheets>
 </T3DataStructure>

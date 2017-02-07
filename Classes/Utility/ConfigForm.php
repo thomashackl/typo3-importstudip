@@ -22,7 +22,7 @@ namespace UniPassau\Importstudip\Utility;
 
 class ConfigForm {
 
-    public function getExternConfigTypes($parameters, $config) {
+    public static function getExternConfigTypes($parameters, $config) {
         $result = '<div id="tx-importstudip-pagetypes">';
         $result .= '<script type="text/javascript" src="'.
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').
@@ -37,13 +37,13 @@ class ConfigForm {
             $result .= '<input type="radio" id="' .$type[1].
                 '" onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
                 $parameters['itemFormElName'].'" value="'.$type[1].'"'.
-                ($type[1] == $parameters['itemFormElValue'] ? ' checked="checked"' : '').
+                ($type[1] == $parameters['itemFormElValue'] ? ' checked' : '').
                 '/><label for="'.$type[1].'">'.trim($type[0]).'</label><br/>';
         }
         $result .= '<input type="radio" id="searchpage" '.
             'onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
             $parameters['itemFormElName'].'" value="searchpage"'.
-            ($parameters['itemFormElValue'] == 'searchpage' ? ' checked="checked"' : '').
+            ($parameters['itemFormElValue'] == 'searchpage' ? ' checked' : '').
             '/><label for="searchpage">'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'backend.label.searchpage',
@@ -52,7 +52,7 @@ class ConfigForm {
         return $result;
     }
 
-    public function getInstitutes($parameters, $config) {
+    public static function getInstitutes($parameters, $config) {
         $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
         $hierarchy = $extConf['studip_use_hierarchy'];
         $result = '<div id="tx-importstudip-institutes" data-input-name="'.
@@ -76,7 +76,7 @@ class ConfigForm {
         return $result;
     }
 
-    public function getInstituteForm($data, $inputname, $selected, $parameters=array()) {
+    public static function getInstituteForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<ul class="tx-importstudip-tree">';
         foreach ($data as $entry) {
             $id = 'tx-importstudip-institute-'.($entry->id ?: $entry->tree_id);
@@ -85,15 +85,15 @@ class ConfigForm {
             if ($entry->children) {
                 $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
                 $html .= '<img class="tx-importstudip-openclose" id="tx-importstudip-openclose-inst-'.$entry->id.'" src="'.$path.
-                    'gfx/ol/plusonly.gif" data-swap-img="'.$path.
-                    'gfx/ol/minusonly.gif"/>';
+                    'sysext/t3skin/icons/gfx/ol/plus.gif" data-swap-img="'.$path.
+                    'sysext/t3skin/icons/gfx/ol/minus.gif"/>';
             }
             if ($entry->selectable) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" '.
                     'name="'.$inputname.'" value="'.$entry->id.
                     '" onclick="Tx_ImportStudip.changeSelection(\'institute\', \''.
                     $entry->id.'\')"'.
-                    ($entry->id == $selected ? ' checked="checked"' : '').
+                    ($entry->id == $selected ? ' checked' : '').
                     '/>';
             }
             $html .= '<label for="'.$id.'">'.$entry->name.'</label>'.
@@ -108,7 +108,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getExternConfigurations($parameters, $config) {
+    public static function getExternConfigurations($parameters, $config) {
         $result = '<div id="tx-importstudip-externconfig" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.$parameters['itemFormElValue'].
             '" data-loading-text="'.
@@ -133,19 +133,19 @@ class ConfigForm {
         return $result;
     }
 
-    public function getExternConfigurationsForm($data, $inputname, $selected, $parameters=array()) {
+    public static function getExternConfigurationsForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<select name="'.$inputname.'" size="1" onchange="Tx_ImportStudip.setModuleName()">';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry->id.'" data-module="'.
                 $entry->type.'"'.
-                ($entry->id==$selected ? ' selected="selected"' : '').'>'.
+                ($entry->id==$selected ? ' selected' : '').'>'.
                 $entry->name.'</option>';
         }
         $html .= '</select>';
         return $html;
     }
 
-    public function getModule($parameters, $config) {
+    public static function getModule($parameters, $config) {
         $result = '<div id="tx-importstudip-module" data-input-name="'.
             $parameters['itemFormElName'].'">';
         $result .= '<input type="hidden" name="'.
@@ -155,7 +155,7 @@ class ConfigForm {
         return $result;
     }
 
-    public function getPersonSearch($parameters, $config) {
+    public static function getPersonSearch($parameters, $config) {
         $html = '<div id="tx-importstudip-personsearch" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
@@ -177,7 +177,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getPersonSearchForm($data, $inputname, $value, $parameters=array()) {
+    public static function getPersonSearchForm($data, $inputname, $value, $parameters=array()) {
         if ($data) {
             $html = '<select name="' . $inputname . '" id="tx-importstudip-choose-user" data-input-name="' . $inputname .
                 '" data-input-value="' . $value . '" size="1" onchange="Tx_ImportStudip.getPersonInstitutes()">';
@@ -191,7 +191,7 @@ class ConfigForm {
                 }
                 $fullname .= ' (' . $entry['username'] . ')';
                 $html .= '<option value="' . $entry['username'] . '" data-user-id="' . $entry['user_id'] . '"' .
-                    ($entry['username'] == $value ? ' selected="selected"' : '') . '>' . $fullname . '</option>';
+                    ($entry['username'] == $value ? ' selected' : '') . '>' . $fullname . '</option>';
             }
             $html .= '</select>';
         } else {
@@ -204,7 +204,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function chooseUserInstitute($parameters, $config) {
+    public static function chooseUserInstitute($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-choose-user-institute" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -225,19 +225,19 @@ class ConfigForm {
         return $html;
     }
 
-    public function chooseUserInstituteForm($data, $inputname, $value, $parameters=array())
+    public static function chooseUserInstituteForm($data, $inputname, $value, $parameters=array())
     {
         $html = '<select name="'.$inputname.'" onchange="Tx_ImportStudip.getExternConfigurations(\'user-select\')">';
         foreach ($data as $i) {
             $html .= '<option value="'.$i['institute_id'].'"'.
-                ($i['institute_id'] == $value ? ' selected="selected"' : '').
+                ($i['institute_id'] == $value ? ' selected' : '').
                 '>'.$i['name'].'</option>';
         }
         $html .= '</select>';
         return $html;
     }
 
-    public function getCourseSearch($parameters, $config) {
+    public static function getCourseSearch($parameters, $config) {
         $html = '<div id="tx-importstudip-coursesearch" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
@@ -266,7 +266,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getCourseSearchForm($data, $inputname, $value, $parameters=array()) {
+    public static function getCourseSearchForm($data, $inputname, $value, $parameters=array()) {
         if ($data) {
             $html = '<select name="' . $inputname . '" size="1" id="tx-importstudip-choose-course" ' .
                 'onchange="Tx_ImportStudip.getCourseInstitutes()">';
@@ -277,7 +277,7 @@ class ConfigForm {
                 }
                 $fullname .= ' (' . $entry['type'] . ', ' . $entry['semester'] . ')';
                 $html .= '<option value="' . $entry['course_id'] . '"' .
-                    ($entry['course_id'] == $value ? ' selected="selected"' : '') . '>' .
+                    ($entry['course_id'] == $value ? ' selected' : '') . '>' .
                     $fullname . '</option>';
             }
             $html .= '</select>';
@@ -291,7 +291,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function chooseCourseInstitute($parameters, $config) {
+    public static function chooseCourseInstitute($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-choose-course-institute" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -306,24 +306,24 @@ class ConfigForm {
         return $html;
     }
 
-    public function chooseCourseInstituteForm($data, $inputname, $value, $parameters=array()) {
+    public static function chooseCourseInstituteForm($data, $inputname, $value, $parameters=array()) {
         $html = '<select name="'.$inputname.'" onchange="Tx_ImportStudip.getExternConfigurations(\'course-select\')">';
         foreach ($data as $i) {
             $html .= '<option value="'.$i['institute_id'].'"'.
-                ($i['institute_id']==$value ? ' selected="selected"' : '').
+                ($i['institute_id']==$value ? ' selected' : '').
                 '>'.$i['name'].'</option>';
         }
         $html .= '</select>';
         return $html;
     }
 
-    public function getAdditionalFilters() {
+    public static function getAdditionalFilters() {
         $html = '<div id="tx-importstudip-filters">';
         $html .= '</div>';
         return $html;
     }
 
-    public function getAggregation($parameters, $config) {
+    public static function getAggregation($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-aggregate" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -335,16 +335,16 @@ class ConfigForm {
         return $html;
     }
 
-    public function getAggregationForm($inputname, $value) {
+    public static function getAggregationForm($inputname, $value) {
         $html = '<input id="tx-importstudip-aggregate-checkbox" type="checkbox" name="'.$inputname.'_0"'.
-            ($value ? ' checked="checked"' : '').
+            ($value ? ' checked' : '').
             ' onclick="TYPO3.jQuery(\'#tx-importstudip-aggregate-hidden\').val(TYPO3.jQuery(this).prop(\'checked\') ? 1 : 0)"/>';
         $html .= '<input id="tx-importstudip-aggregate-hidden" type="hidden" name="'.$inputname.'" value="'.
             ($value ? 1 : 0).'"/>';
         return $html;
     }
 
-    public function getParticipating($parameters, $config) {
+    public static function getParticipating($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-participating" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -356,16 +356,16 @@ class ConfigForm {
         return $html;
     }
 
-    public function getParticipatingForm($inputname, $value) {
+    public static function getParticipatingForm($inputname, $value) {
         $html = '<input id="tx-importstudip-participating-checkbox" type="checkbox" name="'.$inputname.'_0"'.
-            ($value ? ' checked="checked"' : '').
+            ($value ? ' checked' : '').
             ' onclick="TYPO3.jQuery(\'#tx-importstudip-participating-hidden\').val(TYPO3.jQuery(this).prop(\'checked\') ? 1 : 0)"/>';
         $html .= '<input id="tx-importstudip-participating-hidden" type="hidden" name="'.$inputname.'" value="'.
             ($value ? 1 : 0).'"/>';
         return $html;
     }
 
-    public function getCourseTypes($parameters, $config) {
+    public static function getCourseTypes($parameters, $config) {
         $html = '<div id="tx-importstudip-coursetypes" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
@@ -381,20 +381,20 @@ class ConfigForm {
         return $html;
     }
 
-    public function getCourseTypeForm($data, $inputname, $selected, $parameters=array()) {
+    public static function getCourseTypeForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'backend.label.select', 'importstudip').'</option>';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry->id.'"'.
-                ($entry->id==$selected ? ' selected="selected"' : '').'>'.
+                ($entry->id==$selected ? ' selected' : '').'>'.
                 $entry->type.' ('.$entry->classname.')</option>';
         }
         $html .= '</select>';
         return $html;
     }
 
-    public function getSubjects($parameters, $config) {
+    public static function getSubjects($parameters, $config) {
         $html = '<div id="tx-importstudip-subjects" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
@@ -410,7 +410,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getSubjectForm($data, $inputname, $selected, $parameters=array()) {
+    public static function getSubjectForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<ul class="tx-importstudip-tree">';
         foreach ($data as $entry) {
             $id = 'tx-importstudip-subject-'.$entry->tree_id;
@@ -419,13 +419,13 @@ class ConfigForm {
             if ($entry->num_children > 0) {
                 $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
                 $html .= '<img class="tx-importstudip-openclose" src="'.$path.
-                    'gfx/ol/plusonly.gif" data-swap-img="'.$path.
-                    'gfx/ol/minusonly.gif"/>';
+                    'sysext/t3skin/icons/gfx/ol/plus.gif" data-swap-img="'.$path.
+                    'sysext/t3skin/icons/gfx/ol/minus.gif"/>';
             }
             if ($entry->id) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" '.
                     'name="'.$inputname.'" value="'.$entry->id.'"'.
-                    ($entry->id == $selected ? ' checked="checked"' : '').
+                    ($entry->id == $selected ? ' checked' : '').
                     '/>';
             }
             $html .= '<label for="'.$id.'">'.$entry->name.'</label>'.
@@ -449,7 +449,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getStatusgroups($parameters, $config) {
+    public static function getStatusgroups($parameters, $config) {
         $html = '<div id="tx-importstudip-statusgroups" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
@@ -464,7 +464,7 @@ class ConfigForm {
         return $html;
     }
 
-    public function getStatusgroupForm($data, $inputname, $selected) {
+    public static function getStatusgroupForm($data, $inputname, $selected) {
         $html = '<select name="'.$inputname.'" size="1">';
         $html .= '<option value="">'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
@@ -472,14 +472,14 @@ class ConfigForm {
             '</option>';
         foreach ($data as $entry) {
             $html .= '<option value="'.$entry.'"'.
-                ($entry==$selected ? ' selected="selected"' : '').'>'.
+                ($entry==$selected ? ' selected' : '').'>'.
                 $entry.'</option>';
         }
         $html .= '</select>';
         return $html;
     }
 
-    public function getSmallNews($parameters, $config) {
+    public static function getSmallNews($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-smallnews" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -491,16 +491,16 @@ class ConfigForm {
         return $html;
     }
 
-    public function getSmallNewsForm($inputname, $value) {
+    public static function getSmallNewsForm($inputname, $value) {
         $html = '<input id="tx-importstudip-smallnews-checkbox" type="checkbox" name="'.$inputname.'_0"'.
-            ($value ? ' checked="checked"' : '').
+            ($value ? ' checked' : '').
             ' onclick="TYPO3.jQuery(\'#tx-importstudip-smallnews\').val(TYPO3.jQuery(this).prop(\'checked\') ? 1 : 0)"/>';
         $html .= '<input id="tx-importstudip-smallnews-hidden" type="hidden" name="'.$inputname.'" value="'.
             ($value ? 1 : 0).'"/>';
         return $html;
     }
 
-    public function getPreselectedInstitute($parameters, $config) {
+    public static function getPreselectedInstitute($parameters, $config) {
         $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
         $result = '<div id="tx-importstudip-preselectinst" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -523,13 +523,13 @@ class ConfigForm {
         return $result;
     }
 
-    public function getLinkingOptions() {
+    public static function getLinkingOptions() {
         $html = '<div id="tx-importstudip-linkingoptions">';
         $html .= '</div>';
         return $html;
     }
 
-    public function getMakeLink($parameters, $config) {
+    public static function getMakeLink($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-makelink" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -539,15 +539,15 @@ class ConfigForm {
         return $html;
     }
 
-    public function getMakeLinkForm($inputname, $value) {
+    public static function getMakeLinkForm($inputname, $value) {
         $html = '<input id="tx-importstudip-makelink-checkbox" type="checkbox" name="'.$inputname.'_0"'.
-            ($value ? ' checked="checked"' : '').' onclick="Tx_ImportStudip.adjustLinkOptions()"/>';
+            ($value ? ' checked' : '').' onclick="Tx_ImportStudip.adjustLinkOptions()"/>';
         $html .= '<input id="tx-importstudip-makelink-hidden" type="hidden" name="'.$inputname.'" value="'.
             ($value ? 1 : 0).'"/>';
         return $html;
     }
 
-    public function getLinkText($parameters, $config) {
+    public static function getLinkText($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-linktext" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -557,12 +557,12 @@ class ConfigForm {
         return $html;
     }
 
-    public function getLinkTextForm($inputname, $value) {
+    public static function getLinkTextForm($inputname, $value) {
         $html = '<input type="text" name="'.$inputname.'" size="60" maxlength="255" value="'.$value.'"/>';
         return $html;
     }
 
-    public function getLinkFormat($parameters, $config) {
+    public static function getLinkFormat($parameters, $config) {
         $config = self::getConfig($parameters);
         $html = '<div id="tx-importstudip-linkformat" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
@@ -572,13 +572,13 @@ class ConfigForm {
         return $html;
     }
 
-    public function getLinkFormatForm($inputname, $value) {
+    public static function getLinkFormatForm($inputname, $value) {
         $html = '<select name="'.$inputname.'" value="'.$value.'"/>';
-        $html .= '<option value=""'.($value == '' ? ' selected="selected"' : '').'>'.
+        $html .= '<option value=""'.($value == '' ? ' selected' : '').'>'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'backend.label.normaltext', 'importstudip')).'</option>';
         for ($i = 1 ; $i <= 4 ; $i++) {
-            $html .= '<option value="h'.$i.'"'.($value == 'h'.$i ? ' selected="selected"' : '').'>'.
+            $html .= '<option value="h'.$i.'"'.($value == 'h'.$i ? ' selected' : '').'>'.
                 trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                     'backend.label.h'.$i, 'importstudip')).'</option>';
         }
@@ -586,7 +586,7 @@ class ConfigForm {
         return $html;
     }
 
-    public static function getConfig($data) {
+    /*public static function getConfig($data) {
         $result = array();
         // Extract already configured flexform values.
         $xml = simplexml_load_string($data['row']['pi_flexform']);
@@ -596,6 +596,18 @@ class ConfigForm {
             $fullConfig = $fullConfig['data']['sheet']['language']['field'];
             foreach ($fullConfig as $c) {
                 $result[$c['@attributes']['index']] = $c['value'];
+            }
+        }
+        return $result;
+    }*/
+
+    public static function getConfig($data) {
+        $result = array();
+        // Extract already configured flexform values.
+        $config = $data['row']['pi_flexform']['data']['dataSheet']['lDEF'];
+        if (is_array($config)) {
+            foreach ($config as $key => $value) {
+                $result[$key] = $value['vDEF'];
             }
         }
         return $result;

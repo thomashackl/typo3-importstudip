@@ -44,6 +44,7 @@ class StudipExternalPage
 
         // Caching settings.
         $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+
         $validfor = intval($config['config_cache_lifetime']) * 60;
 
         // Fetch cached content if available.

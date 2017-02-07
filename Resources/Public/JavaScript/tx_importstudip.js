@@ -22,27 +22,28 @@ Tx_ImportStudip = {
             Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
         }
         var pagetype = TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val();
-        var persondetailtarget = TYPO3.jQuery('select[name*="persondetailtarget"]').
-            closest('.t3-form-field-container');
+
+        var persondetailtarget = TYPO3.jQuery('select[data-formengine-input-name*="persondetailtarget"]').
+            closest(Tx_ImportStudip.getElementName('container'));
         persondetailtarget.hide();
-        var coursedetailtarget = TYPO3.jQuery('select[name*="coursedetailtarget"]').
-            closest('.t3-form-field-container');
+        var coursedetailtarget = TYPO3.jQuery('select[data-formengine-input-name*="coursedetailtarget"]').
+            closest(Tx_ImportStudip.getElementName('container'));
         coursedetailtarget.hide();
-        var newsdetailtarget = TYPO3.jQuery('select[name*="newsdetailtarget"]').
-            closest('.t3-form-field-container');
+        var newsdetailtarget = TYPO3.jQuery('select[data-formengine-input-name*="newsdetailtarget"]').
+            closest(Tx_ImportStudip.getElementName('container'));
         newsdetailtarget.hide();
-        var linktarget = TYPO3.jQuery('select[name*="linktarget"]').
-            closest('.t3-form-field-container');
+        var linktarget = TYPO3.jQuery('select[data-formengine-input-name*="linktarget"]').
+            closest(Tx_ImportStudip.getElementName('container'));
         linktarget.hide();
         var module = TYPO3.jQuery('#tx-importstudip-module').
-            closest('.t3-form-field-container');
+            closest(Tx_ImportStudip.getElementName('container'));
         module.hide();
         // There is a page type selected.
         if (pagetype != '' && pagetype != null) {
             switch (pagetype) {
                 // Course list.
                 case 'courses':
-                    Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
+                    //Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
                     Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
@@ -81,8 +82,12 @@ Tx_ImportStudip = {
                         }
                     );
                     Tx_ImportStudip.getInstitutes('tx-importstudip-institutes');
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').show();
                     persondetailtarget.show();
                     coursedetailtarget.show();
+                    if (TYPO3.jQuery('#tx-importstudip-institutes').find('input[name*="settings.institute"]:checked').length > 0) {
+                        Tx_ImportStudip.getExternConfigurations('radio');
+                    }
                     break;
                 // Single course.
                 case 'coursedetails':
@@ -113,10 +118,11 @@ Tx_ImportStudip = {
                         Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     }
                     TYPO3.jQuery('#tx-importstudip-externconfig').
-                        closest('.t3-form-field-container').insertAfter(
+                        closest(Tx_ImportStudip.getElementName('container')).insertAfter(
                         TYPO3.jQuery('#tx-importstudip-choose-course-institute').
-                            closest('.t3-form-field-container')
+                            closest(Tx_ImportStudip.getElementName('container'))
                     );
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').show();
                     persondetailtarget.show();
                     break;
                 // Person list.
@@ -133,17 +139,23 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-preselectinst');
                     Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     TYPO3.jQuery('.tx-importstudip-filters-container').show();
-                    Tx_ImportStudip.enableInput('tx-importstudip-statusgroups',
-                        {
-                            action: 'statusgroupform',
-                            inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
-                            value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value'),
-                            institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
-                        }
-                    );
+                    if (TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').length != 0) {
+                        Tx_ImportStudip.enableInput('tx-importstudip-statusgroups',
+                            {
+                                action: 'statusgroupform',
+                                inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
+                                value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value'),
+                                institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
+                            }
+                        );
+                    }
                     Tx_ImportStudip.getInstitutes('tx-importstudip-institutes');
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').show();
                     persondetailtarget.show();
                     coursedetailtarget.show();
+                    if (TYPO3.jQuery('#tx-importstudip-institutes').find('input[name*="settings.institute"]:checked').length > 0) {
+                        Tx_ImportStudip.getExternConfigurations('radio');
+                    }
                     break;
                 // Single person.
                 case 'persondetails':
@@ -171,10 +183,11 @@ Tx_ImportStudip = {
                         Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                     }
                     TYPO3.jQuery('#tx-importstudip-externconfig').
-                        closest('.t3-form-field-container').insertAfter(
+                        closest(Tx_ImportStudip.getElementName('container')).insertAfter(
                         TYPO3.jQuery('#tx-importstudip-choose-user-institute').
-                            closest('.t3-form-field-container')
+                            closest(Tx_ImportStudip.getElementName('container'))
                     );
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').show();
                     coursedetailtarget.show();
                     break;
                 // News list.
@@ -198,7 +211,11 @@ Tx_ImportStudip = {
                             value: TYPO3.jQuery('#tx-importstudip-smallnews').data('input-value')
                         }
                     );
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').show();
                     newsdetailtarget.show();
+                    if (TYPO3.jQuery('#tx-importstudip-institutes').find('input[name*="settings.institute"]:checked').length > 0) {
+                        Tx_ImportStudip.getExternConfigurations('radio');
+                    }
                     break;
                 // Course search
                 case 'searchpage':
@@ -217,6 +234,7 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-subjects');
                     Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     Tx_ImportStudip.getInstitutes('tx-importstudip-preselectinst');
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').hide();
             }
             TYPO3.jQuery.ajax({
                 url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
@@ -238,6 +256,7 @@ Tx_ImportStudip = {
             }
         // No page type set, show default view.
         } else {
+            Tx_ImportStudip.disableInput('tx-importstudip-institutes');
             Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
             Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
             Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
@@ -251,31 +270,35 @@ Tx_ImportStudip = {
             Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
             Tx_ImportStudip.disableInput('tx-importstudip-linktext');
             Tx_ImportStudip.disableInput('tx-importstudip-linkformat');
+            Tx_ImportStudip.disableInput('tx-importstudip-persondetailtarget');
+            Tx_ImportStudip.disableInput('tx-importstudip-coursedetailtarget');
+            Tx_ImportStudip.disableInput('tx-importstudip-newsdetailtarget');
+            TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').hide();
         }
     },
 
     adjustLinkOptions: function() {
         if (TYPO3.jQuery('#tx-importstudip-makelink-checkbox').prop('checked')) {
-            TYPO3.jQuery('input[name*="settings.persondetailtarget"]').closest('div.t3-form-field-container').hide();
-            TYPO3.jQuery('input[name*="settings.coursedetailtarget"]').closest('div.t3-form-field-container').hide();
-            TYPO3.jQuery('input[name*="settings.newsdetailtarget"]').closest('div.t3-form-field-container').hide();
+            TYPO3.jQuery('input[data-formengine-input-name*="settings.persondetailtarget"]').closest(Tx_ImportStudip.getElementName('label')).hide();
+            TYPO3.jQuery('input[data-formengine-input-name*="settings.coursedetailtarget"]').closest(Tx_ImportStudip.getElementName('label')).hide();
+            TYPO3.jQuery('input[data-formengine-input-name*="settings.newsdetailtarget"]').closest(Tx_ImportStudip.getElementName('label')).hide();
             Tx_ImportStudip.enableInput('tx-importstudip-linktext');
             Tx_ImportStudip.enableInput('tx-importstudip-linkformat');
-            TYPO3.jQuery('input[name*="settings.linktarget"]').closest('div.t3-form-field-container').show();
+            TYPO3.jQuery('input[data-formengine-input-name*="settings.linktarget"]').closest(Tx_ImportStudip.getElementName('label')).show();
             TYPO3.jQuery('#tx-importstudip-makelink-hidden').val(1);
         } else {
             if (TYPO3.jQuery('#courses:checked').length > 0 || TYPO3.jQuery('#coursedetails:checked').length > 0) {
-                TYPO3.jQuery('input[name*="settings.persondetailtarget"]').closest('div.t3-form-field-container').show();
+                TYPO3.jQuery('input[data-formengine-input-name*="settings.persondetailtarget"]').closest(Tx_ImportStudip.getElementName('label')).show();
             }
             if (TYPO3.jQuery('#courses:checked').length > 0 || TYPO3.jQuery('#persondetails:checked').length > 0) {
-                TYPO3.jQuery('input[name*="settings.coursedetailtarget"]').closest('div.t3-form-field-container').show();
+                TYPO3.jQuery('input[data-formengine-input-name*="settings.coursedetailtarget"]').closest(Tx_ImportStudip.getElementName('label')).show();
             }
             if (TYPO3.jQuery('#news:checked').length > 0) {
-                TYPO3.jQuery('input[name*="settings.newsdetailtarget"]').closest('div.t3-form-field-container').show();
+                TYPO3.jQuery('input[data-formengine-input-name*="settings.newsdetailtarget"]').closest(Tx_ImportStudip.getElementName('label')).show();
             }
             Tx_ImportStudip.disableInput('tx-importstudip-linktext');
             Tx_ImportStudip.disableInput('tx-importstudip-linkformat');
-            TYPO3.jQuery('input[name*="settings.linktarget"]').closest('div.t3-form-field-container').hide();
+            TYPO3.jQuery('input[data-formengine-input-name*="settings.linktarget"]').closest(Tx_ImportStudip.getElementName('label')).hide();
             TYPO3.jQuery('#tx-importstudip-makelink-hidden').val(0);
         }
     },
@@ -286,7 +309,7 @@ Tx_ImportStudip = {
      */
     getInstitutes: function(elementId) {
         var div = TYPO3.jQuery('#' + elementId);
-        div.parents('.t3-form-field-container').show();
+        div.parents(Tx_ImportStudip.getElementName('container')).show();
         if (TYPO3.jQuery('#' + elementId).find('input[type="radio"]').length == 0) {
             div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
             TYPO3.jQuery.ajax({
@@ -369,7 +392,7 @@ Tx_ImportStudip = {
      */
     getExternConfigurations: function(sourcetype) {
         var div = TYPO3.jQuery('#tx-importstudip-externconfig');
-        div.parents('.t3-form-field-container').show();
+        div.parents(Tx_ImportStudip.getElementName('container')).show();
         div.html(Tx_ImportStudip.getSpinner(div.data('loading-text')));
         var source = null;
         /*
@@ -632,7 +655,7 @@ Tx_ImportStudip = {
      * @param parameters needed parameters for AJAX call which fills in data
      */
     enableInput: function(id, parameters) {
-        TYPO3.jQuery('#'+id).closest('.t3-form-field-container').show();
+        TYPO3.jQuery('#'+id).closest(Tx_ImportStudip.getElementName('container')).show();
         if (parameters != '' && parameters != null) {
             TYPO3.jQuery.ajax({
                 url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
@@ -654,7 +677,7 @@ Tx_ImportStudip = {
      */
     disableInput: function(id) {
         TYPO3.jQuery('#'+id).html();
-        TYPO3.jQuery('#'+id).closest('.t3-form-field-container').hide();
+        TYPO3.jQuery('#'+id).closest(Tx_ImportStudip.getElementName('container')).hide();
     },
 
     /**
@@ -663,7 +686,7 @@ Tx_ImportStudip = {
      * @returns {string|*}
      */
     getSpinner: function(text) {
-        html = '<img src="gfx/spinner.gif"/>';
+        html = '';
         if (text != '') {
             html += text;
         }
@@ -682,18 +705,18 @@ Tx_ImportStudip = {
         var element = TYPO3.jQuery('#' + elementId);
         // Append all given children.
         for (var i = 0 ; i < children.length ; i++) {
-            element.append(TYPO3.jQuery('#' + children[i]).closest('.t3-form-field-container'));
+            element.append(TYPO3.jQuery('#' + children[i]).closest(Tx_ImportStudip.getElementName('container')));
         }
         // Hide element.
         element.hide();
-        var container = element.closest('.t3-form-field-container');
+        var container = element.closest(Tx_ImportStudip.getElementName('container'));
         container.addClass('tx-importstudip-entrygroup');
         container.addClass(elementId + '-container');
-        container.children('.t3-form-field-label').prepend(
-            '<img src="gfx/ol/plusbullet.gif" data-toggle-image="gfx/ol/minusbullet.gif"/>');
-        container.children('.t3-form-field-label').on('click', function() {
+        container.children(Tx_ImportStudip.getElementName('label')).prepend(
+            '<img src="sysext/t3skin/icons/gfx/ol/plus.gif" data-toggle-image="sysext/t3skin/icons/gfx/ol/minus.gif"/>');
+        container.children(Tx_ImportStudip.getElementName('label')).children('img, label').on('click', function() {
             element.toggle();
-            var img = container.children('.t3-form-field-label').children('img');
+            var img = container.children(Tx_ImportStudip.getElementName('label')).children('img');
             var src = img.attr('src');
             var other = img.data('toggle-image');
             img.attr('src', other);
@@ -710,6 +733,30 @@ Tx_ImportStudip = {
             element.attr('src', img2);
         }
         return false;
+    },
+
+    /**
+     * Gets element names according to TYPO3 version.
+     * @param type
+     * @returns {string}
+     */
+    getElementName: function(type) {
+        var result = '';
+
+        var t3version = (TYPO3.jQuery('div.t3-form-field-container').length > 0) ? 6 : 7;
+
+        switch (type) {
+            case 'container':
+                result = (t3version == 6) ? '.t3-form-field-container' : '.form-section';
+                break;
+            case 'label':
+                result = (t3version == 6) ? '.t3-form-field-label' : '.form-group';
+                break;
+            case 'inputname':
+                result = (t3version == 6) ? 'name' : 'data-formengine-input-name';
+                break;
+        }
+        return result;
     }
 
 };
@@ -726,10 +773,18 @@ TYPO3.jQuery(function () {
     Tx_ImportStudip.buildEntryGroup('tx-importstudip-linkingoptions',
         ['tx-importstudip-makelink', 'tx-importstudip-linktext', 'tx-importstudip-linkformat']);
     var container = TYPO3.jQuery('#tx-importstudip-linkingoptions');
-    container.append(TYPO3.jQuery('select[name*=persondetailtarget').closest('.t3-form-field-container'));
-    container.append(TYPO3.jQuery('select[name*=coursedetailtarget').closest('.t3-form-field-container'));
-    container.append(TYPO3.jQuery('select[name*=newsdetailtarget').closest('.t3-form-field-container'));
-    container.append(TYPO3.jQuery('select[name*=linktarget').closest('.t3-form-field-container'));
+    container.append(
+        TYPO3.jQuery('select[' + Tx_ImportStudip.getElementName('inputname') + '*="persondetailtarget"]').
+            closest(Tx_ImportStudip.getElementName('container')));
+    container.append(
+        TYPO3.jQuery('select[' + Tx_ImportStudip.getElementName('inputname') + '*="coursedetailtarget"]').
+            closest(Tx_ImportStudip.getElementName('container')));
+    container.append(
+        TYPO3.jQuery('select[' + Tx_ImportStudip.getElementName('inputname') + '*="newsdetailtarget"]').
+            closest(Tx_ImportStudip.getElementName('container')));
+    container.append(
+        TYPO3.jQuery('select[' + Tx_ImportStudip.getElementName('inputname') + '*="linktarget"]').
+            closest(Tx_ImportStudip.getElementName('container')));
     Tx_ImportStudip.adjustToPageType();
     Tx_ImportStudip.adjustLinkOptions();
 });

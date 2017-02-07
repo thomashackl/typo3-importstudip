@@ -117,8 +117,7 @@
             </trans-unit>
             <trans-unit id="backend.label.institute">
                 <target>
-                    Welche Einrichtung stellt die anzuzeigenden Daten zur
-                    Verf&#252;gung?
+                    Welche Einrichtung stellt die anzuzeigenden Daten zur Verf&#252;gung?
                 </target>
             </trans-unit>
             <trans-unit id="backend.label.linkformat">
@@ -234,15 +233,12 @@
             </trans-unit>
             <trans-unit id="backend.text.coursesearch">
                 <target>
-                    Sie k&#246;nnen nach Veranstaltungen durch Angabe von
-                    Teilen des Titels oder der Veranstaltungsnummer suchen.
+                    Sie k&#246;nnen nach Veranstaltungen durch Angabe von Teilen des Titels oder der Veranstaltungsnummer suchen.
                 </target>
             </trans-unit>
             <trans-unit id="backend.text.personsearch">
                 <target>
-                    Sie k&#246;nnen nach Personen durch Angabe des Vornamens
-                    oder Nachnamens oder Benutzernamens oder in der Form
-                    "Vorname Nachname" suchen.
+                    Sie k&#246;nnen nach Personen durch Angabe des Vornamens oder Nachnamens oder Benutzernamens oder in der Form "Vorname Nachname" suchen.
                 </target>
             </trans-unit>
             <trans-unit id="conf.category_studip">
@@ -257,43 +253,27 @@
             </trans-unit>
             <trans-unit id="conf.config_cache_lifetime">
                 <target>
-                    Wie lange (in Minuten) sollen aus Stud.IP &#252;bertragene
-                    Konfigurationsdaten zwischengespeichert werden?:Daten, die
-                    f&#252;r die Konfiguration im Backend &#252;ber die
-                    REST-Schnittstelle aus Stud.IP abgerufen werden, werden
-                    f&#252;r diese Dauer in der Datenbank zwischengespeichert
-                    und erst nach Ablauf dieser Zeit wieder neu aus Stud.IP
-                    abgerufen.
+                    Wie lange (in Minuten) sollen aus Stud.IP &#252;bertragene Konfigurationsdaten zwischengespeichert werden?:Daten, die f&#252;r die Konfiguration im Backend &#252;ber die REST-Schnittstelle aus Stud.IP abgerufen werden, werden f&#252;r diese Dauer in der Datenbank zwischengespeichert und erst nach Ablauf dieser Zeit wieder neu aus Stud.IP abgerufen.
                 </target>
             </trans-unit>
             <trans-unit id="conf.debug">
                 <target>
-                    Debug-Ausgaben?:Falls gesetzt, werden Information
-                    dar&#252;ber ausgegeben, welche Daten von Stud.IP abgerufen
-                    werden und wie sie in der Extension weiterverarbeitet
-                    werden.
+                    Debug-Ausgaben?:Falls gesetzt, werden Information dar&#252;ber ausgegeben, welche Daten von Stud.IP abgerufen werden und wie sie in der Extension weiterverarbeitet werden.
                 </target>
             </trans-unit>
             <trans-unit id="conf.studip_api_password">
                 <target>
-                    Passwort f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API
-                    zuzugreifen, wird ein Passwort ben&#246;tigt. Dieses
-                    erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.
+                    Passwort f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Passwort ben&#246;tigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.
                 </target>
             </trans-unit>
             <trans-unit id="conf.studip_api_username">
                 <target>
-                    Benutzername f&#252;r API-Zugriff:Um auf die
-                    Stud.IP-REST-API zuzugreifen, wird ein Benutzername
-                    ben&#246;tigt. Diesen erhalten Sie bei Ihrem lokalen
-                    Stud.IP-Rootadministrator.
+                    Benutzername f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Benutzername ben&#246;tigt. Diesen erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.
                 </target>
             </trans-unit>
             <trans-unit id="conf.studip_externphp_path">
                 <target>
-                    Vollst&#228;ndige URL zu extern.php:Die so genannten
-                    Externen Seiten werden in Stud.IP &#252;ber die extern.php
-                    bereitgestellt.
+                    Vollst&#228;ndige URL zu extern.php:Die so genannten Externen Seiten werden in Stud.IP &#252;ber die extern.php bereitgestellt.
                 </target>
             </trans-unit>
             <trans-unit id="conf.studip_hierarchy_institute">
@@ -313,23 +293,12 @@
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
                 <target>
-                    Welche Stud.IP-Einrichtungshierarchie soll verwendet
-                    werden?:In Stud.IP gibt es zwei Arten, um die Beziehungen
-                    von Einrichtungen untereinander darzustellen. Die
-                    Institute-Hierarchie kann maximal zweistufig sein,
-                    beinhaltet aber nur echte Einrichtungen. Daneben gibt es
-                    noch die RangeTree-Einrichtungshierarchie, die beliebig
-                    viele Ebenen und Mehrfachzuordnungen darstellen kann, auch
-                    mit Ebenen, die keiner existierenden Einrichtung entsprechen.
+                    Welche Stud.IP-Einrichtungshierarchie soll verwendet werden?:In Stud.IP gibt es zwei Arten, um die Beziehungen von Einrichtungen untereinander darzustellen. Die Institute-Hierarchie kann maximal zweistufig sein, beinhaltet aber nur echte Einrichtungen. Daneben gibt es noch die RangeTree-Einrichtungshierarchie, die beliebig viele Ebenen und Mehrfachzuordnungen darstellen kann, auch mit Ebenen, die keiner existierenden Einrichtung entsprechen.
                 </target>
             </trans-unit>
             <trans-unit id="conf.typo3_url">
                 <target>
-                    Adresse dieser Website (optional):Diese Angabe
-                    &#252;berschreibt die automatische Ermittlung der aktuellen
-                    Seitenadresse. Das kann sinnvoll sein, wenn Ihre
-                    TYPO3-Installation nach au&#223;en &#252;ber eine andere
-                    Adresse aufgerufen wird, als sie eigentlich physikalisch hat.
+                    Adresse dieser Website (optional):Diese Angabe &#252;berschreibt die automatische Ermittlung der aktuellen Seitenadresse. Das kann sinnvoll sein, wenn Ihre TYPO3-Installation nach au&#223;en &#252;ber eine andere Adresse aufgerufen wird, als sie eigentlich physikalisch hat.
                 </target>
             </trans-unit>
             <trans-unit id="frontend.label.all">
@@ -355,15 +324,12 @@
             </trans-unit>
             <trans-unit id="frontend.text.error_no_curl">
                 <target>
-                    Es ist ein TYPO3-Fehler aufgetreten, daher k&#246;nnen
-                    keine Daten aus Stud.IP abgerufen werden.
+                    Es ist ein TYPO3-Fehler aufgetreten, daher k&#246;nnen keine Daten aus Stud.IP abgerufen werden.
                 </target>
             </trans-unit>
             <trans-unit id="frontend.text.error_studip_unavailable">
                 <target>
-                    Es k&#246;nnen keine Daten angezeigt werden, da Stud.IP
-                    nicht verf&#252;gbar ist oder zu lange braucht, um zu
-                    antworten.
+                    Es k&#246;nnen keine Daten angezeigt werden, da Stud.IP nicht verf&#252;gbar ist oder zu lange braucht, um zu antworten.
                 </target>
             </trans-unit>
             <trans-unit id="frontend.text.no_search_results">
@@ -393,9 +359,7 @@
             </trans-unit>
             <trans-unit id="message.incomplete_api_config">
                 <target>
-                    Bitte setzen Sie den korrekten Pfad zur
-                    Stud.IP-Schnittstelle und die zugeh$#246;rige Kombination
-                    aus Benutzername und Passwort.
+                    Bitte setzen Sie den korrekten Pfad zur Stud.IP-Schnittstelle und die zugeh$#246;rige Kombination aus Benutzername und Passwort.
                 </target>
             </trans-unit>
             <trans-unit id="message.no_courses_found">
@@ -410,14 +374,12 @@
             </trans-unit>
             <trans-unit id="message.rest_access_error">
                 <target>
-                    Auf die Stud.IP-Schnittstelle konnte nicht zugegriffen
-                    werden. Die Fehlermeldung lautete:
+                    Auf die Stud.IP-Schnittstelle konnte nicht zugegriffen werden. Die Fehlermeldung lautete:
                 </target>
             </trans-unit>
             <trans-unit id="plugindesc">
                 <target>
-                    F&#252;gt Daten aus Stud.IP ein, wie Veranstaltungs-
-                    oder Personenverzeichnisse.
+                    F&#252;gt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.
                 </target>
             </trans-unit>
             <trans-unit id="plugintitle">

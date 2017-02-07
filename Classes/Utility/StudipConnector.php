@@ -317,6 +317,7 @@ class StudipConnector {
      */
     private static function getData($route, $caching=true)
     {
+        $data = array();
         $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
         $validfor = intval($config['config_cache_lifetime']) * 60 * 1000;
         if ($caching) {
@@ -330,11 +331,11 @@ class StudipConnector {
         } else {
             $rest = new StudipRESTHelper();
             $data = $rest->call($route);
-            if ($caching) {
+            if ($caching && $data) {
                 if ($row) {
                     $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
                         'tx_importstudip_config',
-                        'route=' . $route,
+                        "route='" . $route . "'",
                         array('data' => $data, 'chdate' => time())
                     );
                 } else {
