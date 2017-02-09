@@ -586,28 +586,28 @@ class ConfigForm {
         return $html;
     }
 
-    /*public static function getConfig($data) {
-        $result = array();
-        // Extract already configured flexform values.
-        $xml = simplexml_load_string($data['row']['pi_flexform']);
-        if ($xml) {
-            $json = json_encode($xml);
-            $fullConfig = json_decode($json, true);
-            $fullConfig = $fullConfig['data']['sheet']['language']['field'];
-            foreach ($fullConfig as $c) {
-                $result[$c['@attributes']['index']] = $c['value'];
-            }
-        }
-        return $result;
-    }*/
-
     public static function getConfig($data) {
         $result = array();
-        // Extract already configured flexform values.
-        $config = $data['row']['pi_flexform']['data']['dataSheet']['lDEF'];
-        if (is_array($config)) {
-            foreach ($config as $key => $value) {
-                $result[$key] = $value['vDEF'];
+        // TYPO3 6.x
+        if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) < 7000000) {
+            // Extract already configured flexform values.
+            $xml = simplexml_load_string($data['row']['pi_flexform']);
+            if ($xml) {
+                $json = json_encode($xml);
+                $fullConfig = json_decode($json, true);
+                $fullConfig = $fullConfig['data']['sheet']['language']['field'];
+                foreach ($fullConfig as $c) {
+                    $result[$c['@attributes']['index']] = $c['value'];
+                }
+            }
+        // TYPO3 7 and up.
+        } else {
+            // Extract already configured flexform values.
+            $config = $data['row']['pi_flexform']['data']['dataSheet']['lDEF'];
+            if (is_array($config)) {
+                foreach ($config as $key => $value) {
+                    $result[$key] = $value['vDEF'];
+                }
             }
         }
         return $result;
