@@ -135,11 +135,13 @@ class ConfigForm {
 
     public static function getExternConfigurationsForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<select name="'.$inputname.'" size="1" onchange="Tx_ImportStudip.setModuleName()">';
-        foreach ($data as $entry) {
-            $html .= '<option value="'.$entry->id.'" data-module="'.
-                $entry->type.'"'.
-                ($entry->id==$selected ? ' selected' : '').'>'.
-                $entry->name.'</option>';
+        if (is_array($data)) {
+            foreach ($data as $entry) {
+                $html .= '<option value="'.$entry->id.'" data-module="'.
+                    $entry->type.'"'.
+                    ($entry->id==$selected ? ' selected' : '').'>'.
+                    $entry->name.'</option>';
+            }
         }
         $html .= '</select>';
         return $html;
