@@ -459,7 +459,7 @@ class ConfigForm {
         if ($config['settings.pagetype'] == 'persons' ||
                 \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'persons') {
             $html .= self::getStatusgroupForm(
-                json_decode(StudipConnector::getStatusgroupNames($config['settings.institute'])),
+                json_decode(StudipConnector::getStatusgroupNames($config['settings.institute']), true),
                 $parameters['itemFormElName'], $parameters['itemFormElValue']);
         }
         $html .= '</div>';
@@ -473,9 +473,10 @@ class ConfigForm {
                 'backend.label.all', 'importstudip')).
             '</option>';
         foreach ($data as $entry) {
-            $html .= '<option value="'.$entry.'"'.
-                ($entry==$selected ? ' selected' : '').'>'.
-                $entry.'</option>';
+            $current = (array) $entry;
+            $html .= '<option value="'.$current['id'].'"'.
+                ($current['id']==$selected ? ' selected' : '').'>'.
+                $current['name'].'</option>';
         }
         $html .= '</select>';
         return $html;

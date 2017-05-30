@@ -191,6 +191,8 @@ class StudipExternalPage
         // Check and set if some parameters are already given by called TYPO3 page URL.
         $urlparams = self::urlParameters();
 
+        $params = array();
+
         // Parameters provided by GET, use these.
         if ($urlparams) {
 
@@ -297,6 +299,7 @@ class StudipExternalPage
                     if ($settings['statusgroup']) {
                         $params['visible_groups'] = $settings['statusgroup'];
                     }
+                    break;
                 // Show a single person.
                 case 'persondetails':
                     $params['username'] = $settings['personsearch'];
