@@ -95,7 +95,7 @@ class AjaxHandler {
 
     public function coursesearch() {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         return ConfigForm::getCourseSearch();
     }
 
@@ -103,7 +103,7 @@ class AjaxHandler {
         $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
         $semester = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('semester');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $data = json_decode(StudipConnector::searchCourse($searchterm, $semester), true);
         return ConfigForm::getCourseSearchForm($data, $inputname, $selected);
     }
@@ -122,7 +122,7 @@ class AjaxHandler {
 
     public function choosecourseinstitute() {
         $course_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('courseid');
-        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $institutes = json_decode(StudipConnector::getCourse($course_id), true);
         $institutes = array($institutes['home_institute']);
@@ -147,7 +147,7 @@ class AjaxHandler {
 
     public function coursetypeform() {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
         return ConfigForm::getCourseTypeForm(json_decode(StudipConnector::getCourseTypes($institute)),
             $inputname, $value);
@@ -156,7 +156,7 @@ class AjaxHandler {
     public function subjectsform() {
         $parent_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('parent');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         //return StudipConnector::getSubjects($parent_id, 2);
         return ConfigForm::getSubjectForm(json_decode(StudipConnector::getSubjects($parent_id, 2)),
             $inputname, $selected);

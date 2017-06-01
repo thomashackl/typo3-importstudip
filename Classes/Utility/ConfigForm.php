@@ -414,6 +414,19 @@ class ConfigForm {
 
     public static function getSubjectForm($data, $inputname, $selected, $parameters=array()) {
         $html = '<ul class="tx-importstudip-tree">';
+        /*
+         * Extra entry for deselecting any tree entry which cannot be done
+         * otherwise because you cannot unselect a radio button.
+         */
+        $html .= '<li class="tx-importstudip-treeleaf">';
+        $html .= '<input type="radio" class="tx-importstudip-selector" name="' . $inputname . '" value=""'.
+            ($selected == '' ? ' checked' : '') . '/>';
+        $html .= trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+            'backend.label.all', 'importstudip'));
+
+        /**
+         * Now build subject area tree.
+         */
         foreach ($data as $entry) {
             $id = 'tx-importstudip-subject-'.$entry->tree_id;
             $html .= '<li class="'.
