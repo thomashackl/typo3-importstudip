@@ -78,10 +78,13 @@ class StudipExternalPage
                 // No result because of code 404 "Not found".
                 if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 404) {
                     $error = true;
-                    throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
+                    /*throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
                         trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                             'frontend.text.error_studip_404',
-                            'importstudip')));
+                            'importstudip')));*/
+                    $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                        'frontend.text.error_studip_404',
+                        'importstudip'));
                 }
                 curl_close($curl);
 
@@ -105,10 +108,13 @@ class StudipExternalPage
                     // No result because of code 404 "Not found".
                     if (!$html && strpos($http_response_header[0], '404') !== false) {
                         $error = true;
-                        throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
+                        /*throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
                             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                                 'frontend.text.error_studip_404',
-                                'importstudip')));
+                                'importstudip')));*/
+                        $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                            'frontend.text.error_studip_404',
+                            'importstudip'));
                     }
 
                 // No allow_url_fopen, show error message and write to syslog.
