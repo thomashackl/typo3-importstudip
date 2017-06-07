@@ -23,7 +23,7 @@ $EM_CONF[$_EXTKEY] = array(
         'suggests' => array(
         ),
     ),
-    'state' => 'beta',
+    'state' => 'stable',
     'clearCacheOnLoad' => 1,
     'author' => 'Thomas Hackl',
     'author_email' => 'thomas.hackl@uni-passau.de',
