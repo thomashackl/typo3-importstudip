@@ -35,13 +35,13 @@ class ConfigForm {
         $types = StudipConnector::getExternConfigTypes();
         foreach ($types as $type) {
             $result .= '<input type="radio" id="' .$type[1].
-                '" onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
+                '" onclick="Tx_ImportStudip.changeSelection(\'pagetype\', \'\')" name="'.
                 $parameters['itemFormElName'].'" value="'.$type[1].'"'.
                 ($type[1] == $parameters['itemFormElValue'] ? ' checked' : '').
                 '/><label for="'.$type[1].'">'.trim($type[0]).'</label><br/>';
         }
         $result .= '<input type="radio" id="searchpage" '.
-            'onclick="Tx_ImportStudip.changeSelection(\'pagetype\')" name="'.
+            'onclick="Tx_ImportStudip.changeSelection(\'pagetype\', \'\')" name="'.
             $parameters['itemFormElName'].'" value="searchpage"'.
             ($parameters['itemFormElValue'] == 'searchpage' ? ' checked' : '').
             '/><label for="searchpage">'.

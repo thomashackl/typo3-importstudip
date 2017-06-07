@@ -1,13 +1,13 @@
 Tx_ImportStudip = {
 
-    changeSelection: function(type) {
+    changeSelection: function(type, selected) {
         switch (type) {
             case 'pagetype':
                 Tx_ImportStudip.adjustToPageType();
                 break;
             case 'institute':
                 Tx_ImportStudip.getExternConfigurations();
-                Tx_ImportStudip.changeInstitute();
+                Tx_ImportStudip.changeInstitute(selected);
                 break;
         }
     },
@@ -348,16 +348,17 @@ Tx_ImportStudip = {
     /**
      * Actions to execute if the selected institute is changed.
      */
-    changeInstitute: function() {
-        var type = TYPO3.jQuery('#tx-importstudip-pagetypes').find('input[type="radio"]:checked').val();
+    changeInstitute: function(selected) {
+        var type = TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val();
         // Set course types for chosen institute.
         if (type == 'courses') {
+            Tx_ImportStudip.getExternConfigurations('radio');
             TYPO3.jQuery.ajax({
                 url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
                 method: 'post',
                 data: {
                     action: 'coursetypeform',
-                    institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
+                    institute: selected,
                     inputname: TYPO3.jQuery('#tx-importstudip-coursetypes').data('input-name'),
                     selected: TYPO3.jQuery('#tx-importstudip-coursetypes').data('input-value')
                 },
@@ -367,19 +368,21 @@ Tx_ImportStudip = {
             });
         // Set statusgroups for chosen institute.
         } else if (type == 'persons') {
-            TYPO3.jQuery.ajax({
-                url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],
-                method: 'post',
-                data: {
-                    action: 'statusgroupform',
-                    institute: TYPO3.jQuery('#tx-importstudip-institutes').find('input[type="radio"]:checked').val(),
-                    inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
-                    selected: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value')
-                },
-                success: function(response, textStatus, jqXHR) {
-                    TYPO3.jQuery('#tx-importstudip-statusgroups').html(response.tx_importstudip);
+            Tx_ImportStudip.enableInput('tx-importstudip-aggregate',
+                {
+                    action: 'aggregationform',
+                    inputname: TYPO3.jQuery('#tx-importstudip-aggregate').data('input-name'),
+                    value: TYPO3.jQuery('#tx-importstudip-aggregate').data('input-value')
                 }
-            });
+            );
+            Tx_ImportStudip.enableInput('tx-importstudip-statusgroups',
+                {
+                    action: 'statusgroupform',
+                    inputname: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-name'),
+                    value: TYPO3.jQuery('#tx-importstudip-statusgroups').data('input-value'),
+                    institute: selected,
+                }
+            );
         }
     },
 
