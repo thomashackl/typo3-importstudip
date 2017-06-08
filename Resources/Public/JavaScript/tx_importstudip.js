@@ -790,4 +790,17 @@ TYPO3.jQuery(function () {
             closest(Tx_ImportStudip.getElementName('container')));
     Tx_ImportStudip.adjustToPageType();
     Tx_ImportStudip.adjustLinkOptions();
+
+    TYPO3.jQuery('input#tx-importstudip-personsearchterm').on('keypress', function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            TYPO3.jQuery('button#tx-importstudip-execute-personsearch').click();
+        }
+    });
+    TYPO3.jQuery('input#tx-importstudip-coursesearchterm').on('keypress', function(event) {
+        if (event.which == 13) {
+            event.preventDefault();
+            TYPO3.jQuery('button#tx-importstudip-execute-coursesearch').click();
+        }
+    });
 });
