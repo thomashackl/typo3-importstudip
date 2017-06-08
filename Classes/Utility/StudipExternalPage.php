@@ -211,9 +211,9 @@ class StudipExternalPage
                 $params['ext_templatepersbrowse[initiale]'] = $initial;
             }
 
-            // Item_id for course browser.
-            if ($item = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('item_id')) {
-                $params['ext_templatepersbrowse[item_id]'] = $item;
+            // Item_id for person browser.
+            if ($item = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('ext_templatepersbrowse')) {
+                $params['ext_templatepersbrowse[item_id]'] = $item['item_id'];
             }
 
             // Single username.
@@ -234,11 +234,6 @@ class StudipExternalPage
             // Aggregate over sub institutes?
             if ($aggregation = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('aggregation')) {
                 $params['aggregation'] = true;
-            }
-
-            // Item_id for course browser.
-            if ($item = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('item_id')) {
-                $params['item_id'] = $item;
             }
 
             // Short news display.
