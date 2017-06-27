@@ -18,7 +18,7 @@
     <!-- Parse old "sheet" element and generate new structure -->
     <xsl:template match="sheet">
         <xsl:if test="@index = 'sDEF'">
-            <sheet index="dataSheet">
+            <sheet index="sDEF">
                 <xsl:apply-templates select="language"/>
             </sheet>
         </xsl:if>
