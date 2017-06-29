@@ -48,8 +48,8 @@ class StudipExternalPage
         $validfor = intval($config['config_cache_lifetime']) * 60;
 
         // Fetch cached content if available.
-        $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('content, chdate',
-            'tx_importstudip_externalpages', "url='" . $url . "'");
+        $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('content, chdate', 'tx_importstudip_externalpages',
+            "url='" . $GLOBALS['TYPO3_DB']->quoteStr($url, 'tx_importstudip_externalpages') . "'");
         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
 
         // Cached content exists and is not expired, use it.
@@ -156,8 +156,11 @@ class StudipExternalPage
                     // Update existing row.
                     $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
                         'tx_importstudip_externalpages',
-                        "url='" . $url . "'",
-                        array('content' => utf8_encode(trim($html)), 'chdate' => time())
+                        "url='" . $GLOBALS['TYPO3_DB']->quoteStr($url, 'tx_importstudip_externalpages') . "'",
+                        array(
+                            'content' => utf8_encode(trim($html)),
+                            'chdate' => time()
+                        )
                     );
                 // Nothing cached yet, create new entry.
                 } else {
@@ -165,11 +168,12 @@ class StudipExternalPage
                     $GLOBALS['TYPO3_DB']->exec_INSERTquery(
                         'tx_importstudip_externalpages',
                         array(
-                            'url' => $url,
+                            'url' => $GLOBALS['TYPO3_DB']->quoteStr($url, 'tx_importstudip_externalpages'),
                             'content' => utf8_encode(trim($html)),
                             'mkdate' => time(),
                             'chdate' => time()
-                        )
+                        ),
+                        'tx_importstudip_externalpages'
                     );
                 }
 
@@ -315,6 +319,10 @@ class StudipExternalPage
             }
 
         }
+
+        array_walk_recursive($params, function (&$value) {
+            $value = $GLOBALS['TYPO3_DB']->quoteStr($value, 'tx_importstudip_externalpages');
+        });
 
         // Now iterate over set parameters and build the URL.
         $first = true;
@@ -478,7 +486,8 @@ class StudipExternalPage
      */
     public static function getTargetPage($uid)
     {
-        $dbData = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('pid', 'tt_content', 'uid='.$uid);
+        $dbData = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('pid', 'tt_content',
+            'uid=' . $GLOBALS['TYPO3_DB']->quoteStr($uid, 'tt_content'));
         return $dbData['pid'];
     }
 

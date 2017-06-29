@@ -321,8 +321,8 @@ class StudipConnector {
         $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
         $validfor = intval($config['config_cache_lifetime']) * 60 * 1000;
         if ($caching) {
-            $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate',
-                'tx_importstudip_config', "route='" . $route . "'");
+            $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate', 'tx_importstudip_config',
+                "route='" . $GLOBALS['TYPO3_DB']->quoteStr($route, 'tx_importstudip_configs') . "'");
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
         }
         if ($row && $row['chdate'] >= time() - $validfor) {
@@ -335,14 +335,14 @@ class StudipConnector {
                 if ($row) {
                     $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
                         'tx_importstudip_config',
-                        "route='" . $route . "'",
+                        "route='" . $GLOBALS['TYPO3_DB']->quoteStr($route, 'tx_importstudip_configs') . "'",
                         array('data' => $data, 'chdate' => time())
                     );
                 } else {
                     $GLOBALS['TYPO3_DB']->exec_INSERTquery(
                         'tx_importstudip_config',
                         array(
-                            'route' => $route,
+                            'route' => $GLOBALS['TYPO3_DB']->quoteStr($route, 'tx_importstudip_configs'),
                             'data' => $data,
                             'mkdate' => time(),
                             'chdate' => time()
