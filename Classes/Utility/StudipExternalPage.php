@@ -38,7 +38,7 @@ class StudipExternalPage
         $extconfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
 
         // Create the correct URL from given settings.
-        $url = self::buildStudipURL($settings, $extconfig['studip_externphp_path']);
+        $url = self::buildStudipURL($settings, $extconfig['studip_externphp_path'], $elementid);
 
         $error = false;
 
@@ -192,14 +192,15 @@ class StudipExternalPage
      *
      * @param Array $settings extension settings as configured by user for this element.
      * @param String $studippath Path to Stud.IP extern.php as given in extension config
+     * @param int $uid ID of the current content element
      * @return string The external page URL.
      */
-    private static function buildStudipURL($settings, $studippath)
+    private static function buildStudipURL($settings, $studippath, $uid)
     {
         $studip = $studippath;
 
         // Check and set if some parameters are already given by called TYPO3 page URL.
-        $urlparams = self::urlParameters();
+        $urlparams = self::urlParameters($uid);
 
         $params = array();
 
@@ -345,9 +346,10 @@ class StudipExternalPage
     /**
      * Check if extension parameters are given via GET and set them accordingly
      *
+     * @param int $uid The current element ID.
      * @return Array The parameters set by GET values.
      */
-    public static function urlParameters()
+    public static function urlParameters($uid)
     {
 
         $set = array();
@@ -355,8 +357,9 @@ class StudipExternalPage
         $module = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('module');
         $config = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('config_id');
         $range = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('range_id');
+        $target = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('target');
 
-        if ($module && $config && $range) {
+        if ($module && $config && $range && (!$target || $target == $uid)) {
             $set = array(
                 'module' => $module,
                 'config_id' => $config,

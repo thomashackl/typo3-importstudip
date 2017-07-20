@@ -62,7 +62,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
             $this->view->assign('showsearch', false);
 
-            if ($this->settings['makelink'] && !StudipExternalPage::urlParameters()) {
+            if ($this->settings['makelink'] && !StudipExternalPage::urlParameters(intval($this->configurationManager->getContentObject()->data['uid']))) {
                 $this->view->assign('makelink', true);
                 // Create a link that will fetch the configured Stud.IP external page.
                 $this->view->assign('link', $this->makeLink());

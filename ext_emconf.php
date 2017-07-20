@@ -28,7 +28,7 @@ $EM_CONF[$_EXTKEY] = array(
     'author' => 'Thomas Hackl',
     'author_email' => 'thomas.hackl@uni-passau.de',
     'author_company' => 'University of Passau',
-    'version' => '3.1.3',
+    'version' => '3.1.4',
     'autoload' => array(
         'classmap' => array(
             'Classes',
@@ -39,5 +39,3 @@ $EM_CONF[$_EXTKEY] = array(
         )
     )
 );
-
-?>
