@@ -52,10 +52,13 @@ class StudipExternalPage
             "url='" . $GLOBALS['TYPO3_DB']->quoteStr($url, 'tx_importstudip_externalpages') . "'");
         $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
 
-        // Cached content exists and is not expired, use it.
-        if ($row && $row['chdate'] >= time() - $validfor) {
+        /*
+         * Cached content exists and is not expired, use it
+         * if the "purge_cache" parameter is not set.
+         */
+        if (!(\TYPO3\CMS\Core\Utility\GeneralUtility::_GET('purge_cache')) && $row && $row['chdate'] >= time() - $validfor) {
 
-            $html = utf8_decode($row['content']);
+            $html = $row['content'];
             $GLOBALS['TYPO3_DB']->sql_free_result($cached);
 
         // No cached content or expired -> fetch page from Stud.IP.
@@ -158,7 +161,7 @@ class StudipExternalPage
                         'tx_importstudip_externalpages',
                         "url='" . $GLOBALS['TYPO3_DB']->quoteStr($url, 'tx_importstudip_externalpages') . "'",
                         array(
-                            'content' => utf8_encode(trim($html)),
+                            'content' => trim($html),
                             'chdate' => time()
                         )
                     );
@@ -169,7 +172,7 @@ class StudipExternalPage
                         'tx_importstudip_externalpages',
                         array(
                             'url' => $GLOBALS['TYPO3_DB']->quoteStr($url, 'tx_importstudip_externalpages'),
-                            'content' => utf8_encode(trim($html)),
+                            'content' => trim($html),
                             'mkdate' => time(),
                             'chdate' => time()
                         ),

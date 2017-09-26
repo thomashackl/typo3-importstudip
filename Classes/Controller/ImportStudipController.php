@@ -76,8 +76,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             }
 
             // UTF8-encode the content if necessary.
-            if ($this->utf) {
-                $content = utf8_encode($content);
+            if (!$this->utf) {
+                $content = utf8_decode($content);
             }
 
             // Assign Stud.IP output to view.
