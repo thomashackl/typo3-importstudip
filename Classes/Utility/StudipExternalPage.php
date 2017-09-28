@@ -389,6 +389,13 @@ class StudipExternalPage
     {
         $oldpath = $extconfig['studip_externphp_path'].'?';
 
+        // Check for HTTP AND HTTPS.
+        if (strpos($oldpath, 'https://')) {
+            $oldpath2 = str_replace('https://', 'http://', $extconfig['studip_externphp_path'].'?');
+        } else {
+            $oldpath2 = str_replace('http://', 'https://', $extconfig['studip_externphp_path'].'?');
+        }
+
         $find = array();
         $replace = array();
 
@@ -401,6 +408,12 @@ class StudipExternalPage
                 $pageid;
             $element = $params['persondetailtarget'] ?: $elementid;
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
+            $replace[] = $newpath.'module=Persondetails';
+            $replace[] = $newpath.'module=TemplatePersondetails';
+
+            // Replace in "other" protocol, too.
+            $find[] = $oldpath2.'module=Persondetails';
+            $find[] = $oldpath2.'module=TemplatePersondetails';
             $replace[] = $newpath.'module=Persondetails';
             $replace[] = $newpath.'module=TemplatePersondetails';
         }
@@ -416,6 +429,12 @@ class StudipExternalPage
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
             $replace[] = $newpath.'module=Lecturedetails';
             $replace[] = $newpath.'module=TemplateLecturedetails';
+
+            // Replace in "other" protocol, too.
+            $find[] = $oldpath2.'module=Lecturedetails';
+            $find[] = $oldpath2.'module=TemplateLecturedetails';
+            $replace[] = $newpath.'module=Lecturedetails';
+            $replace[] = $newpath.'module=TemplateLecturedetails';
         }
 
         // Rewrite links to news details.
@@ -429,6 +448,12 @@ class StudipExternalPage
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
             $replace[] = $newpath.'module=News';
             $replace[] = $newpath.'module=TemplateNews';
+
+            // Replace in "other" protocol, too.
+            $find[] = $oldpath2.'module=News';
+            $find[] = $oldpath2.'module=TemplateNews';
+            $replace[] = $newpath.'module=News';
+            $replace[] = $newpath.'module=TemplateNews';
         }
 
         // Rewrite browsing links.
@@ -440,8 +465,14 @@ class StudipExternalPage
             $element = $params['browsingtarget'] ?: $elementid;
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
             $replace[] = $newpath.'module=TemplatePersBrowse';
+
+            // Replace in "other" protocol, too.
+            $find[] = $oldpath2.'module=TemplatePersBrowse';
+            $replace[] = $newpath.'module=TemplatePersBrowse';
+
             $find[] = 'ext_templatepersbrowse[initiale]=';
             $replace[] = 'initial=';
+
         }
         if (in_array($params['pagetype'], array('', 'courses'))) {
             $find[] = $oldpath.'module=TemplateSemBrowse';
@@ -451,11 +482,21 @@ class StudipExternalPage
             $element = $params['browsingtarget'] ?: $elementid;
             $newpath = self::buildTargetLink($target, $element, $uribuilder);
             $replace[] = $newpath.'module=TemplateSemBrowse';
+
+            // Replace in "other" protocol, too.
+            $find[] = $oldpath2.'module=TemplateSemBrowse';
+            $replace[] = $newpath.'module=TemplateSemBrowse';
+
+
             $find[] = 'ext_templatepersbrowse[item_id]=';
             $replace[] = 'item_id=';
         }
 
         $html = str_replace($find, $replace, $html);
+
+        if (strpos($oldpath))
+
+        $html = str_replace(str_replace('http://', 'https://', $find), $replace, $html);
 
         return $html;
     }
