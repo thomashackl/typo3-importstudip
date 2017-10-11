@@ -287,7 +287,7 @@ class StudipExternalPage
                     }
                     // Show only a selected course type.
                     if ($settings['coursetype']) {
-                        $params['semstatuses'] = $settings['coursetype'];
+                        $params['semstatus'] = $settings['coursetype'];
                     }
                     // Show only courses assigned to selected SemTree node (and its children).
                     if ($settings['subject']) {
