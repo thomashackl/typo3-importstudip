@@ -89,7 +89,7 @@ class StudipRESTHelper {
         $response = $this->client->get($route);
 
         // HTTP code 200 -> all ok, return response.
-        if ($response->info->http_code == '200') {
+        if (in_array($response->info->http_code, array(200, 302))) {
 
             return $response->response;
 
