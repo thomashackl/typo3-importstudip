@@ -494,8 +494,6 @@ class StudipExternalPage
 
         $html = str_replace($find, $replace, $html);
 
-        if (strpos($oldpath))
-
         $html = str_replace(str_replace('http://', 'https://', $find), $replace, $html);
 
         return $html;
