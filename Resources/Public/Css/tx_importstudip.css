@@ -21,12 +21,14 @@ ul.tx-importstudip-tree li.tx-importstudip-treebranch input.tx-importstudip-tree
 ul.tx-importstudip-tree li.tx-importstudip-treebranch input.tx-importstudip-treeinput:checked + ul > li {
   display: block;
   background-image: url('../../../../../../typo3/sysext/t3skin/icons/gfx/ol/join.gif');
+  background-image: url('../../../../../../typo3/sysext/core/Resources/Public/ExtJs/images/ol/join.gif');
   background-repeat: no-repeat;
   margin-left: -20px;
   padding-left: 20px;
 }
 ul.tx-importstudip-tree li.tx-importstudip-treebranch input.tx-importstudip-treeinput:checked + ul > li:last-child {
   background-image: url('../../../../../../typo3/sysext/t3skin/icons/gfx/ol/joinbottom.gif');
+  background-image: url('../../../../../../typo3/sysext/core/Resources/Public/ExtJs/images/ol/joinbottom.gif');
   background-repeat: no-repeat;
 }
 ul.tx-importstudip-tree li.tx-importstudip-treeleaf {
