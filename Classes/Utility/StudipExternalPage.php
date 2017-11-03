@@ -81,10 +81,6 @@ class StudipExternalPage
                 // No result because of code 404 "Not found".
                 if (curl_getinfo($curl, CURLINFO_HTTP_CODE) == 404) {
                     $error = true;
-                    /*throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
-                        trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                            'frontend.text.error_studip_404',
-                            'importstudip')));*/
                     $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                         'frontend.text.error_studip_404',
                         'importstudip'));
@@ -111,10 +107,6 @@ class StudipExternalPage
                     // No result because of code 404 "Not found".
                     if (!$html && strpos($http_response_header[0], '404') !== false) {
                         $error = true;
-                        /*throw new \TYPO3\CMS\Extbase\Property\Exception\TargetNotFoundException(
-                            trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
-                                'frontend.text.error_studip_404',
-                                'importstudip')));*/
                         $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                             'frontend.text.error_studip_404',
                             'importstudip'));
@@ -362,7 +354,7 @@ class StudipExternalPage
         $range = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('range_id');
         $target = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('target');
 
-        if ($module && $config && $range && (!$target || $target == $uid)) {
+        if ($module && $config && $range && (!$target || $target == $uid) && self::checkReferrer()) {
             $set = array(
                 'module' => $module,
                 'config_id' => $config,
@@ -534,6 +526,14 @@ class StudipExternalPage
         $dbData = $GLOBALS['TYPO3_DB']->exec_SELECTgetSingleRow('pid', 'tt_content',
             'uid=' . $GLOBALS['TYPO3_DB']->quoteStr($uid, 'tt_content'));
         return $dbData['pid'];
+    }
+
+    /**
+     * Check if HTTP referrer is part of the current domain.
+     */
+    private static function checkReferrer()
+    {
+        return strpos($_SERVER['HTTP_REFERER'], $_SERVER['HTTP_HOST']) !== false;
     }
 
 }
