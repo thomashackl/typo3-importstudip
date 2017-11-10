@@ -1,3 +1,7 @@
+171109 Version 3.2.0
+* Compatibility with Typo3 8.x
+* Pass frontend language to Stud.IP
+
 170130 Version 3.1.0
 * Compatibility with Typo3 7.x
 

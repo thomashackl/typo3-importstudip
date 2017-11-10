@@ -316,6 +316,11 @@ class StudipExternalPage
 
         }
 
+        // Pass language if set.
+        if ($GLOBALS['TSFE']->lang) {
+            $params['language'] = $GLOBALS['TSFE']->lang;
+        }
+
         array_walk_recursive($params, function (&$value) {
             $value = $GLOBALS['TYPO3_DB']->quoteStr($value, 'tx_importstudip_externalpages');
         });
