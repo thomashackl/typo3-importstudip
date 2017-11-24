@@ -145,7 +145,7 @@ class StudipExternalPage
                 }
             }
 
-            if (!$error) {
+            if (!$error && $html) {
                 // Expired content available, replace it.
                 if ($row) {
                     // Update existing row.
