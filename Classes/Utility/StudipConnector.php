@@ -267,7 +267,11 @@ class StudipConnector {
 
     public static function getStatusgroupNames($institute)
     {
-        return self::getData('extern/statusgroupnames/'.$institute);
+        if ($institute) {
+            return self::getData('extern/statusgroupnames/' . $institute);
+        } else {
+            return array();
+        }
     }
 
     private static function getTypeMapping()
