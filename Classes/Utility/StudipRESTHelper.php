@@ -88,6 +88,11 @@ class StudipRESTHelper {
         // Call route.
         $response = $this->client->get($route);
 
+        $log = fopen('/Users/thomashackl/Downloads/typo3.log', 'a');
+        fwrite('Calling route ' . $route . "...\n");
+        fwrite($log, print_r($response, 1) . "\n\n");
+        fclose($log);
+
         // HTTP code 200 -> all ok, return response.
         if (in_array($response->info->http_code, array(200, 302))) {
 
