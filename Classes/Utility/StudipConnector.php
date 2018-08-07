@@ -172,7 +172,7 @@ class StudipConnector {
     public static function getUser($user_id) {
         $result = array();
         if ($user_id) {
-            $data = json_decode(self::getData('extern/user/' . $user_id), true);
+            $data = json_decode(self::getData('extern/user/' . $user_id, false), true);
             if ($data) {
                 $result = array(
                     array(
@@ -202,7 +202,7 @@ class StudipConnector {
     {
         $result = array();
         if ($user_id) {
-            $result = self::getData('extern/user_institutes/' . $user_id);
+            $result = self::getData('extern/user_institutes/' . $user_id, false);
         }
         return $result;
     }

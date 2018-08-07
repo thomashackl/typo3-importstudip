@@ -147,7 +147,7 @@ class AjaxHandler {
 
     public function coursetypeform() {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+        $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
         return ConfigForm::getCourseTypeForm(json_decode(StudipConnector::getCourseTypes($institute)),
             $inputname, $value);
