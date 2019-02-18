@@ -35,10 +35,12 @@ class StudipExternalPage
     {
 
         // Load global extension config as we need the URL for Stud.IP extern.php.
-        $extconfig = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $om = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $configurationUtility = $om->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $extconfig = $configurationUtility->getCurrentConfiguration('importstudip');
 
         // Create the correct URL from given settings.
-        $url = self::buildStudipURL($settings, $extconfig['studip_externphp_path'], $elementid);
+        $url = self::buildStudipURL($settings, $extconfig['studip_externphp_path']['value'], $elementid);
 
         $error = false;
 
@@ -76,6 +78,7 @@ class StudipExternalPage
                 curl_setopt($curl, CURLOPT_URL, $url);
                 curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
                 curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, $timeout);
+                curl_setopt($curl, CURLOPT_FOLLOWLOCATION, true);
                 $html = trim(curl_exec($curl));
 
                 // No result because of code 404 "Not found".
@@ -145,7 +148,12 @@ class StudipExternalPage
                 }
             }
 
-            if (!$error && $html) {
+            if (strpos($html, 'Ein Fehler ist aufgetreten. Die Daten können nicht angezeigt werden.') !== false ||
+                    strpos($html, 'No snapshot available or empty result!') !== false) {
+                $html = '';
+            }
+
+            if (!$error && trim($html) !== '') {
                 // Expired content available, replace it.
                 if ($row) {
                     // Update existing row.
@@ -388,9 +396,9 @@ class StudipExternalPage
 
         // Check for HTTP AND HTTPS.
         if (strpos($oldpath, 'https://')) {
-            $oldpath2 = str_replace('https://', 'http://', $extconfig['studip_externphp_path'].'?');
+            $oldpath2 = str_replace('https://', 'http://', $extconfig['studip_externphp_path']['value'].'?');
         } else {
-            $oldpath2 = str_replace('http://', 'https://', $extconfig['studip_externphp_path'].'?');
+            $oldpath2 = str_replace('http://', 'https://', $extconfig['studip_externphp_path']['value'].'?');
         }
 
         $find = array();

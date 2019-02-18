@@ -126,11 +126,14 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
         if (trim($searchterm)) {
             // Get search results.
-            $results = json_decode(StudipConnector::frontendSearchCourse($searchterm, $semester, $institute, $coursetype));
+            $results = json_decode(StudipConnector::frontendSearchCourse($searchterm, $semester, $institute, $coursetype), true);
             $this->view->assign('searchresults', $results);
             $this->view->assign('numresults', count($results));
-            $config = unserialize($GLOBALS['TSFE']->TYPO3_CONF_VARS['EXT']['extConf']['importstudip']);
-            $studip_url = $config['studip_url'];
+
+            $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+            $config = $configurationUtility->getCurrentConfiguration('importstudip');
+
+            $studip_url = $config['studip_url']['value'];
             if (substr($studip_url, 0, 1) == '/') {
                 $studip_url = substr($studip_url, 1);
             } else {

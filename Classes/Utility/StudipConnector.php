@@ -133,7 +133,7 @@ class StudipConnector {
      */
     public static function getInstitutes($treetype, $externtype='')
     {
-        $result = array();
+        $result = '';
         if ($treetype) {
             $mapping = self::getTypeMapping();
             if ($treetype == 'rangetree') {
@@ -148,7 +148,7 @@ class StudipConnector {
 
     public static function getExternConfigurations($institute, $type)
     {
-        $result = array();
+        $result = '';
         if ($institute) {
             $mapping = self::getTypeMapping();
             $route = 'extern/externconfigs/' . $institute;
@@ -202,7 +202,7 @@ class StudipConnector {
     {
         $result = array();
         if ($user_id) {
-            $result = self::getData('extern/user_institutes/' . $user_id, false);
+            $result = json_decode(self::getData('extern/user_institutes/' . $user_id, false), true);
         }
         return $result;
     }
@@ -230,6 +230,7 @@ class StudipConnector {
             }
             $result = self::getData($call, false);
         }
+
         return $result;
     }
 
@@ -321,21 +322,27 @@ class StudipConnector {
      */
     private static function getData($route, $caching=true)
     {
-        $data = array();
-        $config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        $validfor = intval($config['config_cache_lifetime']) * 60 * 1000;
+        $data = '';
+
+        $om = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $configurationUtility = $om->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $config = $configurationUtility->getCurrentConfiguration('importstudip');
+
+        $validfor = intval($config['config_cache_lifetime']) * 60;
+
         if ($caching) {
             $cached = $GLOBALS['TYPO3_DB']->exec_SELECTquery('data, chdate', 'tx_importstudip_config',
                 "route='" . $GLOBALS['TYPO3_DB']->quoteStr($route, 'tx_importstudip_configs') . "'");
             $row = $GLOBALS['TYPO3_DB']->sql_fetch_assoc($cached);
         }
+
         if ($row && $row['chdate'] >= time() - $validfor) {
             $data = $row['data'];
             $GLOBALS['TYPO3_DB']->sql_free_result($cached);
         } else {
             $rest = new StudipRESTHelper();
             $data = $rest->call($route);
-            if ($caching && $data) {
+            if ($caching && trim($data) !== '') {
                 if ($row) {
                     $GLOBALS['TYPO3_DB']->exec_UPDATEquery(
                         'tx_importstudip_config',

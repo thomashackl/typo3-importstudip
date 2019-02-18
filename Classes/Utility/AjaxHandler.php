@@ -29,9 +29,12 @@ class AjaxHandler {
     }
 
     public function institutes() {
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $om = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $configurationUtility = $om->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $config = $configurationUtility->getCurrentConfiguration('importstudip');
+
         $configtype = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype');
-        return StudipConnector::getInstitutes($extConf['studip_use_hierarchy'], $configtype);
+        return StudipConnector::getInstitutes($config['studip_use_hierarchy']['value'], $configtype);
     }
 
     public function instituteform() {
@@ -85,7 +88,7 @@ class AjaxHandler {
         $username = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('username');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $institutes = json_decode(StudipConnector::getUserInstitutes($username), true);
+        $institutes = StudipConnector::getUserInstitutes($username);
         $institutes = $institutes['collection']['work'];
         usort($institutes, function($a, $b) {
             return strnatcasecmp($a['name'], $b['name']);

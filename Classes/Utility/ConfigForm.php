@@ -53,8 +53,11 @@ class ConfigForm {
     }
 
     public static function getInstitutes($parameters, $config) {
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
-        $hierarchy = $extConf['studip_use_hierarchy'];
+        $om = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $configurationUtility = $om->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $config = $configurationUtility->getCurrentConfiguration('importstudip');
+
+        $hierarchy = $config['studip_use_hierarchy']['value'];
         $result = '<div id="tx-importstudip-institutes" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'" data-inst-treetype="'.$hierarchy.'" '.
@@ -212,7 +215,7 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         if ($parameters['itemFormElValue']) {
-            $institutes = json_decode(StudipConnector::getUserInstitutes($config['settings.personsearch']), true);
+            $institutes = StudipConnector::getUserInstitutes($config['settings.personsearch']);
             // We need only non-selfassigned institutes.
             $institutes = $institutes['collection']['work'];
             usort(
@@ -517,7 +520,6 @@ class ConfigForm {
     }
 
     public static function getPreselectedInstitute($parameters, $config) {
-        $extConf = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
         $result = '<div id="tx-importstudip-preselectinst" data-input-name="'.
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'" data-inst-treetype="institute" '.

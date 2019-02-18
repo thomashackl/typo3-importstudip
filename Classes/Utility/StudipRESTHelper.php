@@ -32,19 +32,23 @@ class StudipRESTHelper {
     public function __construct() {
 
         // Get global extension config.
-        $this->config = unserialize($GLOBALS['TYPO3_CONF_VARS']['EXT']['extConf']['importstudip']);
+        $om = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+        $configurationUtility = $om->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+        $this->config = $configurationUtility->getCurrentConfiguration('importstudip');
 
         // All necessary values set?
-        if ($this->config['studip_url'] && $this->config['studip_api_username'] && $this->config['studip_api_password']) {
+        if ($this->config['studip_url']['value'] &&
+            $this->config['studip_api_username']['value'] &&
+            $this->config['studip_api_password']['value']) {
 
             /*
              * Build correct URL (check for slashes between path parts and try
              * to remove double slashes in address)
              */
-            if (substr($this->config['studip_url'], 0, 1) == '/') {
-                $url = substr($this->config['studip_url'], 1);
+            if (substr($this->config['studip_url']['value'], 0, 1) == '/') {
+                $url = substr($this->config['studip_url']['value'], 1);
             } else {
-                $url = $this->config['studip_url'];
+                $url = $this->config['studip_url']['value'];
             }
             $url .= 'api.php';
 
@@ -53,11 +57,11 @@ class StudipRESTHelper {
                 'base_url' => $url
             );
             // Add access credentials if set in extension config.
-            if ($this->config['studip_api_username']) {
-                $restconfig['username'] = $this->config['studip_api_username'];
+            if ($this->config['studip_api_username']['value']) {
+                $restconfig['username'] = $this->config['studip_api_username']['value'];
             }
-            if ($this->config['studip_api_password']) {
-                $restconfig['password'] = $this->config['studip_api_password'];
+            if ($this->config['studip_api_password']['value']) {
+                $restconfig['password'] = $this->config['studip_api_password']['value'];
             }
 
             // Initialize REST client.

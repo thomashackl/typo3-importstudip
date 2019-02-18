@@ -4,31 +4,29 @@ namespace UniPassau\Importstudip\ViewHelpers;
 
 class InstituteSelectViewHelper extends \TYPO3\CMS\Fluid\ViewHelpers\Form\SelectViewHelper {
 
-    protected function renderOptionTags($options) {
-        $output = '';
+    protected function getOptions() {
+        $options = [];
 
-        if ($this->hasArgument('prependOptionLabel')) {
-            $value = $this->hasArgument('prependOptionValue') ? $this->arguments['prependOptionValue'] : '';
-            $label = $this->arguments['prependOptionLabel'];
-            $output .= $this->renderOptionTag($value, $label, FALSE) . chr(10);
+        foreach ($this->arguments['options'] as $option) {
+            $options = array_merge($options, $this->buildOptions($option));
         }
 
-        foreach ($options as $faculty) {
-            $output .= $this->renderOptionTag($faculty['id'], $faculty['name'], $this->isSelected($faculty['id']));
-            foreach ($faculty['children'] as $c) {
-                $output .= $this->renderOptionTag($c['id'], '  '.$c['name'], $this->isSelected($c['id']), true);
-            }
-        }
-        return $output;
+        return $options;
     }
 
-    protected function renderOptionTag($value, $label, $isSelected, $isChild = false) {
-        $output = '<option value="' . htmlspecialchars($value) . '"';
-        if ($isSelected) {
-            $output .= ' selected';
+    private function buildOptions($parent, $indent = '') {
+        $options = [
+            $parent['id'] === 'studip' ? '' : $parent['id'] => $indent . $parent['name']
+        ];
+
+        if (is_array($parent['children']) && count($parent['children']) > 0) {
+            foreach ($parent['children'] as $child) {
+                $options = array_merge($options,
+                    $this->buildOptions($child, $indent . html_entity_decode('&nbsp;&nbsp;')));
+            }
         }
-        $output .= '>' . ($isChild ? '&nbsp;&nbsp;' : '') . htmlspecialchars($label) . '</option>';
-        return $output;
+
+        return $options;
     }
 
 }
