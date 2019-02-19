@@ -392,110 +392,107 @@ class StudipExternalPage
      */
     private static function rewriteStudipLinks($html, $pageid, $elementid, $extconfig, $params, $uribuilder)
     {
-        $oldpath = $extconfig['studip_externphp_path'].'?';
+        $oldpath = $extconfig['studip_externphp_path']['value'] . '?';
 
         // Check for HTTP AND HTTPS.
         if (strpos($oldpath, 'https://')) {
-            $oldpath2 = str_replace('https://', 'http://', $extconfig['studip_externphp_path']['value'].'?');
+            $oldpath2 = str_replace(
+                'https://',
+                'http://',
+                $extconfig['studip_externphp_path']['value'] . '?'
+            );
         } else {
-            $oldpath2 = str_replace('http://', 'https://', $extconfig['studip_externphp_path']['value'].'?');
+            $oldpath2 = str_replace(
+                'http://',
+                'https://',
+                $extconfig['studip_externphp_path']['value'] . '?'
+            );
         }
 
         $find = array();
         $replace = array();
 
         // Rewrite links to person details.
-        if (in_array($params['pagetype'], array('', 'courses', 'coursedetails', 'persons', 'news'))) {
-            $find[] = $oldpath.'module=Persondetails';
-            $find[] = $oldpath.'module=TemplatePersondetails';
-            $target = $params['persondetailtarget'] ?
-                self::getTargetPage($params['persondetailtarget']) :
-                $pageid;
-            $element = $params['persondetailtarget'] ?: $elementid;
-            $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $replace[] = $newpath.'module=Persondetails';
-            $replace[] = $newpath.'module=TemplatePersondetails';
+        $find[] = $oldpath . 'module=Persondetails';
+        $find[] = $oldpath . 'module=TemplatePersondetails';
+        $target = $params['persondetailtarget'] ?
+            self::getTargetPage($params['persondetailtarget']) :
+            $pageid;
+        $element = $params['persondetailtarget'] ?: $elementid;
+        $newpath = self::buildTargetLink($target, $element, $uribuilder);
+        $replace[] = $newpath . 'module=Persondetails';
+        $replace[] = $newpath . 'module=TemplatePersondetails';
 
-            // Replace in "other" protocol, too.
-            $find[] = $oldpath2.'module=Persondetails';
-            $find[] = $oldpath2.'module=TemplatePersondetails';
-            $replace[] = $newpath.'module=Persondetails';
-            $replace[] = $newpath.'module=TemplatePersondetails';
-        }
+        // Replace in "other" protocol, too.
+        $find[] = $oldpath2 . 'module=Persondetails';
+        $find[] = $oldpath2 . 'module=TemplatePersondetails';
+        $replace[] = $newpath . 'module=Persondetails';
+        $replace[] = $newpath . 'module=TemplatePersondetails';
 
         // Rewrite links to course details.
-        if (in_array($params['pagetype'], array('', 'courses', 'persondetails'))) {
-            $find[] = $oldpath.'module=Lecturedetails';
-            $find[] = $oldpath.'module=TemplateLecturedetails';
-            $target = $params['coursedetailtarget'] ?
-                self::getTargetPage($params['coursedetailtarget']) :
-                $pageid;
-            $element = $params['coursedetailtarget'] ?: $elementid;
-            $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $replace[] = $newpath.'module=Lecturedetails';
-            $replace[] = $newpath.'module=TemplateLecturedetails';
+        $find[] = $oldpath . 'module=Lecturedetails';
+        $find[] = $oldpath . 'module=TemplateLecturedetails';
+        $target = $params['coursedetailtarget'] ?
+            self::getTargetPage($params['coursedetailtarget']) :
+            $pageid;
+        $element = $params['coursedetailtarget'] ?: $elementid;
+        $newpath = self::buildTargetLink($target, $element, $uribuilder);
+        $replace[] = $newpath . 'module=Lecturedetails';
+        $replace[] = $newpath . 'module=TemplateLecturedetails';
 
-            // Replace in "other" protocol, too.
-            $find[] = $oldpath2.'module=Lecturedetails';
-            $find[] = $oldpath2.'module=TemplateLecturedetails';
-            $replace[] = $newpath.'module=Lecturedetails';
-            $replace[] = $newpath.'module=TemplateLecturedetails';
-        }
+        // Replace in "other" protocol, too.
+        $find[] = $oldpath2 . 'module=Lecturedetails';
+        $find[] = $oldpath2 . 'module=TemplateLecturedetails';
+        $replace[] = $newpath . 'module=Lecturedetails';
+        $replace[] = $newpath . 'module=TemplateLecturedetails';
 
         // Rewrite links to news details.
-        if (in_array($params['pagetype'], array('', 'news'))) {
-            $find[] = $oldpath.'module=News';
-            $find[] = $oldpath.'module=TemplateNews';
-            $target = $params['newsdetailtarget'] ?
-                self::getTargetPage($params['newsdetailtarget']) :
-                $pageid;
-            $element = $params['newsdetailtarget'] ?: $elementid;
-            $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $replace[] = $newpath.'module=News';
-            $replace[] = $newpath.'module=TemplateNews';
+        $find[] = $oldpath . 'module=News';
+        $find[] = $oldpath . 'module=TemplateNews';
+        $target = $params['newsdetailtarget'] ?
+            self::getTargetPage($params['newsdetailtarget']) :
+            $pageid;
+        $element = $params['newsdetailtarget'] ?: $elementid;
+        $newpath = self::buildTargetLink($target, $element, $uribuilder);
+        $replace[] = $newpath . 'module=News';
+        $replace[] = $newpath . 'module=TemplateNews';
 
-            // Replace in "other" protocol, too.
-            $find[] = $oldpath2.'module=News';
-            $find[] = $oldpath2.'module=TemplateNews';
-            $replace[] = $newpath.'module=News';
-            $replace[] = $newpath.'module=TemplateNews';
-        }
+        // Replace in "other" protocol, too.
+        $find[] = $oldpath2 . 'module=News';
+        $find[] = $oldpath2 . 'module=TemplateNews';
+        $replace[] = $newpath . 'module=News';
+        $replace[] = $newpath . 'module=TemplateNews';
 
         // Rewrite browsing links.
-        if (in_array($params['pagetype'], array('', 'persons'))) {
-            $find[] = $oldpath.'module=TemplatePersBrowse';
-            $target = $params['browsingtarget'] ?
-                self::getTargetPage($params['browsingtarget']) :
-                $pageid;
-            $element = $params['browsingtarget'] ?: $elementid;
-            $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $replace[] = $newpath.'module=TemplatePersBrowse';
+        $find[] = $oldpath . 'module=TemplatePersBrowse';
+        $target = $params['browsingtarget'] ?
+            self::getTargetPage($params['browsingtarget']) :
+            $pageid;
+        $element = $params['browsingtarget'] ?: $elementid;
+        $newpath = self::buildTargetLink($target, $element, $uribuilder);
+        $replace[] = $newpath . 'module=TemplatePersBrowse';
 
-            // Replace in "other" protocol, too.
-            $find[] = $oldpath2.'module=TemplatePersBrowse';
-            $replace[] = $newpath.'module=TemplatePersBrowse';
+        // Replace in "other" protocol, too.
+        $find[] = $oldpath2 . 'module=TemplatePersBrowse';
+        $replace[] = $newpath . 'module=TemplatePersBrowse';
 
-            $find[] = 'ext_templatepersbrowse[initiale]=';
-            $replace[] = 'initial=';
+        $find[] = 'ext_templatepersbrowse[initiale]=';
+        $replace[] = 'initial=';
+        $find[] = $oldpath . 'module=TemplateSemBrowse';
+        $target = $params['browsingtarget'] ?
+            self::getTargetPage($params['browsingtarget']) :
+            $pageid;
+        $element = $params['browsingtarget'] ?: $elementid;
+        $newpath = self::buildTargetLink($target, $element, $uribuilder);
+        $replace[] = $newpath . 'module=TemplateSemBrowse';
 
-        }
-        if (in_array($params['pagetype'], array('', 'courses'))) {
-            $find[] = $oldpath.'module=TemplateSemBrowse';
-            $target = $params['browsingtarget'] ?
-                self::getTargetPage($params['browsingtarget']) :
-                $pageid;
-            $element = $params['browsingtarget'] ?: $elementid;
-            $newpath = self::buildTargetLink($target, $element, $uribuilder);
-            $replace[] = $newpath.'module=TemplateSemBrowse';
-
-            // Replace in "other" protocol, too.
-            $find[] = $oldpath2.'module=TemplateSemBrowse';
-            $replace[] = $newpath.'module=TemplateSemBrowse';
+        // Replace in "other" protocol, too.
+        $find[] = $oldpath2 . 'module=TemplateSemBrowse';
+        $replace[] = $newpath . 'module=TemplateSemBrowse';
 
 
-            $find[] = 'ext_templatepersbrowse[item_id]=';
-            $replace[] = 'item_id=';
-        }
+        $find[] = 'ext_templatepersbrowse[item_id]=';
+        $replace[] = 'item_id=';
 
         $html = str_replace($find, $replace, $html);
 

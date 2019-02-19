@@ -60,19 +60,45 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
         } else {
 
+            // Get current UID.
+            $uid = intval($this->configurationManager->getContentObject()->data['uid']);
+
             $this->view->assign('showsearch', false);
 
-            if ($this->settings['makelink'] && !StudipExternalPage::urlParameters(intval($this->configurationManager->getContentObject()->data['uid']))) {
+            if ($this->settings['makelink'] && !StudipExternalPage::urlParameters($uid)) {
                 $this->view->assign('makelink', true);
                 // Create a link that will fetch the configured Stud.IP external page.
                 $this->view->assign('link', $this->makeLink());
                 $this->view->assign('linktext', $this->settings['linktext']);
                 $this->view->assign('linkformat', $this->settings['linkformat']);
             } else {
-                // Fetch Stud.IP external page.
-                $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
-                    intval($this->configurationManager->getContentObject()->data['uid']),
-                    $this->settings, $this->controllerContext->getUriBuilder());
+
+                // No GET Parameters set -> we come from extension configuration.
+                // Set session variable so that detail pages may be called safely.
+                if (!StudipExternalPage::urlParameters($uid)) {
+
+                    $GLOBALS['TSFE']->fe_user->setKey('ses', 'studiptracker', true);
+                    $GLOBALS['TSFE']->fe_user->storeSessionData();
+
+                    // Fetch Stud.IP external page.
+                    $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
+                        intval($this->configurationManager->getContentObject()->data['uid']),
+                        $this->settings, $this->controllerContext->getUriBuilder());
+
+                // We have some GET parameters, so we need to check if we have a valid session
+                // and not some direct Google call to a detail page.
+                } else if ($GLOBALS['TSFE']->fe_user->getKey('ses', 'studiptracker')) {
+
+                    // Fetch Stud.IP external page.
+                    $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
+                        intval($this->configurationManager->getContentObject()->data['uid']),
+                        $this->settings, $this->controllerContext->getUriBuilder());
+
+                // GET parameters set but no session -> deliver no content but an error.
+                } else {
+                    $content = 'ÄLLABÄTSCH!';
+                    $this->response->setHeader('HTTP/1.0 404 Not found.');
+                }
             }
 
             // UTF8-encode the content if necessary.
