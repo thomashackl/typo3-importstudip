@@ -17,7 +17,7 @@ class Wizicon {
         $wizardItems['plugins_tx_importstudip_pi1'] = array(
             'title' => LocalizationUtility::translate('plugintitle', 'importstudip'),
             'description' => LocalizationUtility::translate('plugindesc', 'importstudip'),
-            'params' => '&defVals[tt_content][CType]=list'
+            'params' => '&defVals[tt_content][CType]=list&&defVals[tt_content][list_type]=importstudip_pi1'
         );
 
         if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 7005000) {

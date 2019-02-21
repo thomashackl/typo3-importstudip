@@ -716,7 +716,9 @@ Tx_ImportStudip = {
         container.addClass('tx-importstudip-entrygroup');
         container.addClass(elementId + '-container');
         container.children(Tx_ImportStudip.getElementName('label')).prepend(
-            '<img src="sysext/t3skin/icons/gfx/ol/plus.gif" data-toggle-image="sysext/t3skin/icons/gfx/ol/minus.gif"/>');
+            '<img src="' + TYPO3.jQuery('#tx-importstudip-pagetypes').data('iconpath') +
+            'plus.gif" data-toggle-image="' + TYPO3.jQuery('#tx-importstudip-pagetypes').data('iconpath') +
+            'minus.gif"/>');
         container.children(Tx_ImportStudip.getElementName('label')).children('img, label').on('click', function() {
             element.toggle();
             var img = container.children(Tx_ImportStudip.getElementName('label')).children('img');

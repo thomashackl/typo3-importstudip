@@ -1,3 +1,11 @@
+190218 Version 3.2.6
+* TYPO3 8.x refinements
+* Use internal session variable for preventing direct call of detail pages
+
+180807 Version 3.2.4
+* Disable caching for fetching user data
+* Course type selection
+
 180627 Version 3.2.3
 * Update restclient from https://github.com/tcdent/php-restclient
 

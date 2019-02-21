@@ -23,7 +23,13 @@ namespace UniPassau\Importstudip\Utility;
 class ConfigForm {
 
     public static function getExternConfigTypes($parameters, $config) {
-        $result = '<div id="tx-importstudip-pagetypes">';
+        if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
+            $path = 'sysext/core/Resources/Public/ExtJs/images/ol/';
+        } else {
+            $path = 'sysext/t3skin/icons/gfx/ol/';
+        }
+
+        $result = '<div id="tx-importstudip-pagetypes" data-iconpath="' . $path . '">';
         $result .= '<script type="text/javascript" src="'.
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').
             'Resources/Public/JavaScript/tx_importstudip.min.js"></script>';
@@ -83,25 +89,32 @@ class ConfigForm {
         $html = '<ul class="tx-importstudip-tree">';
         foreach ($data as $entry) {
             $id = 'tx-importstudip-institute-'.($entry->id ?: $entry->tree_id);
-            $html .= '<li class="'.
-                ($entry->children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
+            $html .= '<li class="' .
+                ($entry->children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf') . '">';
             if ($entry->children) {
                 $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
-                $html .= '<img class="tx-importstudip-openclose" id="tx-importstudip-openclose-inst-'.$entry->id.'" src="'.$path.
-                    'sysext/t3skin/icons/gfx/ol/plus.gif" data-swap-img="'.$path.
-                    'sysext/t3skin/icons/gfx/ol/minus.gif"/>';
+
+                if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
+                    $path .= 'sysext/core/Resources/Public/ExtJs/images/ol/';
+                } else {
+                    $path .= 'sysext/t3skin/icons/gfx/ol/';
+                }
+
+                $html .= '<img class="tx-importstudip-openclose" '.
+                    'id="tx-importstudip-openclose-inst-' . $entry->id . '" src="' . $path . 'plus.gif" ' .
+                    'data-swap-img="' . $path . 'minus.gif"/>';
             }
             if ($entry->selectable) {
-                $html .= '<input type="radio" class="tx-importstudip-selector" '.
-                    'name="'.$inputname.'" value="'.$entry->id.
-                    '" onclick="Tx_ImportStudip.changeSelection(\'institute\', \''.
-                    $entry->id.'\')"'.
-                    ($entry->id == $selected ? ' checked' : '').
+                $html .= '<input type="radio" class="tx-importstudip-selector" ' .
+                    'name="' . $inputname . '" value="' . $entry->id .
+                    '" onclick="Tx_ImportStudip.changeSelection(\'institute\', \'' .
+                    $entry->id . '\')"' .
+                    ($entry->id == $selected ? ' checked' : '') .
                     '/>';
             }
-            $html .= '<label for="'.$id.'">'.$entry->name.'</label>'.
-                '<input type="checkbox" class="tx-importstudip-treeinput" id="'.
-                $id.'" onclick="Tx_ImportStudip.swapImages(\'tx-importstudip-openclose-inst-'.$entry->id.'\')"/>';
+            $html .= '<label for="' . $id . '">' . $entry->name . '</label>' .
+                '<input type="checkbox" class="tx-importstudip-treeinput" id="' .
+                $id . '" onclick="Tx_ImportStudip.swapImages(\'tx-importstudip-openclose-inst-' . $entry->id . '\')"/>';
             if ($entry->children != null) {
                 $html .= self::getInstituteForm($entry->children, $inputname, $selected, $parameters);
             }
@@ -427,6 +440,12 @@ class ConfigForm {
         $html .= trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
             'backend.label.all', 'importstudip'));
 
+        if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
+            $path = 'sysext/core/Resources/Public/ExtJs/images/ol/';
+        } else {
+            $path = 'sysext/t3skin/icons/gfx/ol/';
+        }
+
         /**
          * Now build subject area tree.
          */
@@ -435,10 +454,9 @@ class ConfigForm {
             $html .= '<li class="'.
                 ($entry->num_children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
             if ($entry->num_children > 0) {
-                $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
                 $html .= '<img class="tx-importstudip-openclose" src="'.$path.
-                    'sysext/t3skin/icons/gfx/ol/plus.gif" data-swap-img="'.$path.
-                    'sysext/t3skin/icons/gfx/ol/minus.gif"/>';
+                    'plus.gif" data-swap-img="'.$path.
+                    'minus.gif"/>';
             }
             if ($entry->id) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" '.
