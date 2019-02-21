@@ -2,7 +2,7 @@
 
 // Register plugin for usage.
 \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-    $_EXTKEY,
+    'UniPassau.'.$_EXTKEY,
     'Pi1',
     'LLL:EXT:'.$_EXTKEY.'/Resources/Private/Language/locallang.xlf:plugintitle',
     'EXT:importstudip/Resources/Public/Icons/Extension.svg'
