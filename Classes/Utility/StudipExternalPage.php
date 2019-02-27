@@ -150,7 +150,12 @@ class StudipExternalPage
 
             if (strpos($html, 'Ein Fehler ist aufgetreten. Die Daten können nicht angezeigt werden.') !== false ||
                     strpos($html, 'No snapshot available or empty result!') !== false) {
-                $html = '';
+
+                $error = true;
+
+                $html = trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
+                    'frontend.text.no_studip_data',
+                    'importstudip'));
             }
 
             if (!$error && trim($html) !== '') {
@@ -184,7 +189,9 @@ class StudipExternalPage
         }
 
         // Rewrite links to Stud.IP in content.
-        $html = self::rewriteStudipLinks($html, $pageid, $elementid, $extconfig, $settings, $uribuilder);
+        if (!$error) {
+            $html = self::rewriteStudipLinks($html, $pageid, $elementid, $extconfig, $settings, $uribuilder);
+        }
 
         return $html;
 

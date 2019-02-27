@@ -96,7 +96,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
                 // GET parameters set but no session -> deliver no content but an error.
                 } else {
-                    $content = 'ÄLLABÄTSCH!';
+                    $content = '';
                     $this->response->setHeader('HTTP/1.0 404 Not found.');
                 }
             }

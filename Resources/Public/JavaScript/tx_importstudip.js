@@ -563,7 +563,7 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.enableInput('tx-importstudip-externconfig');
                     Tx_ImportStudip.getCourseInstitutes();
                 } else {
-                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
                     Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
                 }
             },

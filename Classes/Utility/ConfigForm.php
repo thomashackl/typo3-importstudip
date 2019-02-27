@@ -508,8 +508,8 @@ class ConfigForm {
             '</option>';
         foreach ($data as $entry) {
             $current = (array) $entry;
-            $html .= '<option value="'.$current['id'].'"'.
-                ($current['id']==$selected ? ' selected' : '').'>'.
+            $html .= '<option value="'.urlencode($current['name']).'"'.
+                (urlencode($current['name'])==$selected ? ' selected' : '').'>'.
                 $current['name'].'</option>';
         }
         $html .= '</select>';

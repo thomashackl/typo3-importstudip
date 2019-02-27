@@ -207,6 +207,9 @@
             <trans-unit id="frontend.text.error_studip_unavailable">
                 <source>No data available. Stud.IP is either offline or too slow to respond.</source>
             </trans-unit>
+            <trans-unit id="frontend.text.no_studip_data">
+                <source>No data was found.</source>
+            </trans-unit>
             <trans-unit id="frontend.text.no_search_results">
                 <source>No results have been found for your search.</source>
             </trans-unit>
