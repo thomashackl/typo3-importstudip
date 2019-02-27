@@ -544,9 +544,11 @@ class ConfigForm {
             'data-loading-text="'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).'">';
         if ($parameters['itemFormElValue']) {
-            $result .= self::getInstituteForm(json_decode(
-                StudipConnector::getInstitutes('institute')),
+
+            $data = json_decode(StudipConnector::getInstitutes('institute'));
+            $result .= self::getPreselectedInstituteForm($data,
                 $parameters['itemFormElName'], $parameters['itemFormElValue']);
+
         }
         $result .= '</div>';
         if (!$parameters['itemFormElValue']) {
@@ -556,6 +558,43 @@ class ConfigForm {
             //-->
             </script>';
         }
+        return $result;
+    }
+
+    public static function getPreselectedInstituteForm($data, $inputname, $selected)
+    {
+        $result = '<ul class="tx-importstudip-tree">';
+        foreach ($data as $entry) {
+            $id = 'tx-importstudip-preselect-institute-'.($entry->id ?: $entry->tree_id);
+            $result .= '<li class="' .
+                ($entry->children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf') . '">';
+            if ($entry->children) {
+                $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
+
+                if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
+                    $path .= 'sysext/core/Resources/Public/ExtJs/images/ol/';
+                } else {
+                    $path .= 'sysext/t3skin/icons/gfx/ol/';
+                }
+
+                $result .= '<img class="tx-importstudip-openclose" '.
+                    'id="tx-importstudip-openclose-inst-' . $entry->id . '" src="' . $path . 'plus.gif" ' .
+                    'data-swap-img="' . $path . 'minus.gif"/>';
+            }
+            if ($entry->selectable) {
+                $result .= '<input type="radio" class="tx-importstudip-selector" ' .
+                    'name="' . $inputname . '" value="' . $entry->id .
+                    '" ' . ($entry->id == $selected ? ' checked' : '') . '/>';
+            }
+            $result .= '<label for="' . $id . '">' . $entry->name . '</label>' .
+                '<input type="checkbox" class="tx-importstudip-treeinput" id="' .
+                $id . '" onclick="Tx_ImportStudip.swapImages(\'tx-importstudip-openclose-inst-' . $entry->id . '\')"/>';
+            if ($entry->children != null) {
+                $result .= self::getPreselectedInstituteForm($entry->children, $inputname, $selected);
+            }
+            $result .= '</li>';
+        }
+        $result .= '</ul>';
         return $result;
     }
 
