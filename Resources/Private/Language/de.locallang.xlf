@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version='1.0' encoding='UTF-8'?>
 <xliff version="1.0">
     <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-11-25T14:37:11Z" product-name="importstudip">
         <header/>
@@ -19,10 +19,10 @@
                 <target>Liste von Personen</target>
             </trans-unit>
             <trans-unit id="backend.externtype.news">
-                <target>Ank&#252;ndigungen</target>
+                <target>Ankündigungen</target>
             </trans-unit>
             <trans-unit id="backend.label.aggregate">
-                <target>Daten von Untereinrichtungen der gew&#228;hlten
+                <target>Daten von Untereinrichtungen der gewählten
                     Einrichtung anzeigen?</target>
             </trans-unit>
             <trans-unit id="backend.label.all">
@@ -35,11 +35,11 @@
                 <target>Einrichtungszuordnung der Veranstaltung:</target>
             </trans-unit>
             <trans-unit id="backend.label.choose_user_institute">
-                <target>Die gew&#228;hlte Person ist folgenden Einrichtungen
+                <target>Die gewählte Person ist folgenden Einrichtungen
                     zugeordnet:</target>
             </trans-unit>
             <trans-unit id="backend.label.coursedetailtarget">
-                <target>Zielseite und -element f&#252;r Links zu Veranstaltungsdetails:</target>
+                <target>Zielseite und -element für Links zu Veranstaltungsdetails:</target>
             </trans-unit>
             <trans-unit id="backend.label.coursesearch">
                 <target>Welche Veranstaltung soll angezeigt werden?</target>
@@ -51,28 +51,28 @@
                 <target>Suchen</target>
             </trans-unit>
             <trans-unit id="backend.label.externconfigurations">
-                <target>W&#228;hlen Sie hier aus, welche Daten angezeigt werden sollen:</target>
+                <target>Wählen Sie hier aus, welche Daten angezeigt werden sollen:</target>
             </trans-unit>
             <trans-unit id="backend.label.externtype">
-                <target>Welche Art Inhalt m&#246;chten Sie anzeigen?</target>
+                <target>Welche Art Inhalt möchten Sie anzeigen?</target>
             </trans-unit>
             <trans-unit id="backend.label.filters">
-                <target>Zus&#228;tzliche Einstellungen f&#252;r die angezeigten Daten</target>
+                <target>Zusätzliche Einstellungen für die angezeigten Daten</target>
             </trans-unit>
             <trans-unit id="backend.label.h1">
-                <target>&#220;berschrift 1</target>
+                <target>Überschrift 1</target>
             </trans-unit>
             <trans-unit id="backend.label.h2">
-                <target>&#220;berschrift 2</target>
+                <target>Überschrift 2</target>
             </trans-unit>
             <trans-unit id="backend.label.h3">
-                <target>&#220;berschrift 3</target>
+                <target>Überschrift 3</target>
             </trans-unit>
             <trans-unit id="backend.label.h4">
-                <target>&#220;berschrift 4</target>
+                <target>Überschrift 4</target>
             </trans-unit>
             <trans-unit id="backend.label.institute">
-                <target>Welche Einrichtung stellt die anzuzeigenden Daten zur Verf&#252;gung?</target>
+                <target>Welche Einrichtung stellt die anzuzeigenden Daten zur Verfügung?</target>
             </trans-unit>
             <trans-unit id="backend.label.linkformat">
                 <target>Format des Linktextes:</target>
@@ -96,19 +96,19 @@
                 <target>Normaler Text</target>
             </trans-unit>
             <trans-unit id="backend.label.newsdetailtarget">
-                <target>Zielseite und -element f&#252;r Links zu Ank&#252;ndigungen:</target>
+                <target>Zielseite und -element für Links zu Ankündigungen:</target>
             </trans-unit>
             <trans-unit id="backend.label.participating">
-                <target>Zeige auch Veranstaltungen, bei denen die aktuell gew&#228;hlte Einrichtung nur teilnehmend ist?</target>
+                <target>Zeige auch Veranstaltungen, bei denen die aktuell gewählte Einrichtung nur teilnehmend ist?</target>
             </trans-unit>
             <trans-unit id="backend.label.persondetailtarget">
-                <target>Zielseite und -element f&#252;r Links zu Personendetails:</target>
+                <target>Zielseite und -element für Links zu Personendetails:</target>
             </trans-unit>
             <trans-unit id="backend.label.personsearch">
                 <target>Welche Person soll angezeigt werden?</target>
             </trans-unit>
             <trans-unit id="backend.label.preselectinst">
-                <target>Vorausgew&#228;hlte Einrichtung</target>
+                <target>Vorausgewählte Einrichtung</target>
             </trans-unit>
             <trans-unit id="backend.label.searchpage">
                 <target>Veranstaltungssuche</target>
@@ -120,10 +120,10 @@
                 <target>Ein Ergebnis gefunden.</target>
             </trans-unit>
             <trans-unit id="backend.label.select">
-                <target>-- bitte ausw&#228;hlen --</target>
+                <target>-- bitte auswählen --</target>
             </trans-unit>
             <trans-unit id="backend.label.smallnews">
-                <target>Kurze Ank&#252;ndigungsansicht (nur Titel und Datum)?</target>
+                <target>Kurze Ankündigungsansicht (nur Titel und Datum)?</target>
             </trans-unit>
             <trans-unit id="backend.label.statusgroup">
                 <target>Zeige nur Personen in folgender Statusgruppe:</target>
@@ -142,31 +142,31 @@
                 <target>Suchformular</target>
             </trans-unit>
             <trans-unit id="backend.text.coursesearch">
-                <target>Sie k&#246;nnen nach Veranstaltungen durch Angabe von Teilen des Titels oder der Veranstaltungsnummer suchen.</target>
+                <target>Sie können nach Veranstaltungen durch Angabe von Teilen des Titels oder der Veranstaltungsnummer suchen.</target>
             </trans-unit>
             <trans-unit id="backend.text.personsearch">
-                <target>Sie k&#246;nnen nach Personen durch Angabe des Vornamens oder Nachnamens oder Benutzernamens oder in der Form "Vorname Nachname" suchen.</target>
+                <target>Sie können nach Personen durch Angabe des Vornamens oder Nachnamens oder Benutzernamens oder in der Form "Vorname Nachname" suchen.</target>
             </trans-unit>
             <trans-unit id="conf.category_studip">
                 <target>Stud.IP-bezogene Einstellungen</target>
             </trans-unit>
             <trans-unit id="conf.category_typo3">
-                <target>Einstellungen f&#252;r die Ausgabe in TYPO3</target>
+                <target>Einstellungen für die Ausgabe in TYPO3</target>
             </trans-unit>
             <trans-unit id="conf.config_cache_lifetime">
-                <target>Wie lange (in Minuten) sollen aus Stud.IP &#252;bertragene Konfigurationsdaten zwischengespeichert werden?:Daten, die f&#252;r die Konfiguration im Backend &#252;ber die REST-Schnittstelle aus Stud.IP abgerufen werden, werden f&#252;r diese Dauer in der Datenbank zwischengespeichert und erst nach Ablauf dieser Zeit wieder neu aus Stud.IP abgerufen.</target>
+                <target>Wie lange (in Minuten) sollen aus Stud.IP übertragene Konfigurationsdaten zwischengespeichert werden?:Daten, die für die Konfiguration im Backend über die REST-Schnittstelle aus Stud.IP abgerufen werden, werden für diese Dauer in der Datenbank zwischengespeichert und erst nach Ablauf dieser Zeit wieder neu aus Stud.IP abgerufen.</target>
             </trans-unit>
             <trans-unit id="conf.debug">
-                <target>Debug-Ausgaben?:Falls gesetzt, werden Information dar&#252;ber ausgegeben, welche Daten von Stud.IP abgerufen werden und wie sie in der Extension weiterverarbeitet werden.</target>
+                <target>Debug-Ausgaben?:Falls gesetzt, werden Information darüber ausgegeben, welche Daten von Stud.IP abgerufen werden und wie sie in der Extension weiterverarbeitet werden.</target>
             </trans-unit>
             <trans-unit id="conf.studip_api_password">
-                <target>Passwort f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Passwort ben&#246;tigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
+                <target>Passwort für API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Passwort benötigt. Dieses erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
             </trans-unit>
             <trans-unit id="conf.studip_api_username">
-                <target>Benutzername f&#252;r API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Benutzername ben&#246;tigt. Diesen erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
+                <target>Benutzername für API-Zugriff:Um auf die Stud.IP-REST-API zuzugreifen, wird ein Benutzername benötigt. Diesen erhalten Sie bei Ihrem lokalen Stud.IP-Rootadministrator.</target>
             </trans-unit>
             <trans-unit id="conf.studip_externphp_path">
-                <target>Vollst&#228;ndige URL zu extern.php:Die so genannten Externen Seiten werden in Stud.IP &#252;ber die extern.php bereitgestellt.</target>
+                <target>Vollständige URL zu extern.php:Die so genannten Externen Seiten werden in Stud.IP über die extern.php bereitgestellt.</target>
             </trans-unit>
             <trans-unit id="conf.studip_hierarchy_institute">
                 <target>Zweistufige Einrichtungshierarchie (institute)</target>
@@ -175,13 +175,13 @@
                 <target>Mehrstufige, erweiterte Einrichtungshierarchie (range_tree)</target>
             </trans-unit>
             <trans-unit id="conf.studip_url">
-                <target>Vollst&#228;ndige URL Ihrer Stud.IP-Installation</target>
+                <target>Vollständige URL Ihrer Stud.IP-Installation</target>
             </trans-unit>
             <trans-unit id="conf.studip_use_hierarchy">
                 <target>Welche Stud.IP-Einrichtungshierarchie soll verwendet werden?:In Stud.IP gibt es zwei Arten, um die Beziehungen von Einrichtungen untereinander darzustellen. Die Institute-Hierarchie kann maximal zweistufig sein, beinhaltet aber nur echte Einrichtungen. Daneben gibt es noch die RangeTree-Einrichtungshierarchie, die beliebig viele Ebenen und Mehrfachzuordnungen darstellen kann, auch mit Ebenen, die keiner existierenden Einrichtung entsprechen.</target>
             </trans-unit>
             <trans-unit id="conf.typo3_url">
-                <target>Adresse dieser Website (optional):Diese Angabe &#252;berschreibt die automatische Ermittlung der aktuellen Seitenadresse. Das kann sinnvoll sein, wenn Ihre TYPO3-Installation nach au&#223;en &#252;ber eine andere Adresse aufgerufen wird, als sie eigentlich physikalisch hat.</target>
+                <target>Adresse dieser Website (optional):Diese Angabe überschreibt die automatische Ermittlung der aktuellen Seitenadresse. Das kann sinnvoll sein, wenn Ihre TYPO3-Installation nach außen über eine andere Adresse aufgerufen wird, als sie eigentlich physikalisch hat.</target>
             </trans-unit>
             <trans-unit id="frontend.label.all">
                 <target>alle</target>
@@ -205,10 +205,10 @@
                 <target>Zu den angegebenen Einstellungen wurden keine Daten gefunden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.error_no_curl">
-                <target>Es ist ein TYPO3-Fehler aufgetreten, daher k&#246;nnen keine Daten aus Stud.IP abgerufen werden.</target>
+                <target>Es ist ein TYPO3-Fehler aufgetreten, daher können keine Daten aus Stud.IP abgerufen werden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.error_studip_unavailable">
-                <target>Es k&#246;nnen keine Daten angezeigt werden, da Stud.IP nicht verf&#252;gbar ist oder zu lange braucht, um zu antworten.</target>
+                <target>Es können keine Daten angezeigt werden, da Stud.IP nicht verfügbar ist oder zu lange braucht, um zu antworten.</target>
             </trans-unit>
             <trans-unit id="frontend.text.no_studip_data">
                 <source>Es wurden keine Daten gefunden.</source>
@@ -247,7 +247,7 @@
                 <target>Auf die Stud.IP-Schnittstelle konnte nicht zugegriffen werden. Die Fehlermeldung lautete:</target>
             </trans-unit>
             <trans-unit id="plugindesc">
-                <target>F&#252;gt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.</target>
+                <target>Fügt Daten aus Stud.IP ein, wie Veranstaltungs- oder Personenverzeichnisse.</target>
             </trans-unit>
             <trans-unit id="plugintitle">
                 <target>Daten aus Stud.IP</target>
