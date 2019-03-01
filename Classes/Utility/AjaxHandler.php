@@ -24,47 +24,48 @@ class AjaxHandler {
 
     public function handleAjax($params = array(), \TYPO3\CMS\Core\Http\AjaxRequestHandler &$ajaxObj = NULL) {
         $action = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('action');
+        $elementId = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('elementid');
         $ajaxObj->setContentFormat('json');
-        $ajaxObj->addContent('tx_importstudip', self::$action());
+        $ajaxObj->addContent('tx_importstudip', self::$action($elementId));
     }
 
-    public function institutes() {
+    public function institutes($elementId = '') {
         $om = new \TYPO3\CMS\Extbase\Object\ObjectManager();
         $configurationUtility = $om->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
         $config = $configurationUtility->getCurrentConfiguration('importstudip');
 
         $configtype = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype');
-        return StudipConnector::getInstitutes($config['studip_use_hierarchy']['value'], $configtype);
+        return StudipConnector::getInstitutes($config['studip_use_hierarchy']['value'], $configtype, $elementId);
     }
 
-    public function instituteform() {
+    public function instituteform($elementId = '') {
         $institutes = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institutes');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
-        return ConfigForm::getInstituteForm(json_decode($institutes), $inputname, $selected);
+        $log = fopen('/Users/thomashackl/Downloads/typo3.log', 'w');
+        fwrite($log, print_r($elementId, 1));
+        return ConfigForm::getInstituteForm(json_decode($institutes), $inputname, $selected, $elementId);
     }
 
-    public function externconfigurations() {
+    public function externconfigurations($elementId = '') {
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
         $types = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype');
 
         return StudipConnector::getExternConfigurations($institute, $types);
     }
 
-    public function externconfigurationsform() {
+    public function externconfigurationsform($elementId = '') {
         $externconfigs = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configurations');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         return ConfigForm::getExternConfigurationsForm(json_decode($externconfigs), $inputname, $selected);
     }
 
-    public function personsearch() {
-        $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
-        $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
+    public function personsearch($elementId = '') {
         return ConfigForm::getPersonSearch();
     }
 
-    public function personsearchform() {
+    public function personsearchform($elementId = '') {
         $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
@@ -72,7 +73,7 @@ class AjaxHandler {
         return ConfigForm::getPersonSearchForm($data, $inputname, $selected);
     }
 
-    public function personsearchresults() {
+    public function personsearchresults($elementId = '') {
         $number = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('number');
         $html = '<div class="tx-importstudip-searchresult-found">';
         if ($number == 1) {
@@ -84,7 +85,7 @@ class AjaxHandler {
         return $html;
     }
 
-    public function chooseuserinstitute() {
+    public function chooseuserinstitute($elementId = '') {
         $username = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('username');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
@@ -96,13 +97,13 @@ class AjaxHandler {
         return ConfigForm::chooseUserInstituteForm($institutes, $inputname, $selected);
     }
 
-    public function coursesearch() {
+    public function coursesearch($elementId = '') {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         return ConfigForm::getCourseSearch();
     }
 
-    public function coursesearchform() {
+    public function coursesearchform($elementId = '') {
         $searchterm = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('searchterm');
         $semester = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('semester');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
@@ -111,7 +112,7 @@ class AjaxHandler {
         return ConfigForm::getCourseSearchForm($data, $inputname, $selected);
     }
 
-    public function coursesearchresults() {
+    public function coursesearchresults($elementId = '') {
         $number = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('number');
         $html = '<div class="tx-importstudip-searchresult-found">';
         if ($number == 1) {
@@ -123,7 +124,7 @@ class AjaxHandler {
         return $html;
     }
 
-    public function choosecourseinstitute() {
+    public function choosecourseinstitute($elementId = '') {
         $course_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('courseid');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
@@ -132,23 +133,23 @@ class AjaxHandler {
         return ConfigForm::chooseCourseInstituteForm($institutes, $inputname, $selected);
     }
 
-    public function additionalfilters() {
+    public function additionalfilters($elementId = '') {
         return ConfigForm::getadditionalFilters();
     }
 
-    public function aggregationform() {
+    public function aggregationform($elementId = '') {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         return ConfigForm::getAggregationForm($inputname, $value);
     }
 
-    public function participatingform() {
+    public function participatingform($elementId = '') {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         return ConfigForm::getParticipatingForm($inputname, $value);
     }
 
-    public function coursetypeform() {
+    public function coursetypeform($elementId = '') {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
@@ -156,7 +157,7 @@ class AjaxHandler {
             $inputname, $value);
     }
 
-    public function subjectsform() {
+    public function subjectsform($elementId = '') {
         $parent_id = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('parent');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
@@ -165,7 +166,7 @@ class AjaxHandler {
             $inputname, $selected);
     }
 
-    public function statusgroupform() {
+    public function statusgroupform($elementId = '') {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         $institute = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('institute');
@@ -173,7 +174,7 @@ class AjaxHandler {
             $inputname, $value);
     }
 
-    public function smallnewsform() {
+    public function smallnewsform($elementId = '') {
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $value = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('value');
         return ConfigForm::getSmallNewsForm($inputname, $value);

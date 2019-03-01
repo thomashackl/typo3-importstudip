@@ -38,11 +38,10 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
      */
     public function indexAction()
     {
+        $this->view->assign('showsearch', $this->settings['pagetype'] == 'searchpage');
 
         // Generate form for course search.
         if ($this->settings['pagetype'] == 'searchpage') {
-
-            $this->view->assign('showsearch', true);
 
             $semesters = $this->getSemesters();
             $this->view->assign('semesters', array_reverse($semesters['semesters']));
@@ -58,12 +57,16 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             $coursetypes = $this->getCourseTypes();
             $this->view->assign('coursetypes', $coursetypes);
 
+            /*
+             * Provide current UID so that we know which content element should
+             * handle the search result in case the are several on this page.
+             */
+            $this->view->assign('target', intval($this->configurationManager->getContentObject()->data['uid']));
+
         } else {
 
             // Get current UID.
             $uid = intval($this->configurationManager->getContentObject()->data['uid']);
-
-            $this->view->assign('showsearch', false);
 
             if ($this->settings['makelink'] && !StudipExternalPage::urlParameters($uid)) {
                 $this->view->assign('makelink', true);
@@ -82,11 +85,10 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
                     // Fetch Stud.IP external page.
                     $content = StudipExternalPage::get(intval($GLOBALS['TSFE']->id),
-                        intval($this->configurationManager->getContentObject()->data['uid']),
-                        $this->settings, $this->controllerContext->getUriBuilder());
+                        $uid, $this->settings, $this->controllerContext->getUriBuilder());
 
-                // We have some GET parameters, so we need to check if we have a valid session
-                // and not some direct Google call to a detail page.
+                    // We have some GET parameters, so we need to check if we have a valid session
+                    // and not some direct Google call to a detail page.
                 } else if ($GLOBALS['TSFE']->fe_user->getKey('ses', 'studiptracker')) {
 
                     // Fetch Stud.IP external page.
@@ -94,7 +96,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
                         intval($this->configurationManager->getContentObject()->data['uid']),
                         $this->settings, $this->controllerContext->getUriBuilder());
 
-                // GET parameters set but no session -> deliver no content but an error.
+                    // GET parameters set but no session -> deliver no content but an error.
                 } else {
                     $content = '';
                     $this->response->setHeader('HTTP/1.0 404 Not found.');
@@ -110,66 +112,77 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             $this->view->assign('studipcontent', $content);
 
         }
-
     }
 
     public function searchcourseAction()
     {
+        // Get current UID.
+        $uid = intval($this->configurationManager->getContentObject()->data['uid']);
 
-        // Get request values.
-        if ($this->request->hasArgument('searchterm')) {
-            $searchterm = trim($this->request->getArgument('searchterm'));
-            $this->view->assign('searchterm', $searchterm);
-        }
+        // Which content object should handle displaying search results?
+        $target = intval(\TYPO3\CMS\Core\Utility\GeneralUtility::_POST('target'));
 
-        // Fill values for search form.
-        $semesters = $this->getSemesters();
-        $this->view->assign('semesters', array_reverse($semesters['semesters']));
-        // Current semester is pre-selected
-        $this->view->assign('semester', $semesters['current']);
+        if ($uid === $target) {
 
-        // Get all institutes and build a value => name array.
-        $this->view->assign('institutes', $this->getInstitutes());
-        // If a pre-selected institute is set in backend, set it.
-        $this->view->assign('institute', $this->settings['preselectinst']);
-
-        // Get all coursetypes and build a value => name array.
-        $coursetypes = $this->getCourseTypes();
-        $this->view->assign('coursetypes', $coursetypes);
-
-        if ($this->request->hasArgument('semester')) {
-            $semester = $this->request->getArgument('semester');
-            $this->view->assign('semester', $semester);
-        }
-        if ($this->request->hasArgument('institute')) {
-            $institute = $this->request->getArgument('institute');
-            $this->view->assign('institute', $institute);
-        }
-        if ($this->request->hasArgument('coursetype')) {
-            $coursetype = $this->request->getArgument('coursetype');
-            $this->view->assign('coursetype', $coursetype);
-        }
-
-        if (trim($searchterm)) {
-            // Get search results.
-            $results = json_decode(StudipConnector::frontendSearchCourse($searchterm, $semester, $institute, $coursetype), true);
-            $this->view->assign('searchresults', $results);
-            $this->view->assign('numresults', count($results));
-
-            $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
-            $config = $configurationUtility->getCurrentConfiguration('importstudip');
-
-            $studip_url = $config['studip_url']['value'];
-            if (substr($studip_url, 0, 1) == '/') {
-                $studip_url = substr($studip_url, 1);
-            } else {
-                $studip_url = $studip_url;
+            // Get request values.
+            if ($this->request->hasArgument('searchterm')) {
+                $searchterm = trim($this->request->getArgument('searchterm'));
+                $this->view->assign('searchterm', $searchterm);
             }
-            $this->view->assign('studip_url', $studip_url);
-        } else {
-            $this->view->assign('nosearchterm', 1);
-        }
 
+            // Fill values for search form.
+            $semesters = $this->getSemesters();
+            $this->view->assign('semesters', array_reverse($semesters['semesters']));
+            // Current semester is pre-selected
+            $this->view->assign('semester', $semesters['current']);
+
+            // Get all institutes and build a value => name array.
+            $this->view->assign('institutes', $this->getInstitutes());
+            // If a pre-selected institute is set in backend, set it.
+            $this->view->assign('institute', $this->settings['preselectinst']);
+
+            // Get all coursetypes and build a value => name array.
+            $coursetypes = $this->getCourseTypes();
+            $this->view->assign('coursetypes', $coursetypes);
+
+            if ($this->request->hasArgument('semester')) {
+                $semester = $this->request->getArgument('semester');
+                $this->view->assign('semester', $semester);
+            }
+            if ($this->request->hasArgument('institute')) {
+                $institute = $this->request->getArgument('institute');
+                $this->view->assign('institute', $institute);
+            }
+            if ($this->request->hasArgument('coursetype')) {
+                $coursetype = $this->request->getArgument('coursetype');
+                $this->view->assign('coursetype', $coursetype);
+            }
+
+            if (trim($searchterm)) {
+                // Get search results.
+                $results = json_decode(StudipConnector::frontendSearchCourse($searchterm, $semester, $institute, $coursetype), true);
+                $this->view->assign('searchresults', $results);
+                $this->view->assign('numresults', count($results));
+
+                $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+                $config = $configurationUtility->getCurrentConfiguration('importstudip');
+
+                $studip_url = $config['studip_url']['value'];
+                if (substr($studip_url, 0, 1) == '/') {
+                    $studip_url = substr($studip_url, 1);
+                } else {
+                    $studip_url = $studip_url;
+                }
+                $this->view->assign('studip_url', $studip_url);
+            } else {
+                $this->view->assign('nosearchterm', 1);
+            }
+
+        } else {
+
+            $this->forward('index');
+
+        }
     }
 
     /**

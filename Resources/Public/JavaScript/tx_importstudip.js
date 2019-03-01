@@ -317,7 +317,8 @@ Tx_ImportStudip = {
                 method: 'post',
                 data: {
                     action: 'institutes',
-                    configtype: TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val()
+                    configtype: TYPO3.jQuery('#tx-importstudip-pagetypes input[type="radio"]:checked').val(),
+                    elementId: elementId
                 },
                 success: function(data, textStatus, jqXHR) {
                     TYPO3.jQuery.ajax({
@@ -327,7 +328,8 @@ Tx_ImportStudip = {
                             action: 'instituteform',
                             institutes: data.tx_importstudip,
                             inputname: div.data('input-name'),
-                            selected: div.data('input-value')
+                            selected: div.data('input-value'),
+                            elementid: elementId
                         },
                         success: function(response, textStatus, jqXHR) {
                             div.html(response.tx_importstudip);
@@ -335,6 +337,9 @@ Tx_ImportStudip = {
                             if (div.find('input[type="radio"]:checked').length > 0) {
                                 Tx_ImportStudip.getExternConfigurations('radio');
                             }
+                        },
+                        error: function(data, textStatus, errorThrown) {
+                            div.html('Error: '+errorThrown);
                         }
                     });
                 },
