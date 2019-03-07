@@ -230,7 +230,7 @@ class ConfigForm {
         if ($parameters['itemFormElValue']) {
             $institutes = StudipConnector::getUserInstitutes($config['settings.personsearch']);
             // We need only non-selfassigned institutes.
-            $institutes = $institutes['collection']['work'];
+            $institutes = $institutes['collection']['work'] ?: array();
             usort(
                 $institutes,
                 function($a, $b) {
@@ -263,9 +263,10 @@ class ConfigForm {
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.placeholder.personsearch', 'importstudip')).
             '">';
         $html .= '<select id="tx-importstudip-semester" size="1">';
-        $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.allsemesters', 'importstudip').'</option>';
-        foreach (json_decode(StudipConnector::getAllSemesters()) as $semester) {
-            $html .= '<option value="'.$semester->semester_id.'">'.$semester->description.'</option>';
+        //$html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.allsemesters', 'importstudip').'</option>';
+        $allsemesters = json_decode(StudipConnector::getAllSemesters(), true);
+        foreach (array_reverse($allsemesters) as $semester) {
+            $html .= '<option value="'.$semester['semester_id'].'">'.$semester['description'].'</option>';
         }
         $html .= '</select>';
         $html .= '<button type="button" id="tx-importstudip-execute-coursesearch" onclick="Tx_ImportStudip.performCourseSearch()">'.
