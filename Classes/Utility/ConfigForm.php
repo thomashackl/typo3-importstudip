@@ -70,7 +70,7 @@ class ConfigForm {
             'data-loading-text="'.
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).'">';
         if ($parameters['itemFormElValue']) {
-            $result .= self::getInstituteForm(json_decode(StudipConnector::getInstitutes($hierarchy)),
+            $result .= self::getInstituteForm(json_decode(StudipConnector::getInstitutes($hierarchy), true),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
                 'tx-importstudip-institutes', $hierarchy);
         }
@@ -88,10 +88,10 @@ class ConfigForm {
     public static function getInstituteForm($data, $inputname, $selected, $elementId, $parameters=array()) {
         $html = '<ul class="tx-importstudip-tree">';
         foreach ($data as $entry) {
-            $id = $elementId . '-' . ($entry->id ?: $entry->tree_id);
+            $id = $elementId . '-' . ($entry['id'] ?: $entry['tree_id']);
             $html .= '<li class="' .
-                ($entry->children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf') . '">';
-            if ($entry->children) {
+                ($entry['children'] ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf') . '">';
+            if ($entry['children']) {
                 $path = substr($_SERVER['REQUEST_URI'], 0, strrpos($_SERVER['REQUEST_URI'], '/') + 1);
 
                 if (\TYPO3\CMS\Core\Utility\VersionNumberUtility::convertVersionNumberToInteger(TYPO3_version) >= 8000000) {
@@ -101,22 +101,22 @@ class ConfigForm {
                 }
 
                 $html .= '<img class="tx-importstudip-openclose" '.
-                    'id="tx-importstudip-openclose-inst-' . $entry->id . '" src="' . $path . 'plus.gif" ' .
+                    'id="tx-importstudip-openclose-inst-' . $entry['id'] . '" src="' . $path . 'plus.gif" ' .
                     'data-swap-img="' . $path . 'minus.gif"/>';
             }
-            if ($entry->selectable) {
+            if ($entry['selectable']) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" ' .
-                    'name="' . $inputname . '" value="' . $entry->id .
+                    'name="' . $inputname . '" value="' . $entry['id'] .
                     '" onclick="Tx_ImportStudip.changeSelection(\'institute\', \'' .
-                    $entry->id . '\')"' .
-                    ($entry->id == $selected ? ' checked' : '') .
+                    $entry['id'] . '\')"' .
+                    ($entry['id'] == $selected ? ' checked' : '') .
                     '/>';
             }
-            $html .= '<label for="' . $id . '">' . $entry->name . '</label>' .
+            $html .= '<label for="' . $id . '">' . $entry['name'] . '</label>' .
                 '<input type="checkbox" class="tx-importstudip-treeinput" id="' .
-                $id . '" onclick="Tx_ImportStudip.swapImages(\'tx-importstudip-openclose-inst-' . $entry->id . '\')"/>';
-            if ($entry->children != null) {
-                $html .= self::getInstituteForm($entry->children, $inputname, $selected, $parameters);
+                $id . '" onclick="Tx_ImportStudip.swapImages(\'tx-importstudip-openclose-inst-' . $entry['id'] . '\')"/>';
+            if ($entry['children'] != null) {
+                $html .= self::getInstituteForm($entry['children'], $inputname, $selected, $parameters);
             }
             $html .= '</li>';
         }
@@ -154,9 +154,9 @@ class ConfigForm {
         if (is_array($data)) {
             foreach ($data as $entry) {
                 $html .= '<option value="'.$entry->id.'" data-module="'.
-                    $entry->type.'"'.
-                    ($entry->id==$selected ? ' selected' : '').'>'.
-                    $entry->name.'</option>';
+                    $entry['type'].'"'.
+                    ($entry['id']==$selected ? ' selected' : '').'>'.
+                    $entry['name'].'</option>';
             }
         }
         $html .= '</select>';
@@ -316,8 +316,7 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         if ($parameters['itemFormElValue']) {
-            $institute = json_decode(StudipConnector::getInstitute($parameters['itemFormElValue']), true);
-            $institutes = array($institute);
+            $institutes = json_decode(StudipConnector::getInstitute($parameters['itemFormElValue']), true);
             $html .= self::chooseUserInstituteForm($institutes, $parameters['itemFormElName'],
                 $parameters['itemFormElValue']);
         }
@@ -392,7 +391,7 @@ class ConfigForm {
         if ($config['settings.pagetype'] == 'courses' ||
                 \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
             $html .= self::getCourseTypeForm(
-                json_decode(StudipConnector::getCourseTypes($config['settings.institute'])),
+                json_decode(StudipConnector::getCourseTypes($config['settings.institute']), true),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
                 $parameters);
         }
@@ -405,9 +404,9 @@ class ConfigForm {
         $html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                 'backend.label.select', 'importstudip').'</option>';
         foreach ($data as $entry) {
-            $html .= '<option value="'.$entry->id.'"'.
-                ($entry->id==$selected ? ' selected' : '').'>'.
-                $entry->type.' ('.$entry->classname.')</option>';
+            $html .= '<option value="'.$entry['id'].'"'.
+                ($entry['id']==$selected ? ' selected' : '').'>'.
+                $entry['type'].' ('.$entry['classname'].')</option>';
         }
         $html .= '</select>';
         return $html;
@@ -421,7 +420,7 @@ class ConfigForm {
         if ($config['settings.pagetype'] == 'courses' ||
                 \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('configtype') == 'courses') {
             $html .= self::getSubjectForm(
-                json_decode(StudipConnector::getSubjects('root', 1, $parameters['itemFormElValue'])),
+                json_decode(StudipConnector::getSubjects('root', 1, $parameters['itemFormElValue']), true),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],
                 $parameters);
         }
@@ -451,30 +450,30 @@ class ConfigForm {
          * Now build subject area tree.
          */
         foreach ($data as $entry) {
-            $id = 'tx-importstudip-subject-'.$entry->tree_id;
+            $id = 'tx-importstudip-subject-'.$entry['tree_id'];
             $html .= '<li class="'.
-                ($entry->num_children ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
-            if ($entry->num_children > 0) {
+                ($entry['num_children'] ? 'tx-importstudip-treebranch' : 'tx-importstudip-treeleaf').'">';
+            if ($entry['num_children'] > 0) {
                 $html .= '<img class="tx-importstudip-openclose" src="'.$path.
                     'plus.gif" data-swap-img="'.$path.
                     'minus.gif"/>';
             }
-            if ($entry->id) {
+            if ($entry['id']) {
                 $html .= '<input type="radio" class="tx-importstudip-selector" '.
-                    'name="'.$inputname.'" value="'.$entry->id.'"'.
-                    ($entry->id == $selected ? ' checked' : '').
+                    'name="'.$inputname.'" value="'.$entry['id'].'"'.
+                    ($entry['id'] == $selected ? ' checked' : '').
                     '/>';
             }
-            $html .= '<label for="'.$id.'">'.$entry->name.'</label>'.
+            $html .= '<label for="'.$id.'">'.$entry['name'].'</label>'.
                 '<input type="checkbox" class="tx-importstudip-treeinput" id="'.
                 $id.'"';
-            if ($entry->num_children && !$entry->children) {
-                $html .= 'onclick="return Tx_ImportStudip.getSubjects(\''.$entry->id.'\')"';
+            if ($entry['num_children'] && !$entry['children']) {
+                $html .= 'onclick="return Tx_ImportStudip.getSubjects(\''.$entry['id'].'\')"';
             }
             $html .= '/>';
-            if ($entry->children) {
-                $html .= self::getSubjectForm($entry->children, $inputname, $selected, $parameters);
-            } else if ($entry->num_children) {
+            if ($entry['children']) {
+                $html .= self::getSubjectForm($entry['children'], $inputname, $selected, $parameters);
+            } else if ($entry['num_children']) {
                 $html .= '<ul class="tx-importstudip-tree"><li data-loading-text="'.
                     trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate(
                         'backend.label.loading', 'importstudip')).
@@ -546,7 +545,7 @@ class ConfigForm {
             trim(\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.loading', 'importstudip')).'">';
         if ($parameters['itemFormElValue']) {
 
-            $result .= self::getInstituteForm(json_decode(StudipConnector::getInstitutes('institute')),
+            $result .= self::getInstituteForm(json_decode(StudipConnector::getInstitutes('institute'), true),
                 $parameters['itemFormElName'], $parameters['itemFormElValue'],'tx-importstudip-preselectinst');
 
         }

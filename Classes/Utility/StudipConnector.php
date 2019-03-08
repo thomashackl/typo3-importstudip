@@ -133,16 +133,22 @@ class StudipConnector {
      */
     public static function getInstitutes($treetype, $externtype='')
     {
-        $result = '';
-        if ($treetype) {
-            $mapping = self::getTypeMapping();
-            if ($treetype == 'rangetree') {
-                $route = 'extern/rangetree' . ($externtype ? '/' . implode(',', $mapping[$externtype]) : '');
-            } else {
-                $route = 'extern/institutes' . ($externtype ? '/' . implode(',', $mapping[$externtype]) : '');
-            }
-            $result = self::getData($route);
+        $mapping = self::getTypeMapping();
+
+        $addpath = '';
+
+        if ($externtype !== '' && $mapping[$externtype] != null) {
+            $addpath = '/' . implode(', ', $mapping[$externtype]);
         }
+
+        if ($treetype == 'rangetree') {
+            $route = 'extern/rangetree' . $addpath;
+        } else {
+            $route = 'extern/institutes' . $addpath;
+        }
+
+        $result = self::getData($route);
+
         return $result;
     }
 
