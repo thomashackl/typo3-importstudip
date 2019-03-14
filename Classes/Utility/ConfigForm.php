@@ -153,7 +153,7 @@ class ConfigForm {
         $html = '<select name="'.$inputname.'" size="1" onchange="Tx_ImportStudip.setModuleName()">';
         if (is_array($data)) {
             foreach ($data as $entry) {
-                $html .= '<option value="'.$entry->id.'" data-module="'.
+                $html .= '<option value="'.$entry['id'].'" data-module="'.
                     $entry['type'].'"'.
                     ($entry['id']==$selected ? ' selected' : '').'>'.
                     $entry['name'].'</option>';
