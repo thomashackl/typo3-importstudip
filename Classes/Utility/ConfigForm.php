@@ -247,9 +247,9 @@ class ConfigForm {
     {
         $html = '<select name="'.$inputname.'" onchange="Tx_ImportStudip.getExternConfigurations(\'user-select\')">';
         foreach ($data as $i) {
-            $html .= '<option value="'.$i['institute_id'].'"'.
-                ($i['institute_id'] == $value ? ' selected' : '').
-                '>'.$i['name'].'</option>';
+            $html .= '<option value="' . $i['institute_id'] . '"' .
+                ($i['institute_id'] == $value ? ' selected' : '') .
+                '>' . $i['name'] . '</option>';
         }
         $html .= '</select>';
         return $html;
@@ -318,8 +318,8 @@ class ConfigForm {
             $parameters['itemFormElName'].'" data-input-value="'.
             $parameters['itemFormElValue'].'">';
         if ($parameters['itemFormElValue']) {
-            $institutes = json_decode(StudipConnector::getInstitute($parameters['itemFormElValue']), true);
-            $html .= self::chooseUserInstituteForm($institutes, $parameters['itemFormElName'],
+            $institute = json_decode(StudipConnector::getInstitute($parameters['itemFormElValue']), true);
+            $html .= self::chooseCourseInstituteForm(array($institute), $parameters['itemFormElName'],
                 $parameters['itemFormElValue']);
         }
         $html .= '</div>';

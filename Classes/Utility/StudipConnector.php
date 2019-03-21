@@ -204,11 +204,11 @@ class StudipConnector {
         return $result;
     }
 
-    public static function getUserInstitutes($user_id)
+    public static function getUserInstitutes($username)
     {
         $result = array();
-        if ($user_id) {
-            $result = json_decode(self::getData('extern/user_institutes/' . $user_id, false), true);
+        if ($username) {
+            $result = json_decode(self::getData('extern/user_institutes/' . $username), true);
         }
         return $result;
     }

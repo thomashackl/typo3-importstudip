@@ -88,7 +88,7 @@ class AjaxHandler {
         $selected = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('selected');
         $inputname = \TYPO3\CMS\Core\Utility\GeneralUtility::_POST('inputname');
         $institutes = StudipConnector::getUserInstitutes($username);
-        $institutes = $institutes['collection']['work'];
+        $institutes = $institutes['collection']['work'] ?: array();
         usort($institutes, function($a, $b) {
             return strnatcasecmp($a['name'], $b['name']);
         });
