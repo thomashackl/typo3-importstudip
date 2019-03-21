@@ -266,7 +266,9 @@ class ConfigForm {
         //$html .= '<option value="">'.\TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.label.allsemesters', 'importstudip').'</option>';
         $allsemesters = json_decode(StudipConnector::getAllSemesters(), true);
         foreach (array_reverse($allsemesters) as $semester) {
-            $html .= '<option value="'.$semester['semester_id'].'">'.$semester['description'].'</option>';
+            $html .= '<option value="'.$semester['semester_id'].'"' .
+                ($semester['current'] ? ' selected' : '') .
+                '>'.$semester['description'].'</option>';
         }
         $html .= '</select>';
         $html .= '<button type="button" id="tx-importstudip-execute-coursesearch" onclick="Tx_ImportStudip.performCourseSearch()">'.
