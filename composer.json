@@ -14,9 +14,9 @@
   "autoload": {
     "psr-4": {
       "UniPassau\\Importstudip\\": "Classes",
-      "UniPassau\\Importstudip\\Controller": "Classes/Controller",
-      "UniPassau\\Importstudip\\Utility": "Classes/Utility",
-      "UniPassau\\Importstudip\\ViewHelpers": "Classes/ViewHelpers"
+      "UniPassau\\Importstudip\\Controller\\": "Classes/Controller",
+      "UniPassau\\Importstudip\\Utility\\": "Classes/Utility",
+      "UniPassau\\Importstudip\\ViewHelpers\\": "Classes/ViewHelpers"
     },
     "classmap": [
       "Classes",
