@@ -374,7 +374,7 @@ class StudipExternalPage
         $range = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('range_id');
         $target = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('target');
 
-        if ($module && $config && $range && (!$target || $target == $uid) && self::checkReferrer()) {
+        if ($module && $config && $range && (!$target || $target == $uid)) {
             $set = array(
                 'module' => $module,
                 'config_id' => $config,
