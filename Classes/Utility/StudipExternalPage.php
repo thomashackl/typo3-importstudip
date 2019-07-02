@@ -227,8 +227,8 @@ class StudipExternalPage
             }
 
             // Item_id for person browser.
-            if ($item = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('ext_templatepersbrowse')) {
-                $params['ext_templatepersbrowse[item_id]'] = $item['item_id'];
+            if ($item = \TYPO3\CMS\Core\Utility\GeneralUtility::_GET('item_id')) {
+                $params['ext_templatepersbrowse[item_id]'] = $item;
             }
 
             // Single username.
