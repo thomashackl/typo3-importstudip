@@ -21,6 +21,9 @@
             <trans-unit id="backend.externtype.persons">
                 <source>List of persons</source>
             </trans-unit>
+            <trans-unit id="backend.externtype.phonebook">
+                <source>Phonebook</source>
+            </trans-unit>
             <trans-unit id="backend.label.aggregate">
                 <source>Aggregate data over sub-institutes</source>
             </trans-unit>
@@ -189,8 +192,20 @@
             <trans-unit id="frontend.label.institute">
                 <source>Institute:</source>
             </trans-unit>
+            <trans-unit id="frontend.label.institute_holder">
+                <source>Institution holder</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.institute_name">
+                <source>Institution name</source>
+            </trans-unit>
             <trans-unit id="frontend.label.perform_search">
                 <source>Find</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.person_name">
+                <source>Person name</source>
+            </trans-unit>
+            <trans-unit id="frontend.label.phonenumber">
+                <source>Phone number</source>
             </trans-unit>
             <trans-unit id="frontend.label.searchterm">
                 <source>Search for:</source>
@@ -221,6 +236,9 @@
             </trans-unit>
             <trans-unit id="frontend.text.num_search_results">
                 <source>%s results found.</source>
+            </trans-unit>
+            <trans-unit id="frontend.text.searchphonebook_placeholder">
+                <source>Search for phone extension, name or institution</source>
             </trans-unit>
             <trans-unit id="frontend.text.searchterm_placeholder">
                 <source>Course name or number...</source>

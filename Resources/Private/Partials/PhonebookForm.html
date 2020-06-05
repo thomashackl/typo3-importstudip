@@ -1,0 +1,30 @@
+{namespace importstudip=UniPassau\Importstudip\ViewHelpers}
+<f:form action="phonebook" method="post">
+    <label>
+        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.searchterm"/>
+        <br/>
+        <f:form.textfield name="searchterm" size="75" maxlength="255"
+                          value="{searchterm}" required="1" autofocus="1"
+                          placeholder="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.searchphonebook_placeholder')}"/>
+    </label>
+    <f:form.submit value="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.perform_search')}"/>
+    <div class="studip-phonebook-searchoptions">
+        <label>
+            <f:form.checkbox name="in[]" value="phone_number" checked="{phone_number}"/>
+            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.phonenumber"/>
+        </label>
+        <label>
+            <f:form.checkbox name="in[]" value="person_name" checked="{person_name}"/>
+            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.person_name"/>
+        </label>
+        <label>
+            <f:form.checkbox name="in[]" value="institute_name" checked="{institute_name}"/>
+            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.institute_name"/>
+        </label>
+        <label>
+            <f:form.checkbox name="in[]" value="institute_holder" checked="{institute_holder}"/>
+            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.institute_holder"/>
+        </label>
+    </div>
+    <f:form.hidden name="target" value="{target}"/>
+</f:form>

@@ -77,6 +77,11 @@ class StudipConnector {
                 case 10:
                     $download = true;
                     break;
+
+                // Phonebook plugin
+                case 555:
+                    $phonebook = true;
+                    break;
             }
         }
         $types = array();
@@ -118,6 +123,14 @@ class StudipConnector {
                 'download'
             );
         }
+
+        if ($phonebook) {
+            $types[] = array(
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('backend.externtype.phonebook', 'importstudip'),
+                'phonebook'
+            );
+        }
+
         return $types;
     }
 
@@ -234,6 +247,17 @@ class StudipConnector {
             if ($semester_id || $institute_id || $coursetype) {
                 $call .= '/' . ($semester_id ?: 0) . '/' . ($institute_id ?: 0) . '/' . ($coursetype ?: 0);
             }
+            $result = self::getData($call, false);
+        }
+
+        return $result;
+    }
+
+    public static function frontendSearchPhonebook($searchterm, $in = [])
+    {
+        $result = array();
+        if ($searchterm) {
+            $call = 'phonebook/search/' . rawurlencode($searchterm) . '?in=' . implode(',', $in);
             $result = self::getData($call, false);
         }
 

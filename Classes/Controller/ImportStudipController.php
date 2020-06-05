@@ -39,6 +39,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
     public function indexAction()
     {
         $this->view->assign('showsearch', $this->settings['pagetype'] == 'searchpage');
+        $this->view->assign('phonebook', $this->settings['pagetype'] == 'phonebook');
 
         session_start();
 
@@ -64,6 +65,23 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
              * handle the search result in case the are several on this page.
              */
             $this->view->assign('target', intval($this->configurationManager->getContentObject()->data['uid']));
+
+        // Generate form for phonebook and corresponding search.
+        } else if ($this->settings['pagetype'] == 'phonebook') {
+
+            /*
+             * Provide current UID so that we know which content element should
+             * handle the search result in case the are several on this page.
+             */
+            $this->view->assign('target', intval($this->configurationManager->getContentObject()->data['uid']));
+
+            $this->view->assign('searchterm', '');
+
+            // Assign fields to search in
+            $this->view->assign('phone_number', true);
+            $this->view->assign('person_name', true);
+            $this->view->assign('institute_name', true);
+            $this->view->assign('institute_holder', false);
 
         } else {
 
@@ -131,7 +149,13 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
         // Which content object should handle displaying search results?
         $target = intval(\TYPO3\CMS\Core\Utility\GeneralUtility::_POST('target'));
 
-        if ($uid === $target) {
+        if ($uid == $target) {
+
+            /*
+             * Provide current UID so that we know which content element should
+             * handle the search result in case the are several on this page.
+             */
+            $this->view->assign('target', intval($this->configurationManager->getContentObject()->data['uid']));
 
             // Get request values.
             if ($this->request->hasArgument('searchterm')) {
@@ -183,6 +207,54 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
                     $studip_url = $studip_url;
                 }
                 $this->view->assign('studip_url', $studip_url);
+            } else {
+                $this->view->assign('nosearchterm', 1);
+            }
+
+        } else {
+
+            $this->forward('index');
+
+        }
+    }
+
+    public function phonebookAction()
+    {
+        // Get current UID.
+        $uid = intval($this->configurationManager->getContentObject()->data['uid']);
+
+        // Which content object should handle displaying search results?
+        $target = intval($this->request->getArgument('target'));
+
+        if ($uid == $target) {
+
+            /*
+             * Provide current UID so that we know which content element should
+             * handle the search result in case the are several on this page.
+             */
+            $this->view->assign('target', intval($this->configurationManager->getContentObject()->data['uid']));
+
+            // Get request values.
+            if ($this->request->hasArgument('searchterm')) {
+                $searchterm = trim($this->request->getArgument('searchterm'));
+                $this->view->assign('searchterm', $searchterm);
+            }
+
+            // Set fields to search in.
+            $in = $this->request->getArgument('in');
+            foreach ($in as $one) {
+                $this->view->assign($one, true);
+            }
+
+            if (trim($searchterm)) {
+                // Get search results.
+                $results = json_decode(StudipConnector::frontendSearchPhonebook($searchterm, $in), true);
+
+                $log = fopen('/Users/thomashackl/Downloads/typo3.log', 'w');
+                fwrite($log, print_r($results, 1));
+
+                $this->view->assign('searchresults', $results);
+                $this->view->assign('numresults', count($results));
             } else {
                 $this->view->assign('nosearchterm', 1);
             }

@@ -16,7 +16,7 @@ $EM_CONF[$_EXTKEY] = array(
     'category' => 'plugin',
     'constraints' => array(
         'depends' => array(
-            'typo3' => '6.2.0-8.99.99'
+            'typo3' => '8.0.0-8.99.99'
         ),
         'conflicts' => array(
         ),
@@ -28,7 +28,7 @@ $EM_CONF[$_EXTKEY] = array(
     'author' => 'Thomas Hackl',
     'author_email' => 'thomas.hackl@uni-passau.de',
     'author_company' => 'University of Passau',
-    'version' => '3.2.6.2',
+    'version' => '3.3.0.0',
     'autoload' => array(
         'classmap' => array(
             'Classes',

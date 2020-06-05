@@ -1,0 +1,79 @@
+<f:render partial="PhonebookForm" arguments="{_all}"/>
+<f:if condition="{nosearchterm} == 1">
+    <f:then>
+        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_term"/>
+    </f:then>
+    <f:else if="{numresults} > 0">
+        <table width="100%">
+            <caption>
+                <f:if condition="{numresults} == 1">
+                    <f:then>
+                        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.one_search_result"/>
+                    </f:then>
+                    <f:else>
+                        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.num_search_results"
+                                     arguments="{0: numresults}"/>
+                    </f:else>
+                </f:if>
+            </caption>
+            <thead>
+                <tr>
+                    <th width="70%">Person</th>
+                    <th width="30%" style="text-align: right">Telefonnummer</th>
+                </tr>
+            </thead>
+            <tbody>
+            <f:for each="{searchresults}" as="entry">
+                <tr style="vertical-align: top">
+                    <td valign="top" style="display: flex; flex-direction: row">
+                        <div class="studip-persondetails-picture">
+                            <div class="studip-picture-frame">
+                                <img src="{entry.picture}" width="64" height="64"
+                                     title="{entry.firstname} {entry.lastname}"/>
+                            </div>
+                            <div class="studip-picture-shadow"></div>
+                        </div>
+                        <div class="studip-phonebook-person" style="flex: 1">
+                            <div class="studip-phonebook-name" style="font-weight: bold">
+                                {entry.lastname}
+                                <f:if condition="{entry.firstname} != ''">
+                                    , {entry.firstname}
+                                </f:if>
+                                <f:if condition="{entry.title_front} != ''">
+                                    , {entry.title_front}
+                                </f:if>
+                                <f:if condition="{entry.title_rear} != ''">
+                                    , {entry.title_rear}
+                                </f:if>
+                            </div>
+                            <div class="studip-phonebook-institute" style="font-size: small;font-style: italic">
+                                {entry.institute}
+                                <f:if condition="{entry.gender} == 1">
+                                    <f:then>
+                                        <br>
+                                        {entry.statusgroup_male}
+                                    </f:then>
+                                    <f:else if="{entry.gender} == 2">
+                                        <br>
+                                        {entry.statusgroup_female}
+                                    </f:else>
+                                    <f:else>
+                                        <br>
+                                        {entry.statusgroup}
+                                    </f:else>
+                                </f:if>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="font-size: larger;font-weight: bold;line-height: 50pt;text-align: right;width: 250px">
+                        {entry.phone}
+                    </td>
+                </tr>
+            </f:for>
+            </tbody>
+        </table>
+    </f:else>
+    <f:else>
+        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_results"/>
+    </f:else>
+</f:if>

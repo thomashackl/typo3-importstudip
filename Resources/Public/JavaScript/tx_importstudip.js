@@ -235,6 +235,27 @@ Tx_ImportStudip = {
                     Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
                     Tx_ImportStudip.getInstitutes('tx-importstudip-preselectinst');
                     TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').hide();
+                    break;
+                // Phonebook
+                case 'phonebook':
+                    Tx_ImportStudip.disableInput('tx-importstudip-institutes');
+                    Tx_ImportStudip.disableInput('tx-importstudip-externconfig');
+                    Tx_ImportStudip.disableInput('tx-importstudip-personsearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-user-institute');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursesearch');
+                    Tx_ImportStudip.disableInput('tx-importstudip-choose-course-institute');
+                    TYPO3.jQuery('.tx-importstudip-filters-container').hide();
+                    TYPO3.jQuery('.tx-importstudip-linkingoptions-container').hide();
+                    Tx_ImportStudip.disableInput('tx-importstudip-aggregate');
+                    Tx_ImportStudip.disableInput('tx-importstudip-statusgroups');
+                    Tx_ImportStudip.disableInput('tx-importstudip-participating');
+                    Tx_ImportStudip.disableInput('tx-importstudip-coursetypes');
+                    Tx_ImportStudip.disableInput('tx-importstudip-subjects');
+                    Tx_ImportStudip.disableInput('tx-importstudip-smallnews');
+                    Tx_ImportStudip.getInstitutes('tx-importstudip-preselectinst');
+                    TYPO3.jQuery('div.tx-importstudip-linkingoptions-container').hide();
+                    TYPO3.jQuery('div.tx-importstudip-filters-container').hide();
+                    break;
             }
             TYPO3.jQuery.ajax({
                 url: TYPO3.settings.ajaxUrls['ImportStudip::AjaxHandler'],

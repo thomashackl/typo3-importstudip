@@ -32,7 +32,7 @@ class ConfigForm {
         $result = '<div id="tx-importstudip-pagetypes" data-iconpath="' . $path . '">';
         $result .= '<script type="text/javascript" src="'.
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').
-            'Resources/Public/JavaScript/tx_importstudip.js"></script>';
+            'Resources/Public/JavaScript/tx_importstudip.min.js"></script>';
         $result .= '<style type="text/css">
             @import url("'.
             \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath('importstudip').

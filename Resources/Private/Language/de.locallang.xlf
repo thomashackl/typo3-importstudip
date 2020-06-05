@@ -18,6 +18,9 @@
             <trans-unit id="backend.externtype.persons">
                 <target>Liste von Personen</target>
             </trans-unit>
+            <trans-unit id="backend.externtype.phonebook">
+                <target>Telefonbuch</target>
+            </trans-unit>
             <trans-unit id="backend.externtype.news">
                 <target>Ankündigungen</target>
             </trans-unit>
@@ -192,8 +195,20 @@
             <trans-unit id="frontend.label.institute">
                 <target>Einrichtung:</target>
             </trans-unit>
+            <trans-unit id="frontend.label.institute_holder">
+                <target>Einrichtungsleitung</target>
+            </trans-unit>
+            <trans-unit id="frontend.label.institute_name">
+                <target>Einrichtungsname</target>
+            </trans-unit>
             <trans-unit id="frontend.label.perform_search">
                 <target>Finden</target>
+            </trans-unit>
+            <trans-unit id="frontend.label.person_name">
+                <target>Vor- und Nachname</target>
+            </trans-unit>
+            <trans-unit id="frontend.label.phonenumber">
+                <target>Telefonnummer</target>
             </trans-unit>
             <trans-unit id="frontend.label.searchterm">
                 <target>Suche nach:</target>
@@ -211,7 +226,7 @@
                 <target>Es können keine Daten angezeigt werden, da Stud.IP nicht verfügbar ist oder zu lange braucht, um zu antworten.</target>
             </trans-unit>
             <trans-unit id="frontend.text.no_studip_data">
-                <source>Es wurden keine Daten gefunden.</source>
+                <target>Es wurden keine Daten gefunden.</target>
             </trans-unit>
             <trans-unit id="frontend.text.no_search_results">
                 <target>Es wurden keine Ergebnisse zu Ihrer Suche gefunden.</target>
@@ -224,6 +239,9 @@
             </trans-unit>
             <trans-unit id="frontend.text.num_search_results">
                 <target>%s Ergebnisse gefunden.</target>
+            </trans-unit>
+            <trans-unit id="frontend.text.searchphonebook_placeholder">
+                <target>Suchen Sie nach Durchwahl, Name oder Einrichtung</target>
             </trans-unit>
             <trans-unit id="frontend.text.searchterm_placeholder">
                 <target>Veranstaltungsname oder -nummer...</target>
