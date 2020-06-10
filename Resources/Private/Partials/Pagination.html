@@ -1,0 +1,80 @@
+<ul class="studip-pagination">
+	<f:if condition="{currentPage} > 1">
+		<f:then>
+			<li class="previous">
+				<f:link.page additionalParams="{tx_importstudip_pi1: {action: 'phonebook',
+						controller: 'ImportStudip', page: previousPage, searchterm: searchterm, target: target, in: in}}">
+					&lt;
+				</f:link.page>
+			</li>
+		</f:then>
+	</f:if>
+	<li class="first{f:if(condition: '{currentPage} == 1', then: ' current)}
+						{f:if(condition: '{numPages} > 1', then: ' studip-pagination-with-separator')}">
+		<f:if condition="{currentPage} == 1">
+			<f:then>
+				1
+			</f:then>
+			<f:else>
+				<f:link.page additionalParams="{tx_importstudip_pi1: {action: 'phonebook',
+						controller: 'ImportStudip', page: 1, searchterm: searchterm, target: target, in: in}}">
+					1
+				</f:link.page>
+			</f:else>
+		</f:if>
+	</li>
+	<f:if condition="hasMorePages && {lowerPageLimit} > 2">
+		<f:then>
+			<li class="studip-pagination-ellipsis studip-pagination-with-separator">
+				[&hellip;]
+			</li>
+		</f:then>
+	</f:if>
+	<f:for each="{pages}" as="page">
+		<f:if condition="{page} == {currentPage}">
+			<f:then>
+				<li class="{f:if(condition: '{page} < {numPages}', then: ' studip-pagination-with-separator')}">
+					{page}
+				</li>
+			</f:then>
+			<f:else>
+				<li class="{f:if(condition: '{page} < {numPages}', then: ' studip-pagination-with-separator')}">
+					<f:link.page additionalParams="{tx_importstudip_pi1: {action: 'phonebook',
+						controller: 'ImportStudip', page: page, searchterm: searchterm, target: target, in: in}}">
+						{page}
+					</f:link.page>
+				</li>
+			</f:else>
+		</f:if>
+	</f:for>
+	<f:if condition="hasMorePages && {upperPageLimit} < {stopCounting}">
+		<f:then>
+			<li class="studip-pagination-ellipsis studip-pagination-with-separator">
+				[&hellip;]
+			</li>
+		</f:then>
+	</f:if>
+	<li class="last{f:if(condition: '{currentPage} == {numPages}', then: ' current)}">
+		<f:if condition="{currentPage} == {numPages}">
+			<f:then>
+				{numPages}
+			</f:then>
+			<f:else>
+				<f:link.page additionalParams="{tx_importstudip_pi1: {action: 'phonebook',
+						controller: 'ImportStudip', page: numPages, searchterm: searchterm, target: target, in: in}}">
+					{numPages}
+				</f:link.page>
+			</f:else>
+		</f:if>
+	</li>
+	<f:if condition="{currentPage} < {numPages}">
+		<f:then>
+			<li class="next">
+				<f:link.page additionalParams="{tx_importstudip_pi1: {action: 'phonebook',
+						controller: 'ImportStudip', page: nextPage, searchterm: searchterm, target: target, in: in}}">
+					&gt;
+				</f:link.page>
+			</li>
+		</f:then>
+	</f:if>
+</ul>

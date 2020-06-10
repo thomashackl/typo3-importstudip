@@ -253,11 +253,11 @@ class StudipConnector {
         return $result;
     }
 
-    public static function frontendSearchPhonebook($searchterm, $in = [])
+    public static function frontendSearchPhonebook($searchterm, $queryParams = [])
     {
         $result = array();
         if ($searchterm) {
-            $call = 'phonebook/search/' . rawurlencode($searchterm) . '?in=' . implode(',', $in);
+            $call = 'phonebook/search/' . rawurlencode($searchterm) . '?' . http_build_query($queryParams);
             $result = self::getData($call, false);
         }
 

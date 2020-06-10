@@ -1,31 +1,41 @@
+<link rel="stylesheet" href="{f:uri.resource(path:'Css/tx_importstudip_frontend.min.css')}">
 <f:render partial="PhonebookForm" arguments="{_all}"/>
 <f:if condition="{nosearchterm} == 1">
     <f:then>
         <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_term"/>
     </f:then>
-    <f:else if="{numresults} > 0">
-        <table width="100%">
+    <f:else if="{numResults} > 0">
+        <f:if condition="{numPages} > 1">
+            <f:then>
+                <f:render partial="Pagination" arguments="{_all}"></f:render>
+            </f:then>
+        </f:if>
+        <table class="studip-searchresult-table">
             <caption>
-                <f:if condition="{numresults} == 1">
+                <f:if condition="{numResults} == 1">
                     <f:then>
                         <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.one_search_result"/>
                     </f:then>
                     <f:else>
                         <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.num_search_results"
-                                     arguments="{0: numresults}"/>
+                                     arguments="{0: numResults}"/>
                     </f:else>
                 </f:if>
             </caption>
+            <colgroup>
+                <col width="60%">
+                <col width="40%">
+            </colgroup>
             <thead>
                 <tr>
-                    <th width="70%">Person</th>
-                    <th width="30%" style="text-align: right">Telefonnummer</th>
+                    <th>Name</th>
+                    <th class="studip-phonebook-number">Telefonnummer</th>
                 </tr>
             </thead>
             <tbody>
-            <f:for each="{searchresults}" as="entry">
-                <tr style="vertical-align: top">
-                    <td valign="top" style="display: flex; flex-direction: row">
+            <f:for each="{searchResults}" as="entry">
+                <tr>
+                    <td class="studip-phonebook-data">
                         <div class="studip-persondetails-picture">
                             <div class="studip-picture-frame">
                                 <img src="{entry.picture}" width="64" height="64"
@@ -33,8 +43,8 @@
                             </div>
                             <div class="studip-picture-shadow"></div>
                         </div>
-                        <div class="studip-phonebook-person" style="flex: 1">
-                            <div class="studip-phonebook-name" style="font-weight: bold">
+                        <div class="studip-phonebook-entry">
+                            <div class="studip-phonebook-name">
                                 {entry.lastname}
                                 <f:if condition="{entry.firstname} != ''">
                                     , {entry.firstname}
@@ -46,7 +56,7 @@
                                     , {entry.title_rear}
                                 </f:if>
                             </div>
-                            <div class="studip-phonebook-institute" style="font-size: small;font-style: italic">
+                            <div class="studip-phonebook-institute">
                                 {entry.institute}
                                 <f:if condition="{entry.gender} == 1">
                                     <f:then>
@@ -65,7 +75,7 @@
                             </div>
                         </div>
                     </td>
-                    <td style="font-size: larger;font-weight: bold;line-height: 50pt;text-align: right;width: 250px">
+                    <td class="studip-phonebook-number">
                         {entry.phone}
                     </td>
                 </tr>

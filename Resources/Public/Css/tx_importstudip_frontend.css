@@ -1,0 +1,65 @@
+ul.studip-pagination {
+  background-color: #efefef;
+  display: flex;
+  flex-direction: row;
+  height: 25px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 0;
+}
+ul.studip-pagination li {
+  line-height: 25px;
+  list-style-type: none;
+  margin: 2px;
+  text-align: center;
+  width: 25px;
+}
+ul.studip-pagination li.previous {
+  border-right: 2px solid #ff8000;
+}
+ul.studip-pagination li.current {
+  background-color: #7d7d7d;
+  font-weight: bold;
+  color: #ffffff;
+}
+ul.studip-pagination li.studip-pagination-with-separator {
+  border-right: 1px solid #ff8000;
+}
+ul.studip-pagination li.studip-pagination-ellipsis {
+  font-size: small;
+}
+ul.studip-pagination li.next {
+  border-left: 2px solid #ff8000;
+}
+table.studip-searchresult-table {
+  width: 100%;
+}
+table.studip-searchresult-table .studip-phonebook-number {
+  text-align: right;
+}
+table.studip-searchresult-table tr {
+  vertical-align: top;
+}
+table.studip-searchresult-table tr td {
+  margin-bottom: 5px;
+}
+table.studip-searchresult-table tr td.studip-phonebook-data {
+  display: flex;
+  flex-direction: row;
+}
+table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry {
+  flex: 1;
+}
+table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry .studip-phonebook-name {
+  font-weight: bold;
+}
+table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry .studip-phonebook-institute {
+  font-size: small;
+  font-style: italic;
+}
+table.studip-searchresult-table tr td.studip-phonebook-number {
+  font-size: larger;
+  font-weight: bold;
+  line-height: 50pt;
+}
+/*# sourceMappingURL=tx_importstudip_frontend.css.map */

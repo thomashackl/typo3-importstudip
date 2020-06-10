@@ -25,6 +25,8 @@ use UniPassau\Importstudip\Utility\StudipExternalPage;
 
 class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionController {
 
+    private $limit = 50;
+
     public function InitializeAction()
     {
         // Check for site charset and set local variable accordingly
@@ -193,11 +195,13 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
             if (trim($searchterm)) {
                 // Get search results.
-                $results = json_decode(StudipConnector::frontendSearchCourse($searchterm, $semester, $institute, $coursetype), true);
+                $results = json_decode(
+                    StudipConnector::frontendSearchCourse($searchterm, $semester, $institute, $coursetype), true);
                 $this->view->assign('searchresults', $results);
                 $this->view->assign('numresults', count($results));
 
-                $configurationUtility = $this->objectManager->get('TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
+                $configurationUtility = $this->objectManager->get(
+                    'TYPO3\CMS\Extensionmanager\Utility\ConfigurationUtility');
                 $config = $configurationUtility->getCurrentConfiguration('importstudip');
 
                 $studip_url = $config['studip_url']['value'];
@@ -228,6 +232,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
         if ($uid == $target) {
 
+            $this->view->assign('target', $target);
+
             /*
              * Provide current UID so that we know which content element should
              * handle the search result in case the are several on this page.
@@ -242,19 +248,54 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
             // Set fields to search in.
             $in = $this->request->getArgument('in');
+            $this->view->assign('in', $in);
             foreach ($in as $one) {
                 $this->view->assign($one, true);
             }
 
             if (trim($searchterm)) {
                 // Get search results.
-                $results = json_decode(StudipConnector::frontendSearchPhonebook($searchterm, $in), true);
+                $params = [
+                    'in' => implode(',', $in),
+                    'offset' => $this->request->hasArgument('page') ?
+                        $this->request->getArgument('page') * $this->limit : 0,
+                    'limit' => $this->limit
+                ];
 
-                $log = fopen('/Users/thomashackl/Downloads/typo3.log', 'w');
-                fwrite($log, print_r($results, 1));
+                $results = json_decode(StudipConnector::frontendSearchPhonebook($searchterm, $params), true);
 
-                $this->view->assign('searchresults', $results);
-                $this->view->assign('numresults', count($results));
+                $this->view->assign('searchResults', $results['collection']);
+                $this->view->assign('currentResults', count($results['collection']));
+                $this->view->assign('numResults', $results['pagination']['total']);
+
+                $pageNumber = ceil($results['pagination']['total'] / $this->limit) - 1;
+                $this->view->assign('numPages', $pageNumber);
+
+                $currentPage = $this->request->hasArgument('page') ?
+                    $this->request->getArgument('page') : 1;
+                $this->view->assign('currentPage', $currentPage);
+                $this->view->assign('previousPage', $currentPage - 1);
+                $this->view->assign('nextPage', $currentPage + 1);
+
+                /*
+                 * Don't always show all pages in pagination, if there are too
+                 * many, the layout would "explode". So just show the first,
+                 * the last and the current pages with 2 pages around.
+                 */
+                $hasMorePages = $pageNumber > 5;
+                $this->view->assign('hasMorePages', $hasMorePages);
+
+                $lowerPageLimit = $hasMorePages ? max($currentPage - 2, 2) : 2;
+                $this->view->assign('lowerPageLimit', $lowerPageLimit);
+                $upperPageLimit = $hasMorePages ? min($currentPage + 2, $pageNumber - 1) : $pageNumber - 1;
+                $this->view->assign('upperPageLimit', $upperPageLimit);
+                // Stop counting upwards one entry before page count.
+                $this->view->assign('stopCounting', $pageNumber - 1);
+
+                // PageNumbers to show in pagination
+                $this->view->assign('pages', $lowerPageLimit < $upperPageLimit ?
+                    range($lowerPageLimit, $upperPageLimit) : []);
+
             } else {
                 $this->view->assign('nosearchterm', 1);
             }
@@ -280,7 +321,8 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             UniPassau\Importstudip\AjaxController::$action();
         } else {
             $message = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Messaging\\FlashMessage',
-                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.rest_access_error', 'importstudip').' '.$response->response,
+                \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.rest_access_error', 'importstudip').
+                    ' '.$response->response,
                 \TYPO3\CMS\Extbase\Utility\LocalizationUtility::translate('message.error', 'importstudip'),
                 \TYPO3\CMS\Core\Messaging\FlashMessage::ERROR
             );
