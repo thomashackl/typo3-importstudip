@@ -37,11 +37,15 @@
                 <tr>
                     <td class="studip-phonebook-data">
                         <div class="studip-persondetails-picture">
-                            <div class="studip-picture-frame">
-                                <img src="{entry.picture}" width="64" height="64"
-                                     title="{entry.firstname} {entry.lastname}"/>
-                            </div>
-                            <div class="studip-picture-shadow"></div>
+                            <f:if condition="{entry.picture} != ''">
+                                <f:then>
+                                    <div class="studip-picture-frame">
+                                        <img src="{entry.picture}" width="64" height="64"
+                                             title="{entry.firstname} {entry.lastname}"/>
+                                    </div>
+                                    <div class="studip-picture-shadow"></div>
+                                </f:then>
+                            </f:if>
                         </div>
                         <div class="studip-phonebook-entry">
                             <div class="studip-phonebook-name">
