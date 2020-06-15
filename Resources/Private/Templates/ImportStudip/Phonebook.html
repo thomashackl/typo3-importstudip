@@ -37,7 +37,7 @@
                 <tr>
                     <td class="studip-phonebook-data">
                         <div class="studip-persondetails-picture">
-                            <f:if condition="{entry.picture} != ''">
+                            <f:if condition="{entry.picture} != '' && {entry.picture_customized}">
                                 <f:then>
                                     <div class="studip-picture-frame">
                                         <img src="{entry.picture}" width="64" height="64"
