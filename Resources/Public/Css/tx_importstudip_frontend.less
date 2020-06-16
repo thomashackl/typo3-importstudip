@@ -46,6 +46,7 @@ table.studip-searchresult-table {
   }
 
   tr {
+    border-bottom: 1px solid #000000;
     vertical-align: top;
 
     td {
@@ -54,6 +55,10 @@ table.studip-searchresult-table {
       &.studip-phonebook-data {
         display: flex;
         flex-direction: row;
+
+        .studip-persondetails-picture {
+          width: 64px;
+        }
 
         .studip-phonebook-entry {
           flex: 1;
@@ -72,7 +77,12 @@ table.studip-searchresult-table {
       &.studip-phonebook-number {
         font-size: larger;
         font-weight: bold;
-        line-height: 50pt;
+        margin-top: 10px;
+
+        div.studip-phonebook-fax {
+          font-size: small;
+          margin-top: 3px;
+        }
       }
     }
   }

@@ -38,6 +38,7 @@ table.studip-searchresult-table .studip-phonebook-number {
   text-align: right;
 }
 table.studip-searchresult-table tr {
+  border-bottom: 1px solid #000000;
   vertical-align: top;
 }
 table.studip-searchresult-table tr td {
@@ -46,6 +47,9 @@ table.studip-searchresult-table tr td {
 table.studip-searchresult-table tr td.studip-phonebook-data {
   display: flex;
   flex-direction: row;
+}
+table.studip-searchresult-table tr td.studip-phonebook-data .studip-persondetails-picture {
+  width: 64px;
 }
 table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry {
   flex: 1;
@@ -60,6 +64,10 @@ table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-en
 table.studip-searchresult-table tr td.studip-phonebook-number {
   font-size: larger;
   font-weight: bold;
-  line-height: 50pt;
+  margin-top: 10px;
+}
+table.studip-searchresult-table tr td.studip-phonebook-number div.studip-phonebook-fax {
+  font-size: small;
+  margin-top: 3px;
 }
 /*# sourceMappingURL=tx_importstudip_frontend.css.map */

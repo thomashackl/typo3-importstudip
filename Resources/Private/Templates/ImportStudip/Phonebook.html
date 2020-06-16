@@ -81,6 +81,13 @@
                     </td>
                     <td class="studip-phonebook-number">
                         {entry.phone}
+                        <f:if condition="{entry.fax} != ''">
+                            <f:then>
+                                <div class="studip-phonebook-fax">
+                                    Fax: {entry.fax}
+                                </div>
+                            </f:then>
+                        </f:if>
                     </td>
                 </tr>
             </f:for>
