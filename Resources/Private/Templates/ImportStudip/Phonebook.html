@@ -59,6 +59,9 @@
                                 <f:if condition="{entry.title_rear} != ''">
                                     , {entry.title_rear}
                                 </f:if>
+                                <f:if condition="{entry.info} != ''">
+                                    <span class="studip-phonebook-info">({entry.info})</span>
+                                </f:if>
                             </div>
                             <div class="studip-phonebook-institute">
                                 {entry.institute}
@@ -75,6 +78,17 @@
                                         <br>
                                         {entry.statusgroup}
                                     </f:else>
+                                </f:if>
+                                <f:if condition="{entry.room} != ''">
+                                    <f:then>
+                                        <f:if condition="{entry.statusgroup} != ''">
+                                            ,
+                                        </f:if>
+                                        <span class="studip-phonebook-room">
+                                            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.room"/>
+                                            {entry.room}
+                                        </span>
+                                    </f:then>
                                 </f:if>
                             </div>
                         </div>

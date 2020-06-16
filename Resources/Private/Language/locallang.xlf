@@ -207,6 +207,9 @@
             <trans-unit id="frontend.label.phonenumber">
                 <source>Phone number</source>
             </trans-unit>
+            <trans-unit id="frontend.label.room">
+                <source>Room</source>
+            </trans-unit>
             <trans-unit id="frontend.label.searchterm">
                 <source>Search for:</source>
             </trans-unit>

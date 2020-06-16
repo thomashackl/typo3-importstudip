@@ -57,6 +57,9 @@ table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-en
 table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry .studip-phonebook-name {
   font-weight: bold;
 }
+table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry .studip-phonebook-name .studip-phonebook-info {
+  font-weight: normal;
+}
 table.studip-searchresult-table tr td.studip-phonebook-data .studip-phonebook-entry .studip-phonebook-institute {
   font-size: small;
   font-style: italic;

@@ -210,6 +210,9 @@
             <trans-unit id="frontend.label.phonenumber">
                 <target>Telefonnummer</target>
             </trans-unit>
+            <trans-unit id="frontend.label.room">
+                <target>Raum</target>
+            </trans-unit>
             <trans-unit id="frontend.label.searchterm">
                 <target>Suche nach:</target>
             </trans-unit>
