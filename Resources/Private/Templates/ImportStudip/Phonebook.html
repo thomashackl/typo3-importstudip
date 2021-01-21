@@ -1,113 +1,115 @@
-<f:render partial="PhonebookForm" arguments="{_all}"/>
-<f:if condition="{nosearchterm} == 1">
-    <f:then>
-        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_term"/>
-    </f:then>
-    <f:else if="{numResults} > 0">
-        <f:if condition="{numPages} > 1">
-            <f:then>
-                <f:render partial="Pagination" arguments="{_all}"></f:render>
-            </f:then>
-        </f:if>
-        <table class="studip-searchresult-table">
-            <caption>
-                <f:if condition="{numResults} == 1">
-                    <f:then>
-                        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.one_search_result"/>
-                    </f:then>
-                    <f:else>
-                        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.num_search_results"
-                                     arguments="{0: numResults}"/>
-                    </f:else>
-                </f:if>
-            </caption>
-            <colgroup>
-                <col width="60%">
-                <col width="40%">
-            </colgroup>
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th class="studip-phonebook-number">Telefonnummer</th>
-                </tr>
-            </thead>
-            <tbody>
-            <f:for each="{searchResults}" as="entry">
-                <tr>
-                    <td class="studip-phonebook-data">
-                        <div class="studip-persondetails-picture">
-                            <f:if condition="{entry.picture} != '' && {entry.picture_customized}">
+<div class="studip-phonebook">
+    <f:render partial="PhonebookForm" arguments="{_all}"/>
+    <f:if condition="{nosearchterm} == 1">
+        <f:then>
+            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_term"/>
+        </f:then>
+        <f:else if="{numResults} > 0">
+            <f:if condition="{numPages} > 1">
+                <f:then>
+                    <f:render partial="Pagination" arguments="{_all}"></f:render>
+                </f:then>
+            </f:if>
+            <table class="studip-searchresult-table">
+                <caption>
+                    <f:if condition="{numResults} == 1">
+                        <f:then>
+                            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.one_search_result"/>
+                        </f:then>
+                        <f:else>
+                            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.num_search_results"
+                                         arguments="{0: numResults}"/>
+                        </f:else>
+                    </f:if>
+                </caption>
+                <colgroup>
+                    <col width="60%">
+                    <col width="40%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th class="studip-phonebook-number">Telefonnummer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <f:for each="{searchResults}" as="entry">
+                    <tr>
+                        <td class="studip-phonebook-data">
+                            <div class="studip-persondetails-picture">
+                                <f:if condition="{entry.picture} != '' && {entry.picture_customized}">
+                                    <f:then>
+                                        <div class="studip-picture-frame">
+                                            <img src="{entry.picture}" width="64" height="64"
+                                                 title="{entry.firstname} {entry.lastname}"/>
+                                        </div>
+                                        <div class="studip-picture-shadow"></div>
+                                    </f:then>
+                                </f:if>
+                            </div>
+                            <div class="studip-phonebook-entry">
+                                <div class="studip-phonebook-name">
+                                    {entry.lastname}
+                                    <f:if condition="{entry.firstname} != ''">
+                                        , {entry.firstname}
+                                    </f:if>
+                                    <f:if condition="{entry.title_front} != ''">
+                                        , {entry.title_front}
+                                    </f:if>
+                                    <f:if condition="{entry.title_rear} != ''">
+                                        , {entry.title_rear}
+                                    </f:if>
+                                    <f:if condition="{entry.info} != ''">
+                                        <span class="studip-phonebook-info">({entry.info})</span>
+                                    </f:if>
+                                </div>
+                                <div class="studip-phonebook-institute">
+                                    {entry.institute}
+                                    <f:if condition="{entry.gender} == 1">
+                                        <f:then>
+                                            <br>
+                                            {entry.statusgroup_male}
+                                        </f:then>
+                                        <f:else if="{entry.gender} == 2">
+                                            <br>
+                                            {entry.statusgroup_female}
+                                        </f:else>
+                                        <f:else>
+                                            <br>
+                                            {entry.statusgroup}
+                                        </f:else>
+                                    </f:if>
+                                    <f:if condition="{entry.room} != ''">
+                                        <f:then>
+                                            <f:if condition="{entry.statusgroup} != ''">
+                                                ,
+                                            </f:if>
+                                            <span class="studip-phonebook-room">
+                                                <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.room"/>
+                                                {entry.room}
+                                            </span>
+                                        </f:then>
+                                    </f:if>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="studip-phonebook-number">
+                            {entry.phone}
+                            <f:if condition="{entry.fax} != ''">
                                 <f:then>
-                                    <div class="studip-picture-frame">
-                                        <img src="{entry.picture}" width="64" height="64"
-                                             title="{entry.firstname} {entry.lastname}"/>
+                                    <div class="studip-phonebook-fax">
+                                        Fax: {entry.fax}
                                     </div>
-                                    <div class="studip-picture-shadow"></div>
                                 </f:then>
                             </f:if>
-                        </div>
-                        <div class="studip-phonebook-entry">
-                            <div class="studip-phonebook-name">
-                                {entry.lastname}
-                                <f:if condition="{entry.firstname} != ''">
-                                    , {entry.firstname}
-                                </f:if>
-                                <f:if condition="{entry.title_front} != ''">
-                                    , {entry.title_front}
-                                </f:if>
-                                <f:if condition="{entry.title_rear} != ''">
-                                    , {entry.title_rear}
-                                </f:if>
-                                <f:if condition="{entry.info} != ''">
-                                    <span class="studip-phonebook-info">({entry.info})</span>
-                                </f:if>
-                            </div>
-                            <div class="studip-phonebook-institute">
-                                {entry.institute}
-                                <f:if condition="{entry.gender} == 1">
-                                    <f:then>
-                                        <br>
-                                        {entry.statusgroup_male}
-                                    </f:then>
-                                    <f:else if="{entry.gender} == 2">
-                                        <br>
-                                        {entry.statusgroup_female}
-                                    </f:else>
-                                    <f:else>
-                                        <br>
-                                        {entry.statusgroup}
-                                    </f:else>
-                                </f:if>
-                                <f:if condition="{entry.room} != ''">
-                                    <f:then>
-                                        <f:if condition="{entry.statusgroup} != ''">
-                                            ,
-                                        </f:if>
-                                        <span class="studip-phonebook-room">
-                                            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.room"/>
-                                            {entry.room}
-                                        </span>
-                                    </f:then>
-                                </f:if>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="studip-phonebook-number">
-                        {entry.phone}
-                        <f:if condition="{entry.fax} != ''">
-                            <f:then>
-                                <div class="studip-phonebook-fax">
-                                    Fax: {entry.fax}
-                                </div>
-                            </f:then>
-                        </f:if>
-                    </td>
-                </tr>
-            </f:for>
-            </tbody>
-        </table>
-    </f:else>
-    <f:else>
-        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_results"/>
-    </f:else>
-</f:if>
+                        </td>
+                    </tr>
+                </f:for>
+                </tbody>
+            </table>
+        </f:else>
+        <f:else>
+            <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.text.no_search_results"/>
+        </f:else>
+    </f:if>
+</div>
