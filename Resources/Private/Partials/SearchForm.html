@@ -23,9 +23,16 @@
     <label>
         <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.coursetype"/>
         <br/>
-        <importstudip:CourseTypeSelect name="coursetype" value="{coursetype}"
-            options="{coursetypes}"
-            prependOptionLabel="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.all')}"/>
+        <f:form.select name="coursetype" value="{coursetype}"
+            prependOptionLabel="{f:translate(key: 'LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.all')}">
+            <f:for each="{coursetypes}" as="class">
+                <f:form.select.optgroup label="{class.name}">
+                    <f:for each="{class.types}" as="type">
+                        <f:form.select.option value="{type.id}">{type.name}</f:form.select.option>
+                    </f:for>
+                </f:form.select.optgroup>
+            </f:for>
+        </f:form.select>
     </label>
     <br/><br/>
     <input type="hidden" name="target" value="{target}"/>

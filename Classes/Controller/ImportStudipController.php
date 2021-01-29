@@ -58,8 +58,9 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
             // If a pre-selected institute is set in backend, set it.
             $this->view->assign('institute', $this->settings['preselectinst']);
 
-            // Get all coursetypes and build a value => name array.
+            // Get all coursetypes.
             $coursetypes = $this->getCourseTypes();
+
             $this->view->assign('coursetypes', $coursetypes);
 
             /*
@@ -369,7 +370,25 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
 
     private function getCourseTypes()
     {
-        return json_decode(StudipConnector::getCourseTypes(), true);
+        $types = json_decode(StudipConnector::getCourseTypes(), true);
+
+        $data = [];
+        foreach ($types as $type) {
+            if (!is_array($data[$type['typeclass']])) {
+                $data[$type['typeclass']] = [
+                    'id' => $type['typeclass'],
+                    'name' => $type['classname'],
+                    'types' => []
+                ];
+            }
+
+            $data[$type['typeclass']]['types'][] = [
+                'id' => $type['id'],
+                'name' => $type['type']
+            ];
+        }
+
+        return $data;
     }
 
     private function makeLink()
