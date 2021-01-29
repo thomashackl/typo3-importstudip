@@ -3,7 +3,9 @@
         <f:render partial="SearchForm" arguments="{_all}"/>
     </f:then>
     <f:else if="{phonebook}">
-        <f:render partial="PhonebookForm" arguments="{_all}"/>
+        <div class="studip-phonebook">
+            <f:render partial="PhonebookForm" arguments="{_all}"/>
+        </div>
     </f:else>
     <f:else if="{makelink}">
         <a href="{link}">
