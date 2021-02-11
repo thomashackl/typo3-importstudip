@@ -259,7 +259,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
                 $params = [
                     'in' => implode(',', $in),
                     'offset' => $this->request->hasArgument('page') ?
-                        $this->request->getArgument('page') * $this->limit : 0,
+                        ($this->request->getArgument('page') - 1) * $this->limit : 0,
                     'limit' => $this->limit
                 ];
 
@@ -269,7 +269,7 @@ class ImportStudipController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionCon
                 $this->view->assign('currentResults', count($results['collection']));
                 $this->view->assign('numResults', $results['pagination']['total']);
 
-                $pageNumber = ceil($results['pagination']['total'] / $this->limit) - 1;
+                $pageNumber = ceil($results['pagination']['total'] / $this->limit);
                 $this->view->assign('numPages', $pageNumber);
 
                 $currentPage = $this->request->hasArgument('page') ?
