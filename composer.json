@@ -25,9 +25,5 @@
       "Classes/ViewHelpers",
       "Resources/Private/PHP/restclient"
     ]
-  },
-  "replace": {
-    "importstudip": "self.version",
-    "typo3-ter/importstudip": "self.version"
   }
 }

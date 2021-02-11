@@ -94,7 +94,7 @@
                             </div>
                         </td>
                         <td class="studip-phonebook-number">
-                            {entry.phone}
+                            <a href="tel:{entry.phoneraw}">{entry.phone}</a>
                             <f:if condition="{entry.fax} != ''">
                                 <f:then>
                                     <div class="studip-phonebook-fax">
