@@ -49,16 +49,7 @@
                             </div>
                             <div class="studip-phonebook-entry">
                                 <div class="studip-phonebook-name">
-                                    {entry.lastname}
-                                    <f:if condition="{entry.firstname} != ''">
-                                        , {entry.firstname}
-                                    </f:if>
-                                    <f:if condition="{entry.title_front} != ''">
-                                        , {entry.title_front}
-                                    </f:if>
-                                    <f:if condition="{entry.title_rear} != ''">
-                                        , {entry.title_rear}
-                                    </f:if>
+                                    {entry.lastname}<f:if condition="{entry.firstname} != ''">, {entry.firstname}</f:if><f:if condition="{entry.title_front} != ''">, {entry.title_front}</f:if><f:if condition="{entry.title_rear} != ''">, {entry.title_rear}</f:if>
                                     <f:if condition="{entry.info} != ''">
                                         <span class="studip-phonebook-info">({entry.info})</span>
                                     </f:if>
@@ -68,22 +59,19 @@
                                     <f:if condition="{entry.gender} == 1">
                                         <f:then>
                                             <br>
-                                            {entry.statusgroup_male}
+                                            {entry.statusgroup_male}<f:if condition="{entry.statusgroup} != '' && {entry.room} != ''">, </f:if>
                                         </f:then>
                                         <f:else if="{entry.gender} == 2">
                                             <br>
-                                            {entry.statusgroup_female}
+                                            {entry.statusgroup_female}<f:if condition="{entry.statusgroup} != '' && {entry.room} != ''">, </f:if>
                                         </f:else>
                                         <f:else>
                                             <br>
-                                            {entry.statusgroup}
+                                            {entry.statusgroup}<f:if condition="{entry.statusgroup} != '' && {entry.room} != ''">, </f:if>
                                         </f:else>
                                     </f:if>
                                     <f:if condition="{entry.room} != ''">
                                         <f:then>
-                                            <f:if condition="{entry.statusgroup} != ''">
-                                                ,
-                                            </f:if>
                                             <span class="studip-phonebook-room">
                                                 <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.room"/>
                                                 {entry.room}
@@ -91,6 +79,12 @@
                                         </f:then>
                                     </f:if>
                                 </div>
+                                <f:if condition="{entry.email} != ''">
+                                    <div class="studip-phonebook-email">
+                                        <f:translate key="LLL:EXT:importstudip/Resources/Private/Language/locallang.xlf:frontend.label.email"/>
+                                        <a href="mailto:{entry.email}">{entry.email}</a>
+                                    </div>
+                                </f:if>
                             </div>
                         </td>
                         <td class="studip-phonebook-number">

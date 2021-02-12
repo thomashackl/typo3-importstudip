@@ -189,6 +189,9 @@
             <trans-unit id="frontend.label.coursetype">
                 <source>Course type:</source>
             </trans-unit>
+            <trans-unit id="frontend.label.email">
+                <source>E-Mail:</source>
+            </trans-unit>
             <trans-unit id="frontend.label.institute">
                 <source>Institute:</source>
             </trans-unit>

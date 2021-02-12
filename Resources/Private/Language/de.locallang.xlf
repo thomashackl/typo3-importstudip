@@ -192,6 +192,9 @@
             <trans-unit id="frontend.label.coursetype">
                 <target>Veranstaltungstyp:</target>
             </trans-unit>
+            <trans-unit id="frontend.label.email">
+                <target>E-Mail:</target>
+            </trans-unit>
             <trans-unit id="frontend.label.institute">
                 <target>Einrichtung:</target>
             </trans-unit>
