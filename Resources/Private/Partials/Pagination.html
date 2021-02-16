@@ -9,8 +9,7 @@
 			</li>
 		</f:then>
 	</f:if>
-	<li class="first{f:if(condition: '{currentPage} == 1', then: ' current)}
-						{f:if(condition: '{numPages} > 1', then: ' studip-pagination-with-separator')}">
+	<li class="first{f:if(condition: '{currentPage} == 1', then: ' current')}{f:if(condition: '{numPages} > 1', then: ' studip-pagination-with-separator')}">
 		<f:if condition="{currentPage} == 1">
 			<f:then>
 				1
@@ -33,12 +32,12 @@
 	<f:for each="{pages}" as="page">
 		<f:if condition="{page} == {currentPage}">
 			<f:then>
-				<li class="{f:if(condition: '{page} < {numPages}', then: ' studip-pagination-with-separator')}">
+				<li class="{f:if(condition: '{page} < {numPages}', then: 'studip-pagination-with-separator')}">
 					{page}
 				</li>
 			</f:then>
 			<f:else>
-				<li class="{f:if(condition: '{page} < {numPages}', then: ' studip-pagination-with-separator')}">
+				<li class="{f:if(condition: '{page} < {numPages}', then: 'studip-pagination-with-separator')}">
 					<f:link.page additionalParams="{tx_importstudip_pi1: {action: 'phonebook',
 						controller: 'ImportStudip', page: page, searchterm: searchterm, target: target, in: in}}">
 						{page}
@@ -54,7 +53,7 @@
 			</li>
 		</f:then>
 	</f:if>
-	<li class="last{f:if(condition: '{currentPage} == {numPages}', then: ' current)}">
+	<li class="last{f:if(condition: '{currentPage} == {numPages}', then: ' current')}">
 		<f:if condition="{currentPage} == {numPages}">
 			<f:then>
 				{numPages}
